@@ -6,7 +6,7 @@
 
     <!-- paletas de cores -->
     <color name="blue_dark">#0395D3</color>
-    <color name="blue_light">#1db8fb</color>
+    <color name="blue_light">#1DB8fb</color>
     <color name="blue_lighter">#5dc9f7</color>
     <color name="blue_lightest">#70d4ff</color>
     <color name="blue_lightest_2">#a8e5ff</color>
