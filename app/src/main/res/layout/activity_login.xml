@@ -61,7 +61,7 @@
         android:layout_marginRight="60dp"
 
         android:background="@drawable/container_edit_text_login"
-        android:drawableRight="@drawable/ic_email"
+        android:drawableRight="@drawable/ic_email_form"
 
         android:hint="E-mail"
         android:inputType="textEmailAddress"
@@ -84,7 +84,7 @@
         android:layout_marginRight="60dp"
 
         android:background="@drawable/container_edit_text_login"
-        android:drawableRight="@drawable/ic_senha"
+        android:drawableRight="@drawable/ic_password_form"
 
         android:hint="Password"
         android:inputType="textPassword"
@@ -169,7 +169,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/containerLogin"
         app:layout_constraintVertical_bias="0.071"
-        app:srcCompat="@drawable/user1" />
+        app:srcCompat="@drawable/img_user_login" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -190,7 +190,7 @@
             android:layout_width="103dp"
             android:layout_height="80dp"
             android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/icon" />
+            app:srcCompat="@drawable/logo_img" />
 
         <TextView
             android:id="@+id/textView"
