@@ -10,7 +10,7 @@
     tools:context=".views.MainActivity" >
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txt_title_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -27,12 +27,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title_main"
         app:layout_constraintVertical_bias="0.656"
         tools:layout_editor_absoluteX="0dp">
 
         <Button
-            android:id="@+id/Entrar"
+            android:id="@+id/btn_login"
             style="@android:style/Widget.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/Cadastrar"
+            android:id="@+id/btn_sing_up"
             style="@android:style/Widget.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
