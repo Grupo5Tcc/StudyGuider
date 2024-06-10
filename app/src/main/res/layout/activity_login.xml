@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/orange_lightest"
     tools:context=".views.LoginActivity">
 
     <View
@@ -100,7 +101,7 @@
         android:id="@+id/btLogin"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:backgroundTint="@color/blueCla"
+        android:backgroundTint="@color/orange_lightest"
         android:fontFamily="sans-serif-condensed-medium"
         android:padding="6dp"
         android:text="ENTRAR"
@@ -119,7 +120,7 @@
         android:id="@+id/btCadastro"
         android:layout_width="250dp"
         android:layout_height="44dp"
-        android:backgroundTint="@color/blueCla"
+        android:backgroundTint="@color/orange_lightest"
         android:fontFamily="sans-serif-condensed-medium"
         android:padding="6dp"
         android:text="CADASTRE-SE"
@@ -161,7 +162,7 @@
         android:id="@+id/imageUser1"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:contentDescription="@string/todo1"
+        android:contentDescription="Test"
         app:layout_constraintBottom_toBottomOf="@+id/containerLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -176,7 +177,7 @@
         android:layout_height="90dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="31dp"
-        android:background="#0395D3"
+        android:background="@color/blue_lighter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -198,7 +199,6 @@
             android:layout_marginStart="100dp"
             android:layout_marginTop="40dp"
             android:textColor="@color/white"
-            android:fontFamily="@font/aclonica"
             android:text="STUDYGUIDER" />
     </FrameLayout>
 
