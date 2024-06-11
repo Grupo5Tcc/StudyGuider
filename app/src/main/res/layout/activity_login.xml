@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.598" />
 
     <TextView
-        android:id="@+id/txtDados"
+        android:id="@+id/lbl_presentation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="entre com seus dados"
@@ -37,7 +37,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/txtForgetYourPassword"
+        android:id="@+id/lbl_forget_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
@@ -49,11 +49,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editPassword" />
+        app:layout_constraintTop_toBottomOf="@id/txt_password" />
 
 
     <EditText
-        android:id="@+id/editUsername"
+        android:id="@+id/txt_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
@@ -72,10 +72,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@id/containerLogin"
-        app:layout_constraintTop_toBottomOf="@id/txtDados" />
+        app:layout_constraintTop_toBottomOf="@id/lbl_presentation" />
 
     <EditText
-        android:id="@+id/editPassword"
+        android:id="@+id/txt_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -94,11 +94,11 @@
 
         app:layout_constraintEnd_toEndOf="@id/containerLogin"
         app:layout_constraintStart_toStartOf="@id/containerLogin"
-        app:layout_constraintTop_toBottomOf="@id/editUsername"
+        app:layout_constraintTop_toBottomOf="@id/txt_email"
         tools:ignore="TextFields" />
 
     <Button
-        android:id="@+id/btLogin"
+        android:id="@+id/btn_menu"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:backgroundTint="@color/orange_lightest"
@@ -113,11 +113,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.534"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtForgetYourPassword"
+        app:layout_constraintTop_toBottomOf="@id/lbl_forget_password"
         app:layout_constraintVertical_bias="0.722" />
 
     <Button
-        android:id="@+id/btCadastro"
+        android:id="@+id/btn_sing_up"
         android:layout_width="250dp"
         android:layout_height="44dp"
         android:backgroundTint="@color/orange_lightest"
@@ -132,19 +132,19 @@
         app:layout_constraintEnd_toEndOf="@id/containerLogin"
         app:layout_constraintHorizontal_bias="0.71"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtForgetYourPassword"
+        app:layout_constraintTop_toBottomOf="@id/lbl_forget_password"
         app:layout_constraintVertical_bias="0.23" />
 
     <ProgressBar
-        android:id="@+id/progressbar"
+        android:id="@+id/pgb_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="44dp"
         android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/containerLogin"
-        />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/containerLogin" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
@@ -159,7 +159,7 @@
         app:barrierDirection="left" />
 
     <ImageView
-        android:id="@+id/imageUser1"
+        android:id="@+id/img_user"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:contentDescription="Test"
@@ -186,14 +186,14 @@
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/img_logo"
             android:layout_width="103dp"
             android:layout_height="80dp"
             android:layout_marginTop="10dp"
             app:srcCompat="@drawable/logo_img" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/lbl_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
