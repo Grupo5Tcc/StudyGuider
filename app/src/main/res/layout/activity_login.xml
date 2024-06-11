@@ -25,7 +25,7 @@
         android:id="@+id/lbl_presentation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/presentation_login"
+        android:text="@string/presentation_form"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -86,7 +86,7 @@
         android:background="@drawable/ct_background_text_area_form"
         android:drawableRight="@drawable/ic_password_form"
 
-        android:hint="Password"
+        android:hint="@string/hint_password"
         android:inputType="textPassword"
         android:maxLines="1"
         android:maxLength="25"

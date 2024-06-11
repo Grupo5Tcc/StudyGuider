@@ -4,8 +4,11 @@
     <string name="presentation_main">Bem Vindo</string>
     <string name="btn_login_main">Entrar</string>
     <string name="btn_sing_up_main">Cadastrar</string>
-    <string name="presentation_login">Entre com seus dados</string>
+    <string name="presentation_form">Entre com seus dados</string>
     <string name="forget_password_login">Esqueceu a senha?</string>
     <string name="btn_login_form">ENTRAR</string>
     <string name="btn_sing_up_form">CADASTRAR</string>
+    <string name="hint_password">Senha</string>
+    <string name="btn_crate_user_form">Crie a sua conta</string>
+    <string name="hint_date">Data de Nascimento</string>
 </resources>

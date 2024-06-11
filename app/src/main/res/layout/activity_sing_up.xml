@@ -24,7 +24,7 @@
         android:id="@+id/lbl_presentation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="entre com seus dados"
+        android:text="@string/presentation_form"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -48,7 +48,7 @@
         android:background="@drawable/ct_background_text_area_form"
         android:drawableRight="@drawable/ic_email_form"
 
-        android:hint="E-mail"
+        android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
         android:maxLength="25"
         android:maxLines="1"
@@ -71,7 +71,7 @@
         android:background="@drawable/ct_background_text_area_form"
         android:drawableRight="@drawable/ic_name_form"
 
-        android:hint="Username"
+        android:hint="@string/hint_username"
         android:inputType="text"
         android:maxLength="25"
         android:maxLines="1"
@@ -94,7 +94,7 @@
         android:background="@drawable/ct_background_text_area_form"
         android:drawableRight="@drawable/ic_password_form"
 
-        android:hint="Password"
+        android:hint="@string/hint_password"
         android:inputType="textPassword"
         android:maxLength="25"
         android:maxLines="1"
@@ -117,7 +117,7 @@
         android:background="@drawable/ct_background_text_area_form"
         android:drawableRight="@drawable/ic_date_form"
 
-        android:hint="Data de nascimento"
+        android:hint="@string/hint_date"
         android:inputType="date"
         android:maxLength="25"
         android:maxLines="1"
@@ -139,7 +139,7 @@
         android:fontFamily="sans-serif-condensed-medium"
 
         android:padding="6dp"
-        android:text="ENTRAR"
+        android:text="@string/btn_crate_user_form"
         android:textColor="@color/black"
         android:textSize="13sp"
         android:textStyle="bold"
