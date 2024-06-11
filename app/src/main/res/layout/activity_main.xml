@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
-        android:text="BEM VINDO(A)"
+        android:text="@string/presentation_main"
         android:textColor="@color/white"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +41,7 @@
             android:layout_marginRight="40dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/bg_bnt_intro_primary_main"
-            android:text="login"
+            android:text="@string/btn_login_main"
             android:textSize="25dp"
             android:textStyle="bold" />
 
@@ -55,7 +55,7 @@
             android:layout_marginRight="40dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/bg_bnt_intro_secundary_main"
-            android:text="Cadastrar"
+            android:text="@string/btn_sing_up_main"
             android:textColor="@android:color/background_light"
             android:textSize="25dp"
             android:textStyle="bold" />

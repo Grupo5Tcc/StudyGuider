@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">StudyGuider</string>
-    <string name="tst1">salut</string>
+    <string name="presentation_main">Accueillir</string>
+    <string name="btn_login_main">Entrer</string>
+    <string name="btn_sing_up_main">Registre</string>
 </resources>

@@ -1,4 +1,10 @@
 <resources>
+    <!-- app strings -->
     <string name="app_name">StudyGuider</string>
-    <string name="tst1">Hello</string>
+    <string name="app_name_title" translatable="false">STUDYGUIDER</string>
+
+    <!-- main string -->
+    <string name="presentation_main" >Welcome</string>
+    <string name="btn_login_main">Sing In</string>
+    <string name="btn_sing_up_main">Sing Up</string>
 </resources>
