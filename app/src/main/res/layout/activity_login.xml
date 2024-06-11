@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:layout_marginHorizontal="40dp"
-        android:background="@drawable/container_login"
+        android:background="@drawable/ct_background_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
@@ -60,7 +60,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="60dp"
 
-        android:background="@drawable/container_edit_text_login"
+        android:background="@drawable/ct_background_text_area_form"
         android:drawableRight="@drawable/ic_email_form"
 
         android:hint="E-mail"
@@ -83,7 +83,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginRight="60dp"
 
-        android:background="@drawable/container_edit_text_login"
+        android:background="@drawable/ct_background_text_area_form"
         android:drawableRight="@drawable/ic_password_form"
 
         android:hint="Password"
