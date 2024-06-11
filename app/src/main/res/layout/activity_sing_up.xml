@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.767" />
 
     <TextView
-        android:id="@+id/txtDados"
+        android:id="@+id/lbl_presentation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="entre com seus dados"
@@ -37,7 +37,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/editEmail"
+        android:id="@+id/txt_email"
         android:layout_width="match_parent"
         android:layout_height="50dp"
 
@@ -56,11 +56,11 @@
 
         app:layout_constraintEnd_toEndOf="@id/containerCadastro"
         app:layout_constraintStart_toStartOf="@id/containerCadastro"
-        app:layout_constraintTop_toBottomOf="@id/editUsername"
+        app:layout_constraintTop_toBottomOf="@id/txt_name"
         tools:ignore="TextFields" />
 
     <EditText
-        android:id="@+id/editUsername"
+        android:id="@+id/txt_name"
         android:layout_width="match_parent"
         android:layout_height="50dp"
 
@@ -80,10 +80,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@id/containerCadastro"
-        app:layout_constraintTop_toBottomOf="@id/txtDados" />
+        app:layout_constraintTop_toBottomOf="@id/lbl_presentation" />
 
     <EditText
-        android:id="@+id/editPassword"
+        android:id="@+id/txt_password"
         android:layout_width="match_parent"
         android:layout_height="50dp"
 
@@ -102,11 +102,11 @@
 
         app:layout_constraintEnd_toEndOf="@id/containerCadastro"
         app:layout_constraintStart_toStartOf="@id/containerCadastro"
-        app:layout_constraintTop_toBottomOf="@id/editEmail"
+        app:layout_constraintTop_toBottomOf="@id/txt_email"
         tools:ignore="TextFields" />
 
     <EditText
-        android:id="@+id/editDate"
+        android:id="@+id/txt_date"
         android:layout_width="match_parent"
         android:layout_height="50dp"
 
@@ -125,11 +125,11 @@
 
         app:layout_constraintEnd_toEndOf="@id/containerCadastro"
         app:layout_constraintStart_toStartOf="@id/containerCadastro"
-        app:layout_constraintTop_toBottomOf="@id/editPassword"
+        app:layout_constraintTop_toBottomOf="@id/txt_password"
         tools:ignore="TextFields" />
 
     <Button
-        android:id="@+id/btn_Entrar"
+        android:id="@+id/btn_menu"
 
         android:layout_width="250dp"
         android:layout_height="50dp"
@@ -163,7 +163,7 @@
         app:barrierDirection="left" />
 
     <ImageView
-        android:id="@+id/imageUser1"
+        android:id="@+id/img_user"
         android:layout_width="70dp"
         android:layout_height="70dp"
         app:layout_constraintBottom_toBottomOf="@+id/containerCadastro"
@@ -189,14 +189,14 @@
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/img_logo"
             android:layout_width="103dp"
             android:layout_height="80dp"
             android:layout_marginTop="10dp"
             app:srcCompat="@drawable/logo_img" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/lbl_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
