@@ -4,4 +4,8 @@
     <string name="presentation_main">Accueillir</string>
     <string name="btn_login_main">Entrer</string>
     <string name="btn_sing_up_main">Registre</string>
+    <string name="presentation_login">Entrez vos coordonnées</string>
+    <string name="forget_password_login">Mot de passe oublié?</string>
+    <string name="btn_login_form">ENTRER</string>
+    <string name="btn_sing_up_form">REGISTRE</string>
 </resources>

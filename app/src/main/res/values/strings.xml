@@ -3,8 +3,20 @@
     <string name="app_name">StudyGuider</string>
     <string name="app_name_title" translatable="false">STUDYGUIDER</string>
 
-    <!-- main string -->
-    <string name="presentation_main" >Welcome</string>
+    <!-- btn form string -->
     <string name="btn_login_main">Sing In</string>
     <string name="btn_sing_up_main">Sing Up</string>
+    <string name="btn_sing_up_form">Sing UP</string>
+    <string name="btn_login_form">SING IN</string>
+
+
+    <!-- main string -->
+    <string name="presentation_main" >Welcome</string>
+
+    <!-- login string -->
+    <string name="presentation_login">Enter your details</string>
+    <string name="forget_password_login">Forgot your password?</string>
+
+
+    <!-- sing up string -->
 </resources>
