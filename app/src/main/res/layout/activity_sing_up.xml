@@ -115,7 +115,9 @@
         android:layout_marginRight="60dp"
 
         android:background="@drawable/ct_background_text_area_form"
+        android:focusable="false"
         android:drawableRight="@drawable/ic_date_form"
+
 
         android:hint="@string/hint_date"
         android:inputType="date"
