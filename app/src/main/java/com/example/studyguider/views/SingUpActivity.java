@@ -125,9 +125,9 @@ public class SingUpActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Toast.makeText(SingUpActivity.this, "Usuário registrado. Verifique seu e-mail.", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(SingUpActivity.this, "Registered user. Check your email.", Toast.LENGTH_LONG).show();
                                                 } else {
-                                                    Toast.makeText(SingUpActivity.this, "Falha ao enviar e-mail de verificação.", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(SingUpActivity.this, "Failed to send verification email.", Toast.LENGTH_LONG).show();
                                                 }
                                             }
                                         });
@@ -138,7 +138,7 @@ public class SingUpActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                         } else {
-                            Toast.makeText(SingUpActivity.this, "Falha ao registrar usuário: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(SingUpActivity.this, "Failed to register user: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
