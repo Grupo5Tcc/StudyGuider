@@ -8,6 +8,17 @@
     android:background="@color/orange_lightest"
     tools:context=".views.SingUpActivity">
 
+    <ProgressBar
+        android:id="@+id/pgb_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <View
         android:id="@+id/containerCadastro"
         android:layout_width="match_parent"
