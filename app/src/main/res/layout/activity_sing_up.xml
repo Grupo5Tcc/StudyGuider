@@ -49,6 +49,7 @@
 
     <EditText
         android:id="@+id/txt_email"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="50dp"
 
@@ -72,6 +73,7 @@
 
     <EditText
         android:id="@+id/txt_name"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="50dp"
 
@@ -95,6 +97,7 @@
 
     <EditText
         android:id="@+id/txt_password"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="50dp"
 
@@ -118,6 +121,7 @@
 
     <EditText
         android:id="@+id/txt_date"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="50dp"
 
@@ -146,7 +150,7 @@
 
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="32dp"
 
         android:backgroundTint="@color/orange_lightest"
         android:fontFamily="sans-serif-condensed-medium"
