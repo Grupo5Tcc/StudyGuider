@@ -1,9 +1,12 @@
 package com.example.studyguider.views;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +26,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthEmailException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Calendar;
@@ -41,10 +46,6 @@ public class SingUpActivity extends AppCompatActivity {
             return insets;
         });
 
-        //progresbar
-        View progressBar = findViewById(R.id.pgb_loading);
-
-        //texts
         EditText editTextUsername = findViewById(R.id.txt_name);
         EditText editTextEMail = findViewById(R.id.txt_email);
         EditText editTextPassword = findViewById(R.id.txt_password);
@@ -69,14 +70,10 @@ public class SingUpActivity extends AppCompatActivity {
             }
         });
 
-        //verification form
 
-
-
-
-        //buttons
 
         Button buttonMenu = findViewById(R.id.btn_menu);
+        View progressBar = findViewById(R.id.pgb_loading);
         buttonMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,31 +105,42 @@ public class SingUpActivity extends AppCompatActivity {
                 } else {
                     progressBar.setVisibility(View.VISIBLE);
                     registerUser(textUsername,textEMail,textPassword,textDateOfBirth);
-                    /*no momento*/
-                    Intent intent = new Intent(SingUpActivity.this, MenuActivity.class);
-                    startActivity(intent);
                 }
             }
         });
     }
 
-    private void registerUser(String textUsername, String textEMail, String textPassword, String textDateOfBirth) {
-        /*FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.createUserWithEmailAndPassword(textEMail,textPassword).addOnCompleteListener(SingUpActivity.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
-                    Toast.makeText(SingUpActivity.this, "User registered successfully", Toast.LENGTH_LONG).show();
-                    FirebaseUser firebaseUser = auth.getCurrentUser();
+    private void registerUser(String textUsername, String txtEMail, String txtPassword, String textDateOfBirth) {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-                    firebaseUser.sendEmailVerification();
+        mAuth.createUserWithEmailAndPassword(txtEMail, txtPassword)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            if (user != null) {
+                                user.sendEmailVerification()
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(SingUpActivity.this, "Usuário registrado. Verifique seu e-mail.", Toast.LENGTH_LONG).show();
+                                                } else {
+                                                    Toast.makeText(SingUpActivity.this, "Falha ao enviar e-mail de verificação.", Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+                                        });
+                            }
 
-                    Intent intent = new Intent(SingUpActivity.this, MenuActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });*/
+                            Intent intent = new Intent(SingUpActivity.this, MenuActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(SingUpActivity.this, "Falha ao registrar usuário: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 }

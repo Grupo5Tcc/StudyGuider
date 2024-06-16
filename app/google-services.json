@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "171307994812",
-    "project_id": "studyguider-8627c",
-    "storage_bucket": "studyguider-8627c.appspot.com"
+    "project_number": "646383342663",
+    "project_id": "studyguider-201dd",
+    "storage_bucket": "studyguider-201dd.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:171307994812:android:3dfa50be39b5772c1f0ab9",
+        "mobilesdk_app_id": "1:646383342663:android:63a3cbe45984fdd584cd62",
         "android_client_info": {
           "package_name": "com.example.studyguider"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDWgJvNeAx1b4TFpe-oXUiHpvQQTe94cP0"
+          "current_key": "AIzaSyBPFg218nA7tdcO3VDXS5koV190YsEqA-8"
         }
       ],
       "services": {
