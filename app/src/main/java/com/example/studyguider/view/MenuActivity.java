@@ -1,4 +1,4 @@
-package com.example.studyguider.views;
+package com.example.studyguider.view;
 
 import android.os.Bundle;
 

@@ -1,7 +1,6 @@
-package com.example.studyguider.views;
+package com.example.studyguider.view;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,26 +13,26 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.studyguider.R;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
+    /*test*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(R.layout.activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        Button buttonLogin = findViewById(R.id.btn_login);
+        Button buttonMenu = findViewById(R.id.btn_menu);
         Button buttonSingUp = findViewById(R.id.btn_sing_up);
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
+        buttonMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                 startActivity(intent);
             }
         });
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SingUpActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SingUpActivity.class);
                 startActivity(intent);
             }
         });
