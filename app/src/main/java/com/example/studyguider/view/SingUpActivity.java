@@ -25,7 +25,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
 import java.util.Calendar;
+
+import models.ReadWriteUserDetails;
 
 public class SingUpActivity extends AppCompatActivity {
 
@@ -105,7 +108,7 @@ public class SingUpActivity extends AppCompatActivity {
         });
     }
 
-    private void registerUser(String textUsername, String txtEMail, String txtPassword, String textDateOfBirth) {
+    private void registerUser(String txtUsername, String txtEMail, String txtPassword, String txtDateOfBirth) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         mAuth.createUserWithEmailAndPassword(txtEMail, txtPassword)
@@ -114,6 +117,7 @@ public class SingUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
+
                             if (user != null) {
                                 user.sendEmailVerification()
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -127,6 +131,9 @@ public class SingUpActivity extends AppCompatActivity {
                                             }
                                         });
                             }
+
+                            ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(txtUsername,txtDateOfBirth);
+
 
                             user.sendEmailVerification();
 
