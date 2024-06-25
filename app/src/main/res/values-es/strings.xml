@@ -11,4 +11,6 @@
     <string name="hint_password">Contraseña</string>
     <string name="btn_crate_user_form">Crea tu cuenta</string>
     <string name="hint_date">Fecha de nacimiento</string>
+    <string name="about_us_page_title">Sobre Nosotros</string>
+    <string name="about_us_page_text_description_devs">Un grupo de estudiantes de la Escuela Técnica Industrial - Prof. Isaac Portal Roldán (CTI), Anna Clara, Beatriz, Eduarda, Eduardo, Giovanna, Jenyffer y Vitória, quienes decidieron innovar creando una aplicación que facilitaba la organización de los escolares ante una gran carga de trabajo y tareas diversas. El proyecto pasó por numerosas etapas en el año 2024 hasta llegar al resultado final y comenzar a ayudar en la organización escolar de innumerables alumnos.</string>
 </resources>

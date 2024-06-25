@@ -11,4 +11,6 @@
     <string name="hint_password">Mot de passe</string>
     <string name="btn_crate_user_form">Créez votre compte</string>
     <string name="hint_date">Date de naissance</string>
+    <string name="about_us_page_title">À Propos de Nous</string>
+    <string name="about_us_page_text_description_devs">Un groupe d\'étudiants du Collège Technique Industriel - Prof. Isaac Portal Roldán (CTI), Anna Clara, Beatriz, Eduarda, Eduardo, Giovanna, Jenyffer et Vitória, qui ont décidé d\'innover en créant une application facilitant l\'organisation des élèves face à une charge de travail importante et des tâches diverses. Le projet a traversé de nombreuses étapes au cours de l\'année 2024 jusqu\'à atteindre le résultat final et commencer à aider à l\'organisation scolaire d\'innombrables étudiants.</string>
 </resources>
