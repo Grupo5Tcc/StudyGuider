@@ -101,6 +101,7 @@
         android:layout_width="310dp"
         android:layout_height="196dp"
         android:layout_marginTop="292dp"
+        android:justificationMode="inter_word"
         android:text="@string/about_us_page_text_description_devs"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@id/view"
