@@ -51,6 +51,7 @@ public class SingUpActivity extends AppCompatActivity {
         EditText editTextPassword = findViewById(R.id.txt_password);
         EditText editTextDateOfBirth = findViewById(R.id.txt_date);
 
+        /*Form Date*/
         editTextDateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +72,7 @@ public class SingUpActivity extends AppCompatActivity {
         });
 
 
-
+        /*Form */
         Button buttonMenu = findViewById(R.id.btn_menu);
         View progressBar = findViewById(R.id.pgb_loading);
         buttonMenu.setOnClickListener(new View.OnClickListener() {
