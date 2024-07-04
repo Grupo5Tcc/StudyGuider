@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -21,15 +22,19 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.studyguider.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 import java.util.Calendar;
-
-import models.ReadWriteUserDetails;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SingUpActivity extends AppCompatActivity {
 
@@ -135,8 +140,7 @@ public class SingUpActivity extends AppCompatActivity {
                                         });
                             }
 
-                            ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(txtUsername,txtDateOfBirth);
-
+                            ReadWriteUserDetails(txtUsername, txtEMail,txtDateOfBirth);
 
                             user.sendEmailVerification();
 
@@ -149,5 +153,30 @@ public class SingUpActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void ReadWriteUserDetails(String txtUsername,String txtEMail,String txtDateOfBirth) {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        Map<String, Object> users = new HashMap<>();
+        users.put("name", txtUsername);
+        users.put("e_mail", txtEMail);
+        users.put("date_of_birth", txtDateOfBirth);
+
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        DocumentReference documentReference = db.collection("user").document(userID);
+        documentReference.set(users).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("db", "Successful saving data");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("db_error", "Error saving data" + e.toString());
+            }
+        });
     }
 }
