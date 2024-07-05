@@ -94,7 +94,7 @@ public class SingUpActivity extends AppCompatActivity {
                     editTextUsername.requestFocus();
                 } else if(TextUtils.isEmpty(textEMail)){
                     Toast.makeText(SingUpActivity.this,"Please enter your email",Toast.LENGTH_LONG).show();
-                    editTextEMail.setError("Email name is required");
+                    editTextEMail.setError("Email is required");
                     editTextEMail.requestFocus();
                 } else if(!Patterns.EMAIL_ADDRESS.matcher(textEMail).matches()){
                     Toast.makeText(SingUpActivity.this,"Please re-enter your email",Toast.LENGTH_LONG).show();
