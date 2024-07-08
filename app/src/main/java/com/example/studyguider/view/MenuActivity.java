@@ -1,5 +1,6 @@
 package com.example.studyguider.view;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -28,11 +29,20 @@ public class MenuActivity extends AppCompatActivity {
             return insets;
         });
 
-        Button buttonAboutUs = findViewById(R.id.btn_sobre);
+        Button buttonAboutUs = findViewById(R.id.btn_about_us);
+        Button buttonProfile = findViewById(R.id.btn_profile);
         buttonAboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuActivity.this, AboutUsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });
