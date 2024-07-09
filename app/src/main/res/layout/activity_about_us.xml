@@ -70,7 +70,7 @@
         app:layout_constraintVertical_bias="0.887" />
 
     <TextView
-        android:id="@+id/txtTitle"
+        android:id="@+id/lbl_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/about_us_page_title"
@@ -85,7 +85,7 @@
         app:layout_constraintVertical_bias="0.878" />
 
     <com.ortiz.touchview.TouchImageView
-        android:id="@+id/imgDevs"
+        android:id="@+id/img_devs"
         android:layout_width="310dp"
         android:layout_height="229dp"
         android:layout_marginTop="36dp"
@@ -97,7 +97,7 @@
         app:layout_constraintTop_toTopOf="@+id/view" />
 
     <TextView
-        android:id="@+id/txtDescricao"
+        android:id="@+id/lbl_description"
         android:layout_width="310dp"
         android:layout_height="196dp"
         android:layout_marginTop="292dp"
