@@ -24,7 +24,6 @@
             android:layout_width="103dp"
             android:layout_height="80dp"
             android:layout_marginTop="4dp"
-            android:transitionName="imgLogo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo_img" />
