@@ -58,12 +58,17 @@
         android:id="@+id/lbl_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="257dp"
         android:text="PERFIL:"
-        tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="118dp"
         android:textColor="@color/white"
-        android:textStyle="bold"
         android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/containerLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias="0.923"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -85,11 +90,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="164dp"
+        android:textAllCaps="true"
         android:text="XXXXXXXXXXXXX"
         android:textColor="@color/white"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="@+id/containerLogin"
-        app:layout_constraintHorizontal_bias="0.158"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toEndOf="@+id/lbl_name"
         app:layout_constraintTop_toTopOf="@+id/containerLogin" />
 
@@ -112,6 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="196dp"
+        android:textAllCaps="true"
         android:text="XXXXXXXXXXXXX"
         android:textColor="@color/white"
         android:textSize="15dp"
@@ -139,6 +146,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="232dp"
+        android:textAllCaps="true"
         android:text="XX\XX\XXXX"
         android:textColor="@color/white"
         android:textSize="15dp"
@@ -166,6 +174,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="268dp"
+        android:textAllCaps="true"
         android:text="XXXXX"
         android:textColor="@color/white"
         android:textSize="15dp"
@@ -193,6 +202,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="308dp"
+        android:textAllCaps="true"
         android:text="XXXXXXXX"
         android:textColor="@color/white"
         android:textSize="15dp"
@@ -205,6 +215,7 @@
         android:id="@+id/btn_log_out"
         android:layout_width="250dp"
         android:layout_height="44dp"
+        android:layout_marginTop="76dp"
         android:backgroundTint="@color/orange_dark"
         android:fontFamily="sans-serif-condensed-medium"
         android:padding="6dp"
@@ -213,11 +224,21 @@
         android:textSize="13sp"
         android:textStyle="bold"
         app:cornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/containerLogin"
+        app:layout_constraintBottom_toBottomOf="@+id/containerLogin"
         app:layout_constraintEnd_toEndOf="@id/containerLogin"
         app:layout_constraintHorizontal_bias="0.661"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lbl_absence_loading"
-        app:layout_constraintVertical_bias="0.927" />
+        app:layout_constraintTop_toBottomOf="@id/lbl_absence_loading" />
+
+    <ProgressBar
+        android:id="@+id/pgb_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/containerLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
