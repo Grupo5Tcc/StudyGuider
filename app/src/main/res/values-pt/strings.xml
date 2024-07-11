@@ -13,4 +13,15 @@
     <string name="hint_date">Data de Nascimento</string>
     <string name="about_us_page_title">Sobre Nós</string>
     <string name="about_us_page_text_description_devs">Um grupo de estudantes do Colégio Técnico Industrial - Prof. Isaac Portal Roldán (CTI), Anna Clara, Beatriz, Eduarda, Eduardo, Giovanna, Jenyffer e Vitória, que decidiram inovar a partir da criação de um aplicativo que facilitasse  a organização dos alunos do colégio frente à ampla carga hórária e aos diversos afazeres. O projeto passou por  inúmeras etapas no ano de 2024 até chegar ao resultado final e passar a ajudar na organização escolar de inúmeros estudantes.</string>
+    <string name="loading_lbl_profile">Carregando</string>
+    <string name="profile_page_title">Perfil</string>
+    <string name="btn_log_out">Deslogar</string>
+    <string name="name_profile">NOME:</string>
+    <string name="date_of_birth_profile">ANIVERSÁRIO:</string>
+    <string name="recovery_profile">RECUPERAÇÃO:</string>
+    <string name="absence_profile">AUSÊNCIA:</string>
+    <string name="dialog_forgot_title">Esqueceu sua senha</string>
+    <string name="dialog_forgot_text">Entre com seu email</string>
+    <string name="dialog_forgot_cancel">Cancelar</string>
+    <string name="dialog_forgot_reset">Resetar</string>
 </resources>

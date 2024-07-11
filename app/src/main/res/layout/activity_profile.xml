@@ -31,27 +31,26 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
-        android:id="@+id/containerLogin"
+        android:id="@+id/containerProfile"
         android:layout_width="match_parent"
         android:layout_height="480dp"
         android:layout_marginHorizontal="40dp"
         android:background="@drawable/ct_background_profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.537"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.629" />
+        app:layout_constraintVertical_bias="0.625" />
 
     <ImageView
         android:id="@+id/img_profile"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/containerLogin"
+        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/containerLogin"
-        app:layout_constraintTop_toTopOf="@+id/containerLogin"
+        app:layout_constraintStart_toStartOf="@+id/containerProfile"
+        app:layout_constraintTop_toTopOf="@+id/containerProfile"
         app:srcCompat="@drawable/img_user" />
 
     <TextView
@@ -60,11 +59,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginEnd="257dp"
-        android:text="PERFIL:"
+        android:text="@string/profile_page_title"
         android:textColor="@color/white"
         android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/containerLogin"
+        app:layout_constraintBottom_toTopOf="@+id/containerProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/constraintLayout"
@@ -76,140 +75,142 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="164dp"
-        android:text="NOME:"
+        android:text="@string/name_profile"
         android:textColor="@color/white"
         android:textSize="15dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/containerLogin"
-        app:layout_constraintHorizontal_bias="0.14"
-        app:layout_constraintStart_toStartOf="@+id/containerLogin"
-        app:layout_constraintTop_toTopOf="@+id/containerLogin" />
+        app:layout_constraintBottom_toTopOf="@+id/lbl_email"
+        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
+        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/containerProfile"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/lbl_name_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="164dp"
+        android:text="@string/loading_lbl_profile"
         android:textAllCaps="true"
-        android:text="XXXXXXXXXXXXX"
         android:textColor="@color/white"
         android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/containerLogin"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toEndOf="@+id/lbl_name"
-        app:layout_constraintTop_toTopOf="@+id/containerLogin" />
+        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
 
     <TextView
         android:id="@+id/lbl_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="196dp"
-        android:text="E-MAIL:"
+        android:text="@string/e_mail_profile"
         android:textColor="@color/white"
         android:textSize="15dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/containerLogin"
-        app:layout_constraintHorizontal_bias="0.137"
-        app:layout_constraintStart_toStartOf="@+id/containerLogin"
-        app:layout_constraintTop_toTopOf="@+id/containerLogin" />
+        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
+        app:layout_constraintHorizontal_bias="0.246"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
 
     <TextView
         android:id="@+id/lbl_email_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="196dp"
+        android:text="@string/loading_lbl_profile"
         android:textAllCaps="true"
-        android:text="XXXXXXXXXXXXX"
         android:textColor="@color/white"
         android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/containerLogin"
-        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
+        app:layout_constraintHorizontal_bias="0.276"
         app:layout_constraintStart_toEndOf="@+id/lbl_email"
-        app:layout_constraintTop_toTopOf="@+id/containerLogin" />
+        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
 
     <TextView
         android:id="@+id/lbl_date_of_birth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="232dp"
-        android:text="DATA DE NASCIMENTO:"
+        android:text="@string/date_of_birth_profile"
         android:textColor="@color/white"
         android:textSize="15dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/containerLogin"
-        app:layout_constraintHorizontal_bias="0.224"
-        app:layout_constraintStart_toStartOf="@+id/containerLogin"
-        app:layout_constraintTop_toTopOf="@+id/containerLogin" />
+        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
+        app:layout_constraintHorizontal_bias="0.262"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
 
     <TextView
         android:id="@+id/lbl_date_of_birth_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="232dp"
+        android:text="@string/loading_lbl_profile"
         android:textAllCaps="true"
-        android:text="XX\XX\XXXX"
         android:textColor="@color/white"
         android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/containerLogin"
-        app:layout_constraintHorizontal_bias="0.293"
+        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
+        app:layout_constraintHorizontal_bias="0.174"
         app:layout_constraintStart_toEndOf="@+id/lbl_date_of_birth"
-        app:layout_constraintTop_toTopOf="@+id/containerLogin" />
+        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
 
     <TextView
         android:id="@+id/lbl_absence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="268dp"
-        android:text="QTD DE FALTAS:"
+        android:text="@string/absence_profile"
         android:textColor="@color/white"
         android:textSize="15dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/containerLogin"
-        app:layout_constraintHorizontal_bias="0.18"
-        app:layout_constraintStart_toStartOf="@+id/containerLogin"
-        app:layout_constraintTop_toTopOf="@+id/containerLogin" />
+        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
+        app:layout_constraintHorizontal_bias="0.259"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
 
     <TextView
         android:id="@+id/lbl_absence_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="268dp"
+        android:text="@string/loading_lbl_profile"
         android:textAllCaps="true"
-        android:text="XXXXX"
         android:textColor="@color/white"
         android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/containerLogin"
-        app:layout_constraintHorizontal_bias="0.102"
+        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
+        app:layout_constraintHorizontal_bias="0.214"
         app:layout_constraintStart_toEndOf="@+id/lbl_absence"
-        app:layout_constraintTop_toTopOf="@+id/containerLogin" />
+        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
 
     <TextView
         android:id="@+id/lbl_recovery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="308dp"
-        android:text="QTD DE RECUPERAÇÕES:"
+        android:text="@string/recovery_profile"
         android:textColor="@color/white"
         android:textSize="15dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/containerLogin"
-        app:layout_constraintHorizontal_bias="0.237"
-        app:layout_constraintStart_toStartOf="@+id/containerLogin"
-        app:layout_constraintTop_toTopOf="@+id/containerLogin" />
+        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
 
     <TextView
         android:id="@+id/lbl_recovery_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="308dp"
+        android:text="@string/loading_lbl_profile"
         android:textAllCaps="true"
-        android:text="XXXXXXXX"
         android:textColor="@color/white"
         android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/containerLogin"
-        app:layout_constraintHorizontal_bias="0.326"
+        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
+        app:layout_constraintHorizontal_bias="0.169"
         app:layout_constraintStart_toEndOf="@+id/lbl_recovery"
-        app:layout_constraintTop_toTopOf="@+id/containerLogin" />
+        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
 
     <Button
         android:id="@+id/btn_log_out"
@@ -219,13 +220,13 @@
         android:backgroundTint="@color/orange_dark"
         android:fontFamily="sans-serif-condensed-medium"
         android:padding="6dp"
-        android:text="DESLOGAR"
+        android:text="@string/btn_log_out"
         android:textColor="@color/white"
         android:textSize="13sp"
         android:textStyle="bold"
         app:cornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/containerLogin"
-        app:layout_constraintEnd_toEndOf="@id/containerLogin"
+        app:layout_constraintBottom_toBottomOf="@+id/containerProfile"
+        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
         app:layout_constraintHorizontal_bias="0.661"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lbl_absence_loading" />
@@ -239,6 +240,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/containerLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/containerProfile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

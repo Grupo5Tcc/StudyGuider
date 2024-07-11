@@ -30,5 +30,21 @@
     <string name="about_us_page_title">About Us</string>
     <string name="about_us_page_text_description_devs">A group of students from the Industrial Technical College - Prof. Isaac Portal Roldán (CTI), Anna Clara, Beatriz, Eduarda, Eduardo, Giovanna, Jenyffer and Vitória, who decided to innovate by creating an application that facilitated the organization of school students in the face of a large workload and diverse tasks. The project went through numerous stages in the year 2024 until reaching the final result and starting to help with the school organization of countless students.</string>
 
+    <!--Profile string-->
+    <string name="profile_page_title">Profile</string>
+    <string name="loading_lbl_profile">Loading</string>
+    <string name="btn_log_out">Log out</string>
+    <string name="name_profile">NAME:</string>
+    <string name="e_mail_profile" translatable="false">E-MAIL:</string>
+    <string name="date_of_birth_profile">BIRTHDAY:</string>
+    <string name="recovery_profile">RECOVERY:</string>
+    <string name="absence_profile">ABSENCE:</string>
+
+    <!--Dialog forgot string-->
+    <string name="dialog_forgot_title">Forgot password</string>
+    <string name="dialog_forgot_text">Enter your email</string>
+    <string name="dialog_forgot_cancel">Cancel</string>
+    <string name="dialog_forgot_reset">Reset</string>
+
 
 </resources>

@@ -1,8 +1,10 @@
 package com.example.studyguider.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +53,16 @@ public class ProfileActivity extends AppCompatActivity {
             showUserProfile(firebaseUser,progressBar);
         }
 
+        Button buttonMain = findViewById(R.id.btn_log_out);
+
+        buttonMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void showUserProfile(FirebaseUser firebaseUser,View pgb) {
@@ -76,7 +88,7 @@ public class ProfileActivity extends AppCompatActivity {
                             textViewEmail.setText(email);
                             textViewDateOfBirth.setText(dob);
                         } else {
-                            Toast.makeText(ProfileActivity.this, "Documento não encontrado", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ProfileActivity.this, "Document not found", Toast.LENGTH_LONG).show();
                         }
                         pgb.setVisibility(View.GONE);
                     }
@@ -84,8 +96,8 @@ public class ProfileActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ProfileActivity.this, "Erro ao carregar dados", Toast.LENGTH_LONG).show();
-                        Log.d("db_error", "Erro ao carregar dados: " + e.toString());
+                        Toast.makeText(ProfileActivity.this, "Error loading data", Toast.LENGTH_LONG).show();
+                        Log.d("db_error", "Error loading data: " + e.toString());
                         pgb.setVisibility(View.GONE);
                     }
                 });
