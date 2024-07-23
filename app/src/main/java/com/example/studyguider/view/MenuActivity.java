@@ -31,6 +31,7 @@ public class MenuActivity extends AppCompatActivity {
 
         Button buttonAboutUs = findViewById(R.id.btn_about_us);
         Button buttonProfile = findViewById(R.id.btn_profile);
+        Button buttonToDoList = findViewById(R.id.btn_to_do_list);
         buttonAboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +44,14 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonToDoList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this,ToDoListActivity.class);
                 startActivity(intent);
             }
         });
