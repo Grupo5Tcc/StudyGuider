@@ -46,5 +46,12 @@
     <string name="dialog_forgot_cancel">Cancel</string>
     <string name="dialog_forgot_reset">Reset</string>
 
+    <!--To-Do string-->
+    <string name="hint_to_do_list">Enter a new task</string>
+    <string name="btn_add_to_do_list">To add</string>
+    <string name="btn_select_all_to_do_list">Select all</string>
+    <string name="btn_del_to_do_list">Delete</string>
+
+
 
 </resources>

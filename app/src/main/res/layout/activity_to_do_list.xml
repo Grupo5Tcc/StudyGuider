@@ -61,7 +61,7 @@
         android:layout_height="48dp"
         android:layout_margin="16dp"
         android:background="@drawable/rnd_corners_to_do_list"
-        android:hint="Digite um novo afazer"
+        android:hint="@string/hint_to_do_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/constraintLayout" />
@@ -95,21 +95,21 @@
             android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
-            android:text="Adicionar" />
+            android:text="@string/btn_add_to_do_list" />
 
         <Button
             android:id="@+id/btn_select_all"
             android:layout_width="128dp"
             android:layout_height="56dp"
             android:layout_marginStart="16dp"
-            android:text="Selecionar Todos" />
+            android:text="@string/btn_select_all_to_do_list" />
 
         <Button
             android:id="@+id/btn_delete_selected"
             android:layout_width="103dp"
             android:layout_height="56dp"
             android:layout_marginStart="16dp"
-            android:text="Excluir" />
+            android:text="@string/btn_del_to_do_list" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

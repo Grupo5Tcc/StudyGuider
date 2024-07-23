@@ -1,6 +1,8 @@
 package com.example.studyguider.view;
 
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -41,6 +43,22 @@ public class ToDoListActivity extends AppCompatActivity {
         itemsAdapter = new ItemAdapter(items);
         lvItems.setAdapter(itemsAdapter);
 
+        InputFilter noNewLinesFilter = new InputFilter() {
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                StringBuilder filteredStringBuilder = new StringBuilder();
+                for (int i = start; i < end; i++) {
+                    char currentChar = source.charAt(i);
+                    if (currentChar != '\n' && currentChar != '\r') {
+                        filteredStringBuilder.append(currentChar);
+                    }
+                }
+                return filteredStringBuilder.toString();
+            }
+        };
+
+        int maxLength = 29;
+        editText.setFilters(new InputFilter[]{noNewLinesFilter,new InputFilter.LengthFilter(maxLength)});
+
         Button btnAdd = findViewById(R.id.btn_add);
         Button btnSelectAll = findViewById(R.id.btn_select_all);
         Button btnDeleteSelected = findViewById(R.id.btn_delete_selected);
@@ -66,12 +84,16 @@ public class ToDoListActivity extends AppCompatActivity {
         btnSelectAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectAllMode = true;
+                boolean allChecked = true;
                 for (int i = 0; i < lvItems.getChildCount(); i++) {
                     View item = lvItems.getChildAt(i);
                     CheckBox checkBox = item.findViewById(R.id.checkBox);
-                    checkBox.setChecked(true);
+                    if (!checkBox.isChecked()) {
+                        allChecked = false;
+                        checkBox.setChecked(true);
+                    }
                 }
+                selectAllMode = !allChecked;
             }
         });
 
@@ -93,6 +115,7 @@ public class ToDoListActivity extends AppCompatActivity {
                     }
                     items.removeAll(itemsToRemove);
                 }
+                selectAllMode = false;
                 itemsAdapter.notifyDataSetChanged();
             }
         });

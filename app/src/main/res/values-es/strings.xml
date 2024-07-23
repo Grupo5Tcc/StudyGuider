@@ -24,4 +24,8 @@
     <string name="dialog_forgot_text">Introduce tu email</string>
     <string name="dialog_forgot_cancel">Cancelar</string>
     <string name="dialog_forgot_reset">Reiniciar</string>
+    <string name="btn_add_to_do_list">Agregar</string>
+    <string name="btn_select_all_to_do_list">Seleccionar todo</string>
+    <string name="btn_del_to_do_list">Borrar</string>
+    <string name="hint_to_do_list">Introduzca una nueva tarea</string>
 </resources>
