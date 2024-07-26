@@ -21,10 +21,14 @@
             android:id="@+id/imglogo"
             android:layout_width="80dp"
             android:layout_height="75dp"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
-            app:srcCompat="@drawable/logo_img"
-            tools:ignore="MissingConstraints" />
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="201dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtUsuario"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo_img" />
 
         <TextView
             android:id="@+id/txtUsuario"
