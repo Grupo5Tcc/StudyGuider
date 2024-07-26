@@ -1,55 +1,344 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:screenOrientation="portrait"
+    android:background="@color/blue_lightest_2"
+    android:orientation="vertical"
     tools:context=".view.MenuActivity">
 
-    <Button
-        android:id="@+id/btn_about_us"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="151dp"
-        android:layout_marginTop="134dp"
-        android:layout_marginEnd="170dp"
-        android:layout_marginBottom="76dp"
-        android:rotationX="0"
-        android:rotationY="0"
-        android:text="Sobre"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/btn_profile"
-        app:layout_constraintEnd_toEndOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="416dp"
+        android:layout_height="85dp"
+        android:background="@color/blue_dark"
+        android:paddingTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btn_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="171dp"
-        android:layout_marginBottom="425dp"
-        android:text="Perfil"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_about_us" />
+        <ImageView
+            android:id="@+id/imglogo"
+            android:layout_width="80dp"
+            android:layout_height="75dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:srcCompat="@drawable/logo_img"
+            tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/btn_to_do_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginEnd="171dp"
-        android:text="Afazeres"
-        app:layout_constraintBottom_toTopOf="@+id/btn_profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_about_us" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/txtUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="289dp"
+            android:layout_marginTop="30dp"
+            android:text="usuário"
+            android:textColor="#FFFFFF"
+            android:transitionName="txtUsuario"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/imgPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="335dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/img_user"
+            tools:ignore="ContentDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardAfazeres"
+                android:layout_width="379dp"
+                android:layout_height="125dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="6dp"
+                android:backgroundTint="@color/orange_lightest"
+                android:clickable="true"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/txtAfazeres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AFAZERES"
+                    android:fontFamily="@font/bebas_neue"
+                    android:textSize="26dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"/>
+
+                <ImageView
+                    android:id="@+id/imgAfazeres"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/afazeres"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardAgenda"
+                android:layout_width="379dp"
+                android:layout_height="125dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="6dp"
+                android:backgroundTint="@color/orange_lightest"
+                android:clickable="true"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/txtAgenda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AGENDA"
+                    android:fontFamily="@font/bebas_neue"
+                    android:textSize="26dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"/>
+
+                <ImageView
+                    android:id="@+id/imgAgenda"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/agenda"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardMaterias"
+                android:layout_width="379dp"
+                android:layout_height="125dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="6dp"
+                android:backgroundTint="@color/orange_lightest"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/txtMaterias"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MATÉRIAS"
+                    android:fontFamily="@font/bebas_neue"
+                    android:textSize="26dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"/>
+
+                <ImageView
+                    android:id="@+id/imgMaterias"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/materias"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardFaltas"
+                android:layout_width="379dp"
+                android:layout_height="125dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="6dp"
+                android:backgroundTint="@color/orange_lightest"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:id="@+id/txtFaltas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FALTAS"
+                    android:fontFamily="@font/bebas_neue"
+                    android:textSize="26dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"/>
+
+                <ImageView
+                    android:id="@+id/imgFaltas"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/faltas"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="8dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardEmocoes"
+                android:layout_width="379dp"
+                android:layout_height="125dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="6dp"
+                android:backgroundTint="@color/orange_lightest"
+                android:transitionName="btn3"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/txtEmocoes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EMOÇÕES"
+                    android:fontFamily="@font/bebas_neue"
+                    android:textSize="26dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"/>
+
+                <ImageView
+                    android:id="@+id/imgEmocoes"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:src="@drawable/emocoes"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardPlantoes"
+                android:layout_width="379dp"
+                android:layout_height="125dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="6dp"
+                android:backgroundTint="@color/orange_lightest"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/txtPlantoes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PLANTÕES"
+                    android:fontFamily="@font/bebas_neue"
+                    android:textSize="26dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"/>
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/plantoes"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="15dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardNotas"
+                android:layout_width="379dp"
+                android:layout_height="125dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="6dp"
+                android:backgroundTint="@color/orange_lightest"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:id="@+id/txtNotas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NOTAS"
+                    android:fontFamily="@font/bebas_neue"
+                    android:textSize="26dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"/>
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:src="@drawable/notas"
+                    android:layout_gravity="end"
+                    android:layout_marginRight="-10dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardRecuperacoes"
+                android:layout_width="379dp"
+                android:layout_height="125dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="6dp"
+                android:backgroundTint="@color/orange_lightest"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:id="@+id/txtRecuperacoes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RECUPERAÇÕES"
+                    android:fontFamily="@font/bebas_neue"
+                    android:textSize="26dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"/>
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/recs"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="18dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardSobreNos"
+                android:layout_width="379dp"
+                android:layout_height="125dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="6dp"
+                android:backgroundTint="@color/orange_lightest"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:id="@+id/txtSobreNos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SOBRE NÓS"
+                    android:fontFamily="@font/bebas_neue"
+                    android:textSize="26dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"/>
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/img_menu_about_us"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +30,8 @@ public class MenuActivity extends AppCompatActivity {
             return insets;
         });
 
-        Button buttonAboutUs = findViewById(R.id.btn_about_us);
+
+        /*Button buttonAboutUs = findViewById(R.id.btn_about_us);
         Button buttonProfile = findViewById(R.id.btn_profile);
         Button buttonToDoList = findViewById(R.id.btn_to_do_list);
         buttonAboutUs.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +56,6 @@ public class MenuActivity extends AppCompatActivity {
                 Intent intent = new Intent(MenuActivity.this,ToDoListActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 }
