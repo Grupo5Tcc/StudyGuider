@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -58,22 +59,7 @@ public class ToDoListActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
-        db.collection("task_to_do_list")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                String itemName = document.getString("task");
-                                items.add(itemName);
-                            }
-                            itemsAdapter.notifyDataSetChanged();
-                        } else {
-                            Log.w("ToDoListActivity", "Error getting documents.", task.getException());
-                        }
-                    }
-                });
+        loadTasksFromFirebase();
 
         InputFilter noNewLinesFilter = new InputFilter() {
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
@@ -109,6 +95,7 @@ public class ToDoListActivity extends AppCompatActivity {
                     // Save new item to Firestore
                     Map<String, Object> item = new HashMap<>();
                     item.put("task", newItem);
+                    item.put("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
                     db.collection("task_to_do_list").add(item)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -158,15 +145,15 @@ public class ToDoListActivity extends AppCompatActivity {
                     }
                 }
                 for (String itemName : itemsToRemove) {
-                    db.collection("items")
-                            .whereEqualTo("name", itemName)
+                    db.collection("task_to_do_list")
+                            .whereEqualTo("task", itemName)
                             .get()
                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                     if (task.isSuccessful()) {
                                         for (QueryDocumentSnapshot document : task.getResult()) {
-                                            db.collection("items").document(document.getId()).delete();
+                                            db.collection("task_to_do_list").document(document.getId()).delete();
                                         }
                                         items.removeAll(itemsToRemove);
                                         itemsAdapter.notifyDataSetChanged();
@@ -215,5 +202,25 @@ public class ToDoListActivity extends AppCompatActivity {
 
             return convertView;
         }
+    }
+
+    private void loadTasksFromFirebase() {
+        db.collection("task_to_do_list")
+                .whereEqualTo("userId", FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String itemName = document.getString("task");
+                                items.add(itemName);
+                            }
+                            itemsAdapter.notifyDataSetChanged();
+                        } else {
+                            Log.w("ToDoListActivity", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
     }
 }
