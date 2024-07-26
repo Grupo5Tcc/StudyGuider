@@ -1,15 +1,14 @@
 package com.example.studyguider.view;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -30,10 +29,23 @@ public class MenuActivity extends AppCompatActivity {
             return insets;
         });
 
+        CardView cardViewAboutUs = findViewById(R.id.cardAboutUs);
+        //CardView cardViewProfile = findViewById(R.id.btn_profile);
 
-        /*Button buttonAboutUs = findViewById(R.id.btn_about_us);
-        Button buttonProfile = findViewById(R.id.btn_profile);
+
+        cardViewAboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, AboutUsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        /*
+
         Button buttonToDoList = findViewById(R.id.btn_to_do_list);
+
         buttonAboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
