@@ -4,11 +4,10 @@
     <string name="app_name_title" translatable="false">STUDYGUIDER</string>
 
     <!-- main string -->
-    <string name="presentation_main">Welcome</string>
-
-    <!-- btn form string -->
     <string name="btn_login_main">Sing In</string>
     <string name="btn_sing_up_main">Sing Up</string>
+
+    <!-- btn form string -->
     <string name="btn_sing_up_form">Sing UP</string>
     <string name="btn_login_form">SING IN</string>
 
