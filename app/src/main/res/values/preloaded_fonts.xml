@@ -2,5 +2,6 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/bebas_neue</item>
+        <item>@font/gabriela</item>
     </array>
 </resources>
