@@ -10,23 +10,12 @@
     <color name="blue_lighter">#4169E1</color>
     <color name="blue_lightest">#6394EC</color>
     <color name="blue_lightest_2">#ADD8E6</color>
+    <color name="lightest_blue">#E8FBFF</color>
     <color name="orange_dark">#E7750E</color>
     <color name="orange_light">#F68C0A</color>
     <color name="orange_lighter">#F7A206</color>
     <color name="orange_lightest">#FFBC62</color>
     <color name="orange_lightest_2">#FFCFA2</color>
-
-    <color name="azulMaisClaro">#E8FBFF</color>
-    <color name="azul2">#ADD8E6</color>
-    <color name="azul3">#6394EC</color>
-    <color name="azul4">#4169E1</color>
-    <color name="azul5">#000080</color>
-    <color name="azul6">#003366</color>
-    <color name="laranja1">#FFEFDE</color>
-    <color name="laranja2">#FFCFA2</color>
-    <color name="laranja3">#FFBC62</color>
-    <color name="laranja4">#F7A206</color>
-    <color name="laranja5">#F68C0A</color>
-    <color name="laranjaMaisEscuro">#E7750E</color>
+    <color name="light_orange">#FFEFDE</color>
 
 </resources>
