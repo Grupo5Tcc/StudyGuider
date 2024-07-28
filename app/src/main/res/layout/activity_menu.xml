@@ -73,7 +73,7 @@
             android:orientation="vertical" >
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardAfazeres"
+                android:id="@+id/cardToDoList"
                 android:layout_width="379dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
@@ -84,7 +84,7 @@
                 app:cardCornerRadius="10dp">
 
                 <TextView
-                    android:id="@+id/txtAfazeres"
+                    android:id="@+id/txtToDoList"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="AFAZERES"
