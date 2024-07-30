@@ -74,10 +74,10 @@
         android:background="@drawable/ct_background_to_do_list"
         app:layout_constraintBottom_toTopOf="@id/footer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.291"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_text"
-        app:layout_constraintVertical_bias="0.85" />
+        app:layout_constraintVertical_bias="0.263" />
 
     <LinearLayout
         android:id="@+id/footer"

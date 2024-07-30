@@ -96,6 +96,7 @@ public class ToDoListActivity extends AppCompatActivity {
                     Map<String, Object> item = new HashMap<>();
                     item.put("task", newItem);
                     item.put("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    item.put("completed", false);
 
                     db.collection("task_to_do_list").add(item)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -189,16 +190,41 @@ public class ToDoListActivity extends AppCompatActivity {
             CheckBox checkBox = convertView.findViewById(R.id.checkBox);
 
             itemText.setText(item);
-            checkBox.setOnCheckedChangeListener(null);
-            checkBox.setChecked(false);
 
-            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                if (isChecked) {
-                    itemText.setPaintFlags(itemText.getPaintFlags() | android.graphics.Paint.STRIKE_THRU_TEXT_FLAG);
-                } else {
-                    itemText.setPaintFlags(itemText.getPaintFlags() & (~android.graphics.Paint.STRIKE_THRU_TEXT_FLAG));
-                }
-            });
+            db.collection("task_to_do_list")
+                    .whereEqualTo("task", item)
+                    .whereEqualTo("userId", FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                                QueryDocumentSnapshot document = (QueryDocumentSnapshot) task.getResult().getDocuments().get(0);
+                                boolean isCompleted = document.getBoolean("completed");
+                                checkBox.setOnCheckedChangeListener(null);
+                                checkBox.setChecked(isCompleted);
+                                if (isCompleted) {
+                                    itemText.setPaintFlags(itemText.getPaintFlags() | android.graphics.Paint.STRIKE_THRU_TEXT_FLAG);
+                                } else {
+                                    itemText.setPaintFlags(itemText.getPaintFlags() & (~android.graphics.Paint.STRIKE_THRU_TEXT_FLAG));
+                                }
+                                checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                                    db.collection("task_to_do_list").document(document.getId())
+                                            .update("completed", isChecked)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    if (isChecked) {
+                                                        itemText.setPaintFlags(itemText.getPaintFlags() | android.graphics.Paint.STRIKE_THRU_TEXT_FLAG);
+                                                    } else {
+                                                        itemText.setPaintFlags(itemText.getPaintFlags() & (~android.graphics.Paint.STRIKE_THRU_TEXT_FLAG));
+                                                    }
+                                                }
+                                            });
+                                });
+                            }
+                        }
+                    });
 
             return convertView;
         }
