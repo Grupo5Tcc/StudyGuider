@@ -74,7 +74,7 @@ public class ToDoListActivity extends AppCompatActivity {
             }
         };
 
-        int maxLength = 29;
+        int maxLength = 28;
         editText.setFilters(new InputFilter[]{noNewLinesFilter,new InputFilter.LengthFilter(maxLength)});
 
         Button btnAdd = findViewById(R.id.btn_add);
