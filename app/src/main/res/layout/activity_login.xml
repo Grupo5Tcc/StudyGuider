@@ -49,10 +49,12 @@
         android:textColor="@color/white"
         android:textSize="17dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/containerLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_password" />
+        app:layout_constraintTop_toBottomOf="@id/txt_password"
+        app:layout_constraintVertical_bias="0.093" />
 
     <EditText
         android:id="@+id/txt_email"
@@ -61,15 +63,17 @@
         android:layout_marginLeft="60dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="60dp"
+        android:layout_marginBottom="12dp"
         android:background="@drawable/ct_background_text_area_form"
         android:drawableRight="@drawable/ic_email_form"
         android:fontFamily="@font/gabriela"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
-        android:maxLines="1"
         android:maxLength="25"
-        android:padding="10dp"
+        android:maxLines="1"
 
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@id/containerLogin"
