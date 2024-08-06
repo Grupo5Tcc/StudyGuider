@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:screenOrientation="portrait"
-    android:background="@color/orange_lightest"
+    android:background="@color/lightest_blue"
     tools:context=".view.SingUpActivity">
 
     <ProgressBar
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginHorizontal="40dp"
-        android:background="@drawable/ct_background_login"
+        android:background="@drawable/ct_background_sing_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,8 +37,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/presentation_form"
+        android:fontFamily="@font/bebas_neue"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/containerCadastro"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,6 +63,7 @@
         android:drawableRight="@drawable/ic_email_form"
 
         android:hint="@string/hint_email"
+        android:fontFamily="@font/gabriela"
         android:inputType="textEmailAddress"
         android:maxLength="25"
         android:maxLines="1"
@@ -86,6 +88,7 @@
         android:drawableRight="@drawable/ic_name_form"
 
         android:hint="@string/hint_username"
+        android:fontFamily="@font/gabriela"
         android:inputType="text"
         android:maxLength="25"
         android:maxLines="1"
@@ -110,6 +113,7 @@
         android:drawableRight="@drawable/ic_password_form"
 
         android:hint="@string/hint_password"
+        android:fontFamily="@font/gabriela"
         android:inputType="textPassword"
         android:maxLength="25"
         android:maxLines="1"
@@ -136,6 +140,7 @@
 
 
         android:hint="@string/hint_date"
+        android:fontFamily="@font/gabriela"
         android:inputType="date"
         android:maxLength="25"
         android:maxLines="1"
@@ -153,16 +158,15 @@
         android:layout_height="50dp"
         android:layout_marginBottom="32dp"
 
-        android:backgroundTint="@color/orange_lightest"
+        android:backgroundTint="@color/orange_lighter"
         android:fontFamily="sans-serif-condensed-medium"
 
         android:padding="6dp"
         android:text="@string/btn_crate_user_form"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="13sp"
         android:textStyle="bold"
         app:cornerRadius="5dp"
-
         app:layout_constraintBottom_toBottomOf="@id/containerCadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -182,23 +186,23 @@
 
     <ImageView
         android:id="@+id/img_user"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="@+id/containerCadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/containerCadastro"
         app:layout_constraintVertical_bias="0.051"
-        app:srcCompat="@drawable/img_user_form" />
+        app:srcCompat="@drawable/img_user_form_sing_up" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="90dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="31dp"
-        android:background="@color/blue_lighter"
+        android:background="@color/blue_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -208,9 +212,9 @@
 
         <ImageView
             android:id="@+id/img_logo"
-            android:layout_width="103dp"
+            android:layout_width="100dp"
             android:layout_height="80dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="4dp"
             app:srcCompat="@drawable/logo_img" />
 
         <TextView
@@ -219,8 +223,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
             android:layout_marginTop="40dp"
-            android:textColor="@color/white"
-            android:text="@string/app_name_title" />
+            android:fontFamily="@font/bebas_neue"
+            android:text="@string/app_name_title"
+            android:textSize="18dp"
+            android:textColor="@color/white" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
