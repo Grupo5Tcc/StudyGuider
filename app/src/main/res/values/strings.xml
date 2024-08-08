@@ -51,5 +51,14 @@
     <string name="btn_select_all_to_do_list">Select all</string>
     <string name="btn_del_to_do_list">Delete</string>
 
+    <!--Emotional Calendar string-->
+    <string name="month_emotional_calendar">Month</string>
+    <string name="question_emotional_calendar">How was your day?</string>
+    <string name="question_option_good_emotional_calendar">Good</string>
+    <string name="question_option_bad_emotional_calendar">Bad</string>
+    <string name="question_option_normal_emotional_calendar">Normal</string>
+    <string name="question_option_terrible_emotional_calendar">Terrible</string>
+    <string name="question_option_excellent_emotional_calendar">Excellent</string>
+
 
 </resources>

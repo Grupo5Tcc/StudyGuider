@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/bebas_neue"
-        android:text="mês"
+        android:text="@string/month_emotional_calendar"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="Como foi seu dia?"
+            android:text="@string/question_emotional_calendar"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -139,7 +139,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
-                    android:text="Ótimo" />
+                    android:text="@string/question_option_excellent_emotional_calendar" />
             </LinearLayout>
 
             <!-- Bom -->
@@ -159,7 +159,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
-                    android:text="Bom" />
+                    android:text="@string/question_option_good_emotional_calendar" />
             </LinearLayout>
 
             <!-- Normal -->
@@ -179,7 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
-                    android:text="Normal" />
+                    android:text="@string/question_option_normal_emotional_calendar" />
             </LinearLayout>
 
             <!-- Ruim -->
@@ -199,7 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
-                    android:text="Ruim" />
+                    android:text="@string/question_option_bad_emotional_calendar" />
             </LinearLayout>
 
             <!-- Péssimo -->
@@ -218,7 +218,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
-                    android:text="Péssimo" />
+                    android:text="@string/question_option_terrible_emotional_calendar" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -235,6 +235,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/buttonNextMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="19dp"
+        android:background="@android:color/transparent"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/gridLayoutCalendar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewMonth"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
+
+    <Button
+        android:id="@+id/buttonPreviousMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="17dp"
+        android:background="@android:color/transparent"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/gridLayoutCalendar"
+        app:layout_constraintEnd_toStartOf="@+id/textViewMonth"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

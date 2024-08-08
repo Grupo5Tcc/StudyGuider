@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">StudyGuider</string>
-    <string name="presentation_main">Bienvenido</string>
     <string name="btn_login_main">Entrar</string>
     <string name="btn_sing_up_main">Registrar</string>
     <string name="presentation_form">Introduce tus detalles</string>
@@ -28,4 +27,11 @@
     <string name="btn_select_all_to_do_list">Seleccionar todo</string>
     <string name="btn_del_to_do_list">Borrar</string>
     <string name="hint_to_do_list">Introduzca una nueva tarea</string>
+    <string name="month_emotional_calendar">Mes</string>
+    <string name="question_emotional_calendar">¿Cómo estuvo su día?</string>
+    <string name="question_option_excellent_emotional_calendar">Excelente</string>
+    <string name="question_option_good_emotional_calendar">Bien</string>
+    <string name="question_option_bad_emotional_calendar">Malo</string>
+    <string name="question_option_terrible_emotional_calendar">Horrible</string>
+    <string name="question_option_normal_emotional_calendar">Normal</string>
 </resources>
