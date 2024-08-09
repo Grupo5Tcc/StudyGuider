@@ -39,7 +39,7 @@
             android:layout_marginStart="289dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="25dp"
-            android:text="usuário"
+            android:text="@string/name_user_navbar"
             android:textColor="#FFFFFF"
             android:transitionName="txtUsuario"
             app:layout_constraintEnd_toStartOf="@+id/imgPerfil"
