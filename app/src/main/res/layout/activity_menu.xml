@@ -166,7 +166,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardFaltas"
+                android:id="@+id/cardAbsence"
                 android:layout_width="379dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
@@ -177,7 +177,7 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
-                    android:id="@+id/txtFaltas"
+                    android:id="@+id/txtAbsence"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="FALTAS"
@@ -187,7 +187,7 @@
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:id="@+id/imgFaltas"
+                    android:id="@+id/imgAbsence"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/img_menu_absence"
@@ -208,7 +208,7 @@
                 app:cardCornerRadius="10dp">
 
                 <TextView
-                    android:id="@+id/txtEmocoes"
+                    android:id="@+id/txtEmotionalCalendar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="EMOÇÕES"
@@ -218,7 +218,7 @@
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:id="@+id/imgEmocoes"
+                    android:id="@+id/imgEmotionalCalendar"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:src="@drawable/img_menu_emotion"

@@ -33,6 +33,7 @@ public class MenuActivity extends AppCompatActivity {
 
         CardView cardViewAboutUs = findViewById(R.id.cardAboutUs);
         CardView cardViewToDoList = findViewById(R.id.cardToDoList);
+        CardView cardViewAbsence = findViewById(R.id.cardAbsence);
         CardView cardViewEmotionalCalendar = findViewById(R.id.cardEmotionalCalendar);
         ImageView imageProfile = findViewById(R.id.imgPerfil);
 
@@ -41,6 +42,14 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuActivity.this, AboutUsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cardViewAbsence.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, AbsenceCalendarActivity.class);
                 startActivity(intent);
             }
         });
