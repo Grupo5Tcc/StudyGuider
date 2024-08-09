@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.studyguider.models.UserModel;
+import com.example.studyguider.models.UserLogin;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginViewModel extends AndroidViewModel {
@@ -25,7 +25,7 @@ public class LoginViewModel extends AndroidViewModel {
         visibilidadeProgressBar = new MutableLiveData<>();
     }
 
-    public void loginUser(UserModel user) {
+    public void loginUser(UserLogin user) {
         if (isValidEmail(user.getEmail()) && isValidPassword(user.getPassword())) {
             visibilidadeProgressBar.setValue(true);
             auth.signInWithEmailAndPassword(user.getEmail(), user.getPassword())
@@ -39,10 +39,10 @@ public class LoginViewModel extends AndroidViewModel {
 
     private boolean isValidEmail(String email) {
         if (email.isEmpty()) {
-            Toast.makeText(getApplication(), "Por favor, insira seu email", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplication(), "Please enter your email", Toast.LENGTH_LONG).show();
             return false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(getApplication(), "Por favor, insira um email válido", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplication(), "Please enter a valid email", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
@@ -50,7 +50,7 @@ public class LoginViewModel extends AndroidViewModel {
 
     private boolean isValidPassword(String password) {
         if (password.isEmpty()) {
-            Toast.makeText(getApplication(), "Por favor, insira sua senha completa", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplication(), "Please enter your full password", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
@@ -58,15 +58,15 @@ public class LoginViewModel extends AndroidViewModel {
 
     public void resetPassword(String email) {
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(getApplication(), "Insira seu email registrado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplication(), "Enter your registered email", Toast.LENGTH_SHORT).show();
             return;
         }
         auth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getApplication(), "Verifique seu email", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplication(), "Check your email", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplication(), "Falha, não foi possível enviar", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplication(), "Failed, unable to send", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

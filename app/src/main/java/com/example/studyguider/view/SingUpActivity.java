@@ -19,8 +19,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
+import com.example.studyguider.models.User;
+import com.example.studyguider.viewmodels.RegisterViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,6 +41,7 @@ import java.util.Map;
 
 public class SingUpActivity extends AppCompatActivity {
 
+    private RegisterViewModel registerViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +55,13 @@ public class SingUpActivity extends AppCompatActivity {
             return insets;
         });
 
+        registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
+
         EditText editTextUsername = findViewById(R.id.txt_name);
         EditText editTextEMail = findViewById(R.id.txt_email);
         EditText editTextPassword = findViewById(R.id.txt_password);
         EditText editTextDateOfBirth = findViewById(R.id.txt_date);
 
-        /*Form Date*/
         editTextDateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,15 +74,13 @@ public class SingUpActivity extends AppCompatActivity {
                 picker = new DatePickerDialog(SingUpActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        editTextDateOfBirth.setText(dayOfMonth+"/"+(month+1)+"/"+year);
+                        editTextDateOfBirth.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
-                },year,month,day);
+                }, year, month, day);
                 picker.show();
             }
         });
 
-
-        /*Form */
         Button buttonMenu = findViewById(R.id.btn_menu);
         View progressBar = findViewById(R.id.pgb_loading);
         buttonMenu.setOnClickListener(new View.OnClickListener() {
@@ -88,95 +91,33 @@ public class SingUpActivity extends AppCompatActivity {
                 String textDateOfBirth = editTextDateOfBirth.getText().toString();
                 String textPassword = editTextPassword.getText().toString();
 
-                if(TextUtils.isEmpty(textUsername)){
-                    Toast.makeText(SingUpActivity.this,"Please enter your full username",Toast.LENGTH_LONG).show();
-                    editTextUsername.setError("Full name is required");
-                    editTextUsername.requestFocus();
-                } else if(TextUtils.isEmpty(textEMail)){
-                    Toast.makeText(SingUpActivity.this,"Please enter your email",Toast.LENGTH_LONG).show();
-                    editTextEMail.setError("Email is required");
-                    editTextEMail.requestFocus();
-                } else if(!Patterns.EMAIL_ADDRESS.matcher(textEMail).matches()){
-                    Toast.makeText(SingUpActivity.this,"Please re-enter your email",Toast.LENGTH_LONG).show();
-                    editTextEMail.setError("Valid email is required");
-                    editTextEMail.requestFocus();
-                } else if(textPassword.length()<8){
-                    Toast.makeText(SingUpActivity.this,"Password should be at least 8 digits",Toast.LENGTH_LONG).show();
-                    editTextPassword.setError("Password confirmation is required");
-                    editTextPassword.requestFocus();
-                } else if(TextUtils.isEmpty(textDateOfBirth)){
-                    Toast.makeText(SingUpActivity.this,"Please enter your date of birth",Toast.LENGTH_LONG).show();
-                    editTextDateOfBirth.setError("date of birth is required");
-                    editTextDateOfBirth.requestFocus();
-                } else {
+                if (validateInput(textUsername, textEMail, textPassword, textDateOfBirth)) {
                     progressBar.setVisibility(View.VISIBLE);
-                    registerUser(textUsername,textEMail,textPassword,textDateOfBirth);
+                    User user = new User(textUsername, textEMail, textDateOfBirth);
+                    registerViewModel.registerUser(user, textPassword, SingUpActivity.this);
                 }
             }
         });
     }
 
-    private void registerUser(String txtUsername, String txtEMail, String txtPassword, String txtDateOfBirth) {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-        mAuth.createUserWithEmailAndPassword(txtEMail, txtPassword)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-
-                            if (user != null) {
-                                user.sendEmailVerification()
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-                                                    Toast.makeText(SingUpActivity.this, "Registered user. Check your email.", Toast.LENGTH_LONG).show();
-                                                } else {
-                                                    Toast.makeText(SingUpActivity.this, "Failed to send verification email.", Toast.LENGTH_LONG).show();
-                                                }
-                                            }
-                                        });
-                            }
-
-                            ReadWriteUserDetails(txtUsername, txtEMail,txtDateOfBirth);
-
-                            user.sendEmailVerification();
-
-                            Intent intent = new Intent(SingUpActivity.this, MenuActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Toast.makeText(SingUpActivity.this, "Failed to register user: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+    private boolean validateInput(String username, String email, String password, String dateOfBirth) {
+        if (TextUtils.isEmpty(username)) {
+            Toast.makeText(SingUpActivity.this, "Please enter your full username", Toast.LENGTH_LONG).show();
+            return false;
+        } else if (TextUtils.isEmpty(email)) {
+            Toast.makeText(SingUpActivity.this, "Please enter your email", Toast.LENGTH_LONG).show();
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(SingUpActivity.this, "Please re-enter your email", Toast.LENGTH_LONG).show();
+            return false;
+        } else if (password.length() < 8) {
+            Toast.makeText(SingUpActivity.this, "Password should be at least 8 digits", Toast.LENGTH_LONG).show();
+            return false;
+        } else if (TextUtils.isEmpty(dateOfBirth)) {
+            Toast.makeText(SingUpActivity.this, "Please enter your date of birth", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
-    private void ReadWriteUserDetails(String txtUsername,String txtEMail,String txtDateOfBirth) {
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        Map<String, Object> users = new HashMap<>();
-        users.put("name", txtUsername);
-        users.put("e_mail", txtEMail);
-        users.put("date_of_birth", txtDateOfBirth);
-
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        DocumentReference documentReference = db.collection("user").document(userID);
-        documentReference.set(users).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d("db", "Successful saving data");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("db_error", "Error saving data" + e.toString());
-            }
-        });
-    }
 }

@@ -21,7 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
-import com.example.studyguider.models.UserModel;
+import com.example.studyguider.models.UserLogin;
 import com.example.studyguider.viewmodels.LoginViewModel;
 
 
@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
         loginViewModel.loginSucesso.observe(this, isSuccess -> {
             if (isSuccess != null && isSuccess) {
-                Toast.makeText(LoginActivity.this, "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LoginActivity.this, MenuActivity.class));
                 finish();
             }
@@ -67,14 +67,14 @@ public class LoginActivity extends AppCompatActivity {
 
         loginViewModel.loginFalhou.observe(this, isFailed -> {
             if (isFailed != null && isFailed) {
-                Toast.makeText(LoginActivity.this, "Falha no login", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
             }
         });
 
         buttonMenu.setOnClickListener(v -> {
             String textEMail = editTextEMail.getText().toString();
             String textPassword = editTextPassword.getText().toString();
-            UserModel user = new UserModel(textEMail, textPassword);
+            UserLogin user = new UserLogin(textEMail, textPassword);
             loginViewModel.loginUser(user);
         });
 
