@@ -44,6 +44,10 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
     private Button saveButton;
     private Button cancelButton;
 
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    private String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +64,19 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         checkBoxAtestado = findViewById(R.id.checkBoxAtestado);
         editTextNota = findViewById(R.id.editTextNota);
         saveButton = findViewById(R.id.saveButton);
+
+        // Initialize Firebase Auth and Firestore
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            userId = currentUser.getUid();
+        } else {
+            // Handle case where user is not authenticated
+            Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show();
+            finish(); // Close the activity if user is not authenticated
+            return;
+        }
 
         // Set the current month and year
         Calendar calendar = Calendar.getInstance();
@@ -92,6 +109,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         }
 
         saveButton.setOnClickListener(v -> saveFalta());
+        loadFaltas();
     }
 
     private void handleDayClick(TextView dayTextView) {
@@ -112,24 +130,38 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
     }
 
     private void removeFalta(String day) {
-        int childCount = savedFaltasLayout.getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            View view = savedFaltasLayout.getChildAt(i);
-            if (view instanceof LinearLayout) {
-                LinearLayout faltaLayout = (LinearLayout) view;
-                TextView dayTextView = (TextView) faltaLayout.getChildAt(0);
-                if (dayTextView.getText().toString().contains(day)) {
-                    // Remove a falta correspondente ao dia
-                    savedFaltasLayout.removeView(faltaLayout);
-                    break;
-                }
-            }
-        }
+        db.collection("absence_calendar").document(userId).collection("faltas")
+                .whereEqualTo("day", day)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            db.collection("ute").document(userId).collection("faltas").document(document.getId()).delete()
+                                    .addOnSuccessListener(aVoid -> {
+                                        // Remove the view from the savedFaltasLayout
+                                        int childCount = savedFaltasLayout.getChildCount();
+                                        for (int i = 0; i < childCount; i++) {
+                                            View view = savedFaltasLayout.getChildAt(i);
+                                            if (view instanceof LinearLayout) {
+                                                LinearLayout faltaLayout = (LinearLayout) view;
+                                                TextView dayTextView = (TextView) faltaLayout.getChildAt(0);
+                                                if (dayTextView.getText().toString().contains(day)) {
+                                                    savedFaltasLayout.removeView(faltaLayout);
+                                                    break;
+                                                }
+                                            }
+                                        }
 
-        // Hide information layout and show calendar
-        informationScrollView.setVisibility(View.GONE);
-        gridLayoutCalendar.setVisibility(View.VISIBLE);
-        savedFaltasLayout.setVisibility(View.VISIBLE);
+                                        // Hide information layout and show calendar
+                                        informationScrollView.setVisibility(View.GONE);
+                                        gridLayoutCalendar.setVisibility(View.VISIBLE);
+                                        savedFaltasLayout.setVisibility(View.VISIBLE);
+                                    });
+                        }
+                    } else {
+                        Toast.makeText(this, "Failed to remove the entry", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void saveFalta() {
@@ -138,93 +170,168 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         boolean atestado = checkBoxAtestado.isChecked();
         String nota = editTextNota.getText().toString();
 
-        // Create a container for the falta information
-        LinearLayout faltaInfoLayout = new LinearLayout(this);
-        faltaInfoLayout.setOrientation(LinearLayout.VERTICAL);
-        faltaInfoLayout.setPadding(32, 32, 32, 32);
+        // Create a map for the falta information
+        Map<String, Object> falta = new HashMap<>();
+        falta.put("day", day);
+        falta.put("motivo", motivo);
+        falta.put("atestado", atestado);
+        falta.put("nota", nota);
 
-        // Create a rounded background with a color
-        int backgroundColor = Color.parseColor("#FFBC62");
-        int cornerRadius = 20;
+        db.collection("absence_calendar").document(userId).collection("faltas").document(day)
+                .set(falta)
+                .addOnSuccessListener(aVoid -> {
+                    // Create and add the faltaInfoLayout to the savedFaltasLayout
+                    LinearLayout faltaInfoLayout = new LinearLayout(this);
+                    faltaInfoLayout.setOrientation(LinearLayout.VERTICAL);
+                    faltaInfoLayout.setPadding(32, 32, 32, 32);
 
-        GradientDrawable roundedBackground = new GradientDrawable();
-        roundedBackground.setColor(backgroundColor);
-        roundedBackground.setCornerRadius(cornerRadius);
+                    int backgroundColor = Color.parseColor("#FFBC62");
+                    int cornerRadius = 20;
 
-        faltaInfoLayout.setBackground(roundedBackground);
+                    GradientDrawable roundedBackground = new GradientDrawable();
+                    roundedBackground.setColor(backgroundColor);
+                    roundedBackground.setCornerRadius(cornerRadius);
 
-        // Set layout parameters with rounded margins
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        layoutParams.setMargins(24, 24, 24, 24); // Adding rounded margins around the entire block
-        faltaInfoLayout.setLayoutParams(layoutParams);
+                    faltaInfoLayout.setBackground(roundedBackground);
 
-        // Create and add the day information with margins
-        TextView dayTextView = new TextView(this);
-        dayTextView.setText(String.format("Dia: %s", day));
-        dayTextView.setTextColor(Color.BLACK);
-        dayTextView.setTextSize(16);
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    layoutParams.setMargins(24, 24, 24, 24);
+                    faltaInfoLayout.setLayoutParams(layoutParams);
 
-        LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        textViewParams.setMargins(0, 0, 0, 16); // Adding bottom margin
-        dayTextView.setLayoutParams(textViewParams);
-        faltaInfoLayout.addView(dayTextView);
+                    // Create and add the day information with margins
+                    TextView dayTextView = new TextView(this);
+                    dayTextView.setText(String.format("Dia: %s", day));
+                    dayTextView.setTextColor(Color.BLACK);
+                    dayTextView.setTextSize(16);
 
-        // Create and add the motivo information with margins
-        TextView motivoTextView = new TextView(this);
-        motivoTextView.setText(String.format("Motivo: %s", motivo));
-        motivoTextView.setTextColor(Color.BLACK);
-        motivoTextView.setTextSize(16);
-        motivoTextView.setLayoutParams(textViewParams);
-        faltaInfoLayout.addView(motivoTextView);
+                    LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    textViewParams.setMargins(0, 0, 0, 16);
+                    dayTextView.setLayoutParams(textViewParams);
+                    faltaInfoLayout.addView(dayTextView);
 
-        // Create and add the atestado information with margins
-        TextView atestadoTextView = new TextView(this);
-        atestadoTextView.setText(String.format("Atestado: %s", atestado ? "Sim" : "Não"));
-        atestadoTextView.setTextColor(Color.BLACK);
-        atestadoTextView.setTextSize(16);
-        atestadoTextView.setLayoutParams(textViewParams);
-        faltaInfoLayout.addView(atestadoTextView);
+                    // Create and add the motivo information with margins
+                    TextView motivoTextView = new TextView(this);
+                    motivoTextView.setText(String.format("Motivo: %s", motivo));
+                    motivoTextView.setTextColor(Color.BLACK);
+                    motivoTextView.setTextSize(16);
+                    motivoTextView.setLayoutParams(textViewParams);
+                    faltaInfoLayout.addView(motivoTextView);
 
-        // Create and add the nota information with margins
-        TextView notaTextView = new TextView(this);
-        notaTextView.setText(String.format("Perdeu nota: %s", nota));
-        notaTextView.setTextColor(Color.BLACK);
-        notaTextView.setTextSize(16);
-        notaTextView.setLayoutParams(textViewParams);
-        faltaInfoLayout.addView(notaTextView);
+                    // Create and add the atestado information with margins
+                    TextView atestadoTextView = new TextView(this);
+                    atestadoTextView.setText(String.format("Atestado: %s", atestado ? "Sim" : "Não"));
+                    atestadoTextView.setTextColor(Color.BLACK);
+                    atestadoTextView.setTextSize(16);
+                    atestadoTextView.setLayoutParams(textViewParams);
+                    faltaInfoLayout.addView(atestadoTextView);
 
-        // Add the faltaInfoLayout to the savedFaltasLayout
-        savedFaltasLayout.addView(faltaInfoLayout);
+                    // Create and add the nota information with margins
+                    TextView notaTextView = new TextView(this);
+                    notaTextView.setText(String.format("Perdeu nota: %s", nota));
+                    notaTextView.setTextColor(Color.BLACK);
+                    notaTextView.setTextSize(16);
+                    notaTextView.setLayoutParams(textViewParams);
+                    faltaInfoLayout.addView(notaTextView);
 
-        // Reset input fields
-        editTextMotivo.setText("");
-        checkBoxAtestado.setChecked(false);
-        editTextNota.setText("");
+                    savedFaltasLayout.addView(faltaInfoLayout);
 
-        // Hide information layout and show calendar
-        informationScrollView.setVisibility(View.GONE);
-        gridLayoutCalendar.setVisibility(View.VISIBLE);
-        savedFaltasLayout.setVisibility(View.VISIBLE);
+                    // Reset input fields
+                    editTextMotivo.setText("");
+                    checkBoxAtestado.setChecked(false);
+                    editTextNota.setText("");
+
+                    // Hide information layout and show calendar
+                    informationScrollView.setVisibility(View.GONE);
+                    gridLayoutCalendar.setVisibility(View.VISIBLE);
+                    savedFaltasLayout.setVisibility(View.VISIBLE);
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to save the entry", Toast.LENGTH_SHORT).show();
+                });
     }
 
-    private void cancelForm() {
-        // Reset input fields and hide the form
-        clearForm();
-        informationScrollView.setVisibility(View.GONE);
-        gridLayoutCalendar.setVisibility(View.VISIBLE);
-        savedFaltasLayout.setVisibility(View.VISIBLE);
-    }
+    private void loadFaltas() {
+        db.collection("absence_calendar").document(userId).collection("faltas")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String day = document.getString("day");
+                            String motivo = document.getString("motivo");
+                            boolean atestado = document.getBoolean("atestado");
+                            String nota = document.getString("nota");
 
-    private void clearForm() {
-        editTextMotivo.setText("");
-        checkBoxAtestado.setChecked(false);
-        editTextNota.setText("");
+                            // Create and add the faltaInfoLayout to the savedFaltasLayout
+                            LinearLayout faltaInfoLayout = new LinearLayout(this);
+                            faltaInfoLayout.setOrientation(LinearLayout.VERTICAL);
+                            faltaInfoLayout.setPadding(32, 32, 32, 32);
+
+                            int backgroundColor = Color.parseColor("#FFBC62");
+                            int cornerRadius = 20;
+
+                            GradientDrawable roundedBackground = new GradientDrawable();
+                            roundedBackground.setColor(backgroundColor);
+                            roundedBackground.setCornerRadius(cornerRadius);
+
+                            faltaInfoLayout.setBackground(roundedBackground);
+
+                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT
+                            );
+                            layoutParams.setMargins(24, 24, 24, 24);
+                            faltaInfoLayout.setLayoutParams(layoutParams);
+
+                            // Create and add the day information with margins
+                            TextView dayTextView = new TextView(this);
+                            dayTextView.setText(String.format("Dia: %s", day));
+                            dayTextView.setTextColor(Color.BLACK);
+                            dayTextView.setTextSize(16);
+
+                            LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT
+                            );
+                            textViewParams.setMargins(0, 0, 0, 16);
+                            dayTextView.setLayoutParams(textViewParams);
+                            faltaInfoLayout.addView(dayTextView);
+
+                            // Create and add the motivo information with margins
+                            TextView motivoTextView = new TextView(this);
+                            motivoTextView.setText(String.format("Motivo: %s", motivo));
+                            motivoTextView.setTextColor(Color.BLACK);
+                            motivoTextView.setTextSize(16);
+                            motivoTextView.setLayoutParams(textViewParams);
+                            faltaInfoLayout.addView(motivoTextView);
+
+                            // Create and add the atestado information with margins
+                            TextView atestadoTextView = new TextView(this);
+                            atestadoTextView.setText(String.format("Atestado: %s", atestado ? "Sim" : "Não"));
+                            atestadoTextView.setTextColor(Color.BLACK);
+                            atestadoTextView.setTextSize(16);
+                            atestadoTextView.setLayoutParams(textViewParams);
+                            faltaInfoLayout.addView(atestadoTextView);
+
+                            // Create and add the nota information with margins
+                            TextView notaTextView = new TextView(this);
+                            notaTextView.setText(String.format("Perdeu nota: %s", nota));
+                            notaTextView.setTextColor(Color.BLACK);
+                            notaTextView.setTextSize(16);
+                            notaTextView.setLayoutParams(textViewParams);
+                            faltaInfoLayout.addView(notaTextView);
+
+                            savedFaltasLayout.addView(faltaInfoLayout);
+                        }
+                    } else {
+                        Toast.makeText(this, "Failed to load the entries", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
 }
