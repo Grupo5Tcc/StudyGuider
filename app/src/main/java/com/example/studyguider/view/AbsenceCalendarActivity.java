@@ -35,6 +35,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
     private CheckBox checkBoxAtestado;
     private EditText editTextNota;
     private Button saveButton;
+    private Button cancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -203,6 +204,20 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         informationScrollView.setVisibility(View.GONE);
         gridLayoutCalendar.setVisibility(View.VISIBLE);
         savedFaltasLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void cancelForm() {
+        // Reset input fields and hide the form
+        clearForm();
+        informationScrollView.setVisibility(View.GONE);
+        gridLayoutCalendar.setVisibility(View.VISIBLE);
+        savedFaltasLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void clearForm() {
+        editTextMotivo.setText("");
+        checkBoxAtestado.setChecked(false);
+        editTextNota.setText("");
     }
 
 }
