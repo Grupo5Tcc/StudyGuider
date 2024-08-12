@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.studyguider.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -117,7 +120,6 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
             dayTextView.setText(String.valueOf(day));
             dayTextView.setGravity(Gravity.CENTER);
             dayTextView.setBackgroundColor(defaultColor);
-            dayTextView.setTextSize(16);
             dayTextView.setPadding(16, 16, 16, 16);
 
             dayTextView.setOnClickListener(v -> handleDayClick(dayCopy, dayTextView));
@@ -168,6 +170,8 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
                 .addOnSuccessListener(aVoid -> {
                     addFaltaToLayout(day, motivo, atestado, nota);
                     clearForm();
+                    // Increment the absence count
+                    updateUserAbsenceCount(1);
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Failed to save the entry", Toast.LENGTH_SHORT).show());
     }
@@ -233,7 +237,11 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             db.collection("absence_calendar").document(userId)
                                     .collection(monthYearKey).document(document.getId()).delete()
-                                    .addOnSuccessListener(aVoid -> removeFaltaFromLayout(day));
+                                    .addOnSuccessListener(aVoid -> {
+                                        removeFaltaFromLayout(day);
+                                        // Decrement the absence count
+                                        updateUserAbsenceCount(-1);
+                                    });
                         }
                     } else {
                         Toast.makeText(this, "Failed to remove the entry", Toast.LENGTH_SHORT).show();
@@ -282,6 +290,30 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
                         Toast.makeText(this, "Failed to load entries", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void updateUserAbsenceCount(int absenceIncrement) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        DocumentReference userDocRef = db.collection("user").document(userID);
+
+        db.runTransaction(transaction -> {
+            DocumentSnapshot snapshot = transaction.get(userDocRef);
+            if (snapshot.exists()) {
+                // Get current absence count or initialize it to 0
+                long currentAbsenceCount = snapshot.contains("absence") ? snapshot.getLong("absence") : 0;
+                long newAbsenceCount = currentAbsenceCount + absenceIncrement;
+
+                // Update the "absence" field
+                transaction.update(userDocRef, "absence", newAbsenceCount);
+            }
+            return null;
+        }).addOnSuccessListener(aVoid -> {
+            Log.d("db", "Successful update of absence count");
+        }).addOnFailureListener(e -> {
+            Log.d("db_error", "Error updating absence count: " + e.toString());
+        });
     }
 
 }
