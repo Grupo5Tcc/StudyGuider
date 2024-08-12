@@ -11,12 +11,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
-        android:layout_width="416dp"
+        android:layout_width="match_parent"
         android:layout_height="85dp"
         android:background="@color/blue_dark"
-        android:paddingTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:paddingTop="5dp">
 
         <ImageView
             android:id="@+id/imglogo"
@@ -64,15 +62,40 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textViewMonth"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:text="Controle de faltas"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/buttonPreviousMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anterior"
+            android:textSize="16sp"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/textViewMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Controle de faltas"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonNextMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Próximo"
+            android:textSize="16sp"
+            android:padding="8dp" />
+
+    </LinearLayout>
 
     <GridLayout
         android:id="@+id/gridLayoutCalendar"
