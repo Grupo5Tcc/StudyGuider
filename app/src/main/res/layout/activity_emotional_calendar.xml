@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
-        android:layout_width="416dp"
+        android:layout_width="match_parent"
         android:layout_height="85dp"
         android:background="@color/blue_dark"
         android:paddingTop="5dp"
@@ -85,6 +85,7 @@
         android:background="#E8FBFF"
         android:columnCount="7"
         android:padding="16dp"
+        android:rowCount="6"
         app:layout_constraintBottom_toTopOf="@id/legendLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,14 +96,19 @@
     </GridLayout>
 
     <!-- Legenda -->
+
+    <!-- Rodapé -->
+
     <LinearLayout
         android:id="@+id/legendLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@id/footerLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <!-- Legenda Títulos -->
@@ -110,9 +116,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:fontFamily="@font/bebas_neue"
             android:text="@string/question_emotional_calendar"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="20dp" />
 
         <!-- Legenda Itens -->
         <LinearLayout
@@ -131,13 +137,18 @@
 
                 <ImageView
                     android:id="@+id/colorOtimo"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
                     android:background="#2196F3" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/gabriela"
+                    android:textSize="16dp"
+
                     android:paddingStart="8dp"
                     android:text="@string/question_option_excellent_emotional_calendar" />
             </LinearLayout>
@@ -151,14 +162,18 @@
 
                 <ImageView
                     android:id="@+id/colorBom"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
                     android:background="#4CAF50" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/gabriela"
                     android:paddingStart="8dp"
+                    android:textSize="16dp"
                     android:text="@string/question_option_good_emotional_calendar" />
             </LinearLayout>
 
@@ -171,13 +186,17 @@
 
                 <ImageView
                     android:id="@+id/colorNormal"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
                     android:background="#FFEB3B" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/gabriela"
+                    android:textSize="16dp"
                     android:paddingStart="8dp"
                     android:text="@string/question_option_normal_emotional_calendar" />
             </LinearLayout>
@@ -191,13 +210,17 @@
 
                 <ImageView
                     android:id="@+id/colorRuim"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
                     android:background="#FF9800" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/gabriela"
+                    android:textSize="16dp"
                     android:paddingStart="8dp"
                     android:text="@string/question_option_bad_emotional_calendar" />
             </LinearLayout>
@@ -210,20 +233,23 @@
 
                 <ImageView
                     android:id="@+id/colorPessimo"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
                     android:background="#F44336" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/gabriela"
+                    android:textSize="16dp"
                     android:paddingStart="8dp"
                     android:text="@string/question_option_terrible_emotional_calendar" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Rodapé -->
     <LinearLayout
         android:id="@+id/footerLayout"
         android:layout_width="0dp"
@@ -244,7 +270,7 @@
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="19dp"
         android:background="@android:color/transparent"
-        android:textSize="30dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/gridLayoutCalendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewMonth"
@@ -259,11 +285,10 @@
         android:layout_marginEnd="44dp"
         android:layout_marginBottom="17dp"
         android:background="@android:color/transparent"
-        android:textSize="30dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/gridLayoutCalendar"
         app:layout_constraintEnd_toStartOf="@+id/textViewMonth"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
