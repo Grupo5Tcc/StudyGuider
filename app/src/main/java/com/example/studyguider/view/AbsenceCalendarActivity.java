@@ -70,6 +70,12 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         editTextNota = findViewById(R.id.editTextNota);
         saveButton = findViewById(R.id.saveButton);
 
+        Button buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
+        buttonPreviousMonth.setText("<");
+
+        Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
+        buttonNextMonth.setText(">");
+
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
