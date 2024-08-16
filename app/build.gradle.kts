@@ -41,6 +41,7 @@ dependencies {
     implementation("com.google.firebase:firebase-database:21.0.0")
     implementation("com.google.firebase:firebase-core:21.1.1")
     implementation ("com.google.firebase:firebase-firestore:25.0.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0")
     implementation(libs.firebase.auth)
     implementation(libs.firebase.storage)
     testImplementation(libs.junit)
