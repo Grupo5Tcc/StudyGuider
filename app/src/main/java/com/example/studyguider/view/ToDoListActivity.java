@@ -21,8 +21,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
+import com.example.studyguider.models.TaskItem;
+import com.example.studyguider.viewmodels.ToDoListViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,20 +39,21 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ToDoListActivity extends AppCompatActivity {
 
-    private ArrayList<String> items;
+    private ArrayList<TaskItem> items;
     private ItemAdapter itemsAdapter;
     private ListView lvItems;
     private EditText editText;
-    private FirebaseFirestore db;
+    private ToDoListViewModel viewModel;
     private boolean selectAllMode = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_to_do_list);
 
         lvItems = findViewById(R.id.item_list);
@@ -57,9 +62,16 @@ public class ToDoListActivity extends AppCompatActivity {
         itemsAdapter = new ItemAdapter(items);
         lvItems.setAdapter(itemsAdapter);
 
-        db = FirebaseFirestore.getInstance();
+        viewModel = new ViewModelProvider(this).get(ToDoListViewModel.class);
 
-        loadTasksFromFirebase();
+        viewModel.getTasks().observe(this, new Observer<List<TaskItem>>() {
+            @Override
+            public void onChanged(List<TaskItem> taskItems) {
+                items.clear();
+                items.addAll(taskItems);
+                itemsAdapter.notifyDataSetChanged();
+            }
+        });
 
         InputFilter noNewLinesFilter = new InputFilter() {
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
@@ -75,7 +87,7 @@ public class ToDoListActivity extends AppCompatActivity {
         };
 
         int maxLength = 28;
-        editText.setFilters(new InputFilter[]{noNewLinesFilter,new InputFilter.LengthFilter(maxLength)});
+        editText.setFilters(new InputFilter[]{noNewLinesFilter, new InputFilter.LengthFilter(maxLength)});
 
         Button btnAdd = findViewById(R.id.btn_add);
         Button btnSelectAll = findViewById(R.id.btn_select_all);
@@ -92,27 +104,8 @@ public class ToDoListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String newItem = editText.getText().toString();
                 if (!newItem.isEmpty()) {
-                    // Save new item to Firestore
-                    Map<String, Object> item = new HashMap<>();
-                    item.put("task", newItem);
-                    item.put("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    item.put("completed", false);
-
-                    db.collection("task_to_do_list").add(item)
-                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                @Override
-                                public void onSuccess(DocumentReference documentReference) {
-                                    items.add(newItem);
-                                    itemsAdapter.notifyDataSetChanged();
-                                    editText.setText("");
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w("ToDoListActivity", "Error adding document", e);
-                                }
-                            });
+                    viewModel.addTask(newItem);
+                    editText.setText("");
                 }
             }
         });
@@ -136,43 +129,32 @@ public class ToDoListActivity extends AppCompatActivity {
         btnDeleteSelected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<String> itemsToRemove = new ArrayList<>();
+                ArrayList<TaskItem> itemsToRemove = new ArrayList<>();
                 for (int i = 0; i < lvItems.getChildCount(); i++) {
                     View item = lvItems.getChildAt(i);
                     CheckBox checkBox = item.findViewById(R.id.checkBox);
                     if (checkBox.isChecked()) {
                         TextView itemText = item.findViewById(R.id.item_text);
-                        itemsToRemove.add(itemText.getText().toString());
+                        String itemName = itemText.getText().toString();
+                        for (TaskItem taskItem : items) {
+                            if (taskItem.getTask().equals(itemName)) {
+                                itemsToRemove.add(taskItem);
+                            }
+                        }
                     }
                 }
-                for (String itemName : itemsToRemove) {
-                    db.collection("task_to_do_list")
-                            .whereEqualTo("task", itemName)
-                            .get()
-                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        for (QueryDocumentSnapshot document : task.getResult()) {
-                                            db.collection("task_to_do_list").document(document.getId()).delete();
-                                        }
-                                        items.removeAll(itemsToRemove);
-                                        itemsAdapter.notifyDataSetChanged();
-                                    } else {
-                                        Log.w("ToDoListActivity", "Error getting documents.", task.getException());
-                                    }
-                                }
-                            });
+                for (TaskItem item : itemsToRemove) {
+                    viewModel.deleteTask(item.getId());
                 }
             }
         });
 
     }
 
-    private class ItemAdapter extends ArrayAdapter<String> {
-        private ArrayList<String> items;
+    private class ItemAdapter extends ArrayAdapter<TaskItem> {
+        private ArrayList<TaskItem> items;
 
-        public ItemAdapter(ArrayList<String> items) {
+        public ItemAdapter(ArrayList<TaskItem> items) {
             super(ToDoListActivity.this, R.layout.dialog_to_do_list, items);
             this.items = items;
         }
@@ -184,69 +166,19 @@ public class ToDoListActivity extends AppCompatActivity {
                 convertView = inflater.inflate(R.layout.dialog_to_do_list, parent, false);
             }
 
-            String item = items.get(position);
+            TaskItem item = items.get(position);
 
             TextView itemText = convertView.findViewById(R.id.item_text);
             CheckBox checkBox = convertView.findViewById(R.id.checkBox);
 
-            itemText.setText(item);
+            itemText.setText(item.getTask());
+            checkBox.setChecked(item.isCompleted());
 
-            db.collection("task_to_do_list")
-                    .whereEqualTo("task", item)
-                    .whereEqualTo("userId", FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                                QueryDocumentSnapshot document = (QueryDocumentSnapshot) task.getResult().getDocuments().get(0);
-                                boolean isCompleted = document.getBoolean("completed");
-                                checkBox.setOnCheckedChangeListener(null);
-                                checkBox.setChecked(isCompleted);
-                                if (isCompleted) {
-                                    itemText.setPaintFlags(itemText.getPaintFlags() | android.graphics.Paint.STRIKE_THRU_TEXT_FLAG);
-                                } else {
-                                    itemText.setPaintFlags(itemText.getPaintFlags() & (~android.graphics.Paint.STRIKE_THRU_TEXT_FLAG));
-                                }
-                                checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                                    db.collection("task_to_do_list").document(document.getId())
-                                            .update("completed", isChecked)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    if (isChecked) {
-                                                        itemText.setPaintFlags(itemText.getPaintFlags() | android.graphics.Paint.STRIKE_THRU_TEXT_FLAG);
-                                                    } else {
-                                                        itemText.setPaintFlags(itemText.getPaintFlags() & (~android.graphics.Paint.STRIKE_THRU_TEXT_FLAG));
-                                                    }
-                                                }
-                                            });
-                                });
-                            }
-                        }
-                    });
+            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                viewModel.updateTaskCompletion(item.getId(), isChecked);
+            });
 
             return convertView;
         }
-    }
-
-    private void loadTasksFromFirebase() {
-        db.collection("task_to_do_list")
-                .whereEqualTo("userId", FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                String itemName = document.getString("task");
-                                items.add(itemName);
-                            }
-                            itemsAdapter.notifyDataSetChanged();
-                        } else {
-                            Log.w("ToDoListActivity", "Error getting documents.", task.getException());
-                        }
-                    }
-                });
     }
 }
