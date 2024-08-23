@@ -107,7 +107,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardAgenda"
+                android:id="@+id/cardPlanner"
                 android:layout_width="379dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
@@ -117,7 +117,7 @@
                 app:cardCornerRadius="10dp">
 
                 <TextView
-                    android:id="@+id/txtAgenda"
+                    android:id="@+id/txtPlanner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="AGENDA"
