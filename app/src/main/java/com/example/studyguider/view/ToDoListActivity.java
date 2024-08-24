@@ -22,7 +22,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
-import com.example.studyguider.models.TaskItem;
+import com.example.studyguider.models.TaskItemToDoList;
 import com.example.studyguider.viewmodels.ToDoListViewModel;
 
 
@@ -32,7 +32,7 @@ import java.util.List;
 
 public class ToDoListActivity extends AppCompatActivity {
 
-    private ArrayList<TaskItem> items;
+    private ArrayList<TaskItemToDoList> items;
     private ItemAdapter itemsAdapter;
     private ListView lvItems;
     private EditText editText;
@@ -52,9 +52,9 @@ public class ToDoListActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(ToDoListViewModel.class);
 
-        viewModel.getTasks().observe(this, new Observer<List<TaskItem>>() {
+        viewModel.getTasks().observe(this, new Observer<List<TaskItemToDoList>>() {
             @Override
-            public void onChanged(List<TaskItem> taskItems) {
+            public void onChanged(List<TaskItemToDoList> taskItems) {
                 items.clear();
                 items.addAll(taskItems);
                 itemsAdapter.notifyDataSetChanged();
@@ -117,21 +117,21 @@ public class ToDoListActivity extends AppCompatActivity {
         btnDeleteSelected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<TaskItem> itemsToRemove = new ArrayList<>();
+                ArrayList<TaskItemToDoList> itemsToRemove = new ArrayList<>();
                 for (int i = 0; i < lvItems.getChildCount(); i++) {
                     View item = lvItems.getChildAt(i);
                     CheckBox checkBox = item.findViewById(R.id.checkBox);
                     if (checkBox.isChecked()) {
                         TextView itemText = item.findViewById(R.id.item_text);
                         String itemName = itemText.getText().toString();
-                        for (TaskItem taskItem : items) {
+                        for (TaskItemToDoList taskItem : items) {
                             if (taskItem.getTask().equals(itemName)) {
                                 itemsToRemove.add(taskItem);
                             }
                         }
                     }
                 }
-                for (TaskItem item : itemsToRemove) {
+                for (TaskItemToDoList item : itemsToRemove) {
                     viewModel.deleteTask(item.getId());
                 }
             }
@@ -139,10 +139,10 @@ public class ToDoListActivity extends AppCompatActivity {
 
     }
 
-    private class ItemAdapter extends ArrayAdapter<TaskItem> {
-        private ArrayList<TaskItem> items;
+    private class ItemAdapter extends ArrayAdapter<TaskItemToDoList> {
+        private ArrayList<TaskItemToDoList> items;
 
-        public ItemAdapter(ArrayList<TaskItem> items) {
+        public ItemAdapter(ArrayList<TaskItemToDoList> items) {
             super(ToDoListActivity.this, R.layout.dialog_to_do_list, items);
             this.items = items;
         }
@@ -154,7 +154,7 @@ public class ToDoListActivity extends AppCompatActivity {
                 convertView = inflater.inflate(R.layout.dialog_to_do_list, parent, false);
             }
 
-            TaskItem item = items.get(position);
+            TaskItemToDoList item = items.get(position);
 
             TextView itemText = convertView.findViewById(R.id.item_text);
             CheckBox checkBox = convertView.findViewById(R.id.checkBox);

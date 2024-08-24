@@ -21,17 +21,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TaskRepository {
+public class TaskRepositoryToDoList {
     private static final String TAG = "TaskRepository";
     private FirebaseFirestore db;
-    private MutableLiveData<List<TaskItem>> tasksLiveData;
+    private MutableLiveData<List<TaskItemToDoList>> tasksLiveData;
 
-    public TaskRepository() {
+    public TaskRepositoryToDoList() {
         db = FirebaseFirestore.getInstance();
         tasksLiveData = new MutableLiveData<>();
     }
 
-    public LiveData<List<TaskItem>> getTasks() {
+    public LiveData<List<TaskItemToDoList>> getTasks() {
         loadTasksFromFirebase();
         return tasksLiveData;
     }
@@ -44,11 +44,11 @@ public class TaskRepository {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            List<TaskItem> items = new ArrayList<>();
+                            List<TaskItemToDoList> items = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String taskName = document.getString("task");
                                 boolean completed = document.getBoolean("completed");
-                                items.add(new TaskItem(document.getId(), taskName, completed));
+                                items.add(new TaskItemToDoList(document.getId(), taskName, completed));
                             }
                             tasksLiveData.postValue(items);
                         } else {
