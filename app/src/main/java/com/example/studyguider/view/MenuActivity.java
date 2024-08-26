@@ -35,6 +35,11 @@ public class MenuActivity extends AppCompatActivity {
         CardView cardViewToDoList = findViewById(R.id.cardToDoList);
         CardView cardViewAbsence = findViewById(R.id.cardAbsence);
         CardView cardViewEmotionalCalendar = findViewById(R.id.cardEmotionalCalendar);
+        CardView cardViewGrades = findViewById(R.id.cardGrades);
+        CardView cardViewRecovery = findViewById(R.id.cardRecovery);
+        CardView cardViewSupplies = findViewById(R.id.cardSupplies);
+        CardView cardViewSchoolDuty = findViewById(R.id.cardSchoolDuty);
+
         ImageView imageProfile = findViewById(R.id.imgPerfil);
 
 
@@ -77,6 +82,40 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        cardViewGrades.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, GradesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cardViewSchoolDuty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, SchoolDutyActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cardViewRecovery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, RecoveryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cardViewSupplies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, SuppliesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override

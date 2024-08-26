@@ -14,6 +14,11 @@
     <string name="about_us_page_title">À Propos de Nous</string>
     <string name="about_us_page_text_description_devs">Un groupe d\'étudiants du Collège Technique Industriel - Prof. Isaac Portal Roldán (CTI), Anna Clara, Beatriz, Eduarda, Eduardo, Giovanna, Jenyffer et Vitória, qui ont décidé d\'innover en créant une application facilitant l\'organisation des élèves face à une charge de travail importante et des tâches diverses. Le projet a traversé de nombreuses étapes au cours de l\'année 2024 jusqu\'à atteindre le résultat final et commencer à aider à l\'organisation scolaire d\'innombrables étudiants.</string>
     <string name="loading_lbl_profile">Chargement</string>
+    <string name="menu_page_to_do_list">LISTE DES TÂCHES</string>
+    <string name="menu_page_planner">ORDRE DU JOUR</string>
+    <string name="menu_page_supplies">MATÉRIELS</string>
+    <string name="menu_page_absence">FAUTES</string>
+    <string name="menu_page_emotional">ÉMOTIONS</string>
     <string name="profile_page_title">Profil</string>
     <string name="btn_log_out">Se déconnecter</string>
     <string name="name_profile">NOM:</string>
@@ -35,4 +40,8 @@
     <string name="question_option_bad_emotional_calendar">Mauvais</string>
     <string name="question_option_terrible_emotional_calendar">Terrible</string>
     <string name="question_option_normal_emotional_calendar">Normale</string>
+    <string name="menu_page_school_duty">DEVOIR SCOLAIRE</string>
+    <string name="menu_page_grades">NOTES SCOLAIRES</string>
+    <string name="menu_page_recovery">RÉCUPÉRATION</string>
+    <string name="menu_page_about_us">À PROPOS DE NOUS</string>
 </resources>
