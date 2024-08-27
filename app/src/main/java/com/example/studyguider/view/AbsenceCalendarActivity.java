@@ -24,6 +24,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -52,6 +53,8 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
 
     private Calendar calendar;
     private TextView monthTextView;
+
+    private String currentEditingDay; // Day currently being edited
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +149,8 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         ColorDrawable background = (ColorDrawable) dayTextView.getBackground();
         if (background.getColor() == defaultColor) {
             selectedDayTextView = dayTextView;
+            currentEditingDay = String.valueOf(day); // Set the day to edit
+            loadFormForDay(day); // Load existing data into the form
             informationScrollView.setVisibility(View.VISIBLE);
             gridLayoutCalendar.setVisibility(View.GONE);
             savedFaltasLayout.setVisibility(View.GONE);
@@ -157,8 +162,34 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         }
     }
 
+    private void loadFormForDay(int day) {
+        String monthYearKey = getMonthYearKey();
+        DocumentReference docRef = db.collection("absence_calendar").document(userId)
+                .collection(monthYearKey).document(String.valueOf(day));
+
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                editTextMotivo.setText(documentSnapshot.getString("motivo"));
+                checkBoxAtestado.setChecked(documentSnapshot.getBoolean("atestado"));
+                editTextNota.setText(documentSnapshot.getString("nota"));
+            } else {
+                editTextMotivo.setText("");
+                checkBoxAtestado.setChecked(false);
+                editTextNota.setText("");
+            }
+        }).addOnFailureListener(e -> {
+            Log.w("TAG", "Error loading document", e);
+            Toast.makeText(this, "Failed to load the entry", Toast.LENGTH_SHORT).show();
+        });
+    }
+
     private void saveFalta() {
-        String day = selectedDayTextView.getText().toString();
+        if (currentEditingDay == null) {
+            Toast.makeText(this, "No day selected", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String day = currentEditingDay;
         String motivo = editTextMotivo.getText().toString();
         boolean atestado = checkBoxAtestado.isChecked();
         String nota = editTextNota.getText().toString();
@@ -170,14 +201,16 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         falta.put("nota", nota);
 
         String monthYearKey = getMonthYearKey();
+        DocumentReference docRef = db.collection("absence_calendar").document(userId)
+                .collection(monthYearKey).document(day);
 
-        db.collection("absence_calendar").document(userId).collection(monthYearKey).document(day)
-                .set(falta)
+        updateUserAbsenceCount(1);
+
+        docRef.set(falta)
                 .addOnSuccessListener(aVoid -> {
-                    addFaltaToLayout(day, motivo, atestado, nota);
+                    updateFaltaInLayout(day, motivo, atestado, nota);
                     clearForm();
-                    // Increment the absence count
-                    updateUserAbsenceCount(1);
+                    selectedDayTextView.setBackgroundColor(selectedColor);
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Failed to save the entry", Toast.LENGTH_SHORT).show());
     }
@@ -203,6 +236,15 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         addTextViewToLayout(faltaInfoLayout, String.format("Motivo: %s", motivo));
         addTextViewToLayout(faltaInfoLayout, String.format("Atestado: %s", atestado ? "Sim" : "Não"));
         addTextViewToLayout(faltaInfoLayout, String.format("Perdeu nota: %s", nota));
+
+        // Set a click listener to edit this entry
+        faltaInfoLayout.setOnClickListener(v -> {
+            currentEditingDay = day;
+            loadFormForDay(Integer.parseInt(day));
+            informationScrollView.setVisibility(View.VISIBLE);
+            gridLayoutCalendar.setVisibility(View.GONE);
+            savedFaltasLayout.setVisibility(View.GONE);
+        });
 
         savedFaltasLayout.addView(faltaInfoLayout);
     }
@@ -230,6 +272,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         informationScrollView.setVisibility(View.GONE);
         gridLayoutCalendar.setVisibility(View.VISIBLE);
         savedFaltasLayout.setVisibility(View.VISIBLE);
+        currentEditingDay = null; // Reset the editing day
     }
 
     private void removeFalta(int day) {
@@ -245,26 +288,32 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
                                     .collection(monthYearKey).document(document.getId()).delete()
                                     .addOnSuccessListener(aVoid -> {
                                         removeFaltaFromLayout(day);
-                                        // Decrement the absence count
                                         updateUserAbsenceCount(-1);
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Log.w("TAG", "Error deleting document", e);
+                                        Toast.makeText(this, "Failed to delete the entry", Toast.LENGTH_SHORT).show();
                                     });
                         }
-                    } else {
-                        Toast.makeText(this, "Failed to remove the entry", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
     private void removeFaltaFromLayout(int day) {
-        int childCount = savedFaltasLayout.getChildCount();
-        for (int i = 0; i < childCount; i++) {
+        String dayStr = String.valueOf(day);
+        for (int i = 0; i < savedFaltasLayout.getChildCount(); i++) {
             LinearLayout faltaLayout = (LinearLayout) savedFaltasLayout.getChildAt(i);
             TextView dayTextView = (TextView) faltaLayout.getChildAt(0);
-            if (dayTextView.getText().toString().contains(String.valueOf(day))) {
-                savedFaltasLayout.removeViewAt(i);
+            if (dayTextView.getText().toString().contains(dayStr)) {
+                savedFaltasLayout.removeView(faltaLayout);
                 break;
             }
         }
+    }
+
+    private void updateFaltaInLayout(String day, String motivo, boolean atestado, String nota) {
+        removeFaltaFromLayout(Integer.parseInt(day));
+        addFaltaToLayout(day, motivo, atestado, nota);
     }
 
     private void loadFaltas() {
@@ -283,7 +332,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
                             String nota = document.getString("nota");
                             addFaltaToLayout(day, motivo, atestado, nota);
 
-                            // Colorir o dia no calendário
+                            // Highlight the day on the calendar
                             for (int i = 0; i < gridLayoutCalendar.getChildCount(); i++) {
                                 TextView dayView = (TextView) gridLayoutCalendar.getChildAt(i);
                                 if (dayView.getText().toString().equals(day)) {
@@ -298,7 +347,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
                 });
     }
 
-    private void updateUserAbsenceCount(int absenceIncrement) {
+    private void updateUserAbsenceCount(int count) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -309,7 +358,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
             if (snapshot.exists()) {
                 // Get current absence count or initialize it to 0
                 long currentAbsenceCount = snapshot.contains("absence") ? snapshot.getLong("absence") : 0;
-                long newAbsenceCount = currentAbsenceCount + absenceIncrement;
+                long newAbsenceCount = currentAbsenceCount + count;
 
                 // Update the "absence" field
                 transaction.update(userDocRef, "absence", newAbsenceCount);
@@ -321,5 +370,6 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
             Log.d("db_error", "Error updating absence count: " + e.toString());
         });
     }
+
 
 }
