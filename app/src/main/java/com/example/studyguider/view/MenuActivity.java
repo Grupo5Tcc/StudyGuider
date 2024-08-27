@@ -30,6 +30,7 @@ public class MenuActivity extends AppCompatActivity {
             return insets;
         });
 
+
         CardView cardViewAboutUs = findViewById(R.id.cardAboutUs);
         CardView cardViewPlanner = findViewById(R.id.cardPlanner);
         CardView cardViewToDoList = findViewById(R.id.cardToDoList);

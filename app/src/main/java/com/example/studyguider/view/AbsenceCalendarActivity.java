@@ -204,15 +204,27 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         DocumentReference docRef = db.collection("absence_calendar").document(userId)
                 .collection(monthYearKey).document(day);
 
-        updateUserAbsenceCount(1);
+        // Check if the document already exists
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            boolean documentExists = documentSnapshot.exists();
 
-        docRef.set(falta)
-                .addOnSuccessListener(aVoid -> {
-                    updateFaltaInLayout(day, motivo, atestado, nota);
-                    clearForm();
-                    selectedDayTextView.setBackgroundColor(selectedColor);
-                })
-                .addOnFailureListener(e -> Toast.makeText(this, "Failed to save the entry", Toast.LENGTH_SHORT).show());
+            // Update or set the document
+            docRef.set(falta)
+                    .addOnSuccessListener(aVoid -> {
+                        // Update the count based on whether the document existed or not
+                        updateUserAbsenceCount(documentExists ? 0 : 1);
+
+                        updateFaltaInLayout(day, motivo, atestado, nota);
+                        clearForm();
+                        if (selectedDayTextView != null) {
+                            selectedDayTextView.setBackgroundColor(selectedColor);
+                        }
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(this, "Failed to save the entry", Toast.LENGTH_SHORT).show());
+        }).addOnFailureListener(e -> {
+            Log.w("TAG", "Error checking document existence", e);
+            Toast.makeText(this, "Failed to check the entry existence", Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void addFaltaToLayout(String day, String motivo, boolean atestado, String nota) {
