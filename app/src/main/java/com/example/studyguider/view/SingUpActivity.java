@@ -44,12 +44,12 @@ public class SingUpActivity extends AppCompatActivity {
 
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
 
-        EditText editTextUsername = findViewById(R.id.txt_name);
-        EditText editTextEMail = findViewById(R.id.txt_email);
-        EditText editTextPassword = findViewById(R.id.txt_password);
-        EditText editTextDateOfBirth = findViewById(R.id.txt_date);
+        EditText etUsername = findViewById(R.id.txtName);
+        EditText etEmail = findViewById(R.id.txtEmail);
+        EditText etPassword = findViewById(R.id.txtPassword);
+        EditText etDateOfBirth = findViewById(R.id.txtDate);
 
-        editTextDateOfBirth.setOnClickListener(new View.OnClickListener() {
+        etDateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialog picker;
@@ -61,27 +61,27 @@ public class SingUpActivity extends AppCompatActivity {
                 picker = new DatePickerDialog(SingUpActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        editTextDateOfBirth.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        etDateOfBirth.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                 }, year, month, day);
                 picker.show();
             }
         });
 
-        Button buttonMenu = findViewById(R.id.btn_menu);
-        View progressBar = findViewById(R.id.pgb_loading);
+        Button buttonMenu = findViewById(R.id.btnMenu);
+        View progressBar = findViewById(R.id.pgbLoading);
         buttonMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String textUsername = editTextUsername.getText().toString();
-                String textEMail = editTextEMail.getText().toString();
-                String textDateOfBirth = editTextDateOfBirth.getText().toString();
-                String textPassword = editTextPassword.getText().toString();
+                String txtUsername = etUsername.getText().toString();
+                String txtEmail = etEmail.getText().toString();
+                String txtDateOfBirth = etDateOfBirth.getText().toString();
+                String txtPassword = etPassword.getText().toString();
 
-                if (validateInput(textUsername, textEMail, textPassword, textDateOfBirth)) {
+                if (validateInput(txtUsername, txtEmail, txtPassword, txtDateOfBirth)) {
                     progressBar.setVisibility(View.VISIBLE);
-                    User user = new User(textUsername, textEMail, textDateOfBirth);
-                    registerViewModel.registerUser(user, textPassword, SingUpActivity.this);
+                    User user = new User(txtUsername, txtEmail, txtDateOfBirth);
+                    registerViewModel.registerUser(user, txtPassword, SingUpActivity.this);
                 }
             }
         });

@@ -19,4 +19,13 @@
     <color name="orange_lightest_2">#FFCFA2</color>
     <color name="light_orange">#FFEFDE</color>
 
+    <!-- Paleta de cores nova -->
+    <color name="blue_clearer">#AACFE4</color>
+    <color name="blue_1">#4C7DAA</color>
+    <color name="blue_2">#003366</color>
+    <color name="orange_clearer">#FFEFDE</color>
+    <color name="orange_1">#FFCFA2</color>
+    <color name="orange_2">#FFBC62</color>
+    <color name="orange_3">#F7A206</color>
+
 </resources>
