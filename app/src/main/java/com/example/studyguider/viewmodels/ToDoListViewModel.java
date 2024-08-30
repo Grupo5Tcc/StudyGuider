@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.studyguider.models.TaskItemToDoList;
-import com.example.studyguider.models.TaskRepositoryToDoList;
+import com.example.studyguider.repository.TaskRepositoryToDoList;
 
 import java.util.List;
 
