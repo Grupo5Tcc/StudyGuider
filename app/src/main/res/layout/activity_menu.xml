@@ -4,66 +4,47 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightest_blue"
+    android:background="@color/light_orange"
     android:orientation="vertical"
     tools:context=".view.MenuActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- Início do Cabeçalho -->
+    <FrameLayout
         android:id="@+id/header"
-        android:layout_width="416dp"
+        android:layout_width="match_parent"
         android:layout_height="85dp"
         android:background="@color/blue_dark"
-        android:paddingTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:paddingTop="5dp">
 
         <ImageView
             android:id="@+id/imglogo"
-            android:layout_width="80dp"
-            android:layout_height="75dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imgPerfil"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.8"
+            android:layout_width="68dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="16dp"
+            android:layout_gravity="start|center_vertical"
             app:srcCompat="@drawable/logo_img" />
 
         <TextView
             android:id="@+id/txtUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="289dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="25dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="90dp"
             android:text="@string/name_user_navbar"
-            android:textColor="#FFFFFF"
-            android:transitionName="txtUsuario"
-            app:layout_constraintEnd_toStartOf="@+id/imgPerfil"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="HardcodedText" />
+            android:textColor="@color/white"
+            android:fontFamily="@font/yeseva_one"
+            android:textStyle="bold"
+            android:textSize="18dp" />
 
         <ImageView
             android:id="@+id/imgPerfil"
-            android:layout_width="282dp"
-            android:layout_height="71dp"
-            android:layout_marginStart="335dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginBottom="11dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.483"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/img_user"
-            tools:ignore="ContentDescription" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="16dp"
+            app:srcCompat="@drawable/img_user" />
+    </FrameLayout>
+    <!-- Fim do Cabeçalho -->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -81,7 +62,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="6dp"
-                android:backgroundTint="@color/orange_lightest"
+                android:backgroundTint="@color/blue_dark"
                 android:clickable="true"
                 app:cardCornerRadius="10dp">
 
@@ -112,7 +93,7 @@
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
-                android:backgroundTint="@color/orange_lightest"
+                android:backgroundTint="@color/blue_dark"
                 android:clickable="true"
                 app:cardCornerRadius="10dp">
 
@@ -127,7 +108,7 @@
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:id="@+id/imgAgenda"
+                    android:id="@+id/imgPlanner"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/img_menu_schedule"
@@ -143,7 +124,7 @@
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
-                android:backgroundTint="@color/orange_lightest"
+                android:backgroundTint="@color/blue_dark"
                 app:cardCornerRadius="10dp">
 
                 <TextView
@@ -173,7 +154,7 @@
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
-                android:backgroundTint="@color/orange_lightest"
+                android:backgroundTint="@color/blue_dark"
                 android:clickable="true"
                 app:cardCornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="parent">
@@ -205,7 +186,7 @@
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
-                android:backgroundTint="@color/orange_lightest"
+                android:backgroundTint="@color/blue_dark"
                 android:transitionName="btn3"
                 app:cardCornerRadius="10dp">
 
@@ -236,7 +217,7 @@
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
-                android:backgroundTint="@color/orange_lightest"
+                android:backgroundTint="@color/blue_dark"
                 app:cardCornerRadius="10dp">
 
                 <TextView
@@ -265,7 +246,7 @@
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
-                android:backgroundTint="@color/orange_lightest"
+                android:backgroundTint="@color/blue_dark"
                 android:clickable="true"
                 app:cardCornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="parent">
@@ -295,7 +276,7 @@
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
-                android:backgroundTint="@color/orange_lightest"
+                android:backgroundTint="@color/blue_dark"
                 android:clickable="true"
                 app:cardCornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="parent">
@@ -326,20 +307,20 @@
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
-                android:backgroundTint="@color/orange_lightest"
+                android:backgroundTint="@color/blue_dark"
                 android:clickable="true"
                 app:cardCornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
                     android:id="@+id/txtAboutUs"
-                    android:layout_width="90dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/bebas_neue"
                     android:text="@string/menu_page_about_us"
+                    android:fontFamily="@font/bebas_neue"
+                    android:textSize="26dp"
                     android:textColor="@color/white"
-                    android:textSize="26dp" />
+                    android:layout_gravity="center" />
 
                 <ImageView
                     android:layout_width="80dp"

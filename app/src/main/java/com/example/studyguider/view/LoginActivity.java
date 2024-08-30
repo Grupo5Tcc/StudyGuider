@@ -44,12 +44,12 @@ public class LoginActivity extends AppCompatActivity {
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
-        TextView forgetPassword = findViewById(R.id.lbl_forget_password);
-        EditText editTextEMail = findViewById(R.id.txt_email);
-        EditText editTextPassword = findViewById(R.id.txt_password);
-        Button buttonMenu = findViewById(R.id.btn_menu);
-        Button buttonSingUp = findViewById(R.id.btn_sing_up);
-        View progressBar = findViewById(R.id.pgb_loading);
+        TextView txtforgetPassword = findViewById(R.id.lblForgetPassword);
+        EditText etEMail = findViewById(R.id.txtEmail);
+        EditText etPassword = findViewById(R.id.txtPassword);
+        Button btnMenu = findViewById(R.id.btnMenu);
+        Button btnSingUp = findViewById(R.id.btnSingUp);
+        View progressBar = findViewById(R.id.pgbLoading);
 
         loginViewModel.visibilidadeProgressBar.observe(this, isVisible -> {
             if (isVisible != null) {
@@ -71,19 +71,19 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        buttonMenu.setOnClickListener(v -> {
-            String textEMail = editTextEMail.getText().toString();
-            String textPassword = editTextPassword.getText().toString();
+        btnMenu.setOnClickListener(v -> {
+            String textEMail = etEMail.getText().toString();
+            String textPassword = etPassword.getText().toString();
             UserLogin user = new UserLogin(textEMail, textPassword);
             loginViewModel.loginUser(user);
         });
 
-        buttonSingUp.setOnClickListener(v -> {
+        btnSingUp.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, SingUpActivity.class);
             startActivity(intent);
         });
 
-        forgetPassword.setOnClickListener(v -> {
+        txtforgetPassword.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
             View dialogView = getLayoutInflater().inflate(R.layout.dialog_forgot_password, null);
             EditText emailBox = dialogView.findViewById(R.id.emailBox);

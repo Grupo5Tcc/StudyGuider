@@ -14,7 +14,7 @@
     <!-- form string -->
     <string name="presentation_form">Enter your details</string>
     <string name="btn_crate_user_form">Create your account</string>
-    <string name="forget_password_login">Forgot your password?</string>
+    <string name="forgetPasswordLogin">Forgot your password?</string>
 
     <!-- hint form strings -->
     <string name="hint_email" translatable="false">E-Mail</string>

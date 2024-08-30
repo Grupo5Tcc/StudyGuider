@@ -5,7 +5,7 @@
     <string name="btn_login_main">Entrar</string>
     <string name="btn_sing_up_main">Cadastrar</string>
     <string name="presentation_form">Entre com seus dados</string>
-    <string name="forget_password_login">Esqueceu a senha?</string>
+    <string name="forgetPasswordLogin">Esqueceu a senha?</string>
     <string name="btn_login_form">ENTRAR</string>
     <string name="btn_sing_up_form">CADASTRAR</string>
     <string name="hint_password">Senha</string>
