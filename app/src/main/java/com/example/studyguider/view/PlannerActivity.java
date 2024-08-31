@@ -46,6 +46,7 @@ public class PlannerActivity extends AppCompatActivity {
             return insets;
         });
 
+
         for (int day = 1; day <= daysInMonth; day++) {
             TextView dayTextView = new TextView(this);
             dayTextView.setText(String.valueOf(day));
@@ -72,5 +73,6 @@ public class PlannerActivity extends AppCompatActivity {
                 containerTarefas.setVisibility(View.VISIBLE);
             }
         });
+
     }
 }

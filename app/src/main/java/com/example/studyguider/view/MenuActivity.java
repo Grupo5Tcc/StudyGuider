@@ -116,8 +116,6 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-
-
         imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
