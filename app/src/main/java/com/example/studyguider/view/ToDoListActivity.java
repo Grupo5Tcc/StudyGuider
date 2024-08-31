@@ -117,26 +117,20 @@ public class ToDoListActivity extends AppCompatActivity {
         btnDeleteSelected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<TaskItemToDoList> itemsToRemove = new ArrayList<>();
+                ArrayList<String> itemsToRemoveIds = new ArrayList<>();
                 for (int i = 0; i < lvItems.getChildCount(); i++) {
                     View item = lvItems.getChildAt(i);
                     CheckBox checkBox = item.findViewById(R.id.checkBox);
                     if (checkBox.isChecked()) {
-                        TextView itemText = item.findViewById(R.id.item_text);
-                        String itemName = itemText.getText().toString();
-                        for (TaskItemToDoList taskItem : items) {
-                            if (taskItem.getTask().equals(itemName)) {
-                                itemsToRemove.add(taskItem);
-                            }
-                        }
+                        TaskItemToDoList taskItem = items.get(i);
+                        itemsToRemoveIds.add(taskItem.getId());
                     }
                 }
-                for (TaskItemToDoList item : itemsToRemove) {
-                    viewModel.deleteTask(item.getId());
+                for (String itemId : itemsToRemoveIds) {
+                    viewModel.deleteTask(itemId);
                 }
             }
         });
-
     }
 
     private class ItemAdapter extends ArrayAdapter<TaskItemToDoList> {
@@ -159,10 +153,18 @@ public class ToDoListActivity extends AppCompatActivity {
             TextView itemText = convertView.findViewById(R.id.item_text);
             CheckBox checkBox = convertView.findViewById(R.id.checkBox);
 
+            // Configure o texto do item
             itemText.setText(item.getTask());
+
+            // Desativa o listener antes de alterar o estado do checkbox para evitar loops infinitos
+            checkBox.setOnCheckedChangeListener(null);
+
+            // Define o estado do checkbox baseado no estado do item
             checkBox.setChecked(item.isCompleted());
 
+            // Reativa o listener após o estado do checkbox ser configurado
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                // Atualiza o estado de conclusão da tarefa
                 viewModel.updateTaskCompletion(item.getId(), isChecked);
             });
 
