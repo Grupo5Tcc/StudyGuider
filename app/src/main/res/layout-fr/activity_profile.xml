@@ -1,245 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@color/orange_lightest"
+    android:background="@color/light_orange"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.ProfileActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="31dp"
-        android:background="@color/blue_lighter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="85dp"
+        android:background="@color/blue_dark"
+        android:paddingTop="5dp">
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="103dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="4dp"
+            android:id="@+id/imglogo"
+            android:layout_width="68dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo_img" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:id="@+id/containerProfile"
-        android:layout_width="match_parent"
-        android:layout_height="480dp"
-        android:layout_marginHorizontal="40dp"
-        android:background="@drawable/ct_background_profile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.625" />
-
-    <ImageView
-        android:id="@+id/img_profile"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/containerProfile"
-        app:layout_constraintTop_toTopOf="@+id/containerProfile"
-        app:srcCompat="@drawable/img_user" />
+    <ImageButton
+        android:id="@+id/myButton"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_back"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:scaleX="1.5"
+        android:scaleY="1.5" />
 
     <TextView
-        android:id="@+id/lbl_title"
+        android:id="@+id/lblTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginEnd="257dp"
+        android:fontFamily="@font/yeseva_one"
+        android:layout_marginTop="15dp"
         android:text="@string/profile_page_title"
-        android:textColor="@color/white"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/containerProfile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.923"
-        tools:ignore="MissingConstraints" />
+        android:textColor="@color/blue_dark"
+        android:textSize="26dp"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/lbl_name"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ctrProfile"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="164dp"
-        android:text="@string/name_profile"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/lbl_email"
-        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
-        app:layout_constraintHorizontal_bias="0.24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/containerProfile"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="@color/orange_1"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp">
 
-    <TextView
-        android:id="@+id/lbl_name_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="164dp"
-        android:text="@string/loading_lbl_profile"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
-        app:layout_constraintHorizontal_bias="0.348"
-        app:layout_constraintStart_toEndOf="@+id/lbl_name"
-        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <TextView
-        android:id="@+id/lbl_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="196dp"
-        android:text="@string/e_mail_profile"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
-        app:layout_constraintHorizontal_bias="0.252"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="103dp"
+                android:layout_height="91dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                app:srcCompat="@drawable/img_perfil" />
 
-    <TextView
-        android:id="@+id/lbl_email_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="196dp"
-        android:text="@string/loading_lbl_profile"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
-        app:layout_constraintHorizontal_bias="0.276"
-        app:layout_constraintStart_toEndOf="@+id/lbl_email"
-        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/lbl_date_of_birth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="232dp"
-        android:text="@string/date_of_birth_profile"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
-        app:layout_constraintHorizontal_bias="0.304"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
+                <TextView
+                    android:id="@+id/lblName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/bebas_neue"
+                    android:text="@string/name_profile"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
 
-    <TextView
-        android:id="@+id/lbl_date_of_birth_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="232dp"
-        android:text="@string/loading_lbl_profile"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
-        app:layout_constraintHorizontal_bias="0.174"
-        app:layout_constraintStart_toEndOf="@+id/lbl_date_of_birth"
-        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
+                <TextView
+                    android:id="@+id/lblNameLoading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/loading_lbl_profile"
+                    android:textColor="@color/light_orange"
+                    android:textSize="16dp" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/lbl_absence"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="268dp"
-        android:text="@string/absence_profile"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
-        app:layout_constraintHorizontal_bias="0.265"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/lbl_absence_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="268dp"
-        android:text="@string/loading_lbl_profile"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
-        app:layout_constraintHorizontal_bias="0.178"
-        app:layout_constraintStart_toEndOf="@+id/lbl_absence"
-        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
+                <TextView
+                    android:id="@+id/lblEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bebas_neue"
+                    android:text="@string/e_mail_profile"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
 
-    <TextView
-        android:id="@+id/lbl_recovery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="308dp"
-        android:text="@string/recovery_profile"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
-        app:layout_constraintHorizontal_bias="0.31"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
+                <TextView
+                    android:id="@+id/lblEmailLoading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/loading_lbl_profile"
+                    android:textColor="@color/light_orange"
+                    android:textSize="16dp" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/lbl_recovery_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="308dp"
-        android:text="@string/loading_lbl_profile"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
-        app:layout_constraintHorizontal_bias="0.125"
-        app:layout_constraintStart_toEndOf="@+id/lbl_recovery"
-        app:layout_constraintTop_toTopOf="@+id/containerProfile" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_log_out"
-        android:layout_width="250dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="76dp"
-        android:backgroundTint="@color/orange_dark"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:padding="6dp"
-        android:text="@string/btn_log_out"
-        android:textColor="@color/white"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        app:cornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/containerProfile"
-        app:layout_constraintEnd_toEndOf="@+id/containerProfile"
-        app:layout_constraintHorizontal_bias="0.661"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lbl_absence_loading" />
+                <TextView
+                    android:id="@+id/lblDateOfBirth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/bebas_neue"
+                    android:text="@string/date_of_birth_profile"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/lblDateOfBirthLoading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/loading_lbl_profile"
+                    android:textColor="@color/light_orange"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lblAbsence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/bebas_neue"
+                    android:text="@string/absence_profile"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/lblAbsenceLoading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/loading_lbl_profile"
+                    android:textColor="@color/light_orange"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lblRecovery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/bebas_neue"
+                    android:text="@string/recovery_profile"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/lblRecoveryLoading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/loading_lbl_profile"
+                    android:textColor="@color/light_orange"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnLogOut"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="23dp"
+                android:layout_marginRight="23dp"
+                android:layout_marginBottom="23dp"
+                android:backgroundTint="@color/orange_2"
+                android:background="@drawable/bg_bnt_profile"
+                android:fontFamily="@font/bebas_neue"
+                android:text="@string/btn_log_out"
+                android:textColor="@color/white"
+                android:textSize="18dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <ProgressBar
-        android:id="@+id/pgb_loading"
+        android:id="@+id/pgbLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/containerProfile" />
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:visibility="invisible" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
