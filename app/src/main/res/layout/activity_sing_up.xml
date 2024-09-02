@@ -194,7 +194,7 @@
         android:layout_width="63dp"
         android:layout_height="56dp"
         android:layout_marginRight="15dp"
-        app:srcCompat="@drawable/logo_img" />
+        app:srcCompat="@drawable/img_logo" />
 
     <TextView
        android:id="@+id/lblTittle"

@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
@@ -14,6 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.studyguider.R;
 import com.example.studyguider.viewmodels.EmotionalCalendarViewModel;
+import com.example.studyguider.viewmodels.HeaderViewModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Calendar;
 import java.util.Map;
 
@@ -23,11 +28,22 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
     private TextView monthTextView;
     private int selectedColor = Color.WHITE;
     private EmotionalCalendarViewModel viewModel;
+    private HeaderViewModel headerViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emotional_calendar);
+
+        headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
+
+        View headerView = findViewById(R.id.header);
+        HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
+
+        FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser1 != null) {
+            headerViewModel.fetchUsername(currentUser1);
+        }
 
         Button buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
         buttonPreviousMonth.setText("<");

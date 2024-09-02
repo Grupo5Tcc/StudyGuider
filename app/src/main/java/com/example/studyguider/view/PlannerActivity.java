@@ -19,8 +19,12 @@ import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
+import com.example.studyguider.viewmodels.HeaderViewModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +32,7 @@ import java.util.List;
 
 public class PlannerActivity extends AppCompatActivity {
 
+    private HeaderViewModel headerViewModel;
     private GridLayout gridLayoutCalendar;
     private int selectedColor = Color.WHITE;
     private int daysInMonth;
@@ -46,6 +51,15 @@ public class PlannerActivity extends AppCompatActivity {
             return insets;
         });
 
+        headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
+
+        View headerView = findViewById(R.id.header);
+        HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
+
+        FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser1 != null) {
+            headerViewModel.fetchUsername(currentUser1);
+        }
 
         for (int day = 1; day <= daysInMonth; day++) {
             TextView dayTextView = new TextView(this);

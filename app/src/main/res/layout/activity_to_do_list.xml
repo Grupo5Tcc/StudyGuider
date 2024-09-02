@@ -8,62 +8,14 @@
     android:background="@color/light_orange"
     tools:context=".view.ToDoListActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <include
         android:id="@+id/header"
-        android:layout_width="416dp"
-        android:layout_height="85dp"
-        android:background="@color/blue_dark"
-        android:paddingTop="5dp"
+        layout="@layout/activity_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imglogo"
-            android:layout_width="80dp"
-            android:layout_height="75dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imgPerfil"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.8"
-            app:srcCompat="@drawable/logo_img" />
-
-        <TextView
-            android:id="@+id/txtUsuario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="289dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="25dp"
-            android:text="@string/name_user_navbar"
-            android:textColor="#FFFFFF"
-            android:transitionName="txtUsuario"
-            app:layout_constraintEnd_toStartOf="@+id/imgPerfil"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="HardcodedText" />
-
-        <ImageView
-            android:id="@+id/imgPerfil"
-            android:layout_width="282dp"
-            android:layout_height="71dp"
-            android:layout_marginStart="335dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginBottom="11dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.483"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/img_user"
-            tools:ignore="ContentDescription" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/edit_text"

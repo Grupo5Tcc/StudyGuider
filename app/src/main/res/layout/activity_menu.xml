@@ -8,43 +8,14 @@
     android:orientation="vertical"
     tools:context=".view.MenuActivity">
 
-    <!-- Início do Cabeçalho -->
-    <FrameLayout
+    <include
         android:id="@+id/header"
+        layout="@layout/activity_header"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:background="@color/blue_dark"
-        android:paddingTop="5dp">
-
-        <ImageView
-            android:id="@+id/imglogo"
-            android:layout_width="68dp"
-            android:layout_height="61dp"
-            android:layout_marginStart="16dp"
-            android:layout_gravity="start|center_vertical"
-            app:srcCompat="@drawable/logo_img" />
-
-        <TextView
-            android:id="@+id/txtUsuario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="90dp"
-            android:text="@string/name_user_navbar"
-            android:textColor="@color/white"
-            android:fontFamily="@font/yeseva_one"
-            android:textStyle="bold"
-            android:textSize="18dp" />
-
-        <ImageView
-            android:id="@+id/imgPerfil"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="16dp"
-            app:srcCompat="@drawable/img_user" />
-    </FrameLayout>
-    <!-- Fim do Cabeçalho -->
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"

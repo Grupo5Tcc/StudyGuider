@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_orange"
+    android:orientation="vertical"
+    tools:context=".view.MenuActivity">
+
+    <FrameLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:background="@color/blue_dark"
+        android:paddingTop="5dp"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imglogo"
+            android:layout_width="68dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="16dp"
+            android:layout_gravity="start|center_vertical"
+            app:srcCompat="@drawable/img_logo" />
+
+        <TextView
+            android:id="@+id/txtUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="90dp"
+            android:text="@string/name_user_navbar"
+            android:textColor="@color/white"
+            android:fontFamily="@font/yeseva_one"
+            android:textStyle="bold"
+            android:textSize="18dp" />
+
+        <ImageView
+            android:id="@+id/imgPerfil"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="16dp"
+            app:srcCompat="@drawable/img_perfil" />
+    </FrameLayout>
+
+</LinearLayout>
