@@ -48,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
             return insets;
         });
 
-        View progressBar = findViewById(R.id.pgb_loading);
+        View progressBar = findViewById(R.id.pgbLoading);
 
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -61,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
             showUserProfile(firebaseUser,progressBar);
         }
 
-        Button buttonMain = findViewById(R.id.btn_log_out);
+        Button buttonMain = findViewById(R.id.btnLogOut);
 
         buttonMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,9 +75,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void showUserProfile(FirebaseUser firebaseUser,View pgb) {
 
-        TextView textViewName = findViewById(R.id.lbl_name_loading);
-        TextView textViewEmail = findViewById(R.id.lbl_email_loading);
-        TextView textViewDateOfBirth = findViewById(R.id.lbl_date_of_birth_loading);
+        TextView textViewName = findViewById(R.id.lblNameLoading);
+        TextView textViewEmail = findViewById(R.id.lblEmailLoading);
+        TextView textViewDateOfBirth = findViewById(R.id.lblDateOfBirthLoading);
 
         String userID = firebaseUser.getUid();
 
