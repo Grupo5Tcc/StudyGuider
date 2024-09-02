@@ -37,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView imgProfile;
     private Uri imageUri;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
