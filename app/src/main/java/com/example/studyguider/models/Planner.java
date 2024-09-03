@@ -4,40 +4,50 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 
 public class Planner {
-    private GridLayout gridLayoutCalendar;
-    private int selectedColor;
-    private int daysInMonth;
-    private LinearLayout containerTarefas;
+    private String id;
+    private String descricao;
+    private String data;
+    private int cor;
 
-    public LinearLayout getContainerTarefas() {
-        return containerTarefas;
+    // Construtor
+    public Planner(String id, String descricao, String data, int cor) {
+        this.id = id;
+        this.descricao = descricao;
+        this.data = data;
+        this.cor = cor;
     }
 
-    public void setContainerTarefas(LinearLayout containerTarefas) {
-        this.containerTarefas = containerTarefas;
+    // Getters e Setters
+    public String getId() {
+        return id;
     }
 
-    public int getDaysInMonth() {
-        return daysInMonth;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setDaysInMonth(int daysInMonth) {
-        this.daysInMonth = daysInMonth;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public int getSelectedColor() {
-        return selectedColor;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public void setSelectedColor(int selectedColor) {
-        this.selectedColor = selectedColor;
+    public String getData() {
+        return data;
     }
 
-    public GridLayout getGridLayoutCalendar() {
-        return gridLayoutCalendar;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public void setGridLayoutCalendar(GridLayout gridLayoutCalendar) {
-        this.gridLayoutCalendar = gridLayoutCalendar;
+    public int getCor() {
+        return cor;
+    }
+
+    public void setCor(int cor) {
+        this.cor = cor;
     }
 }
+

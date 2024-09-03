@@ -1,42 +1,34 @@
 package com.example.studyguider.view;
 
+
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.CalendarView;
-import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
-import com.example.studyguider.viewmodels.HeaderViewModel;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.studyguider.models.Planner;
+import com.example.studyguider.viewmodels.PlannerViewModel;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class PlannerActivity extends AppCompatActivity {
 
-    private HeaderViewModel headerViewModel;
+    private PlannerViewModel plannerViewModel;
     private GridLayout gridLayoutCalendar;
     private int selectedColor = Color.WHITE;
     private int daysInMonth;
-
     private LinearLayout containerTarefas;
 
     @SuppressLint("MissingInflatedId")
@@ -45,38 +37,26 @@ public class PlannerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_planner);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
-
-        View headerView = findViewById(R.id.header);
-        HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
-
-        FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser1 != null) {
-            headerViewModel.fetchUsername(currentUser1);
-        }
-
-        for (int day = 1; day <= daysInMonth; day++) {
-            TextView dayTextView = new TextView(this);
-            dayTextView.setText(String.valueOf(day));
-            dayTextView.setGravity(Gravity.CENTER);
-
-            dayTextView.setOnClickListener(v -> dayTextView.setBackgroundColor(selectedColor));
-
-            GridLayout.LayoutParams param = new GridLayout.LayoutParams();
-            param.height = GridLayout.LayoutParams.WRAP_CONTENT;
-            param.width = 0;
-            param.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-            dayTextView.setLayoutParams(param);
+        plannerViewModel = new ViewModelProvider(this).get(PlannerViewModel.class);
 
 
-            gridLayoutCalendar.addView(dayTextView);
-        }
+        plannerViewModel.getPlanners().observe(this, new Observer<List<Planner>>() {
+            @Override
+            public void onChanged(List<Planner> planners) {
+                atualizarUI(planners);
+            }
+        });
+
+
+        plannerViewModel.adicionarPlanner(new Planner("1", "Exemplo de Tarefa", "01/01/2024", Color.RED));
+
 
         CalendarView calendarView = findViewById(R.id.calendarView);
         containerTarefas = findViewById(R.id.container_tarefas);
@@ -87,6 +67,9 @@ public class PlannerActivity extends AppCompatActivity {
                 containerTarefas.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    private void atualizarUI(List<Planner> planners) {
 
     }
 }
