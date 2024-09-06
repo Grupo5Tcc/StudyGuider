@@ -110,7 +110,7 @@ public class MenuActivity extends AppCompatActivity {
         cardViewSchoolDuty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, SchoolDutyActivity.class);
+                Intent intent = new Intent(MenuActivity.this, ShiftsActivity.class);
                 startActivity(intent);
             }
         });

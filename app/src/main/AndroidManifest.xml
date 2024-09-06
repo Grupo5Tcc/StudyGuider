@@ -54,6 +54,9 @@
             android:name=".view.LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".view.ShiftsActivity"
+            android:exported="false"/>
+        <activity
             android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -61,6 +64,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <meta-data

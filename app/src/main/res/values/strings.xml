@@ -72,4 +72,8 @@
     <string name="question_option_terrible_emotional_calendar">Terrible</string>
     <string name="question_option_excellent_emotional_calendar">Excellent</string>
 
+    <!-- Shifts string-->
+    <string name="delete_button" translatable="false">Remover item</string>
+    <string name="back_button_description" translatable="false">Voltar</string>
+
 </resources>
