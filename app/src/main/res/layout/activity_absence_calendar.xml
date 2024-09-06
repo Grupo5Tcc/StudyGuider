@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/light_orange"
+    android:orientation="vertical"
     tools:context=".view.AbsenceCalendarActivity">
 
     <include
@@ -14,20 +14,20 @@
         layout="@layout/activity_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
-        android:layout_marginTop="10dp">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/buttonPreviousMonth"
-            android:layout_width="72dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:background="@android:color/transparent"
@@ -53,8 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:background="@android:color/transparent"
-            android:textSize="20dp"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:textSize="20dp" />
 
     </LinearLayout>
 
@@ -62,11 +62,14 @@
         android:id="@+id/gridLayoutCalendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:background="@color/white"
         android:columnCount="7"
-        android:padding="16dp"
-        android:background="@color/white">
-    </GridLayout>
+
+        android:padding="16dp"></GridLayout>
 
     <ScrollView
         android:id="@+id/scrollViewSavedFaltas"
@@ -101,16 +104,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Informações da Falta"
+                android:textColor="@color/white"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/white" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editTextMotivo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Motivo"
-                android:background="@color/white" />
+                android:background="@color/white"
+                android:hint="Motivo" />
 
             <CheckBox
                 android:id="@+id/checkBoxAtestado"
@@ -123,8 +126,8 @@
                 android:id="@+id/editTextNota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Perdeu alguma nota?"
-                android:background="@color/white" />
+                android:background="@color/white"
+                android:hint="Perdeu alguma nota?" />
 
             <Button
                 android:id="@+id/saveButton"
