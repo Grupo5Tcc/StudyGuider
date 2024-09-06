@@ -24,6 +24,9 @@ public class MenuActivity extends AppCompatActivity {
 
     private HeaderViewModel headerViewModel;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +69,7 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         cardViewPlanner.setOnClickListener(new View.OnClickListener() {
             @Override

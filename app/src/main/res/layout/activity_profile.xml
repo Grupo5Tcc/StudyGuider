@@ -29,7 +29,7 @@
             app:srcCompat="@drawable/img_logo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageButton
+    <ImageView
         android:id="@+id/myButton"
         android:layout_width="20dp"
         android:layout_height="20dp"
@@ -40,6 +40,7 @@
         android:scaleType="centerInside"
         android:scaleX="1.5"
         android:scaleY="1.5" />
+
 
     <TextView
         android:id="@+id/lblTitle"
