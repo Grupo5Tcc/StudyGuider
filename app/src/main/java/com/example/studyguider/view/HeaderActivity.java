@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer;
 import com.example.studyguider.R;
 import com.example.studyguider.viewmodels.HeaderViewModel;
 
-public class HeaderActivity {
+public class  HeaderActivity {
 
     private View headerView;
     private HeaderViewModel viewModel;
