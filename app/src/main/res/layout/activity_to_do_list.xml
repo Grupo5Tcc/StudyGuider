@@ -8,6 +8,7 @@
     android:background="@color/light_orange"
     tools:context=".view.ToDoListActivity">
 
+    <!-- Cabeçalho incluído -->
     <include
         android:id="@+id/header"
         layout="@layout/activity_header"
@@ -17,6 +18,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Botão de imagem adicionado abaixo do cabeçalho -->
+    <ImageButton
+        android:id="@+id/myButton"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:src="@drawable/ic_back"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- Campo de entrada de texto -->
     <EditText
         android:id="@+id/edit_text"
         android:layout_width="378dp"
@@ -28,8 +46,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header" />
+        app:layout_constraintTop_toBottomOf="@id/myButton" />
 
+    <!-- Lista de itens -->
     <ListView
         android:id="@+id/item_list"
         android:layout_width="0dp"
@@ -44,6 +63,7 @@
         app:layout_constraintHeight_default="wrap"
         app:layout_constraintVertical_bias="0.168" />
 
+    <!-- Rodapé com botões -->
     <LinearLayout
         android:id="@+id/footer"
         android:layout_width="0dp"

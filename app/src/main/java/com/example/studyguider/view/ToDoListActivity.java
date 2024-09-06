@@ -1,5 +1,6 @@
 package com.example.studyguider.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -7,12 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton; // Certifique-se de importar ImageButton
 import android.widget.ListView;
 import android.widget.TextView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -28,10 +29,8 @@ import com.example.studyguider.viewmodels.ToDoListViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class ToDoListActivity extends AppCompatActivity {
 
@@ -94,6 +93,14 @@ public class ToDoListActivity extends AppCompatActivity {
         Button btnAdd = findViewById(R.id.btn_add);
         Button btnSelectAll = findViewById(R.id.btn_select_all);
         Button btnDeleteSelected = findViewById(R.id.btn_delete_selected);
+
+        ImageButton backButton = findViewById(R.id.myButton); //
+        backButton.setOnClickListener(v -> {
+            // Ao clicar, vai para a página de menu
+            Intent intent = new Intent(ToDoListActivity.this, MenuActivity.class);
+            startActivity(intent);
+            finish();  // Fecha a ToDoListActivity se não quiser que o usuário volte a ela
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
