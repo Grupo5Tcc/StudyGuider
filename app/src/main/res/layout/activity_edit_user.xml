@@ -20,7 +20,7 @@
             android:layout_height="61dp"
             android:layout_gravity="start|center_vertical"
             android:layout_marginStart="16dp"
-            app:srcCompat="@drawable/logo_img" />
+            app:srcCompat="@drawable/img_logo" />
 
         <TextView
             android:id="@+id/txtUsuario"
