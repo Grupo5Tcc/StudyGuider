@@ -126,7 +126,7 @@ public class MenuActivity extends AppCompatActivity {
         cardViewSupplies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, SuppliesActivity.class);
+                Intent intent = new Intent(MenuActivity.this, SubjectsActivity.class);
                 startActivity(intent);
             }
         });
