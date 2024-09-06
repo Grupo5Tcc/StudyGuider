@@ -1,0 +1,82 @@
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.Material3.CardView.Elevated"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="2dp"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="10dp">
+
+    <!-- Layout horizontal para alinhar o conteúdo e o botão -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <!-- Conteúdo com os TextViews -->
+        <RelativeLayout
+            android:id="@+id/relative_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <!-- Professor -->
+            <TextView
+                android:id="@+id/list_item_professor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp" />
+
+            <!-- Matéria -->
+            <TextView
+                android:id="@+id/list_item_materia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/list_item_professor"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:singleLine="true" />
+
+            <!-- Dia -->
+            <TextView
+                android:id="@+id/list_item_dia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/list_item_materia"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:singleLine="true" />
+
+            <!-- Hora -->
+            <TextView
+                android:id="@+id/list_item_hora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/list_item_dia"
+                android:ellipsize="end"
+                android:singleLine="true" />
+        </RelativeLayout>
+
+        <!-- Botão de remover fora do RelativeLayout mas dentro do CardView -->
+        <ImageView
+            android:id="@+id/image_remover"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:contentDescription="@string/delete_button"
+            android:src="@drawable/ic_delete" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
