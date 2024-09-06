@@ -102,7 +102,7 @@
                     android:id="@+id/txtMaterias"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="MATÉRIAS"
+                    android:text="@string/menu_page_subjects"
                     android:fontFamily="@font/bebas_neue"
                     android:textSize="26dp"
                     android:textColor="@color/white"

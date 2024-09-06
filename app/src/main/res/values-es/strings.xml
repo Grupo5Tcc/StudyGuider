@@ -16,7 +16,6 @@
     <string name="loading_lbl_profile">Cargando</string>
     <string name="menu_page_to_do_list">lLISTA DE TAREAS</string>
     <string name="menu_page_planner">ORDEN DEL DÍA</string>
-    <string name="menu_page_supplies">MATERIALES</string>
     <string name="menu_page_absence">FALTAS</string>
     <string name="menu_page_emotional">EMOCIONES</string>
     <string name="profile_page_title">Perfil</string>
@@ -44,4 +43,5 @@
     <string name="menu_page_grades">CALIFICACIONES</string>
     <string name="menu_page_recovery">RECUPERACIÓN</string>
     <string name="menu_page_about_us">NOSOTROS</string>
+    <string name="menu_page_subjects">MATERIAS</string>
 </resources>

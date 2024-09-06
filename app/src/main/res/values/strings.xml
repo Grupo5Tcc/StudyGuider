@@ -32,7 +32,7 @@
     <!--Menu string-->
     <string name="menu_page_to_do_list">TO-DO LIST</string>
     <string name="menu_page_planner">PLANNER</string>
-    <string name="menu_page_supplies">SUPPLIES</string>
+    <string name="menu_page_subjects">SUBJECTS</string>
     <string name="menu_page_absence">ABSENCE</string>
     <string name="menu_page_emotional">EMOTIONAL</string>
     <string name="menu_page_school_duty">SCHOOL DUTY</string>
