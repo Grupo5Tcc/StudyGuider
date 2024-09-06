@@ -35,8 +35,8 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="360dp"
-        android:layout_height="481dp"
+        android:layout_width="365dp"
+        android:layout_height="521dp"
         android:layout_margin="16dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/ct_background_about_us"
@@ -58,8 +58,8 @@
 
     <TextView
         android:id="@+id/lblDescription"
-        android:layout_width="317dp"
-        android:layout_height="230dp"
+        android:layout_width="325dp"
+        android:layout_height="272dp"
         android:layout_margin="16dp"
         android:fontFamily="@font/roboto_medium"
         android:justificationMode="inter_word"
