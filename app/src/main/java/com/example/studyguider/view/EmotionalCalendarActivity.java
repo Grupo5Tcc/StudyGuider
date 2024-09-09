@@ -1,5 +1,6 @@
 package com.example.studyguider.view;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -123,6 +125,14 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
             Log.e("EmotionalCalendar", "Error updating calendar: " + e.getMessage(), e);
             Toast.makeText(this, "Error updating the calendar.", Toast.LENGTH_LONG).show();
         }
+
+        ImageButton backButton = findViewById(R.id.myButton); //
+        backButton.setOnClickListener(v -> {
+            // Ao clicar, vai para a página de menu
+            Intent intent = new Intent(EmotionalCalendarActivity.this, MenuActivity.class);
+            startActivity(intent);
+            finish();  // Fecha a ToDoListActivity se não quiser que o usuário volte a ela
+        });
     }
 
 }

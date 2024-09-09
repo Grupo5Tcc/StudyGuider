@@ -15,9 +15,24 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+
+        />
 
     <!-- Título fora do container -->
+    <ImageView
+        android:id="@+id/myButton"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:src="@drawable/ic_back"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="95dp"
+        tools:ignore="MissingConstraints" />
+
     <TextView
 
         android:id="@+id/lblTittle"

@@ -1,6 +1,7 @@
 package com.example.studyguider.view;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -394,6 +396,14 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
             Log.d("db", "Successful update of absence count");
         }).addOnFailureListener(e -> {
             Log.d("db_error", "Error updating absence count: " + e.toString());
+        });
+
+        ImageButton backButton = findViewById(R.id.myButton); //
+        backButton.setOnClickListener(v -> {
+            // Ao clicar, vai para a página de menu
+            Intent intent = new Intent(AbsenceCalendarActivity.this, MenuActivity.class);
+            startActivity(intent);
+            finish();  // Fecha a ToDoListActivity se não quiser que o usuário volte a ela
         });
     }
 
