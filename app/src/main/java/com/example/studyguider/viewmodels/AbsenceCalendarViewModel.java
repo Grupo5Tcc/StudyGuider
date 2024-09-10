@@ -87,13 +87,15 @@ public class AbsenceCalendarViewModel extends ViewModel {
                 .addOnCompleteListener(task -> isLoading.setValue(false));
     }
 
-    /**********************************************/
-
     public void updateUserAbsenceCount(int count) {
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser == null) return;
+        if (currentUser == null) {
+            errorMessage.setValue("User not authenticated");
+            return;
+        }
 
         DocumentReference userDocRef = db.collection("user").document(currentUser.getUid());
+
         db.runTransaction(transaction -> {
             DocumentSnapshot snapshot = transaction.get(userDocRef);
             long currentAbsenceCount = snapshot.contains("absence") ? snapshot.getLong("absence") : 0;
@@ -101,8 +103,10 @@ public class AbsenceCalendarViewModel extends ViewModel {
             transaction.update(userDocRef, "absence", newAbsenceCount);
             return null;
         }).addOnSuccessListener(aVoid -> {
-            // Successful update
+            // Successfully updated
+            Log.d("db", "Successful update of absence count");
         }).addOnFailureListener(e -> {
+            errorMessage.setValue("Error updating absence count: " + e.getMessage());
             Log.d("db_error", "Error updating absence count: " + e.toString());
         });
     }

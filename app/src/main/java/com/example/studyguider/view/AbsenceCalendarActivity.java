@@ -206,6 +206,8 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         viewModel.saveFalta(userId, getMonthYearKey(), day, falta);
         updateFaltaInLayout(day, motivo, atestado, nota);
         updateCalendar();
+        int countChange = 1; // Incrementa a contagem de ausências
+        viewModel.updateUserAbsenceCount(countChange);
         clearForm();
         if (selectedDayTextView != null) {
             selectedDayTextView.setBackgroundColor(selectedColor);
@@ -275,6 +277,8 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
     private void removeFalta(int day) {
         String monthYearKey = getMonthYearKey();
         viewModel.removeFalta(userId, monthYearKey, day);
+        int countChange = -1; // Incrementa a contagem de ausências
+        viewModel.updateUserAbsenceCount(countChange);
         updateCalendar();
         clearForm();
         if (selectedDayTextView != null) {
@@ -329,38 +333,4 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
                     }
                 });
     }
-
-    private void updateUserAbsenceCount(int count) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        DocumentReference userDocRef = db.collection("user").document(userID);
-
-        db.runTransaction(transaction -> {
-            DocumentSnapshot snapshot = transaction.get(userDocRef);
-            if (snapshot.exists()) {
-                // Get current absence count or initialize it to 0
-                long currentAbsenceCount = snapshot.contains("absence") ? snapshot.getLong("absence") : 0;
-                long newAbsenceCount = currentAbsenceCount + count;
-
-                // Update the "absence" field
-                transaction.update(userDocRef, "absence", newAbsenceCount);
-            }
-            return null;
-        }).addOnSuccessListener(aVoid -> {
-            Log.d("db", "Successful update of absence count");
-        }).addOnFailureListener(e -> {
-            Log.d("db_error", "Error updating absence count: " + e.toString());
-        });
-
-        ImageButton backButton = findViewById(R.id.myButton); //
-        backButton.setOnClickListener(v -> {
-            // Ao clicar, vai para a página de menu
-            Intent intent = new Intent(AbsenceCalendarActivity.this, MenuActivity.class);
-            startActivity(intent);
-            finish();  // Fecha a ToDoListActivity se não quiser que o usuário volte a ela
-        });
-    }
-
-
 }
