@@ -14,9 +14,9 @@
         layout="@layout/activity_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,9 +31,9 @@
                 android:id="@+id/calendarView"
                 android:layout_width="366dp"
                 android:layout_height="327dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:background="@color/white"
-                android:layout_gravity="center"
                 android:clickable="true"
                 android:clipChildren="false" />
 
