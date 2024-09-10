@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_orange"
+    tools:context=".view.AboutUsActivity">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/activity_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        />
+
+    <!-- Título fora do container -->
+    <ImageView
+        android:id="@+id/myButton"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:src="@drawable/ic_back"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="95dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+
+        android:id="@+id/lblTittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/yeseva_one"
+        android:text="@string/about_us_page_title"
+        android:textColor="@color/blue_dark"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header" />
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="365dp"
+        android:layout_height="521dp"
+        android:layout_margin="16dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/ct_background_about_us"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.612"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblTittle" />
+
+    <com.ortiz.touchview.TouchImageView
+        android:id="@+id/img_devs"
+        android:layout_width="305dp"
+        android:layout_height="186dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/img_devs_about_us"
+        app:layout_constraintEnd_toEndOf="@id/view"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="@id/view"
+        app:layout_constraintTop_toTopOf="@id/view" />
+
+    <TextView
+        android:id="@+id/lblDescription"
+        android:layout_width="325dp"
+        android:layout_height="272dp"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/roboto_medium"
+        android:justificationMode="inter_word"
+        android:padding="10dp"
+        android:text="@string/about_us_page_text_description_devs"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="@id/view"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="@id/view"
+        app:layout_constraintTop_toBottomOf="@+id/img_devs" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
