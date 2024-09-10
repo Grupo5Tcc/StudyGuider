@@ -1,8 +1,10 @@
 package com.example.studyguider.view;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,5 +43,12 @@ public class AboutUsActivity extends AppCompatActivity {
         if (currentUser1 != null) {
             headerViewModel.fetchUsername(currentUser1);
         }
+        ImageButton backButton = findViewById(R.id.myButton); //
+        backButton.setOnClickListener(v -> {
+            // Ao clicar, vai para a página de menu
+            Intent intent = new Intent(AboutUsActivity.this, MenuActivity.class);
+            startActivity(intent);
+            finish();  // Fecha a ToDoListActivity se não quiser que o usuário volte a ela
+        });
     }
 }

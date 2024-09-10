@@ -16,7 +16,6 @@
     <string name="loading_lbl_profile">Chargement</string>
     <string name="menu_page_to_do_list">LISTE DES TÂCHES</string>
     <string name="menu_page_planner">ORDRE DU JOUR</string>
-    <string name="menu_page_supplies">MATÉRIELS</string>
     <string name="menu_page_absence">FAUTES</string>
     <string name="menu_page_emotional">ÉMOTIONS</string>
     <string name="profile_page_title">Profil</string>
@@ -44,4 +43,6 @@
     <string name="menu_page_grades">NOTES SCOLAIRES</string>
     <string name="menu_page_recovery">RÉCUPÉRATION</string>
     <string name="menu_page_about_us">À PROPOS DE NOUS</string>
+    <string name="menu_page_subjects">MATÉRIELS</string>
+    <string name="menu_page_subjects">M</string>
 </resources>

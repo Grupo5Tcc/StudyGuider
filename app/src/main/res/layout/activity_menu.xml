@@ -51,7 +51,7 @@
                     android:id="@+id/imgAfazeres"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/img_menu_to_do_list"
+                    android:src="@drawable/img_afazeres"
                     android:layout_gravity="end"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"/>
@@ -102,7 +102,7 @@
                     android:id="@+id/txtMaterias"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="MATÉRIAS"
+                    android:text="@string/menu_page_subjects"
                     android:fontFamily="@font/bebas_neue"
                     android:textSize="26dp"
                     android:textColor="@color/white"
@@ -112,7 +112,7 @@
                     android:id="@+id/imgMaterias"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/img_menu_subjects"
+                    android:src="@drawable/img_materias"
                     android:layout_gravity="end"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"/>
@@ -175,7 +175,7 @@
                     android:id="@+id/imgEmotionalCalendar"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
-                    android:src="@drawable/img_menu_emotion"
+                    android:src="@drawable/emocoes"
                     android:layout_gravity="end"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="10dp"/>
@@ -204,7 +204,7 @@
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/img_menu_duty"
+                    android:src="@drawable/img_plantoes"
                     android:layout_gravity="end"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="15dp"/>
@@ -235,7 +235,7 @@
                 <ImageView
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:src="@drawable/img_menu_grades"
+                    android:src="@drawable/img_notas"
                     android:layout_gravity="end"
                     android:layout_marginRight="-10dp"/>
 
@@ -265,7 +265,7 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/img_menu_recovery"
+                    android:src="@drawable/recuperacoes"
                     android:layout_gravity="end"
                     android:layout_marginTop="28dp"
                     android:layout_marginEnd="18dp"/>
