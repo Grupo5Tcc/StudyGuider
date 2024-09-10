@@ -43,6 +43,5 @@
     <string name="menu_page_grades">NOTES SCOLAIRES</string>
     <string name="menu_page_recovery">RÉCUPÉRATION</string>
     <string name="menu_page_about_us">À PROPOS DE NOUS</string>
-    <string name="menu_page_subjects">MATÉRIELS</string>
-    <string name="menu_page_subjects">M</string>
+
 </resources>

@@ -1,9 +1,11 @@
 package com.example.studyguider.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -68,6 +70,14 @@ public class AddUserActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(AddUserActivity.this, "Erro ao adicionar usuário: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
+                });
+
+                ImageButton backButton = findViewById(R.id.myButton); //
+                backButton.setOnClickListener(v -> {
+                    // Ao clicar, vai para a página de menu
+                    Intent intent = new Intent(AddUserActivity.this, UserAdapter.class);
+                    startActivity(intent);
+                    finish();  // Fecha a ToDoListActivity se não quiser que o usuário volte a ela
                 });
             }
         });
