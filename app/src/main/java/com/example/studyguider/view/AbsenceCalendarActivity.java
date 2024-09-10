@@ -205,6 +205,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
 
         viewModel.saveFalta(userId, getMonthYearKey(), day, falta);
         updateFaltaInLayout(day, motivo, atestado, nota);
+        updateCalendar();
         clearForm();
         if (selectedDayTextView != null) {
             selectedDayTextView.setBackgroundColor(selectedColor);
@@ -274,6 +275,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
     private void removeFalta(int day) {
         String monthYearKey = getMonthYearKey();
         viewModel.removeFalta(userId, monthYearKey, day);
+        updateCalendar();
         clearForm();
         if (selectedDayTextView != null) {
             selectedDayTextView.setBackgroundColor(Color.WHITE); // Reset day background

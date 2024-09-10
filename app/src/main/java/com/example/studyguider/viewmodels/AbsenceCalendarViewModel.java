@@ -25,16 +25,18 @@ public class AbsenceCalendarViewModel extends ViewModel {
     public void loadFaltas(String userId, String monthYearKey) {
         isLoading.setValue(true);
         db.collection("absence_calendar").document(userId).collection(monthYearKey)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Map<String, Object> result = new HashMap<>();
-                        for (DocumentSnapshot document : task.getResult()) {
+                .addSnapshotListener((querySnapshot, e) -> {
+                    if (e != null) {
+                        errorMessage.setValue("Failed to load entries");
+                        isLoading.setValue(false);
+                        return;
+                    }
+                    Map<String, Object> result = new HashMap<>();
+                    if (querySnapshot != null) {
+                        for (DocumentSnapshot document : querySnapshot.getDocuments()) {
                             result.put(document.getId(), document.getData());
                         }
                         absenceData.setValue(result);
-                    } else {
-                        errorMessage.setValue("Failed to load entries");
                     }
                     isLoading.setValue(false);
                 });
