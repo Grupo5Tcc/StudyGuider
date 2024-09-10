@@ -49,12 +49,12 @@
 
                 <ImageView
                     android:id="@+id/imgAfazeres"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/img_afazeres"
+                    android:layout_width="115dp"
+                    android:layout_height="115dp"
                     android:layout_gravity="end"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginRight="-10dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/img_afazeres" />
 
             </androidx.cardview.widget.CardView>
 
@@ -80,12 +80,12 @@
 
                 <ImageView
                     android:id="@+id/imgPlanner"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:src="@drawable/img_menu_schedule"
                     android:layout_gravity="end"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_marginEnd="12dp"/>
 
             </androidx.cardview.widget.CardView>
 
@@ -115,6 +115,7 @@
                     android:src="@drawable/img_materias"
                     android:layout_gravity="end"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="-5dp"
                     android:layout_marginBottom="10dp"/>
 
             </androidx.cardview.widget.CardView>
@@ -142,11 +143,11 @@
 
                 <ImageView
                     android:id="@+id/imgAbsence"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:src="@drawable/img_menu_absence"
                     android:layout_gravity="end"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="26dp"
                     android:layout_marginEnd="8dp"/>
 
             </androidx.cardview.widget.CardView>
@@ -173,11 +174,11 @@
 
                 <ImageView
                     android:id="@+id/imgEmotionalCalendar"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:src="@drawable/emocoes"
                     android:layout_gravity="end"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="25dp"
                     android:layout_marginEnd="10dp"/>
 
             </androidx.cardview.widget.CardView>
@@ -202,12 +203,12 @@
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:src="@drawable/img_plantoes"
                     android:layout_gravity="end"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="15dp"/>
+                    android:layout_marginEnd="8dp"/>
 
             </androidx.cardview.widget.CardView>
 
@@ -233,10 +234,12 @@
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:src="@drawable/img_notas"
                     android:layout_gravity="end"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="33dp"
                     android:layout_marginRight="-10dp"/>
 
             </androidx.cardview.widget.CardView>
@@ -263,12 +266,12 @@
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/recuperacoes"
                     android:layout_gravity="end"
                     android:layout_marginTop="28dp"
-                    android:layout_marginEnd="18dp"/>
+                    android:layout_marginEnd="5dp"/>
 
             </androidx.cardview.widget.CardView>
 
