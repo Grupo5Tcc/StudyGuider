@@ -17,13 +17,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Botão de imagem adicionado abaixo do cabeçalho -->
+    <ImageButton
+        android:id="@+id/myButton"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:src="@drawable/ic_back"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <!-- Título fora do container -->
     <TextView
 
         android:id="@+id/lblTittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/yeseva_one"
         android:text="@string/about_us_page_title"
         android:textColor="@color/blue_dark"
@@ -31,7 +47,7 @@
         android:textStyle="bold"
         android:layout_marginLeft="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header" />
+        app:layout_constraintTop_toBottomOf="@id/myButton" />
 
 
     <View
@@ -59,8 +75,8 @@
 
     <TextView
         android:id="@+id/lblDescription"
-        android:layout_width="325dp"
-        android:layout_height="272dp"
+        android:layout_width="308dp"
+        android:layout_height="281dp"
         android:layout_margin="16dp"
         android:fontFamily="@font/roboto_medium"
         android:justificationMode="inter_word"
