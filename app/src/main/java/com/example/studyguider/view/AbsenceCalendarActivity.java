@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
+import com.example.studyguider.viewmodels.AbsenceCalendarViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -61,11 +62,14 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
     private String currentEditingDay; // Day currently being edited
 
     private HeaderViewModel headerViewModel;
+    private AbsenceCalendarViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_absence_calendar);
+
+        viewModel = new ViewModelProvider(this).get(AbsenceCalendarViewModel.class);
 
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
 
@@ -179,24 +183,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
     }
 
     private void loadFormForDay(int day) {
-        String monthYearKey = getMonthYearKey();
-        DocumentReference docRef = db.collection("absence_calendar").document(userId)
-                .collection(monthYearKey).document(String.valueOf(day));
-
-        docRef.get().addOnSuccessListener(documentSnapshot -> {
-            if (documentSnapshot.exists()) {
-                editTextMotivo.setText(documentSnapshot.getString("motivo"));
-                checkBoxAtestado.setChecked(documentSnapshot.getBoolean("atestado"));
-                editTextNota.setText(documentSnapshot.getString("nota"));
-            } else {
-                editTextMotivo.setText("");
-                checkBoxAtestado.setChecked(false);
-                editTextNota.setText("");
-            }
-        }).addOnFailureListener(e -> {
-            Log.w("TAG", "Error loading document", e);
-            Toast.makeText(this, "Failed to load the entry", Toast.LENGTH_SHORT).show();
-        });
+        viewModel.loadFaltas(userId, getMonthYearKey());
     }
 
     private void saveFalta() {
@@ -216,31 +203,12 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         falta.put("atestado", atestado);
         falta.put("nota", nota);
 
-        String monthYearKey = getMonthYearKey();
-        DocumentReference docRef = db.collection("absence_calendar").document(userId)
-                .collection(monthYearKey).document(day);
-
-        // Check if the document already exists
-        docRef.get().addOnSuccessListener(documentSnapshot -> {
-            boolean documentExists = documentSnapshot.exists();
-
-            // Update or set the document
-            docRef.set(falta)
-                    .addOnSuccessListener(aVoid -> {
-                        // Update the count based on whether the document existed or not
-                        updateUserAbsenceCount(documentExists ? 0 : 1);
-
-                        updateFaltaInLayout(day, motivo, atestado, nota);
-                        clearForm();
-                        if (selectedDayTextView != null) {
-                            selectedDayTextView.setBackgroundColor(selectedColor);
-                        }
-                    })
-                    .addOnFailureListener(e -> Toast.makeText(this, "Failed to save the entry", Toast.LENGTH_SHORT).show());
-        }).addOnFailureListener(e -> {
-            Log.w("TAG", "Error checking document existence", e);
-            Toast.makeText(this, "Failed to check the entry existence", Toast.LENGTH_SHORT).show();
-        });
+        viewModel.saveFalta(userId, getMonthYearKey(), day, falta);
+        updateFaltaInLayout(day, motivo, atestado, nota);
+        clearForm();
+        if (selectedDayTextView != null) {
+            selectedDayTextView.setBackgroundColor(selectedColor);
+        }
     }
 
     private void addFaltaToLayout(String day, String motivo, boolean atestado, String nota) {
@@ -305,26 +273,11 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
 
     private void removeFalta(int day) {
         String monthYearKey = getMonthYearKey();
-
-        db.collection("absence_calendar").document(userId).collection(monthYearKey)
-                .whereEqualTo("day", String.valueOf(day))
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            db.collection("absence_calendar").document(userId)
-                                    .collection(monthYearKey).document(document.getId()).delete()
-                                    .addOnSuccessListener(aVoid -> {
-                                        removeFaltaFromLayout(day);
-                                        updateUserAbsenceCount(-1);
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        Log.w("TAG", "Error deleting document", e);
-                                        Toast.makeText(this, "Failed to delete the entry", Toast.LENGTH_SHORT).show();
-                                    });
-                        }
-                    }
-                });
+        viewModel.removeFalta(userId, monthYearKey, day);
+        clearForm();
+        if (selectedDayTextView != null) {
+            selectedDayTextView.setBackgroundColor(Color.WHITE); // Reset day background
+        }
     }
 
     private void removeFaltaFromLayout(int day) {
