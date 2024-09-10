@@ -23,18 +23,21 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_back"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@null"
         android:scaleType="centerInside"
         android:scaleX="1.5"
-        android:scaleY="1.5" />
+        android:scaleY="1.5"
+        android:src="@drawable/ic_back"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -42,7 +45,7 @@
             android:id="@+id/buttonPreviousMonth"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:padding="8dp"
             android:textSize="20dp" />
@@ -52,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/yeseva_one"
             android:text="Controle de faltas"
@@ -64,7 +67,7 @@
             android:id="@+id/buttonNextMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:padding="8dp"
             android:textSize="20dp" />

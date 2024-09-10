@@ -24,7 +24,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:background="@null"
         android:scaleType="centerInside"
@@ -42,6 +42,9 @@
         android:layout_margin="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/rnd_corners_to_do_list"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/black"
+        android:padding="10dp"
         android:hint="@string/hint_to_do_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
@@ -88,6 +91,7 @@
             android:layout_width="128dp"
             android:layout_height="56dp"
             android:background="@drawable/bg_bnt_to_do_list"
+            android:fontFamily="@font/roboto_medium"
             android:layout_marginStart="16dp"
             android:text="@string/btn_select_all_to_do_list" />
 
