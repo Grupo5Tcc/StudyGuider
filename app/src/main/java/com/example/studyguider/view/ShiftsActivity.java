@@ -72,7 +72,7 @@ public class ShiftsActivity extends AppCompatActivity {
 
     private void updateUserList() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("shifts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {

@@ -59,7 +59,7 @@ public class AddShiftActivity extends AppCompatActivity {
                 user.put("dia", dia);
                 user.put("hora", hora);
 
-                db.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                db.collection("shifts").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Toast.makeText(AddShiftActivity.this, "Usuário adicionado com sucesso", Toast.LENGTH_SHORT).show();

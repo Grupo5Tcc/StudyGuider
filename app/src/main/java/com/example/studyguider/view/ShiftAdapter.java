@@ -83,7 +83,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
         Log.d(TAG, "deleteUser: Deleting user with ID: " + user.getId());
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users").document(user.getId()).delete().addOnSuccessListener(aVoid -> {
+        db.collection("shifts").document(user.getId()).delete().addOnSuccessListener(aVoid -> {
             Log.d(TAG, "deleteUser: User deleted successfully");
             // Remove o item da lista local após a exclusão bem-sucedida no Firestore
             arrayList.remove(position);

@@ -67,7 +67,7 @@ public class EditShiftActivity extends AppCompatActivity {
                 updates.put("dia", dia);
                 updates.put("hora", hora);
 
-                db.collection("users").document(user.getId()).update(updates).addOnSuccessListener(new OnSuccessListener<Void>() {
+                db.collection("shifts").document(user.getId()).update(updates).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(EditShiftActivity.this, "Dados atualizados com sucesso", Toast.LENGTH_SHORT).show();
