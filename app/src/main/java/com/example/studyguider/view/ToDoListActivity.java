@@ -94,13 +94,6 @@ public class ToDoListActivity extends AppCompatActivity {
         Button btnSelectAll = findViewById(R.id.btn_select_all);
         Button btnDeleteSelected = findViewById(R.id.btn_delete_selected);
 
-        ImageButton backButton = findViewById(R.id.myButton); //
-        backButton.setOnClickListener(v -> {
-            // Ao clicar, vai para a página de menu
-            Intent intent = new Intent(ToDoListActivity.this, MenuActivity.class);
-            startActivity(intent);
-            finish();  // Fecha a ToDoListActivity se não quiser que o usuário volte a ela
-        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

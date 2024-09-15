@@ -15,17 +15,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studyguider.R;
+import com.example.studyguider.models.Shift;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
+public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> {
     private static final String TAG = "UserAdapter";
     private final Context context;
-    private final ArrayList<User> arrayList;
+    private final ArrayList<Shift> arrayList;
     private OnItemClickListener onItemClickListener;
 
-    public UserAdapter(Context context, ArrayList<User> arrayList) {
+    public ShiftAdapter(Context context, ArrayList<Shift> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -39,7 +40,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        User user = arrayList.get(position);
+        Shift user = arrayList.get(position);
 
         // Configura os dados nos TextViews
         holder.professor.setText(user.getProfessor());
@@ -62,7 +63,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         });
     }
 
-    private void showConfirmationDialog(User user, int position) {
+    private void showConfirmationDialog(Shift user, int position) {
         new AlertDialog.Builder(context)
                 .setTitle("Confirme a exclusão")
                 .setMessage("Você tem certeza de que deseja excluir esse campo?")
@@ -78,7 +79,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 .show();
     }
 
-    private void deleteUser(User user, int position) {
+    private void deleteUser(Shift user, int position) {
         Log.d(TAG, "deleteUser: Deleting user with ID: " + user.getId());
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -125,6 +126,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public interface OnItemClickListener {
-        void onClick(User user);
+        void onClick(Shift user);
     }
 }
