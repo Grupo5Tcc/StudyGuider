@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Campo de entrada de texto -->
+    <!-- Campo de entrada de teexto -->
     <EditText
         android:id="@+id/edit_text"
         android:layout_width="378dp"
