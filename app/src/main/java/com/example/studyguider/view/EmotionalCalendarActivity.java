@@ -1,36 +1,48 @@
 package com.example.studyguider.view;
 
-import android.content.Intent;
+import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.example.studyguider.R;
 import com.example.studyguider.viewmodels.EmotionalCalendarViewModel;
 import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class EmotionalCalendarActivity extends AppCompatActivity {
 
+    private HeaderViewModel headerViewModel;
     private GridLayout gridLayoutCalendar;
     private TextView monthTextView;
     private int selectedColor = Color.WHITE;
     private EmotionalCalendarViewModel viewModel;
-    private HeaderViewModel headerViewModel;
+
+    // Mapeia cores para listas de frases motivacionais
+    private final Map<Integer, List<String>> colorMessages = Map.of(
+            Color.parseColor("#2196F3"), List.of("Keep going, you're doing great!", "Stay positive and strong!", "You are amazing!"),
+            Color.parseColor("#4CAF50"), List.of("Fantastic job! Keep it up!", "Great work today!", "You're on fire!"),
+            Color.parseColor("#FFEB3B"), List.of("Things are looking good!", "Keep up the good vibes!", "You're making progress!"),
+            Color.parseColor("#FF9800"), List.of("Keep pushing, you're almost there!", "Stay focused and motivated!", "You got this!"),
+            Color.parseColor("#F44336"), List.of("Don't give up, you're almost there!", "Stay strong and resilient!", "Believe in yourself!")
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +129,7 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
                 dayTextView.setOnClickListener(v -> {
                     dayTextView.setBackgroundColor(selectedColor);
                     viewModel.saveMoodData(dayCopy, selectedColor);
+                    showMotivationalMessage(selectedColor);
                 });
 
                 gridLayoutCalendar.addView(dayTextView);
@@ -125,7 +138,28 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
             Log.e("EmotionalCalendar", "Error updating calendar: " + e.getMessage(), e);
             Toast.makeText(this, "Error updating the calendar.", Toast.LENGTH_LONG).show();
         }
-
     }
 
+    private void showMotivationalMessage(int color) {
+        // Seleciona uma frase motivacional aleatória para a cor
+        List<String> messages = colorMessages.getOrDefault(color, List.of("Stay positive!"));
+        String message = messages.get(new Random().nextInt(messages.size()));
+
+        // Cria e configura o diálogo
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_motivational_message);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setLayout(600, 400); // Ajuste o tamanho do diálogo conforme necessário
+
+        TextView messageTextView = dialog.findViewById(R.id.textViewMessage);
+        messageTextView.setText(message);
+
+        // Configura a aparência do diálogo
+        View dialogView = dialog.findViewById(R.id.dialogRoot);
+        dialogView.setBackgroundColor(Color.WHITE);
+        dialogView.setPadding(24, 24, 24, 24);
+        dialogView.setElevation(16); // Define a elevação para uma aparência de sombra
+
+        dialog.show();
+    }
 }

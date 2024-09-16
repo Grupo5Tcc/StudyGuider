@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".view.EmotionalCalendarActivity">
 
+    <!-- Início do Cabeçalho -->
     <include
         android:id="@+id/header"
         layout="@layout/activity_header"
@@ -15,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+    <!-- Fim do Cabeçalho -->
 
     <TextView
         android:id="@+id/textViewMonth"
