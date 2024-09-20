@@ -1,87 +1,129 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_orange"
-    android:orientation="vertical"
-    tools:context=".view.PlannerActivity">
+    android:background="#FFEFDE"
+    android:orientation="vertical">
+
 
     <include
         android:id="@+id/header"
         layout="@layout/activity_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/myButton"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:src="@drawable/ic_back"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/textViewMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="Controle de eventos"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+
+    <GridLayout
+        android:id="@+id/gridLayoutCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#FFFFFF"
+        android:columnCount="7"
+        android:padding="16dp"></GridLayout>
+
+
+    <LinearLayout
+        android:id="@+id/savedEventsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp" />
+
 
     <ScrollView
+        android:id="@+id/informationScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#4C7DAA"
+        android:padding="16dp"
+        android:visibility="gone">
+
 
         <LinearLayout
+            android:id="@+id/informationLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <CalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="366dp"
-                android:layout_height="327dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:background="@color/white"
-                android:clickable="true"
-                android:clipChildren="false" />
 
-            <LinearLayout
-                android:id="@+id/container_tarefas"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Informações do Evento"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/editTextEventName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:background="@drawable/ct_planner_task"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:visibility="invisible">
+                android:background="#FFFFFF"
+                android:hint="Nome do Evento" />
 
-                <TextView
-                    android:id="@+id/data"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="19/09/2024"
-                    android:textColor="@color/white" />
 
-                <TextView
-                    android:id="@+id/tarefa1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="- Tarefa 1"
-                    android:textColor="@color/white" />
+            <EditText
+                android:id="@+id/editTextEventTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:hint="Hora do Evento" />
 
-                <TextView
-                    android:id="@+id/tarefa2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="- Tarefa 2"
-                    android:textColor="@color/white" />
 
-                <TextView
-                    android:id="@+id/tarefa3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="- Tarefa 3"
-                    android:textColor="@color/white" />
+            <EditText
+                android:id="@+id/editTextAdditionalInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:hint="Informações Adicionais" />
 
-            </LinearLayout>
 
+            <Button
+                android:id="@+id/colorPickerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Escolher Cor" />
+
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Salvar" />
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>
+
