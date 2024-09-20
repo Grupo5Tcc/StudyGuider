@@ -19,7 +19,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
 import com.example.studyguider.models.Planner;
-import com.example.studyguider.viewmodels.PlannerViewModel;
 
 import java.util.List;
 
