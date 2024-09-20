@@ -74,6 +74,18 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+
+        ImageView myButton = findViewById(R.id.myButton);
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Inicia a MainActivity
+                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish(); // Encerra a ProfileActivity
+            }
+        });
+
     }
 
     private void showUserProfile(FirebaseUser firebaseUser,View pgb) {
