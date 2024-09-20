@@ -203,11 +203,15 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         falta.put("atestado", atestado);
         falta.put("nota", nota);
 
+        // Verificar se já existe uma falta para esse dia antes de incrementar a contagem
+        if (!dayAlreadyExists(day)) {
+            int countChange = 1;  // Incrementa a contagem de ausências
+            viewModel.updateUserAbsenceCount(countChange);
+        }
+
         viewModel.saveFalta(userId, getMonthYearKey(), day, falta);
         updateFaltaInLayout(day, motivo, atestado, nota);
         updateCalendar();
-        int countChange = 1; // Incrementa a contagem de ausências
-        viewModel.updateUserAbsenceCount(countChange);
         clearForm();
         if (selectedDayTextView != null) {
             selectedDayTextView.setBackgroundColor(selectedColor);
@@ -332,5 +336,16 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
                         Toast.makeText(this, "Failed to load entries", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private boolean dayAlreadyExists(String day) {
+        for (int i = 0; i < savedFaltasLayout.getChildCount(); i++) {
+            LinearLayout faltaLayout = (LinearLayout) savedFaltasLayout.getChildAt(i);
+            TextView dayTextView = (TextView) faltaLayout.getChildAt(0);
+            if (dayTextView.getText().toString().contains(day)) {
+                return true;  // Já existe
+            }
+        }
+        return false;
     }
 }
