@@ -82,9 +82,9 @@
                     android:id="@+id/imgPlanner"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:src="@drawable/img_menu_schedule"
+                    android:src="@drawable/img_agenda"
                     android:layout_gravity="end"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="29dp"
                     android:layout_marginEnd="12dp"/>
 
             </androidx.cardview.widget.CardView>
@@ -145,7 +145,7 @@
                     android:id="@+id/imgAbsence"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:src="@drawable/img_menu_absence"
+                    android:src="@drawable/faltas"
                     android:layout_gravity="end"
                     android:layout_marginTop="26dp"
                     android:layout_marginEnd="8dp"/>
@@ -268,7 +268,7 @@
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/recuperacoes"
+                    android:src="@drawable/img_recuperacoes"
                     android:layout_gravity="end"
                     android:layout_marginTop="28dp"
                     android:layout_marginEnd="5dp"/>

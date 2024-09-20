@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.studyguider.R;
 import com.example.studyguider.models.UserLogin;
 import com.example.studyguider.viewmodels.LoginViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -107,4 +108,20 @@ public class LoginActivity extends AppCompatActivity {
             dialog.show();
         });
     }
+
+    private void navegarTelaPrincipal() {
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            navegarTelaPrincipal();
+        }
+    }
+
 }

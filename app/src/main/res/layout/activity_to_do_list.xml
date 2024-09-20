@@ -18,23 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botão de imagem adicionado abaixo do cabeçalho -->
-    <ImageButton
-        android:id="@+id/myButton"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="@null"
-        android:scaleType="centerInside"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:src="@drawable/ic_back"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <!-- Campo de entrada de texto -->
+    <!-- Campo de entrada de teexto -->
     <EditText
         android:id="@+id/edit_text"
         android:layout_width="378dp"
@@ -49,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/myButton" />
+        app:layout_constraintTop_toBottomOf="@id/header" />
 
     <!-- Lista de itens -->
     <ListView
