@@ -15,7 +15,6 @@
 
     <!-- RecyclerView -->
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_marginTop="20dp"
@@ -23,7 +22,6 @@
         android:layout_height="match_parent"
         android:layout_below="@id/header"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
 
     <!-- Floating Action Buttons -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
