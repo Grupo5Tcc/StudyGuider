@@ -1,19 +1,16 @@
 package com.example.studyguider.view;
 
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -22,18 +19,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
+import com.example.studyguider.models.Absence;
 import com.example.studyguider.viewmodels.AbsenceCalendarViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.SetOptions;
 import com.example.studyguider.viewmodels.HeaderViewModel;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class AbsenceCalendarActivity extends AppCompatActivity {
@@ -197,11 +190,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         boolean atestado = checkBoxAtestado.isChecked();
         String nota = editTextNota.getText().toString();
 
-        Map<String, Object> falta = new HashMap<>();
-        falta.put("day", day);
-        falta.put("motivo", motivo);
-        falta.put("atestado", atestado);
-        falta.put("nota", nota);
+        Absence falta = new Absence(day, motivo, atestado, nota);
 
         // Verificar se já existe uma falta para esse dia antes de incrementar a contagem
         if (!dayAlreadyExists(day)) {
@@ -209,6 +198,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
             viewModel.updateUserAbsenceCount(countChange);
         }
 
+        // Salvar a falta usando o ViewModel
         viewModel.saveFalta(userId, getMonthYearKey(), day, falta);
         updateFaltaInLayout(day, motivo, atestado, nota);
         updateCalendar();
