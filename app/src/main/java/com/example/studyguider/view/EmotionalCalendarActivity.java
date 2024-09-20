@@ -1,6 +1,7 @@
 package com.example.studyguider.view;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -87,6 +89,17 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
                 Toast.makeText(this, "User not authenticated", Toast.LENGTH_LONG).show();
             } else {
                 viewModel.loadMoodData(); // Carrega os dados ao iniciar ou mudar de mês
+            }
+        });
+
+        ImageView myButton = findViewById(R.id.myButton);
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Inicia a MainActivity
+                Intent intent = new Intent(EmotionalCalendarActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish(); // Encerra a ProfileActivity
             }
         });
     }

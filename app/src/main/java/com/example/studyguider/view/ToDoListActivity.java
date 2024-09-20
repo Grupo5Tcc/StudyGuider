@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton; // Certifique-se de importar ImageButton
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.view.LayoutInflater;
@@ -143,6 +144,17 @@ public class ToDoListActivity extends AppCompatActivity {
                 for (String itemId : itemsToRemoveIds) {
                     viewModel.deleteTask(itemId);
                 }
+            }
+        });
+
+        ImageView myButton = findViewById(R.id.myButton);
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Inicia a MainActivity
+                Intent intent = new Intent(ToDoListActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish(); // Encerra a ProfileActivity
             }
         });
     }

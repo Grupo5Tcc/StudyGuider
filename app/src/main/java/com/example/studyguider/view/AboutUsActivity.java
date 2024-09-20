@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,17 @@ public class AboutUsActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        ImageView myButton = findViewById(R.id.myButton);
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Inicia a MainActivity
+                Intent intent = new Intent(AboutUsActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish(); // Encerra a ProfileActivity
+            }
         });
 
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
