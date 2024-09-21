@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,8 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
+import com.example.studyguider.viewmodels.ProfileViewModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,96 +36,70 @@ import com.google.firebase.storage.UploadTask;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private static final int PICK_IMAGE_REQUEST = 1;
-    private ImageView imgProfile;
-    private Uri imageUri;
-
+    private ProfileViewModel profileViewModel;
+    private ProgressBar progressBar;
+    private TextView textViewName, textViewEmail, textViewDateOfBirth, textViewAbsence;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_profile);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        View progressBar = findViewById(R.id.pgbLoading);
+        initUI();
 
+        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        observeViewModel();
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = auth.getCurrentUser();
-
-        if(firebaseUser == null){
-            Toast.makeText(ProfileActivity.this,"Something went wrong! User's details are not available at the moment",Toast.LENGTH_LONG).show();
-        }else{
-            progressBar.setVisibility(View.VISIBLE);
-            showUserProfile(firebaseUser,progressBar);
-        }
+        profileViewModel.fetchUserProfile();
 
         Button buttonLogOut = findViewById(R.id.btnLogOut);
-
-        buttonLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        buttonLogOut.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         });
-
 
         ImageView myButton = findViewById(R.id.myButton);
-        myButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Inicia a MainActivity
-                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish(); // Encerra a ProfileActivity
+        myButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
+    }
+
+    private void initUI() {
+        progressBar = findViewById(R.id.pgbLoading);
+        textViewName = findViewById(R.id.lblNameLoading);
+        textViewEmail = findViewById(R.id.lblEmailLoading);
+        textViewDateOfBirth = findViewById(R.id.lblDateOfBirthLoading);
+        textViewAbsence = findViewById(R.id.lblAbsenceLoading); // Campo de ausência
+    }
+
+    private void observeViewModel() {
+        profileViewModel.getUserProfile().observe(this, userProfile -> {
+            if (userProfile != null) {
+                textViewName.setText(userProfile.getName());
+                textViewEmail.setText(userProfile.getEmail());
+                textViewDateOfBirth.setText(userProfile.getDateOfBirth());
+
+                // Exibe o campo absence como int
+                textViewAbsence.setText(String.valueOf(userProfile.getAbsence()));
             }
         });
 
-    }
-
-    private void showUserProfile(FirebaseUser firebaseUser,View pgb) {
-
-        TextView textViewName = findViewById(R.id.lblNameLoading);
-        TextView textViewEmail = findViewById(R.id.lblEmailLoading);
-        TextView textViewDateOfBirth = findViewById(R.id.lblDateOfBirthLoading);
-
-        String userID = firebaseUser.getUid();
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference documentReference = db.collection("user").document(userID);
-        documentReference.get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            String name = documentSnapshot.getString("name");
-                            String email = documentSnapshot.getString("e_mail");
-                            String dob = documentSnapshot.getString("date_of_birth");
-
-                            textViewName.setText(name);
-                            textViewEmail.setText(email);
-                            textViewDateOfBirth.setText(dob);
-                        } else {
-                            Toast.makeText(ProfileActivity.this, "Document not found", Toast.LENGTH_LONG).show();
-                        }
-                        pgb.setVisibility(View.GONE);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ProfileActivity.this, "Error loading data", Toast.LENGTH_LONG).show();
-                        Log.d("db_error", "Error loading data: " + e.toString());
-                        pgb.setVisibility(View.GONE);
-                    }
-                });
+        profileViewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) {
+                progressBar.setVisibility(View.VISIBLE);
+            } else {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
     }
 }
