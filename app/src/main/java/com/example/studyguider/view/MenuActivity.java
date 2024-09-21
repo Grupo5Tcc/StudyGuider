@@ -70,6 +70,14 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        cardViewPlanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, PlannerActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         cardViewAbsence.setOnClickListener(new View.OnClickListener() {
