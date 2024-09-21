@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class AddUserActivity extends AppCompatActivity {
+public class AddShiftActivity extends AppCompatActivity {
 
     private EditText professorET, materiaET, diaET, horaET;
     private Button addUser;
@@ -30,7 +30,7 @@ public class AddUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_user);
+        setContentView(R.layout.activity_add_shift);
 
         // Inicialização dos campos e do Firestore
         professorET = findViewById(R.id.professorET);
@@ -49,7 +49,7 @@ public class AddUserActivity extends AppCompatActivity {
                 String hora = Objects.requireNonNull(horaET.getText()).toString().trim();
 
                 if (professor.isEmpty() || materia.isEmpty() || dia.isEmpty() || hora.isEmpty()) {
-                    Toast.makeText(AddUserActivity.this, "Todos os campos devem ser preenchidos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddShiftActivity.this, "Todos os campos devem ser preenchidos", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -59,26 +59,19 @@ public class AddUserActivity extends AppCompatActivity {
                 user.put("dia", dia);
                 user.put("hora", hora);
 
-                db.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                db.collection("shifts").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(AddUserActivity.this, "Usuário adicionado com sucesso", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddShiftActivity.this, "Usuário adicionado com sucesso", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AddUserActivity.this, "Erro ao adicionar usuário: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddShiftActivity.this, "Erro ao adicionar usuário: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
-                ImageButton backButton = findViewById(R.id.myButton); //
-                backButton.setOnClickListener(v -> {
-                    // Ao clicar, vai para a página de menu
-                    Intent intent = new Intent(AddUserActivity.this, UserAdapter.class);
-                    startActivity(intent);
-                    finish();  // Fecha a ToDoListActivity se não quiser que o usuário volte a ela
-                });
             }
         });
     }

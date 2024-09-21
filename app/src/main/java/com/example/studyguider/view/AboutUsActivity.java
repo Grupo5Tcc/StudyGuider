@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +35,17 @@ public class AboutUsActivity extends AppCompatActivity {
             return insets;
         });
 
+        ImageView myButton = findViewById(R.id.myButton);
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Inicia a MainActivity
+                Intent intent = new Intent(AboutUsActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish(); // Encerra a ProfileActivity
+            }
+        });
+
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
 
         View headerView = findViewById(R.id.header);
@@ -43,12 +55,6 @@ public class AboutUsActivity extends AppCompatActivity {
         if (currentUser1 != null) {
             headerViewModel.fetchUsername(currentUser1);
         }
-        ImageButton backButton = findViewById(R.id.myButton); //
-        backButton.setOnClickListener(v -> {
-            // Ao clicar, vai para a página de menu
-            Intent intent = new Intent(AboutUsActivity.this, MenuActivity.class);
-            startActivity(intent);
-            finish();  // Fecha a ToDoListActivity se não quiser que o usuário volte a ela
-        });
+
     }
 }

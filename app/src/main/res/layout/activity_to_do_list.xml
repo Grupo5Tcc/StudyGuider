@@ -18,46 +18,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botão de imagem adicionado abaixo do cabeçalho -->
-    <ImageButton
-        android:id="@+id/myButton"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="@null"
-        android:scaleType="centerInside"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:src="@drawable/ic_back"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <!-- Campo de entrada de texto -->
+    <!-- Campo de entrada de teexto -->
     <EditText
         android:id="@+id/edit_text"
-        android:layout_width="378dp"
+        android:layout_width="340dp"
         android:layout_height="48dp"
-        android:layout_margin="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/rnd_corners_to_do_list"
         android:fontFamily="@font/roboto_medium"
-        android:textColor="@color/black"
-        android:padding="10dp"
         android:hint="@string/hint_to_do_list"
+        android:padding="10dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/myButton" />
+        app:layout_constraintTop_toBottomOf="@id/header" />
 
     <!-- Lista de itens -->
     <ListView
         android:id="@+id/item_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/ct_background_to_do_list"
         app:layout_constraintBottom_toTopOf="@id/footer"
         app:layout_constraintEnd_toEndOf="parent"

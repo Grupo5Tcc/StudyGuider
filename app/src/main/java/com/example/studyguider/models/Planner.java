@@ -1,15 +1,15 @@
 package com.example.studyguider.models;
 
-import android.widget.GridLayout;
-import android.widget.LinearLayout;
-
 public class Planner {
     private String id;
     private String descricao;
     private String data;
     private int cor;
 
-    // Construtor
+    public Planner(){
+
+    }
+
     public Planner(String id, String descricao, String data, int cor) {
         this.id = id;
         this.descricao = descricao;
@@ -17,7 +17,6 @@ public class Planner {
         this.cor = cor;
     }
 
-    // Getters e Setters
     public String getId() {
         return id;
     }
@@ -50,4 +49,3 @@ public class Planner {
         this.cor = cor;
     }
 }
-

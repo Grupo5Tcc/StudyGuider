@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studyguider.R;
+import com.example.studyguider.models.Shift;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -18,17 +19,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class EditUserActivity extends AppCompatActivity {
+public class EditShiftActivity extends AppCompatActivity {
 
     private EditText professorET, materiaET, diaET, horaET;
     private Button save;
     private FirebaseFirestore db;
-    private User user;
+    private Shift user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_user);
+        setContentView(R.layout.activity_edit_shift);
 
         // Inicialização dos campos e do Firestore
         professorET = findViewById(R.id.professorET);
@@ -56,7 +57,7 @@ public class EditUserActivity extends AppCompatActivity {
                 String hora = Objects.requireNonNull(horaET.getText()).toString().trim();
 
                 if (professor.isEmpty() || materia.isEmpty() || dia.isEmpty() || hora.isEmpty()) {
-                    Toast.makeText(EditUserActivity.this, "Todos os campos devem ser preenchidos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditShiftActivity.this, "Todos os campos devem ser preenchidos", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -66,16 +67,16 @@ public class EditUserActivity extends AppCompatActivity {
                 updates.put("dia", dia);
                 updates.put("hora", hora);
 
-                db.collection("users").document(user.getId()).update(updates).addOnSuccessListener(new OnSuccessListener<Void>() {
+                db.collection("shifts").document(user.getId()).update(updates).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(EditUserActivity.this, "Dados atualizados com sucesso", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditShiftActivity.this, "Dados atualizados com sucesso", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(EditUserActivity.this, "Erro ao atualizar dados: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditShiftActivity.this, "Erro ao atualizar dados: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
