@@ -1,6 +1,5 @@
 package com.example.studyguider.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -84,33 +83,28 @@ public class ToDoListActivity extends AppCompatActivity {
 
         btnSelectAll.setOnClickListener(v -> {
             boolean allChecked = true;
-            for (int i = 0; i < lvItems.getChildCount(); i++) {
-                View item = lvItems.getChildAt(i);
-                CheckBox checkBox = item.findViewById(R.id.checkBox);
-                if (!checkBox.isChecked()) {
+            // Verifica todos os itens na lista de dados (items)
+            for (TaskItemToDoList item : items) {
+                if (!item.isCompleted()) {
                     allChecked = false;
-                    checkBox.setChecked(true);
-                    viewModel.updateTaskCompletion(items.get(i).getId(), true);
+                    break; // Saia do loop assim que encontrar um item não selecionado
                 }
             }
-            if (allChecked) {
-                for (int i = 0; i < lvItems.getChildCount(); i++) {
-                    View item = lvItems.getChildAt(i);
-                    CheckBox checkBox = item.findViewById(R.id.checkBox);
-                    checkBox.setChecked(false);
-                    viewModel.updateTaskCompletion(items.get(i).getId(), false);
-                }
+            // Atualiza o estado de cada item na lista de dados
+            for (TaskItemToDoList item : items) {
+                boolean newCheckedState = !allChecked; // Alterna o estado
+                item.setCompleted(newCheckedState);
+                viewModel.updateTaskCompletion(item.getId(), newCheckedState);
             }
+            // Notifica a adaptação da lista para atualizar a visualização
+            itemsAdapter.notifyDataSetChanged();
         });
 
         btnDeleteSelected.setOnClickListener(v -> {
             ArrayList<String> itemsToRemoveIds = new ArrayList<>();
-            for (int i = 0; i < lvItems.getChildCount(); i++) {
-                View item = lvItems.getChildAt(i);
-                CheckBox checkBox = item.findViewById(R.id.checkBox);
-                if (checkBox.isChecked()) {
-                    TaskItemToDoList taskItem = items.get(i);
-                    itemsToRemoveIds.add(taskItem.getId());
+            for (TaskItemToDoList item : items) {
+                if (item.isCompleted()) {
+                    itemsToRemoveIds.add(item.getId());
                 }
             }
             for (String itemId : itemsToRemoveIds) {
