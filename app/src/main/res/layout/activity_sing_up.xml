@@ -9,6 +9,157 @@
     android:background="@color/orange_clearer"
     tools:context=".view.SingUpActivity">
 
+    <!-- Header layout -->
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@color/blue_dark"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/imglogo"
+                android:layout_width="63dp"
+                android:layout_height="56dp"
+                android:layout_marginRight="15dp"
+                app:srcCompat="@drawable/img_logo" />
+
+            <TextView
+                android:id="@+id/lblTittle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/yeseva_one"
+                android:text="@string/app_name_title"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- Scrollable content -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/frameLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Container View with background -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/ct_background_sing_up"
+                android:layout_marginHorizontal="40dp"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/imgUser"
+                    android:layout_width="102dp"
+                    android:layout_height="99dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/img_perfil" />
+
+                <TextView
+                    android:id="@+id/textViewMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/yeseva_one"
+                    android:text="CADASTRO"
+                    android:textColor="@color/blue_dark"
+                    android:textSize="26dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp" />
+
+                <EditText
+                    android:id="@+id/txtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/ct_background_text_area_form"
+                    android:drawableRight="@drawable/ic_name_form"
+                    android:hint="@string/hint_username"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:padding="10dp"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/txtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/ct_background_text_area_form"
+                    android:drawableRight="@drawable/ic_email_form"
+                    android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="25"
+                    android:padding="10dp"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/txtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/ct_background_text_area_form"
+                    android:drawableRight="@drawable/ic_password_form"
+                    android:hint="@string/hint_password"
+                    android:inputType="textPassword"
+                    android:maxLength="25"
+                    android:padding="10dp"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/txtDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/ct_background_text_area_form"
+                    android:drawableRight="@drawable/ic_date_form"
+                    android:focusable="false"
+                    android:hint="@string/hint_date"
+                    android:inputType="date"
+                    android:maxLength="25"
+                    android:padding="10dp"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/btnMenu"
+                    android:layout_width="250dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="48dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_bnt_sing"
+                    android:fontFamily="@font/yeseva_one"
+                    android:textStyle="bold"
+                    android:text="@string/btn_crate_user_form"
+                    android:textColor="@color/blue_dark"
+                    android:textSize="16dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Loading ProgressBar -->
     <ProgressBar
         android:id="@+id/pgbLoading"
         android:layout_width="wrap_content"
@@ -17,194 +168,6 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/ctrCadastro"
-        android:layout_width="match_parent"
-        android:layout_height="520dp"
-        android:layout_marginHorizontal="40dp"
-        android:background="@drawable/ct_background_sing_up"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/frameLayout"
-        app:layout_constraintVertical_bias="0.671" />
-
-    <ImageView
-        android:id="@+id/imgUser"
-        android:layout_width="102dp"
-        android:layout_height="99dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toTopOf="@id/ctrCadastro"
-        app:layout_constraintEnd_toEndOf="@id/ctrCadastro"
-        app:layout_constraintStart_toStartOf="@id/ctrCadastro"
-        app:layout_constraintVertical_bias="0.1"
-        app:srcCompat="@drawable/img_perfil" />
-
-    <TextView
-        android:id="@+id/textViewMonth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/yeseva_one"
-        android:text="CADASTRO"
-        android:textColor="@color/blue_dark"
-        android:textSize="26dp"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        app:layout_constraintTop_toBottomOf="@id/imgUser"
-        app:layout_constraintEnd_toEndOf="@id/ctrCadastro"
-        app:layout_constraintStart_toStartOf="@id/ctrCadastro" />
-
-    <EditText
-        android:id="@+id/txtName"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginRight="60dp"
-        android:background="@drawable/ct_background_text_area_form"
-        android:drawableRight="@drawable/ic_name_form"
-        android:fontFamily="@font/roboto_medium"
-        android:hint="@string/hint_username"
-        android:inputType="text"
-        android:maxLength="25"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/ctrCadastro"
-        app:layout_constraintTop_toBottomOf="@id/textViewMonth"
-        tools:ignore="TextFields" />
-
-    <EditText
-        android:id="@+id/txtEmail"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="60dp"
-        android:background="@drawable/ct_background_text_area_form"
-        android:drawableRight="@drawable/ic_email_form"
-        android:fontFamily="@font/roboto_medium"
-        android:hint="@string/hint_email"
-        android:inputType="textEmailAddress"
-        android:maxLength="25"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@id/ctrCadastro"
-        app:layout_constraintStart_toStartOf="@id/ctrCadastro"
-        app:layout_constraintTop_toBottomOf="@id/txtName"
-        tools:ignore="TextFields" />
-
-    <EditText
-        android:id="@+id/txtPassword"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="60dp"
-        android:background="@drawable/ct_background_text_area_form"
-        android:drawableRight="@drawable/ic_password_form"
-        android:fontFamily="@font/roboto_medium"
-        android:hint="@string/hint_password"
-        android:inputType="textPassword"
-        android:maxLength="25"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@id/ctrCadastro"
-        app:layout_constraintStart_toStartOf="@id/ctrCadastro"
-        app:layout_constraintTop_toBottomOf="@id/txtEmail"
-        tools:ignore="TextFields" />
-
-    <EditText
-        android:id="@+id/txtDate"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="60dp"
-        android:background="@drawable/ct_background_text_area_form"
-        android:drawableRight="@drawable/ic_date_form"
-        android:focusable="false"
-        android:fontFamily="@font/roboto_medium"
-        android:hint="@string/hint_date"
-        android:inputType="date"
-        android:maxLength="25"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@id/ctrCadastro"
-        app:layout_constraintStart_toStartOf="@id/ctrCadastro"
-        app:layout_constraintTop_toBottomOf="@id/txtPassword"
-        tools:ignore="TextFields" />
-
-    <Button
-        android:id="@+id/btnMenu"
-        android:layout_width="250dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="48dp"
-        android:background="@drawable/bg_bnt_sing"
-        android:fontFamily="@font/yeseva_one"
-        android:textStyle="bold"
-        android:padding="6dp"
-        android:text="@string/btn_crate_user_form"
-        android:textColor="@color/blue_dark"
-        android:textSize="16dp"
-        app:cornerRadius="10dp"
-        app:layout_constraintTop_toBottomOf="@id/txtDate"
-        app:layout_constraintEnd_toEndOf="@+id/ctrCadastro"
-        app:layout_constraintStart_toStartOf="@+id/ctrCadastro"
-        app:layout_constraintHorizontal_bias="0.493" />
-
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barr1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left" />
-
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:background="@color/blue_dark"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-
-    <ImageView
-        android:id="@+id/imglogo"
-        android:layout_width="63dp"
-        android:layout_height="56dp"
-        android:layout_marginRight="15dp"
-        app:srcCompat="@drawable/img_logo" />
-
-    <TextView
-       android:id="@+id/lblTittle"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:fontFamily="@font/yeseva_one"
-       android:text="@string/app_name_title"
-       android:textColor="@color/white"
-       android:textSize="18dp" />
-    </LinearLayout>
-</FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
