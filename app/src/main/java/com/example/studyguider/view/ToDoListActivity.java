@@ -19,13 +19,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
 import com.example.studyguider.models.TaskItemToDoList;
+import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.example.studyguider.viewmodels.ToDoListViewModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoListActivity extends AppCompatActivity {
 
+    private HeaderViewModel headerViewModel;
     private ArrayList<TaskItemToDoList> items;
     private ItemAdapter itemsAdapter;
     private ListView lvItems;
@@ -36,6 +40,16 @@ public class ToDoListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do_list);
+
+        headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
+
+        View headerView = findViewById(R.id.header);
+        HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
+
+        FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser1 != null) {
+            headerViewModel.fetchUsername(currentUser1);
+        }
 
         lvItems = findViewById(R.id.item_list);
         editText = findViewById(R.id.edit_text);

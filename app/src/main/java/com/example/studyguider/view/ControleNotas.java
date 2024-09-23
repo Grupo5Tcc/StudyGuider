@@ -2,17 +2,22 @@ package com.example.studyguider.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studyguider.R;
 import com.example.studyguider.models.Notas;
+import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -23,12 +28,25 @@ import java.util.ArrayList;
 
 public class ControleNotas extends AppCompatActivity {
 
+    private HeaderViewModel headerViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
         setContentView(R.layout.activity_controle_notas);
+
+        headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
+
+        View headerView = findViewById(R.id.header);
+        HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
+
+        FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser1 != null) {
+            headerViewModel.fetchUsername(currentUser1);
+        }
+
         FirebaseApp.initializeApp(ControleNotas.this);
 
         FirebaseFirestore db =FirebaseFirestore.getInstance();

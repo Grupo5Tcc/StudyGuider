@@ -24,9 +24,6 @@ public class MenuActivity extends AppCompatActivity {
 
     private HeaderViewModel headerViewModel;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +76,6 @@ public class MenuActivity extends AppCompatActivity {
         });
 
 
-
         cardViewAbsence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +103,7 @@ public class MenuActivity extends AppCompatActivity {
         cardViewGrades.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, GradesActivity.class);
+                Intent intent = new Intent(MenuActivity.this, ControleNotas.class);
                 startActivity(intent);
             }
         });

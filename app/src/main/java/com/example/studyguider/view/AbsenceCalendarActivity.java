@@ -331,16 +331,6 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
                     }
                 });
 
-        ImageView myButton = findViewById(R.id.myButton);
-        myButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Inicia a MainActivity
-                Intent intent = new Intent(AbsenceCalendarActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish(); // Encerra a ProfileActivity
-            }
-        });
     }
 
     private boolean dayAlreadyExists(String day) {

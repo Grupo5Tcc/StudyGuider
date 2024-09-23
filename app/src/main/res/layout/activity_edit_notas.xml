@@ -5,44 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/addN"
-    android:background="@color/laranjaMaisClaro"
-    tools:context=".EditNotas">
+    android:background="@color/orange_1"
+    tools:context="view.EditNotas">
 
-    <FrameLayout
+    <include
         android:id="@+id/header"
+        layout="@layout/activity_header"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:background="@color/azulMaisEscuro"
-        android:paddingTop="5dp">
-
-        <ImageView
-            android:id="@+id/imglogo"
-            android:layout_width="68dp"
-            android:layout_height="61dp"
-            android:layout_marginStart="16dp"
-            android:layout_gravity="start|center_vertical"
-            app:srcCompat="@drawable/logo_img" />
-
-        <TextView
-            android:id="@+id/txtUsuario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="90dp"
-            android:fontFamily="@font/yeseva_one"
-            android:text="Notas"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/imgPerfil"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="16dp"
-            app:srcCompat="@drawable/img_user" />
-    </FrameLayout>
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nomeMateriaLayout"
@@ -168,7 +141,7 @@
         app:backgroundTint="@android:color/holo_red_light"
         android:layout_marginStart="20sp"
         android:id="@+id/delete"
-        android:backgroundTint="@color/laranja3"/>
+        android:backgroundTint="@color/orange_1"/>
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
@@ -178,6 +151,6 @@
         android:layout_below="@id/notaProvaLayout"
         android:id="@+id/save"
         android:layout_marginEnd="20sp"
-        android:backgroundTint="@color/laranja3"/>
+        android:backgroundTint="@color/orange_1"/>
 
 </RelativeLayout>

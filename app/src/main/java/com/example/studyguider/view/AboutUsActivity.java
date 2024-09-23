@@ -35,17 +35,6 @@ public class AboutUsActivity extends AppCompatActivity {
             return insets;
         });
 
-        ImageView myButton = findViewById(R.id.myButton);
-        myButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Inicia a MainActivity
-                Intent intent = new Intent(AboutUsActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish(); // Encerra a ProfileActivity
-            }
-        });
-
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
 
         View headerView = findViewById(R.id.header);

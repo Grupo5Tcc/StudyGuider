@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/laranjaMaisClaro">
+    android:background="@color/orange_1">
 
     <FrameLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="85dp"
-        android:background="@color/azulMaisEscuro"
+        android:background="@color/blue_dark"
         android:paddingTop="5dp">
 
         <ImageView
@@ -18,7 +18,7 @@
             android:layout_height="61dp"
             android:layout_marginStart="16dp"
             android:layout_gravity="start|center_vertical"
-            app:srcCompat="@drawable/logo_img" />
+            app:srcCompat="@drawable/img_logo" />
 
         <TextView
             android:id="@+id/txtUsuario"
@@ -164,6 +164,6 @@
         android:text="Adicionar"
         android:id="@+id/addNota"
         android:textColor="@color/black"
-        android:backgroundTint="@color/laranja3"/>
+        android:backgroundTint="@color/orange_1"/>
 
 </RelativeLayout>
