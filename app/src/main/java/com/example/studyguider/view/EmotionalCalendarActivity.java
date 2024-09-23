@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -36,6 +35,7 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
     private TextView monthTextView;
     private int selectedColor = Color.WHITE;
     private EmotionalCalendarViewModel viewModel;
+    private boolean isEmotionSelected = false; // Para controlar a seleção de emoção
 
     // Mapeia cores para listas de frases motivacionais
     private final Map<Integer, List<String>> colorMessages = Map.of(
@@ -52,7 +52,6 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_emotional_calendar);
 
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
-
         View headerView = findViewById(R.id.header);
         HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
 
@@ -85,21 +84,34 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
 
         viewModel.getUserId().observe(this, userId -> {
             if (userId == null) {
-                // Redirecionar para login ou mostrar mensagem de erro
                 Toast.makeText(this, "User not authenticated", Toast.LENGTH_LONG).show();
             } else {
-                viewModel.loadMoodData(); // Carrega os dados ao iniciar ou mudar de mês
+                viewModel.loadMoodData();
             }
         });
-
     }
 
     private void setupColorButtons() {
-        findViewById(R.id.colorOtimo).setOnClickListener(v -> selectedColor = Color.parseColor("#2196F3"));
-        findViewById(R.id.colorBom).setOnClickListener(v -> selectedColor = Color.parseColor("#4CAF50"));
-        findViewById(R.id.colorNormal).setOnClickListener(v -> selectedColor = Color.parseColor("#FFEB3B"));
-        findViewById(R.id.colorRuim).setOnClickListener(v -> selectedColor = Color.parseColor("#FF9800"));
-        findViewById(R.id.colorPessimo).setOnClickListener(v -> selectedColor = Color.parseColor("#F44336"));
+        findViewById(R.id.colorOtimo).setOnClickListener(v -> {
+            selectedColor = Color.parseColor("#2196F3");
+            isEmotionSelected = true; // Emoção foi selecionada
+        });
+        findViewById(R.id.colorBom).setOnClickListener(v -> {
+            selectedColor = Color.parseColor("#4CAF50");
+            isEmotionSelected = true; // Emoção foi selecionada
+        });
+        findViewById(R.id.colorNormal).setOnClickListener(v -> {
+            selectedColor = Color.parseColor("#FFEB3B");
+            isEmotionSelected = true; // Emoção foi selecionada
+        });
+        findViewById(R.id.colorRuim).setOnClickListener(v -> {
+            selectedColor = Color.parseColor("#FF9800");
+            isEmotionSelected = true; // Emoção foi selecionada
+        });
+        findViewById(R.id.colorPessimo).setOnClickListener(v -> {
+            selectedColor = Color.parseColor("#F44336");
+            isEmotionSelected = true; // Emoção foi selecionada
+        });
     }
 
     private void updateMonthTextView(String monthYear) {
@@ -120,7 +132,7 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
                 dayTextView.setGravity(Gravity.CENTER);
                 dayTextView.setTextSize(16);
                 dayTextView.setPadding(8, 8, 8, 8);
-                dayTextView.setBackgroundColor(moodEntries.getOrDefault(day, Color.WHITE)); // Define cor a partir dos dados carregados
+                dayTextView.setBackgroundColor(moodEntries.getOrDefault(day, Color.WHITE));
 
                 GridLayout.LayoutParams param = new GridLayout.LayoutParams();
                 param.height = GridLayout.LayoutParams.WRAP_CONTENT;
@@ -130,9 +142,13 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
                 dayTextView.setLayoutParams(param);
 
                 dayTextView.setOnClickListener(v -> {
-                    dayTextView.setBackgroundColor(selectedColor);
-                    viewModel.saveMoodData(dayCopy, selectedColor);
-                    showMotivationalMessage(selectedColor);
+                    if (isEmotionSelected) {
+                        dayTextView.setBackgroundColor(selectedColor);
+                        viewModel.saveMoodData(dayCopy, selectedColor);
+                        showMotivationalMessage(selectedColor);
+                    } else {
+                        showEmotionSelectionMessage();
+                    }
                 });
 
                 gridLayoutCalendar.addView(dayTextView);
@@ -144,25 +160,26 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
     }
 
     private void showMotivationalMessage(int color) {
-        // Seleciona uma frase motivacional aleatória para a cor
         List<String> messages = colorMessages.getOrDefault(color, List.of("Stay positive!"));
         String message = messages.get(new Random().nextInt(messages.size()));
 
-        // Cria e configura o diálogo
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_motivational_message);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        dialog.getWindow().setLayout(600, 400); // Ajuste o tamanho do diálogo conforme necessário
+        dialog.getWindow().setLayout(600, 400);
 
         TextView messageTextView = dialog.findViewById(R.id.textViewMessage);
         messageTextView.setText(message);
 
-        // Configura a aparência do diálogo
         View dialogView = dialog.findViewById(R.id.dialogRoot);
         dialogView.setBackgroundColor(Color.WHITE);
         dialogView.setPadding(24, 24, 24, 24);
-        dialogView.setElevation(16); // Define a elevação para uma aparência de sombra
+        dialogView.setElevation(16);
 
         dialog.show();
+    }
+
+    private void showEmotionSelectionMessage() {
+        Toast.makeText(this, "Por favor, escolha uma emoção antes de selecionar um dia!", Toast.LENGTH_SHORT).show();
     }
 }

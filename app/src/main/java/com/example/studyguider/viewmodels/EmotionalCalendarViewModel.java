@@ -14,7 +14,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class EmotionalCalendarViewModel extends ViewModel {
     private final MutableLiveData<Map<Integer, Integer>> moodData = new MutableLiveData<>();
     private final MutableLiveData<String> userId = new MutableLiveData<>();
