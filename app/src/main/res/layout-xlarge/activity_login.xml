@@ -14,7 +14,7 @@
         android:layout_width="803dp"
         android:layout_height="1177dp"
         android:layout_marginHorizontal="40dp"
-        android:background="@drawable/ct_background_login"
+        android:background="@drawable/ct_background_login_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -40,7 +40,7 @@
         android:fontFamily="@font/yeseva_one"
         android:text="LOGIN"
         android:textColor="@color/blue_dark"
-        android:textSize="26dp"
+        android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/containerLogin"
         app:layout_constraintHorizontal_bias="0.499"
@@ -60,9 +60,10 @@
         android:fontFamily="@font/roboto_medium"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
+        android:textSize="26sp"
         android:maxLength="25"
         android:maxLines="1"
-        android:padding="10dp"
+        android:padding="20dp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@id/containerLogin"
         app:layout_constraintHorizontal_bias="0.495"
@@ -81,9 +82,10 @@
         android:fontFamily="@font/roboto_medium"
         android:hint="@string/hint_password"
         android:inputType="textPassword"
+        android:textSize="26sp"
         android:maxLength="25"
         android:maxLines="1"
-        android:padding="10dp"
+        android:padding="20dp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@id/containerLogin"
         app:layout_constraintHorizontal_bias="0.504"
@@ -99,7 +101,7 @@
         android:fontFamily="@font/bebas_neue"
         android:text="@string/forgetPasswordLogin"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="@id/containerLogin"
         app:layout_constraintStart_toStartOf="@id/containerLogin"
         app:layout_constraintTop_toBottomOf="@id/txtPassword" />
@@ -114,7 +116,7 @@
         android:padding="6dp"
         android:text="@string/btn_login_form"
         android:textColor="@color/blue_dark"
-        android:textSize="16dp"
+        android:textSize="26dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/containerLogin"
         app:layout_constraintHorizontal_bias="0.498"
@@ -130,7 +132,7 @@
         android:fontFamily="@font/yeseva_one"
         android:text="@string/btn_sing_up_form"
         android:textColor="@color/blue_dark"
-        android:textSize="16dp"
+        android:textSize="26dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/containerLogin"
         app:layout_constraintHorizontal_bias="0.498"
@@ -180,7 +182,8 @@
                 android:id="@+id/imglogo"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginLeft="120dp"
+                android:layout_marginRight="20dp"
                 app:srcCompat="@drawable/img_logo" />
 
             <TextView
@@ -190,7 +193,7 @@
                 android:fontFamily="@font/yeseva_one"
                 android:text="@string/app_name_title"
                 android:textColor="@color/white"
-                android:textSize="18dp" />
+                android:textSize="40dp" />
         </LinearLayout>
     </FrameLayout>
 
