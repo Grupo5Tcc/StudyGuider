@@ -34,7 +34,7 @@
             android:name=".view.SubjectsActivity"
             android:exported="false" />
         <activity
-            android:name=".view.RecoveryActivity"
+            android:name=".view.ControleRec"
             android:exported="false" />
         <activity
             android:name=".view.SchoolDutyActivity"
