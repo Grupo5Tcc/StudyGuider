@@ -9,28 +9,26 @@
     android:orientation="vertical"
     tools:context=".view.ProfileActivity">
 
-    <include
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
-        layout="@layout/activity_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-    <ImageView
-        android:id="@+id/myButton"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="@null"
-        android:scaleType="centerInside"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:src="@drawable/ic_back"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_height="85dp"
+        android:background="@color/blue_dark"
+        android:paddingTop="5dp">
+
+        <ImageView
+            android:id="@+id/imglogo"
+            android:layout_width="68dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/img_logo" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
         android:id="@+id/lblTitle"
         android:layout_width="wrap_content"

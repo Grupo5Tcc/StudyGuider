@@ -109,19 +109,4 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void navegarTelaPrincipal() {
-        Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            navegarTelaPrincipal();
-        }
-    }
-
 }
