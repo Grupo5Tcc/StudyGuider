@@ -119,7 +119,7 @@ public class MenuActivity extends AppCompatActivity {
         cardViewRecovery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, RecoveryActivity.class);
+                Intent intent = new Intent(MenuActivity.this, ControleRec.class);
                 startActivity(intent);
             }
         });
