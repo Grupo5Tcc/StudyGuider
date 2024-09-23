@@ -234,6 +234,27 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         addTextViewToLayout(faltaInfoLayout, String.format("Atestado: %s", atestado ? "Sim" : "Não"));
         addTextViewToLayout(faltaInfoLayout, String.format("Perdeu nota: %s", nota));
 
+        // Adicionar botão de deletar
+        Button deleteButton = new Button(this);
+        deleteButton.setBackgroundColor(Color.TRANSPARENT);
+        deleteButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_delete, 0, 0, 0);
+
+        LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
+                70, // Largura fixa em pixels (ajuste conforme necessário)
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        buttonParams.gravity = Gravity.END;
+        deleteButton.setLayoutParams(buttonParams);
+
+        // Listener para deletar a falta
+        deleteButton.setOnClickListener(v -> {
+            removeFalta(Integer.parseInt(day)); // Remove do banco de dados
+            savedFaltasLayout.removeView(faltaInfoLayout); // Remove do layout sem recarregar
+            Toast.makeText(this, "Falta deletada", Toast.LENGTH_SHORT).show();
+        });
+
+        faltaInfoLayout.addView(deleteButton); // Adiciona o botão ao layout
+
         // Set a click listener to edit this entry
         faltaInfoLayout.setOnClickListener(v -> {
             currentEditingDay = day;
