@@ -2,12 +2,12 @@
 <resources>
     <string name="app_name">StudyGuider</string>
     <string name="month_emotional_calendar">Mês</string>
-    <string name="btn_login_main">Entrar</string>
-    <string name="btn_sing_up_main">Cadastrar</string>
+    <string name="btn_login_main">ENTRAR</string>
+    <string name="btn_sing_up_main">CADASTRAR</string>
     <string name="presentation_form">Entre com seus dados</string>
     <string name="forgetPasswordLogin">Esqueceu a senha?</string>
-    <string name="btn_login_form">ENTRAR</string>
-    <string name="btn_sing_up_form">CADASTRAR</string>
+    <string name="btn_login_form">entrar</string>
+    <string name="btn_sing_up_form">cadastrar</string>
     <string name="hint_password">Senha</string>
     <string name="btn_crate_user_form">Crie a sua conta</string>
     <string name="hint_date">Data de Nascimento</string>

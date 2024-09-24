@@ -4,7 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_background_main"
+    android:background="@drawable/splash_background"
     tools:context=".view.SplashActivity">
 
 
@@ -13,8 +13,8 @@
         android:layout_width="220dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="180dp"
-        android:src="@drawable/img_logo_background_main" />
+        android:layout_marginTop="120dp"
+        android:src="@drawable/img_logo_splash" />
 
     <!-- Título logo abaixo da imagem -->
     <TextView
@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/yeseva_one"
         android:text="StudyGuider"
-        android:textColor="@color/white"
+        android:textColor="#1A4281"
         android:textSize="50sp"
         android:textStyle="bold" />
 
