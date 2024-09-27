@@ -8,16 +8,12 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
-import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -27,7 +23,6 @@ import java.util.Objects;
 
 public class AddNotas extends AppCompatActivity {
 
-    private HeaderViewModel headerViewModel;
     private static final String TAG = "AddNotas";
 
     @Override
@@ -36,16 +31,6 @@ public class AddNotas extends AppCompatActivity {
         EdgeToEdge.enable(this);
 
         setContentView(R.layout.activity_add_notas);
-
-        headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
-
-        View headerView = findViewById(R.id.header);
-        HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
-
-        FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser1 != null) {
-            headerViewModel.fetchUsername(currentUser1);
-        }
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -66,7 +51,6 @@ public class AddNotas extends AppCompatActivity {
                 String notaCred = Objects.requireNonNull(notaCredET.getText()).toString().trim();
                 String notaTrab = Objects.requireNonNull(notaTrabET.getText()).toString().trim();
                 String notaList = Objects.requireNonNull(notaListaET.getText()).toString().trim();
-                String notaPrec = Objects.requireNonNull(notaPrecisoET.getText()).toString().trim();
                 String notaPro = Objects.requireNonNull(notaProvaET.getText()).toString().trim();
 
                 if (nomeMateria.isEmpty() || notaCred.isEmpty() || notaTrab.isEmpty() || notaList.isEmpty() || notaPro.isEmpty()) {
@@ -75,28 +59,26 @@ public class AddNotas extends AppCompatActivity {
                 }
 
                 Map<String, Object> notas = new HashMap<>();
-                notas.put("nomeMateriaET", nomeMateria);
-                notas.put("cred", notaCred);
-                notas.put("trab", notaTrab);
-                notas.put("list", notaList);
-                notas.put("pre", notaPrec);
-                notas.put("prova", notaPro);
+                notas.put("nomeMateria", Objects.requireNonNull(nomeMateriaET.getText()).toString());
+                notas.put("cred", Objects.requireNonNull(notaCredET.getText()).toString());
+                notas.put("trab", Objects.requireNonNull(notaTrabET.getText()).toString());
+                notas.put("list", Objects.requireNonNull(notaListaET.getText()).toString());
+                notas.put("pre", Objects.requireNonNull(notaPrecisoET.getText()).toString());
+                notas.put("prova", Objects.requireNonNull(notaProvaET.getText()).toString());
 
-                db.collection("notas").add(notas)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(AddNotas.this, "Notas adicionadas com sucesso!!", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(AddNotas.this, "Falha Ao Tentar Adicionar Matéria: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                Log.e(TAG, "Erro ao adicionar matéria", e);
-                            }
-                        });
+                db.collection("notas").add(notas).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(AddNotas.this, "Notas adicionadas com sucesso!!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddNotas.this, "Falha Ao Tentar Adicionar Matéria: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "Erro ao adicionar matéria", e);
+                    }
+                });
             }
         });
 
