@@ -1,5 +1,6 @@
 package com.example.studyguider.viewmodels;
 
+import android.graphics.Color;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -10,37 +11,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlannerViewModel extends ViewModel {
-    private final MutableLiveData<List<Planner>> plannersLiveData = new MutableLiveData<>();
-    public PlannerViewModel() {
-        plannersLiveData.setValue(new ArrayList<>());
+
+    private final MutableLiveData<List<Planner>> events = new MutableLiveData<>(new ArrayList<>());
+    private final MutableLiveData<String> selectedDay = new MutableLiveData<>();
+    private final MutableLiveData<Integer> selectedColor = new MutableLiveData<>(Color.parseColor("#F68C0A")); // Default color
+
+    public LiveData<List<Planner>> getEvents() {
+        return events;
     }
-    public LiveData<List<Planner>> getPlanners() {
-        return plannersLiveData;
+
+    public LiveData<String> getSelectedDay() {
+        return selectedDay;
     }
-    public void adicionarPlanner(Planner planner) {
-        List<Planner> listaAtual = plannersLiveData.getValue();
-        if (listaAtual != null) {
-            listaAtual.add(planner);
-            plannersLiveData.setValue(listaAtual);
-        }
+
+    public LiveData<Integer> getSelectedColor() {
+        return selectedColor;
     }
-    public void removerPlanner(Planner planner) {
-        List<Planner> listaAtual = plannersLiveData.getValue();
-        if (listaAtual != null) {
-            listaAtual.remove(planner);
-            plannersLiveData.setValue(listaAtual);
-        }
+
+    public void selectDay(String day) {
+        selectedDay.setValue(day);
     }
-    public void atualizarCorDoPlanner(Planner planner, int novaCor) {
-        List<Planner> listaAtual = plannersLiveData.getValue();
-        if (listaAtual != null) {
-            for (Planner p : listaAtual) {
-                if (p.getId().equals(planner.getId())) {
-                    p.setCor(novaCor);
-                    break;
-                }
-            }
-            plannersLiveData.setValue(listaAtual);
+
+    public void setColor(int color) {
+        selectedColor.setValue(color);
+    }
+
+    public void addEvent(String eventName, String eventTime, String additionalInfo, int color) {
+        List<Planner> currentEvents = events.getValue();
+        if (currentEvents != null) {
+            currentEvents.add(new Planner(eventName, eventTime, additionalInfo, color));
+            events.setValue(currentEvents);
         }
     }
 }
