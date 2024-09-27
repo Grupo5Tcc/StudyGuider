@@ -10,35 +10,33 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studyguider.R;
-import com.example.studyguider.models.Notas;
+import com.example.studyguider.models.Materia;
 
 import java.util.ArrayList;
 
-public class NotasAdapter extends RecyclerView.Adapter<NotasAdapter.ViewHolder> {
+public class MateriaAdapter extends RecyclerView.Adapter<MateriaAdapter.ViewHolder> {
     Context context;
-    ArrayList<Notas> arrayList;
+    ArrayList<Materia> arrayList;
     OnItemClickListener onItemClickListener;
 
-    public NotasAdapter(Context context, ArrayList<Notas> arrayList) {
+    public MateriaAdapter(Context context, ArrayList<Materia> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
 
     @NonNull
     @Override
-    public NotasAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.notas_list_item, parent, false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.materia_list_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.nomeMateria.setText(arrayList.get(position).getNomeMateria());
-        holder.notaCred.setText(arrayList.get(position).getCred());
-        holder.notaTrab.setText(arrayList.get(position).getTrab());
-        holder.notaList.setText(arrayList.get(position).getList());
-        holder.notaPrec.setText(arrayList.get(position).getPre());
-        holder.notaPro.setText(arrayList.get(position).getProva());
+        holder.professor.setText(arrayList.get(position).getProfessor());
+        holder.conteudos.setText(arrayList.get(position).getConteudos());
+        holder.media.setText(arrayList.get(position).getMedia());
         holder.itemView.setOnClickListener(view -> onItemClickListener.onClick(arrayList.get(position)));
     }
 
@@ -47,16 +45,14 @@ public class NotasAdapter extends RecyclerView.Adapter<NotasAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView nomeMateria, notaCred, notaTrab, notaList, notaPrec, notaPro;
+        TextView nomeMateria, professor, conteudos, media;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             nomeMateria = itemView.findViewById(R.id.list_item_materia);
-            notaCred = itemView.findViewById(R.id.list_item_cred);
-            notaTrab = itemView.findViewById(R.id.list_item_trab);
-            notaList = itemView.findViewById(R.id.list_item_lista);
-            notaPrec = itemView.findViewById(R.id.list_item_pre);
-            notaPro = itemView.findViewById(R.id.list_item_pro);
+            professor = itemView.findViewById(R.id.list_item_professor);
+            conteudos = itemView.findViewById(R.id.list_item_conteudos);
+            media = itemView.findViewById(R.id.list_item_media);
         }
     }
 
@@ -65,6 +61,6 @@ public class NotasAdapter extends RecyclerView.Adapter<NotasAdapter.ViewHolder> 
     }
 
     public interface OnItemClickListener {
-        void onClick(Notas notas);
+        void onClick(Materia materia);
     }
 }

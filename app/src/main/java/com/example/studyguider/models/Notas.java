@@ -1,7 +1,7 @@
 package com.example.studyguider.models;
 
 public class Notas {
-    String id, nomeMateria, cred, list,trab, prec, prov;
+    String id, nomeMateria, cred, list,trab, pre, prova;
 
     public Notas() {
     }
@@ -42,19 +42,19 @@ public class Notas {
         this.trab = trab;
     }
 
-    public String getPrec() {
-        return prec;
+    public String getPre() {
+        return pre;
     }
 
-    public void setPrec(String prec) {
-        this.prec = prec;
+    public void setPre(String pre) {
+        this.pre = pre;
     }
 
-    public String getProv() {
-        return prov;
+    public String getProva() {
+        return prova;
     }
 
-    public void setProv(String prov) {
-        this.prov = prov;
+    public void setProva(String prova) {
+        this.prova = prova;
     }
 }
