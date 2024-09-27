@@ -35,6 +35,8 @@ import java.util.Calendar;
 
 public class AbsenceCalendarActivity extends AppCompatActivity {
 
+
+
     private GridLayout gridLayoutCalendar;
     private int selectedColor = Color.parseColor("#F68C0A"); // Selected color
     private int defaultColor = Color.WHITE; // Default background color
@@ -48,6 +50,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
     private CheckBox checkBoxAtestado;
     private EditText editTextNota;
     private Button saveButton;
+    private Button backButton;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -89,11 +92,12 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         checkBoxAtestado = findViewById(R.id.checkBoxAtestado);
         editTextNota = findViewById(R.id.editTextNota);
         saveButton = findViewById(R.id.saveButton);
+        backButton = findViewById(R.id.backButton);
 
         Button buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
-        buttonPreviousMonth.setText("<");
-
         Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
+
+        buttonPreviousMonth.setText("<");
         buttonNextMonth.setText(">");
 
         mAuth = FirebaseAuth.getInstance();
@@ -119,7 +123,16 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
             updateCalendar();
         });
 
+
         saveButton.setOnClickListener(v -> saveFalta());
+
+        backButton.setOnClickListener(v -> {
+            clearForm();  // Limpa o formulário
+            informationScrollView.setVisibility(View.GONE); // Esconde o formulário
+            gridLayoutCalendar.setVisibility(View.VISIBLE); // Mostra o calendário
+            savedFaltasLayout.setVisibility(View.VISIBLE);  // Mostra as faltas salvas
+        });
+
         updateCalendar();
     }
 
@@ -130,6 +143,9 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
     }
 
     private void updateCalendar() {
+        Button buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
+        Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
+
         gridLayoutCalendar.removeAllViews();
 
         int month = calendar.get(Calendar.MONTH);
@@ -150,6 +166,12 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
 
             dayTextView.setOnClickListener(v -> handleDayClick(dayCopy, dayTextView));
 
+            monthTextView.setVisibility(View.VISIBLE);
+            buttonPreviousMonth.setText("<");
+            buttonNextMonth.setText(">");
+            buttonNextMonth.setEnabled(true);
+            buttonPreviousMonth.setEnabled(true);
+
             GridLayout.LayoutParams param = new GridLayout.LayoutParams();
             param.height = GridLayout.LayoutParams.WRAP_CONTENT;
             param.width = 0;
@@ -163,6 +185,9 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
     }
 
     private void handleDayClick(int day, TextView dayTextView) {
+        Button buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
+        Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
+
         ColorDrawable background = (ColorDrawable) dayTextView.getBackground();
         if (background.getColor() == defaultColor) {
             selectedDayTextView = dayTextView;
@@ -171,6 +196,12 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
             informationScrollView.setVisibility(View.VISIBLE);
             gridLayoutCalendar.setVisibility(View.GONE);
             savedFaltasLayout.setVisibility(View.GONE);
+            monthTextView.setVisibility(View.INVISIBLE);
+            buttonPreviousMonth.setText("");
+            buttonNextMonth.setText("");
+            buttonNextMonth.setEnabled(false);
+            buttonPreviousMonth.setEnabled(false);
+
             dayTextView.setBackgroundColor(selectedColor);
         } else {
             removeFalta(day);
