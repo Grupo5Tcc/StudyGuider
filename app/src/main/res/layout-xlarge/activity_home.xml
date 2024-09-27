@@ -6,16 +6,44 @@
     android:layout_height="match_parent"
     android:background="@color/light_orange"
     android:orientation="vertical"
-    tools:context=".view.MenuActivity">
+    tools:context=".view.HomeActivity">
 
-    <include
+    <FrameLayout
         android:id="@+id/header"
-        layout="@layout/activity_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_height="100dp"
+        android:background="@color/blue_dark"
+        android:paddingTop="5dp"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imglogo"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="5dp"
+            app:srcCompat="@drawable/img_logo" />
+
+        <TextView
+            android:id="@+id/txtUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="110dp"
+            android:fontFamily="@font/yeseva_one"
+            android:text="@string/name_user_navbar"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imgPerfil"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="5dp"
+            app:srcCompat="@drawable/img_perfil" />
+    </FrameLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,7 +56,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardToDoList"
-                android:layout_width="379dp"
+                android:layout_width="750dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
@@ -43,24 +71,23 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_to_do_list"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="26dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
                     android:id="@+id/imgAfazeres"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
+                    android:layout_width="115dp"
+                    android:layout_height="115dp"
                     android:layout_gravity="end"
-                    android:layout_marginEnd="-5dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="10dp"
                     android:src="@drawable/img_afazeres" />
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardPlanner"
-                android:layout_width="379dp"
+                android:layout_width="750dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
@@ -74,24 +101,24 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_planner"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="26dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
                     android:id="@+id/imgPlanner"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:src="@drawable/img_agenda"
                     android:layout_gravity="end"
-                    android:layout_marginTop="31dp"
-                    android:layout_marginEnd="12dp"/>
+                    android:layout_marginTop="29dp"
+                    android:layout_marginEnd="20dp"/>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardSupplies"
-                android:layout_width="379dp"
+                android:layout_width="750dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
@@ -104,25 +131,25 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_subjects"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="26dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
                     android:id="@+id/imgMaterias"
-                    android:layout_width="85dp"
-                    android:layout_height="85dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:src="@drawable/img_materias"
                     android:layout_gravity="end"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="8dp"
                     android:layout_marginBottom="10dp"/>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardAbsence"
-                android:layout_width="379dp"
+                android:layout_width="750dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
@@ -137,24 +164,24 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_absence"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="26dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
                     android:id="@+id/imgAbsence"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:src="@drawable/faltas"
                     android:layout_gravity="end"
-                    android:layout_marginTop="28dp"
-                    android:layout_marginEnd="9dp"/>
+                    android:layout_marginTop="26dp"
+                    android:layout_marginEnd="21dp"/>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardEmotionalCalendar"
-                android:layout_width="379dp"
+                android:layout_width="750dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
@@ -168,24 +195,24 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_emotional"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="26dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
                     android:id="@+id/imgEmotionalCalendar"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:src="@drawable/emocoes"
                     android:layout_gravity="end"
-                    android:layout_marginTop="34dp"
-                    android:layout_marginEnd="13dp"/>
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="23dp"/>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardSchoolDuty"
-                android:layout_width="379dp"
+                android:layout_width="750dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
@@ -198,23 +225,23 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_school_duty"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="26dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:src="@drawable/img_plantoes"
                     android:layout_gravity="end"
-                    android:layout_marginTop="28dp"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"/>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardGrades"
-                android:layout_width="379dp"
+                android:layout_width="750dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
@@ -229,23 +256,23 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_grades"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="26dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:src="@drawable/img_notas"
                     android:layout_gravity="end"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="38dp"/>
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="33dp"/>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardRecovery"
-                android:layout_width="379dp"
+                android:layout_width="750dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
@@ -260,23 +287,23 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_recovery"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="26dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:layout_width="68dp"
-                    android:layout_height="68dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/img_recuperacoes"
                     android:layout_gravity="end"
                     android:layout_marginTop="28dp"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="15dp"/>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardAboutUs"
-                android:layout_width="379dp"
+                android:layout_width="750dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
@@ -291,17 +318,17 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_about_us"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="26dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center" />
 
                 <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/img_menu_about_us"
                     android:layout_gravity="end"
-                    android:layout_marginTop="27dp"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="18dp"/>
 
             </androidx.cardview.widget.CardView>
 

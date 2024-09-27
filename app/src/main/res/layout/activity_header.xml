@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_orange"
     android:orientation="vertical"
-    tools:context=".view.MenuActivity">
+    tools:context=".view.HomeActivity">
 
     <FrameLayout
         android:id="@+id/header"

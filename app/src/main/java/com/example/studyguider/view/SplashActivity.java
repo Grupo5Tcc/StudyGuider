@@ -50,7 +50,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void gotoMenuActivity() {
-        Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();

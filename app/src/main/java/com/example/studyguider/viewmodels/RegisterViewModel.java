@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
 import com.example.studyguider.models.User;
-import com.example.studyguider.view.MenuActivity;
+import com.example.studyguider.view.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -81,7 +81,7 @@ public class RegisterViewModel extends ViewModel {
     }
 
     private void navigateToMenu(Context context) {
-        Intent intent = new Intent(context, MenuActivity.class);
+        Intent intent = new Intent(context, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
     }

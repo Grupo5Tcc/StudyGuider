@@ -55,7 +55,7 @@
             android:name=".view.AboutUsActivity"
             android:exported="false" />
         <activity
-            android:name=".view.MenuActivity"
+            android:name=".view.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".view.SingUpActivity"

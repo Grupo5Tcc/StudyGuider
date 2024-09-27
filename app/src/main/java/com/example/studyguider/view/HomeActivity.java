@@ -20,7 +20,7 @@ import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MenuActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     private HeaderViewModel headerViewModel;
 
@@ -28,7 +28,7 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_home);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -62,7 +62,7 @@ public class MenuActivity extends AppCompatActivity {
         cardViewAboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, AboutUsActivity.class);
+                Intent intent = new Intent(HomeActivity.this, AboutUsActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,7 +70,7 @@ public class MenuActivity extends AppCompatActivity {
         cardViewPlanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, PlannerActivity.class);
+                Intent intent = new Intent(HomeActivity.this, PlannerActivity.class);
                 startActivity(intent);
             }
         });
@@ -79,7 +79,7 @@ public class MenuActivity extends AppCompatActivity {
         cardViewAbsence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, AbsenceCalendarActivity.class);
+                Intent intent = new Intent(HomeActivity.this, AbsenceCalendarActivity.class);
                 startActivity(intent);
             }
         });
@@ -87,7 +87,7 @@ public class MenuActivity extends AppCompatActivity {
         cardViewToDoList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this,ToDoListActivity.class);
+                Intent intent = new Intent(HomeActivity.this,ToDoListActivity.class);
                 startActivity(intent);
             }
         });
@@ -95,7 +95,7 @@ public class MenuActivity extends AppCompatActivity {
         cardViewEmotionalCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, EmotionalCalendarActivity.class);
+                Intent intent = new Intent(HomeActivity.this, EmotionalCalendarActivity.class);
                 startActivity(intent);
             }
         });
@@ -103,7 +103,7 @@ public class MenuActivity extends AppCompatActivity {
         cardViewGrades.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, ControleNotas.class);
+                Intent intent = new Intent(HomeActivity.this, ControleNotas.class);
                 startActivity(intent);
             }
         });
@@ -111,7 +111,7 @@ public class MenuActivity extends AppCompatActivity {
         cardViewSchoolDuty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, ShiftsActivity.class);
+                Intent intent = new Intent(HomeActivity.this, ShiftsActivity.class);
                 startActivity(intent);
             }
         });
@@ -119,7 +119,7 @@ public class MenuActivity extends AppCompatActivity {
         cardViewRecovery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, ControleRec.class);
+                Intent intent = new Intent(HomeActivity.this, ControleRec.class);
                 startActivity(intent);
             }
         });
@@ -127,7 +127,7 @@ public class MenuActivity extends AppCompatActivity {
         cardViewSupplies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, SubjectsActivity.class);
+                Intent intent = new Intent(HomeActivity.this, SubjectsActivity.class);
                 startActivity(intent);
             }
         });
@@ -135,7 +135,7 @@ public class MenuActivity extends AppCompatActivity {
         imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });

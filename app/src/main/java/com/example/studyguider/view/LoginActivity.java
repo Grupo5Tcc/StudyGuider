@@ -23,7 +23,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.studyguider.R;
 import com.example.studyguider.models.UserLogin;
 import com.example.studyguider.viewmodels.LoginViewModel;
-import com.google.firebase.auth.FirebaseAuth;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -63,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.loginSucesso.observe(this, isSuccess -> {
             if (isSuccess != null && isSuccess) {
                 Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                 finish();
             }
         });
