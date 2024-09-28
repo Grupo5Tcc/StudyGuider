@@ -6,25 +6,17 @@
     android:background="#FFEFDE"
     android:orientation="vertical">
 
-
     <include
         android:id="@+id/header"
         layout="@layout/activity_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-
         android:gravity="center_horizontal"
         android:orientation="horizontal">
-
 
         <Button
             android:id="@+id/buttonPreviousMonth"
@@ -34,7 +26,6 @@
             android:background="@android:color/transparent"
             android:padding="8dp"
             android:textSize="20dp" />
-
 
         <TextView
             android:id="@+id/textViewMonth"
@@ -49,7 +40,6 @@
             android:textSize="26dp"
             android:textStyle="bold" />
 
-
         <Button
             android:id="@+id/buttonNextMonth"
             android:layout_width="wrap_content"
@@ -58,10 +48,7 @@
             android:background="@android:color/transparent"
             android:padding="8dp"
             android:textSize="20dp" />
-
-
     </LinearLayout>
-
 
     <GridLayout
         android:id="@+id/gridLayoutCalendar"
@@ -72,7 +59,6 @@
         android:columnCount="7"
         android:padding="16dp" />
 
-
     <LinearLayout
         android:id="@+id/savedEventsLayout"
         android:layout_width="match_parent"
@@ -80,71 +66,88 @@
         android:orientation="vertical"
         android:padding="16dp" />
 
-
     <ScrollView
         android:id="@+id/informationScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="#4C7DAA"
+        android:background="#FFEFDE"
         android:padding="16dp"
         android:visibility="gone">
-
 
         <LinearLayout
             android:id="@+id/informationLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="#4C7DAA"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="4dp"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Informações do Evento"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_neue"
+                android:paddingBottom="16dp" />
 
             <EditText
                 android:id="@+id/editTextEventName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:hint="Nome do Evento" />
 
+                android:hint="Nome do Evento"
+                android:padding="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@android:color/white" />
 
             <TextView
                 android:id="@+id/textViewEventTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Selecione o horário"
-                android:background="#FFFFFF"
-                android:padding="16dp"
-                android:gravity="center" />
 
+                android:padding="12dp"
+                android:gravity="center"
+                android:layout_marginBottom="12dp"
+                android:background="@android:color/white" />
 
             <EditText
                 android:id="@+id/editTextAdditionalInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:hint="Informações Adicionais" />
 
+                android:hint="Informações Adicionais"
+                android:padding="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@android:color/white" />
 
             <Button
                 android:id="@+id/colorPickerButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Escolher Cor" />
-
+                android:text="Escolher Cor"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="#AACFE4"
+                android:textColor="#FFFFFF"
+                android:padding="12dp"
+                android:fontFamily="@font/bebas_neue" />
 
             <Button
                 android:id="@+id/saveButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Salvar" />
+                android:text="Salvar"
+                android:backgroundTint="#AACFE4"
+                android:textColor="#FFFFFF"
+                android:padding="12dp"
+                android:fontFamily="@font/bebas_neue" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

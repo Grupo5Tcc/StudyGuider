@@ -3,20 +3,19 @@ package com.example.studyguider.view;
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
@@ -24,7 +23,9 @@ import com.example.studyguider.models.Planner;
 import com.example.studyguider.viewmodels.PlannerViewModel;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PlannerActivity extends AppCompatActivity {
 
@@ -41,6 +42,7 @@ public class PlannerActivity extends AppCompatActivity {
     private TextView textViewEventTime;
 
     private PlannerViewModel plannerViewModel;
+    private Map<String, Integer> dayColors = new HashMap<>(); // Mapeia dias às suas cores
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,7 @@ public class PlannerActivity extends AppCompatActivity {
             dayTextView.setGravity(Gravity.CENTER);
             dayTextView.setBackgroundColor(Color.WHITE);
             dayTextView.setPadding(16, 16, 16, 16);
+            dayColors.put(String.valueOf(day), Color.WHITE); // Inicializa a cor como branco
 
             int finalDay = day;
             dayTextView.setOnClickListener(v -> handleDayClick(dayTextView, finalDay));
@@ -112,12 +115,14 @@ public class PlannerActivity extends AppCompatActivity {
             if (backgroundColor == Color.WHITE) {
                 selectedDayTextView = dayTextView;
                 dayTextView.setBackgroundColor(plannerViewModel.getSelectedColor().getValue());
+                dayColors.put(String.valueOf(day), plannerViewModel.getSelectedColor().getValue()); // Armazena a nova cor
                 plannerViewModel.selectDay(String.valueOf(day));
                 informationScrollView.setVisibility(View.VISIBLE);
                 gridLayoutCalendar.setVisibility(View.GONE);
                 savedEventsLayout.setVisibility(View.GONE);
             } else {
                 dayTextView.setBackgroundColor(Color.WHITE);
+                dayColors.put(String.valueOf(day), Color.WHITE); // Restaura a cor para branco
                 selectedDayTextView = null;
                 informationScrollView.setVisibility(View.GONE);
                 gridLayoutCalendar.setVisibility(View.VISIBLE);
@@ -142,7 +147,6 @@ public class PlannerActivity extends AppCompatActivity {
     }
 
     private void showTimePickerDialog() {
-        // Implementação do TimePickerDialog
         int hour = 12; // Hora padrão
         int minute = 0; // Minuto padrão
 
@@ -163,15 +167,18 @@ public class PlannerActivity extends AppCompatActivity {
             return;
         }
 
-        plannerViewModel.addEvent(eventName, eventTime, additionalInfo, plannerViewModel.getSelectedColor().getValue(), day); // Passa o dia
+        plannerViewModel.addEvent(eventName, eventTime, additionalInfo, plannerViewModel.getSelectedColor().getValue(), day);
+
+        // Atualiza a cor do dia que tem evento
+        if (selectedDayTextView != null) {
+            Integer newColor = plannerViewModel.getSelectedColor().getValue();
+            dayColors.put(day, newColor); // Atualiza a cor do dia no mapeamento
+            selectedDayTextView.setBackgroundColor(newColor); // Define a nova cor para o dia selecionado
+        }
 
         informationScrollView.setVisibility(View.GONE);
         gridLayoutCalendar.setVisibility(View.VISIBLE);
         savedEventsLayout.setVisibility(View.VISIBLE);
-
-        if (selectedDayTextView != null) {
-            selectedDayTextView.setBackgroundColor(plannerViewModel.getSelectedColor().getValue());
-        }
 
         selectedDayTextView = null;
         editTextEventName.setText("");
@@ -185,26 +192,54 @@ public class PlannerActivity extends AppCompatActivity {
 
     private void updateSavedEvents(List<Planner> events) {
         savedEventsLayout.removeAllViews();
+
         for (Planner event : events) {
+            LinearLayout eventLayout = new LinearLayout(this);
+            eventLayout.setOrientation(LinearLayout.HORIZONTAL);
+            eventLayout.setPadding(16, 16, 16, 16);
+
             TextView eventTextView = new TextView(this);
             eventTextView.setText(String.format("Evento: %s\nDia: %s\nHora: %s\nInformações: %s",
-                    event.getName(), event.getDay(), event.getTime(), event.getInfo())); // Inclui o dia
+                    event.getName(), event.getDay(), event.getTime(), event.getInfo()));
             eventTextView.setBackgroundColor(event.getColor());
-            eventTextView.setPadding(32, 32, 32, 32);
             eventTextView.setTextColor(Color.BLACK);
-            GradientDrawable roundedBackground = new GradientDrawable();
-            roundedBackground.setCornerRadius(20);
+            eventTextView.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
 
-            // Adiciona espaçamento entre eventos
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(24, 24, 24, 24); // Define margens superior e inferior
-            eventTextView.setLayoutParams(params);
+            ImageView deleteIcon = new ImageView(this);
+            deleteIcon.setImageResource(R.drawable.ic_delete);
+            deleteIcon.setLayoutParams(new LinearLayout.LayoutParams(48, 48));
+            deleteIcon.setPadding(16, 0, 0, 0);
+            deleteIcon.setOnClickListener(v -> {
+                plannerViewModel.removeEvent(event);
+                Toast.makeText(this, "Evento removido", Toast.LENGTH_SHORT).show();
+                updateCalendarDayColor(event.getDay()); // Atualiza a cor do dia ao excluir o evento
+            });
 
+            eventLayout.addView(eventTextView);
+            eventLayout.addView(deleteIcon);
+            savedEventsLayout.addView(eventLayout);
+        }
 
+        // Atualiza a cor dos dias com eventos
+        for (int i = 0; i < gridLayoutCalendar.getChildCount(); i++) {
+            TextView dayTextView = (TextView) gridLayoutCalendar.getChildAt(i);
+            String dayKey = dayTextView.getText().toString();
+            if (dayColors.containsKey(dayKey)) {
+                dayTextView.setBackgroundColor(dayColors.get(dayKey)); // Mantém a cor correta
+            }
+        }
+    }
 
-            savedEventsLayout.addView(eventTextView);
+    private void updateCalendarDayColor(String day) {
+        if (dayColors.containsKey(day)) {
+            dayColors.put(day, Color.WHITE); // Restaura a cor para branco
+            for (int i = 0; i < gridLayoutCalendar.getChildCount(); i++) {
+                TextView dayTextView = (TextView) gridLayoutCalendar.getChildAt(i);
+                if (dayTextView.getText().toString().equals(day)) {
+                    dayTextView.setBackgroundColor(Color.WHITE); // Atualiza a cor do dia no calendário
+                    break;
+                }
+            }
         }
     }
 }

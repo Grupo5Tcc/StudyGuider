@@ -39,10 +39,16 @@ public class PlannerViewModel extends ViewModel {
     public void addEvent(String eventName, String eventTime, String additionalInfo, int color, String day) {
         List<Planner> currentEvents = events.getValue();
         if (currentEvents != null) {
-            currentEvents.add(new Planner(eventName, eventTime, additionalInfo, color, day)); // Passa o dia
+            currentEvents.add(new Planner(eventName, eventTime, additionalInfo, color, day));
             events.setValue(currentEvents);
         }
     }
 
-
+    public void removeEvent(Planner event) {
+        List<Planner> currentEvents = events.getValue();
+        if (currentEvents != null) {
+            currentEvents.remove(event);
+            events.setValue(currentEvents);
+        }
+    }
 }
