@@ -14,24 +14,42 @@
         layout="@layout/activity_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+
+        android:id="@+id/lblTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/yeseva_one"
+        android:text="Afazeres"
+        android:textColor="#003366"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/edit_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header" />
 
     <!-- Campo de entrada de texto -->
     <EditText
         android:id="@+id/edit_text"
         android:layout_width="340dp"
         android:layout_height="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/rnd_corners_to_do_list"
         android:fontFamily="@font/roboto_medium"
         android:hint="@string/hint_to_do_list"
         android:padding="10dp"
         android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header" />
+        app:layout_constraintTop_toBottomOf="@id/lblTitle" />
 
     <!-- Lista de itens -->
     <ListView
@@ -39,13 +57,16 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/ct_background_to_do_list"
+        android:divider="@color/blue_1"
+        android:dividerHeight="1dp"
         app:layout_constraintBottom_toTopOf="@id/footer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="wrap"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_text"
-        app:layout_constraintHeight_default="wrap"
         app:layout_constraintVertical_bias="0.168" />
 
     <!-- Rodapé com botões -->
@@ -53,37 +74,48 @@
         android:id="@+id/footer"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/blue_dark"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:padding="8dp"
-        android:gravity="center">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/btn_add"
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
             android:background="@drawable/bg_bnt_to_do_list"
-            android:text="@string/btn_add_to_do_list" />
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/btn_add_to_do_list"
+            android:textColor="@color/blue_dark"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/btn_select_all"
-            android:layout_width="128dp"
-            android:layout_height="56dp"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
             android:background="@drawable/bg_bnt_to_do_list"
             android:fontFamily="@font/roboto_medium"
-            android:layout_marginStart="16dp"
-            android:text="@string/btn_select_all_to_do_list" />
+            android:text="@string/btn_select_all_to_do_list"
+            android:textColor="@color/blue_dark"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/btn_delete_selected"
-            android:layout_width="103dp"
-            android:layout_height="56dp"
-            android:background="@drawable/bg_bnt_to_do_list"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
             android:layout_marginStart="16dp"
-            android:text="@string/btn_del_to_do_list" />
+            android:layout_weight="1"
+            android:background="@drawable/bg_bnt_to_do_list"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/btn_del_to_do_list"
+            android:textColor="@color/blue_dark"
+            android:textSize="16sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

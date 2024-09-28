@@ -1,4 +1,4 @@
-package com.example.studyguider.view;
+package com.example.studyguider.adapter;
 
 import android.content.Context;
 import android.util.Log;

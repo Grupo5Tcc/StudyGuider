@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studyguider.R;
+import com.example.studyguider.adapter.NotasAdapter;
 import com.example.studyguider.models.Notas;
 import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

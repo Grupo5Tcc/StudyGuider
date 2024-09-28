@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studyguider.R;
+import com.example.studyguider.adapter.ShiftAdapter;
 import com.example.studyguider.models.Shift;
 import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
