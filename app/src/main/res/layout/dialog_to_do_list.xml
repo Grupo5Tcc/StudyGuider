@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/linearLayoutItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp"
+    android:background="?attr/selectableItemBackground"
     android:clickable="true"
-    android:focusable="true"> <!-- Torna o layout clicável -->
+    android:elevation="2dp"
+    android:focusable="true"
+    android:orientation="horizontal"
+    android:padding="12dp">
 
+    <!-- CheckBox com estilo personalizado -->
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:buttonTint="@color/blue_dark" />
 
+    <!-- Texto com estilo atualizado -->
     <TextView
         android:id="@+id/item_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textSize="18sp" />
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_medium"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="18sp" /> <!-- Limita o texto a uma linha e insere "..." no final se for muito longo -->
+
+
 </LinearLayout>
