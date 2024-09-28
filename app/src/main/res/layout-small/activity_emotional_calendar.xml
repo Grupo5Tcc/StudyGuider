@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_orange"
     tools:context=".view.EmotionalCalendarActivity">
 
     <include
@@ -40,7 +41,7 @@
         android:layout_height="208dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-        android:background="#E8FBFF"
+        android:background="@color/blue_clearer"
         android:columnCount="7"
         android:padding="16dp"
         android:rowCount="6"
