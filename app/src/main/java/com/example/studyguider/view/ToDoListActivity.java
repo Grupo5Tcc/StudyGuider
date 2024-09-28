@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -83,19 +84,38 @@ public class ToDoListActivity extends AppCompatActivity {
         int maxLength = 28;
         editText.setFilters(new InputFilter[]{noNewLinesFilter, new InputFilter.LengthFilter(maxLength)});
 
-        Button btnAdd = findViewById(R.id.btn_add);
-        Button btnSelectAll = findViewById(R.id.btn_select_all);
-        Button btnDeleteSelected = findViewById(R.id.btn_delete_selected);
-
-        btnAdd.setOnClickListener(v -> {
-            String newItem = editText.getText().toString();
+        // Listener para salvar o texto ao pressionar "Enter" no teclado
+        editText.setOnEditorActionListener((v, actionId, event) -> {
+            String newItem = editText.getText().toString().trim(); // Remove espaços em branco
             if (!newItem.isEmpty()) {
                 viewModel.addTask(newItem);
-                editText.setText("");
+                editText.setText(""); // Limpa o campo após adicionar
+                return true; // Indica que a ação foi tratada
+            }
+            return false; // Indica que a ação não foi tratada
+        });
+
+        // Listener do botão para adicionar um novo item
+        Button btnAdd = findViewById(R.id.btn_add);
+        btnAdd.setOnClickListener(v -> {
+            String newItem = editText.getText().toString().trim(); // Remove espaços em branco
+            if (!newItem.isEmpty()) {
+                viewModel.addTask(newItem);
+                editText.setText(""); // Limpa o campo após adicionar
+            } else {
+                Toast.makeText(this, "Por favor, preencha o campo antes de adicionar.", Toast.LENGTH_SHORT).show();
             }
         });
 
+        Button btnSelectAll = findViewById(R.id.btn_select_all);
+        Button btnDeleteSelected = findViewById(R.id.btn_delete_selected);
+
         btnSelectAll.setOnClickListener(v -> {
+            if (items.isEmpty()) {
+                Toast.makeText(this, "Não há itens na lista para selecionar.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             boolean allChecked = true;
             // Verifica todos os itens na lista de dados (items)
             for (TaskItemToDoList item : items) {
@@ -121,9 +141,22 @@ public class ToDoListActivity extends AppCompatActivity {
                     itemsToRemoveIds.add(item.getId());
                 }
             }
-            for (String itemId : itemsToRemoveIds) {
-                viewModel.deleteTask(itemId);
+            if (itemsToRemoveIds.isEmpty()) {
+                Toast.makeText(this, "Não há itens selecionados para apagar.", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            // Confirmação antes de deletar
+            new androidx.appcompat.app.AlertDialog.Builder(this)
+                    .setTitle("Confirmar Exclusão")
+                    .setMessage("Você tem certeza que deseja apagar os itens selecionados?")
+                    .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                        for (String itemId : itemsToRemoveIds) {
+                            viewModel.deleteTask(itemId);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .show();
         });
     }
 
