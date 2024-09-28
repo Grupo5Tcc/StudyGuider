@@ -9,20 +9,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
 import com.example.studyguider.models.Planner;
 import com.example.studyguider.viewmodels.PlannerViewModel;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PlannerActivity extends AppCompatActivity {
 
@@ -31,32 +34,35 @@ public class PlannerActivity extends AppCompatActivity {
     private LinearLayout savedEventsLayout;
 
     private EditText editTextEventName;
-    private EditText editTextEventTime;
     private EditText editTextAdditionalInfo;
     private Button saveButton;
     private Button colorPickerButton;
 
     private TextView selectedDayTextView;
+    private TextView textViewEventTime;
+
     private PlannerViewModel plannerViewModel;
+    private Map<String, Integer> dayColors = new HashMap<>(); // Mapeia dias às suas cores
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_planner);
 
+        plannerViewModel = new ViewModelProvider(this).get(PlannerViewModel.class);
+
         gridLayoutCalendar = findViewById(R.id.gridLayoutCalendar);
         informationScrollView = findViewById(R.id.informationScrollView);
         savedEventsLayout = findViewById(R.id.savedEventsLayout);
 
         editTextEventName = findViewById(R.id.editTextEventName);
-        editTextEventTime = findViewById(R.id.editTextEventTime);
+        textViewEventTime = findViewById(R.id.textViewEventTime);
         editTextAdditionalInfo = findViewById(R.id.editTextAdditionalInfo);
         saveButton = findViewById(R.id.saveButton);
         colorPickerButton = findViewById(R.id.colorPickerButton);
 
-        plannerViewModel = new PlannerViewModel();
-
         setupCalendar();
+        setupObservers();
 
         colorPickerButton.setOnClickListener(v -> showColorPickerDialog());
 
@@ -68,13 +74,18 @@ public class PlannerActivity extends AppCompatActivity {
             }
         });
 
-        // Observe events
-        plannerViewModel.getEvents().observe(this, this::updateSavedEvents);
+        textViewEventTime.setOnClickListener(v -> showTimePickerDialog());
     }
 
     private void setupCalendar() {
         Calendar calendar = Calendar.getInstance();
+        int month = calendar.get(Calendar.MONTH);
+        int year = calendar.get(Calendar.YEAR);
         String monthName = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, getResources().getConfiguration().locale);
+        TextView monthTextView = findViewById(R.id.textViewMonth);
+        monthTextView.setText(String.format("%s %d", monthName, year));
+
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
         int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
         for (int day = 1; day <= daysInMonth; day++) {
@@ -83,30 +94,35 @@ public class PlannerActivity extends AppCompatActivity {
             dayTextView.setGravity(Gravity.CENTER);
             dayTextView.setBackgroundColor(Color.WHITE);
             dayTextView.setPadding(16, 16, 16, 16);
+            dayColors.put(String.valueOf(day), Color.WHITE); // Inicializa a cor como branco
 
-            dayTextView.setOnClickListener(v -> handleDayClick(dayTextView));
+            int finalDay = day;
+            dayTextView.setOnClickListener(v -> handleDayClick(dayTextView, finalDay));
 
-            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-            params.height = GridLayout.LayoutParams.WRAP_CONTENT;
-            params.width = 0;
-            params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-            dayTextView.setLayoutParams(params);
+            GridLayout.LayoutParams param = new GridLayout.LayoutParams();
+            param.height = GridLayout.LayoutParams.WRAP_CONTENT;
+            param.width = 0;
+            param.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+            dayTextView.setLayoutParams(param);
 
             gridLayoutCalendar.addView(dayTextView);
         }
     }
 
-    private void handleDayClick(TextView dayTextView) {
+    private void handleDayClick(TextView dayTextView, int day) {
         if (dayTextView.getBackground() instanceof ColorDrawable) {
             int backgroundColor = ((ColorDrawable) dayTextView.getBackground()).getColor();
             if (backgroundColor == Color.WHITE) {
                 selectedDayTextView = dayTextView;
                 dayTextView.setBackgroundColor(plannerViewModel.getSelectedColor().getValue());
+                dayColors.put(String.valueOf(day), plannerViewModel.getSelectedColor().getValue()); // Armazena a nova cor
+                plannerViewModel.selectDay(String.valueOf(day));
                 informationScrollView.setVisibility(View.VISIBLE);
                 gridLayoutCalendar.setVisibility(View.GONE);
                 savedEventsLayout.setVisibility(View.GONE);
             } else {
                 dayTextView.setBackgroundColor(Color.WHITE);
+                dayColors.put(String.valueOf(day), Color.WHITE); // Restaura a cor para branco
                 selectedDayTextView = null;
                 informationScrollView.setVisibility(View.GONE);
                 gridLayoutCalendar.setVisibility(View.VISIBLE);
@@ -119,30 +135,31 @@ public class PlannerActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Escolha uma cor");
 
-        String[] colors = {"Rosa", "Roxo", "Amarelo", "Azul"};
-        int[] colorValues = {
-                Color.parseColor("#FFCBDB"), // Rosa
-                Color.parseColor("#CB9BDE"), // Roxo
-                Color.parseColor("#FFFFCC"), // Amarelo
-                Color.parseColor("#87CEEB")  // Azul
-        };
+        String[] colors = {"Roxo", "Rosa", "Amarelo", "Azul"};
+        int[] colorValues = {Color.parseColor("#CB9BDE"), Color.parseColor("#FFCBDB"), Color.parseColor("#FFFFCC"), Color.parseColor("#87CEEB")};
 
         builder.setItems(colors, (dialog, which) -> {
-            int color = colorValues[which];
-            plannerViewModel.setColor(color);
-            if (selectedDayTextView != null) {
-                selectedDayTextView.setBackgroundColor(color);
-            }
+            plannerViewModel.setColor(colorValues[which]);
         });
 
         AlertDialog dialog = builder.create();
         dialog.show();
     }
 
+    private void showTimePickerDialog() {
+        int hour = 12; // Hora padrão
+        int minute = 0; // Minuto padrão
+
+        new android.app.TimePickerDialog(this, (view, selectedHour, selectedMinute) -> {
+            String time = String.format("%02d:%02d", selectedHour, selectedMinute);
+            textViewEventTime.setText(time);
+        }, hour, minute, true).show();
+    }
+
     private void saveEvent() {
-        String day = selectedDayTextView.getText().toString();
+        String day = plannerViewModel.getSelectedDay().getValue();
         String eventName = editTextEventName.getText().toString();
-        String eventTime = editTextEventTime.getText().toString();
+        String eventTime = textViewEventTime.getText().toString();
         String additionalInfo = editTextAdditionalInfo.getText().toString();
 
         if (eventName.isEmpty() || eventTime.isEmpty()) {
@@ -150,31 +167,79 @@ public class PlannerActivity extends AppCompatActivity {
             return;
         }
 
-        plannerViewModel.addEvent(eventName, eventTime, additionalInfo, plannerViewModel.getSelectedColor().getValue());
+        plannerViewModel.addEvent(eventName, eventTime, additionalInfo, plannerViewModel.getSelectedColor().getValue(), day);
 
-        // Reset the selected day color to the chosen color
+        // Atualiza a cor do dia que tem evento
         if (selectedDayTextView != null) {
-            selectedDayTextView.setBackgroundColor(plannerViewModel.getSelectedColor().getValue());
+            Integer newColor = plannerViewModel.getSelectedColor().getValue();
+            dayColors.put(day, newColor); // Atualiza a cor do dia no mapeamento
+            selectedDayTextView.setBackgroundColor(newColor); // Define a nova cor para o dia selecionado
         }
 
-        selectedDayTextView = null;
-        editTextEventName.setText("");
-        editTextEventTime.setText("");
-        editTextAdditionalInfo.setText("");
         informationScrollView.setVisibility(View.GONE);
         gridLayoutCalendar.setVisibility(View.VISIBLE);
         savedEventsLayout.setVisibility(View.VISIBLE);
+
+        selectedDayTextView = null;
+        editTextEventName.setText("");
+        textViewEventTime.setText("Selecione o horário");
+        editTextAdditionalInfo.setText("");
+    }
+
+    private void setupObservers() {
+        plannerViewModel.getEvents().observe(this, this::updateSavedEvents);
     }
 
     private void updateSavedEvents(List<Planner> events) {
         savedEventsLayout.removeAllViews();
+
         for (Planner event : events) {
+            LinearLayout eventLayout = new LinearLayout(this);
+            eventLayout.setOrientation(LinearLayout.HORIZONTAL);
+            eventLayout.setPadding(16, 16, 16, 16);
+
             TextView eventTextView = new TextView(this);
-            eventTextView.setText(String.format("Evento: %s\nHora: %s\nInformações: %s", event.getName(), event.getTime(), event.getInfo()));
+            eventTextView.setText(String.format("Evento: %s\nDia: %s\nHora: %s\nInformações: %s",
+                    event.getName(), event.getDay(), event.getTime(), event.getInfo()));
             eventTextView.setBackgroundColor(event.getColor());
-            eventTextView.setPadding(16, 16, 16, 16);
             eventTextView.setTextColor(Color.BLACK);
-            savedEventsLayout.addView(eventTextView);
+            eventTextView.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+
+            ImageView deleteIcon = new ImageView(this);
+            deleteIcon.setImageResource(R.drawable.ic_delete);
+            deleteIcon.setLayoutParams(new LinearLayout.LayoutParams(48, 48));
+            deleteIcon.setPadding(16, 0, 0, 0);
+            deleteIcon.setOnClickListener(v -> {
+                plannerViewModel.removeEvent(event);
+                Toast.makeText(this, "Evento removido", Toast.LENGTH_SHORT).show();
+                updateCalendarDayColor(event.getDay()); // Atualiza a cor do dia ao excluir o evento
+            });
+
+            eventLayout.addView(eventTextView);
+            eventLayout.addView(deleteIcon);
+            savedEventsLayout.addView(eventLayout);
+        }
+
+        // Atualiza a cor dos dias com eventos
+        for (int i = 0; i < gridLayoutCalendar.getChildCount(); i++) {
+            TextView dayTextView = (TextView) gridLayoutCalendar.getChildAt(i);
+            String dayKey = dayTextView.getText().toString();
+            if (dayColors.containsKey(dayKey)) {
+                dayTextView.setBackgroundColor(dayColors.get(dayKey)); // Mantém a cor correta
+            }
+        }
+    }
+
+    private void updateCalendarDayColor(String day) {
+        if (dayColors.containsKey(day)) {
+            dayColors.put(day, Color.WHITE); // Restaura a cor para branco
+            for (int i = 0; i < gridLayoutCalendar.getChildCount(); i++) {
+                TextView dayTextView = (TextView) gridLayoutCalendar.getChildAt(i);
+                if (dayTextView.getText().toString().equals(day)) {
+                    dayTextView.setBackgroundColor(Color.WHITE); // Atualiza a cor do dia no calendário
+                    break;
+                }
+            }
         }
     }
 }
