@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFEFDE"
@@ -16,15 +17,50 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
 
-    <TextView
-        android:id="@+id/textViewMonth"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:text="Controle de eventos"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+
+
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/buttonPreviousMonth"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:padding="8dp"
+            android:textSize="20dp" />
+
+
+        <TextView
+            android:id="@+id/textViewMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/yeseva_one"
+            android:text="Controle de eventos"
+            android:textColor="@color/blue_2"
+            android:textSize="26dp"
+            android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/buttonNextMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:padding="8dp"
+            android:textSize="20dp" />
+
+
+    </LinearLayout>
 
 
     <GridLayout
@@ -34,7 +70,7 @@
         android:layout_margin="10dp"
         android:background="#FFFFFF"
         android:columnCount="7"
-        android:padding="16dp"></GridLayout>
+        android:padding="16dp" />
 
 
     <LinearLayout
@@ -79,12 +115,14 @@
                 android:hint="Nome do Evento" />
 
 
-            <EditText
-                android:id="@+id/editTextEventTime"
+            <TextView
+                android:id="@+id/textViewEventTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Selecione o horário"
                 android:background="#FFFFFF"
-                android:hint="Hora do Evento" />
+                android:padding="16dp"
+                android:gravity="center" />
 
 
             <EditText
@@ -110,4 +148,3 @@
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
-

@@ -14,7 +14,7 @@ public class PlannerViewModel extends ViewModel {
 
     private final MutableLiveData<List<Planner>> events = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<String> selectedDay = new MutableLiveData<>();
-    private final MutableLiveData<Integer> selectedColor = new MutableLiveData<>(Color.parseColor("#F68C0A")); // Default color
+    private final MutableLiveData<Integer> selectedColor = new MutableLiveData<>(Color.WHITE);
 
     public LiveData<List<Planner>> getEvents() {
         return events;
@@ -24,23 +24,25 @@ public class PlannerViewModel extends ViewModel {
         return selectedDay;
     }
 
-    public LiveData<Integer> getSelectedColor() {
-        return selectedColor;
-    }
-
     public void selectDay(String day) {
         selectedDay.setValue(day);
+    }
+
+    public LiveData<Integer> getSelectedColor() {
+        return selectedColor;
     }
 
     public void setColor(int color) {
         selectedColor.setValue(color);
     }
 
-    public void addEvent(String eventName, String eventTime, String additionalInfo, int color) {
+    public void addEvent(String eventName, String eventTime, String additionalInfo, int color, String day) {
         List<Planner> currentEvents = events.getValue();
         if (currentEvents != null) {
-            currentEvents.add(new Planner(eventName, eventTime, additionalInfo, color));
+            currentEvents.add(new Planner(eventName, eventTime, additionalInfo, color, day)); // Passa o dia
             events.setValue(currentEvents);
         }
     }
+
+
 }
