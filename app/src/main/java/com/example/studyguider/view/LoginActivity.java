@@ -5,8 +5,12 @@ import android.content.pm.ActivityInfo;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         Button btnMenu = findViewById(R.id.btnMenu);
         Button btnSingUp = findViewById(R.id.btnSingUp);
         View progressBar = findViewById(R.id.pgbLoading);
+        CheckBox ckb_mostrarSenhaLogin  = findViewById(R.id.ckb_mostrarSenhaLogin);
 
         loginViewModel.visibilidadeProgressBar.observe(this, isVisible -> {
             if (isVisible != null) {
@@ -105,6 +110,19 @@ public class LoginActivity extends AppCompatActivity {
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
             }
             dialog.show();
+        });
+
+        //Botão mostrar senha
+        ckb_mostrarSenhaLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //se estiver marcado, chama o método e tira a máscara da "Senha"
+                if (isChecked) {
+                    etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
         });
     }
 

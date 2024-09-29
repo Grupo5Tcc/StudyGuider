@@ -11,8 +11,8 @@
 
     <View
         android:id="@+id/containerLogin"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_width="333dp"
+        android:layout_height="520dp"
         android:layout_marginHorizontal="40dp"
         android:background="@drawable/ct_background_login"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,14 +91,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/bebas_neue"
         android:text="@string/forgetPasswordLogin"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@id/containerLogin"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@id/containerLogin"
-        app:layout_constraintTop_toBottomOf="@id/txtPassword" />
+        app:layout_constraintTop_toBottomOf="@id/ckb_mostrarSenhaLogin" />
 
     <Button
         android:id="@+id/btnMenu"
@@ -115,7 +116,7 @@
         app:layout_constraintEnd_toEndOf="@id/containerLogin"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="@id/containerLogin"
-        app:layout_constraintTop_toBottomOf="@id/txtPassword" />
+        app:layout_constraintTop_toBottomOf="@id/ckb_mostrarSenhaLogin" />
 
     <Button
         android:id="@+id/btnSingUp"
@@ -189,5 +190,20 @@
                 android:textSize="18dp" />
         </LinearLayout>
     </FrameLayout>
+
+    <CheckBox
+        android:id="@+id/ckb_mostrarSenhaLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="8dp"
+        android:buttonTint="@color/black"
+        android:padding="6dp"
+        android:text="Mostrar Senha"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

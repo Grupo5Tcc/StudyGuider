@@ -4,9 +4,13 @@ import android.app.DatePickerDialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -48,6 +52,7 @@ public class SingUpActivity extends AppCompatActivity {
         EditText etEmail = findViewById(R.id.txtEmail);
         EditText etPassword = findViewById(R.id.txtPassword);
         EditText etDateOfBirth = findViewById(R.id.txtDate);
+        CheckBox ckb_mostrarSenhaCadastro  = findViewById(R.id.ckb_mostrarSenhaCadastro);
 
         etDateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +90,20 @@ public class SingUpActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //Botão mostrar senha
+        ckb_mostrarSenhaCadastro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //se estiver marcado, chama o método e tira a máscara da "Senha"
+                if (isChecked) {
+                    etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
+
     }
 
     private boolean validateInput(String username, String email, String password, String dateOfBirth) {

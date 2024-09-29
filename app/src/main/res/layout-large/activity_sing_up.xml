@@ -22,15 +22,16 @@
 
     <View
         android:id="@+id/ctrCadastro"
-        android:layout_width="match_parent"
-        android:layout_height="520dp"
+        android:layout_width="399dp"
+        android:layout_height="568dp"
         android:layout_marginHorizontal="40dp"
         android:background="@drawable/ct_background_sing_up"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/pgbLoading"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/frameLayout"
-        app:layout_constraintVertical_bias="0.671" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:layout_constraintVertical_bias="0.858" />
 
     <ImageView
         android:id="@+id/imgUser"
@@ -100,27 +101,6 @@
         tools:ignore="TextFields" />
 
     <EditText
-        android:id="@+id/txtPassword"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="60dp"
-        android:background="@drawable/ct_background_text_area_form"
-        android:drawableRight="@drawable/ic_password_form"
-        android:fontFamily="@font/roboto_medium"
-        android:hint="@string/hint_password"
-        android:inputType="textPassword"
-        android:maxLength="25"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@id/ctrCadastro"
-        app:layout_constraintStart_toStartOf="@id/ctrCadastro"
-        app:layout_constraintTop_toBottomOf="@id/txtEmail"
-        tools:ignore="TextFields" />
-
-    <EditText
         android:id="@+id/txtDate"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -139,28 +119,47 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@id/ctrCadastro"
         app:layout_constraintStart_toStartOf="@id/ctrCadastro"
-        app:layout_constraintTop_toBottomOf="@id/txtPassword"
+        app:layout_constraintTop_toBottomOf="@id/txtEmail"
+        tools:ignore="TextFields" />
+
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="60dp"
+        android:background="@drawable/ct_background_text_area_form"
+        android:drawableRight="@drawable/ic_password_form"
+        android:fontFamily="@font/roboto_medium"
+        android:hint="@string/hint_password"
+        android:inputType="textPassword"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@id/ctrCadastro"
+        app:layout_constraintStart_toStartOf="@id/ctrCadastro"
+        app:layout_constraintTop_toBottomOf="@id/txtDate"
         tools:ignore="TextFields" />
 
     <Button
         android:id="@+id/btnMenu"
         android:layout_width="250dp"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/bg_bnt_sing"
         android:fontFamily="@font/yeseva_one"
-        android:textStyle="bold"
         android:padding="6dp"
         android:text="@string/btn_crate_user_form"
         android:textColor="@color/blue_dark"
         android:textSize="16dp"
+        android:textStyle="bold"
         app:cornerRadius="10dp"
-        app:layout_constraintTop_toBottomOf="@id/txtDate"
         app:layout_constraintEnd_toEndOf="@+id/ctrCadastro"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/ctrCadastro"
-        app:layout_constraintHorizontal_bias="0.493" />
-
+        app:layout_constraintTop_toBottomOf="@id/ckb_mostrarSenhaCadastro" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barr1"
@@ -204,7 +203,23 @@
                 android:text="@string/app_name_title"
                 android:textColor="@color/white"
                 android:textSize="18dp" />
+
         </LinearLayout>
     </FrameLayout>
+
+    <CheckBox
+        android:id="@+id/ckb_mostrarSenhaCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="8dp"
+        android:buttonTint="@color/black"
+        android:padding="6dp"
+        android:text="Mostrar Senha"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@id/ctrCadastro"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@id/ctrCadastro"
+        app:layout_constraintTop_toBottomOf="@id/txtPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

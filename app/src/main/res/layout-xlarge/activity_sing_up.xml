@@ -117,7 +117,7 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@id/ctrCadastro"
         app:layout_constraintStart_toStartOf="@id/ctrCadastro"
-        app:layout_constraintTop_toBottomOf="@id/txtEmail"
+        app:layout_constraintTop_toBottomOf="@id/txtDate"
         tools:ignore="TextFields" />
 
     <EditText
@@ -139,28 +139,26 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@id/ctrCadastro"
         app:layout_constraintStart_toStartOf="@id/ctrCadastro"
-        app:layout_constraintTop_toBottomOf="@id/txtPassword"
+        app:layout_constraintTop_toBottomOf="@id/txtEmail"
         tools:ignore="TextFields" />
+
 
     <Button
         android:id="@+id/btnMenu"
         android:layout_width="250dp"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/bg_bnt_sing"
         android:fontFamily="@font/yeseva_one"
-        android:textStyle="bold"
         android:padding="6dp"
         android:text="@string/btn_crate_user_form"
         android:textColor="@color/blue_dark"
         android:textSize="16dp"
+        android:textStyle="bold"
         app:cornerRadius="10dp"
-        app:layout_constraintTop_toBottomOf="@id/txtDate"
         app:layout_constraintEnd_toEndOf="@+id/ctrCadastro"
         app:layout_constraintStart_toStartOf="@+id/ctrCadastro"
-        app:layout_constraintHorizontal_bias="0.493" />
-
+        app:layout_constraintTop_toBottomOf="@id/txtPassword" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barr1"
@@ -206,5 +204,20 @@
                 android:textSize="18dp" />
         </LinearLayout>
     </FrameLayout>
+
+    <CheckBox
+        android:id="@+id/ckb_mostrarSenhaCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="8dp"
+        android:buttonTint="@color/black"
+        android:padding="6dp"
+        android:text="Mostrar Senha"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@id/ctrCadastro"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@id/ctrCadastro"
+        app:layout_constraintTop_toBottomOf="@id/txtPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
