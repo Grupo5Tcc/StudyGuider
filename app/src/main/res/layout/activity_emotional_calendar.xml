@@ -17,42 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewMonth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/yeseva_one"
-        android:textColor="@color/blue_2"
-        android:text="@string/month_emotional_calendar"
-        android:textSize="26dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header" />
-
-    <!-- Legenda -->
-
-    <!-- Rodapé -->
-
-    <GridLayout
-        android:id="@+id/gridLayoutCalendar"
-        android:layout_width="345dp"
-        android:layout_height="208dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:background="#E8FBFF"
-        android:columnCount="7"
-        android:padding="16dp"
-        android:rowCount="6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewMonth">
-
-        <!-- Dias do mês serão adicionados dinamicamente -->
-
-    </GridLayout>
-
+    <!-- Layout de Emoções -->
     <LinearLayout
         android:id="@+id/legendLayout"
         android:layout_width="0dp"
@@ -62,75 +27,35 @@
         android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@id/footerLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayoutCalendar">
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintVertical_bias="0.036">
 
         <!-- Legenda Títulos -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:fontFamily="@font/bebas_neue"
-            android:text="@string/question_emotional_calendar"
-            android:textColor="@color/blue_2"
+            android:fontFamily="@font/yeseva_one"
+            android:textStyle="bold"
+            android:text="Escolha a sua emoção:"
+            android:textColor="@color/blue_1"
             android:textSize="20dp" />
 
         <!-- Legenda Itens -->
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/footerLayout"
-        android:layout_width="0dp"
+        android:id="@+id/emotionLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#003366"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/buttonNextMonth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="19dp"
-        android:background="@android:color/transparent"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/gridLayoutCalendar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewMonth"
-        app:layout_constraintTop_toBottomOf="@+id/header" />
-
-    <Button
-        android:id="@+id/buttonPreviousMonth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="17dp"
-        android:background="@android:color/transparent"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/gridLayoutCalendar"
-        app:layout_constraintEnd_toStartOf="@+id/textViewMonth"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginStart="24dp"
         android:orientation="vertical"
         android:paddingTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/footerLayout"
+        app:layout_constraintTop_toBottomOf="@id/legendLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/legendLayout"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Ótimo -->
         <LinearLayout
@@ -152,9 +77,9 @@
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/roboto_medium"
                 android:paddingStart="8dp"
-
                 android:text="@string/question_option_excellent_emotional_calendar"
-                android:textColor="@color/black"
+                android:textColor="@color/blue_1"
+                android:textStyle="bold"
                 android:textSize="16dp" />
         </LinearLayout>
 
@@ -179,7 +104,8 @@
                 android:fontFamily="@font/roboto_medium"
                 android:paddingStart="8dp"
                 android:text="@string/question_option_good_emotional_calendar"
-                android:textColor="@color/black"
+                android:textColor="@color/blue_1"
+                android:textStyle="bold"
                 android:textSize="16dp" />
         </LinearLayout>
 
@@ -204,7 +130,8 @@
                 android:fontFamily="@font/roboto_medium"
                 android:paddingStart="8dp"
                 android:text="@string/question_option_normal_emotional_calendar"
-                android:textColor="@color/black"
+                android:textColor="@color/blue_1"
+                android:textStyle="bold"
                 android:textSize="16dp" />
         </LinearLayout>
 
@@ -229,7 +156,8 @@
                 android:fontFamily="@font/roboto_medium"
                 android:paddingStart="8dp"
                 android:text="@string/question_option_bad_emotional_calendar"
-                android:textColor="@color/black"
+                android:textColor="@color/blue_1"
+                android:textStyle="bold"
                 android:textSize="16dp" />
         </LinearLayout>
 
@@ -253,9 +181,101 @@
                 android:fontFamily="@font/roboto_medium"
                 android:paddingStart="8dp"
                 android:text="@string/question_option_terrible_emotional_calendar"
-                android:textColor="@color/black"
+                android:textColor="@color/blue_1"
+                android:textStyle="bold"
                 android:textSize="16dp" />
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewLeg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/yeseva_one"
+        android:textColor="@color/blue_1"
+        android:text="Pinte o dia com a sua emoção"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emotionLayout" />
+
+    <TextView
+        android:id="@+id/textViewMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/yeseva_one"
+        android:textColor="@color/blue_1"
+        android:text="@string/month_emotional_calendar"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewLeg" />
+
+    <GridLayout
+        android:id="@+id/gridLayoutCalendar"
+        android:layout_width="345dp"
+        android:layout_height="208dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:columnCount="7"
+        android:padding="16dp"
+        android:rowCount="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewMonth">
+
+        <!-- Dias do mês serão adicionados dinamicamente -->
+
+    </GridLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/footerLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#003366"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonNextMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="19dp"
+        android:background="@android:color/transparent"
+        android:textSize="20dp"
+        android:textColor="@color/blue_1"
+        app:layout_constraintBottom_toTopOf="@+id/gridLayoutCalendar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewMonth"
+        app:layout_constraintTop_toBottomOf="@id/textViewLeg" />
+
+    <Button
+        android:id="@+id/buttonPreviousMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="17dp"
+        android:background="@android:color/transparent"
+        android:textSize="20dp"
+        android:textColor="@color/blue_1"
+        app:layout_constraintBottom_toTopOf="@+id/gridLayoutCalendar"
+        app:layout_constraintEnd_toStartOf="@+id/textViewMonth"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewLeg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
