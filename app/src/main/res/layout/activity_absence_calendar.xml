@@ -104,19 +104,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="INFORMAÇÕES DA FALTA"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:layout_marginBottom="20dp"
-                android:textStyle="bold" />
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_neue"
+                android:paddingBottom="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Motivo?"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:layout_marginBottom="5dp"
-                android:textStyle="bold" />
+                android:padding="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@android:color/white"  />
 
             <EditText
                 android:id="@+id/editTextMotivo"
@@ -147,10 +147,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Perdeu alguma atividade?"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:layout_marginBottom="5dp"
-                android:textStyle="bold" />
+                android:padding="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@android:color/white" />
 
             <EditText
                 android:id="@+id/editTextNota"
