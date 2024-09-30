@@ -90,12 +90,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Informações do Evento"
+                android:text="INFORMAÇÕES DO EVENTO"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/bebas_neue"
                 android:paddingBottom="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome do Evento"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_neue"
+                android:paddingBottom="6dp" />
 
             <EditText
                 android:id="@+id/editTextEventName"
@@ -108,22 +118,41 @@
                 android:background="@android:color/white" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecione o horário"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_neue"
+                android:paddingBottom="6dp" />
+
+            <TextView
                 android:id="@+id/textViewEventTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Selecione o horário"
+                android:text="Clique Aqui"
+                android:textSize="18dp"
 
                 android:padding="12dp"
                 android:gravity="center"
                 android:layout_marginBottom="12dp"
                 android:background="@android:color/white" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Informações Adicionais"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_neue"
+                android:paddingBottom="6dp" />
+
             <EditText
                 android:id="@+id/editTextAdditionalInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:hint="Informações Adicionais"
                 android:padding="12dp"
                 android:layout_marginBottom="12dp"
                 android:background="@android:color/white" />
@@ -137,6 +166,7 @@
                 android:backgroundTint="#AACFE4"
                 android:textColor="#FFFFFF"
                 android:padding="12dp"
+                android:textSize="18dp"
                 android:fontFamily="@font/bebas_neue" />
 
             <Button
@@ -147,6 +177,7 @@
                 android:backgroundTint="#AACFE4"
                 android:textColor="#FFFFFF"
                 android:padding="12dp"
+                android:textSize="18dp"
                 android:fontFamily="@font/bebas_neue" />
         </LinearLayout>
     </ScrollView>
