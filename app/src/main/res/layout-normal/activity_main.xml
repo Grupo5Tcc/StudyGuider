@@ -9,6 +9,7 @@
     android:background="@drawable/img_background_main"
     tools:context=".view.MainActivity" >
 
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.741">
+        app:layout_constraintVertical_bias="0.838">
 
         <Button
             android:id="@+id/btn_login"
@@ -32,7 +33,7 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/bg_bnt_intro_primary_main"
             android:text="@string/btn_login_main"
-            android:textColor="@color/white"
+            android:textColor="@color/blue_1"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -51,7 +52,6 @@
             android:textSize="25dp"
             android:textStyle="bold" />
     </LinearLayout>
-
 
     <TextView
         android:id="@+id/textView"
@@ -76,7 +76,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.834"
+        app:layout_constraintVertical_bias="0.833"
         app:srcCompat="@drawable/img_logo_background_main" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
