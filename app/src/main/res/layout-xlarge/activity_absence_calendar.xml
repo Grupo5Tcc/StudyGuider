@@ -114,9 +114,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Motivo?"
-                android:padding="12dp"
-                android:layout_marginBottom="12dp"
-                android:background="@android:color/white"  />
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                />
 
             <EditText
                 android:id="@+id/editTextMotivo"
@@ -138,18 +141,22 @@
                 android:id="@+id/checkBoxAtestado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
                 android:textStyle="bold"
                 android:text="SIM"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:buttonTint="@color/orange_2" />
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Perdeu alguma atividade?"
-                android:padding="12dp"
-                android:layout_marginBottom="12dp"
-                android:background="@android:color/white" />
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+
+                />
 
             <EditText
                 android:id="@+id/editTextNota"
