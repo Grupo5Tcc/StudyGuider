@@ -9,7 +9,7 @@
     android:background="@color/orange_clearer"
     tools:context=".view.SingUpActivity">
 
-    <!-- Header layout -->
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
