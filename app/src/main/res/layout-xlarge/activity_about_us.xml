@@ -8,6 +8,7 @@
     android:background="@color/light_orange"
     tools:context=".view.AboutUsActivity">
 
+    <!-- Inclui cabeçalho -->
     <include
         android:id="@+id/header"
         layout="@layout/activity_header"
@@ -15,67 +16,53 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-        />
 
-    <!-- Título fora do container -->
-    <ImageView
-        android:id="@+id/myButton"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:background="@null"
-        android:scaleType="centerInside"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:src="@drawable/ic_back"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="95dp"
-        tools:ignore="MissingConstraints" />
-
+    <!-- Título com estilo mais suave e alinhamento -->
     <TextView
-
         android:id="@+id/lblTittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/yeseva_one"
         android:text="@string/about_us_page_title"
-        android:textColor="@color/blue_dark"
-        android:textSize="26dp"
+        android:textColor="@color/blue_1"
+        android:textSize="28sp"
         android:textStyle="bold"
-        android:layout_marginLeft="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header" />
+        app:layout_constraintTop_toBottomOf="@id/header"/>
 
-
+    <!-- Container de fundo com bordas arredondadas -->
     <View
         android:id="@+id/view"
-        android:layout_width="365dp"
-        android:layout_height="521dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="16dp"
-        android:layout_marginTop="36dp"
         android:background="@drawable/ct_background_about_us"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.612"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lblTittle" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblTittle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <!-- Imagem com toque interativo e ajuste centralizado -->
     <com.ortiz.touchview.TouchImageView
         android:id="@+id/img_devs"
-        android:layout_width="305dp"
+        android:layout_width="0dp"
         android:layout_height="186dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:src="@drawable/img_devs_sobre_nos"
-        app:layout_constraintEnd_toEndOf="@id/view"
-        app:layout_constraintHorizontal_bias="0.492"
+        android:scaleType="centerInside"
         app:layout_constraintStart_toStartOf="@id/view"
-        app:layout_constraintTop_toTopOf="@id/view" />
+        app:layout_constraintEnd_toEndOf="@id/view"
+        app:layout_constraintTop_toTopOf="@id/view"/>
 
+    <!-- Texto descritivo com alinhamento centralizado -->
     <TextView
         android:id="@+id/lblDescription"
-        android:layout_width="325dp"
-        android:layout_height="272dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:fontFamily="@font/roboto_medium"
         android:justificationMode="inter_word"
@@ -83,9 +70,9 @@
         android:text="@string/about_us_page_text_description_devs"
         android:textColor="@color/white"
         android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="@id/view"
-        app:layout_constraintHorizontal_bias="0.555"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/view"
-        app:layout_constraintTop_toBottomOf="@+id/img_devs" />
+        app:layout_constraintEnd_toEndOf="@id/view"
+        app:layout_constraintTop_toBottomOf="@id/img_devs"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
