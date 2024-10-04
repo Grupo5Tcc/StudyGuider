@@ -40,12 +40,48 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
 
     // Mapeia cores para listas de frases motivacionais
     private final Map<Integer, List<String>> colorMessages = Map.of(
-            Color.parseColor("#2196F3"), List.of("Keep going, you're doing great!", "Stay positive and strong!", "You are amazing!"),
-            Color.parseColor("#4CAF50"), List.of("Fantastic job! Keep it up!", "Great work today!", "You're on fire!"),
-            Color.parseColor("#FFEB3B"), List.of("Things are looking good!", "Keep up the good vibes!", "You're making progress!"),
-            Color.parseColor("#FF9800"), List.of("Keep pushing, you're almost there!", "Stay focused and motivated!", "You got this!"),
-            Color.parseColor("#F44336"), List.of("Don't give up, you're almost there!", "Stay strong and resilient!", "Believe in yourself!")
+            Color.parseColor("#2196F3"), List.of(
+                    "Continue assim, você está indo muito bem!",
+                    "Você é incrível!",
+                    "A vida é um estado de graça!",
+                    "Brilhe lindamente!",
+                    "Você é uma estrela!",
+                    "O céu é o limite!"
+            ),
+            Color.parseColor("#4CAF50"), List.of(
+                    "Ótimo trabalho hoje!",
+                    "Você está arrasando!",
+                    "Viva cada momento!",
+                    "Você é uma força da natureza!",
+                    "Continue sendo você mesmo!",
+                    "Cada dia é uma nova chance!"
+            ),
+            Color.parseColor("#FFEB3B"), List.of(
+                    "Mantenha as boas vibrações!",
+                    "Você está progredindo!",
+                    "O sol sempre brilha!",
+                    "Siga em frente com um sorriso!",
+                    "As nuvens logo vão embora!",
+                    "Você é feito de luz!"
+            ),
+            Color.parseColor("#FF9800"), List.of(
+                    "Continue lutando, você está quase lá!",
+                    "Você consegue!",
+                    "Acredite, você vai brilhar!",
+                    "A luta vale a pena!",
+                    "Não desista agora!",
+                    "O melhor ainda está por vir!"
+            ),
+            Color.parseColor("#F44336"), List.of(
+                    "Não desista, você está quase lá!",
+                    "Acredite em si mesmo!",
+                    "Cada passo conta!",
+                    "As tempestades passam!",
+                    "Você tem força dentro de você!",
+                    "As coisas vão melhorar!"
+            )
     );
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +123,7 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
 
         viewModel.getUserId().observe(this, userId -> {
             if (userId == null) {
-                Toast.makeText(this, "User not authenticated", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Usuário não autenticado", Toast.LENGTH_LONG).show();
             } else {
                 viewModel.loadMoodData();
             }
@@ -157,13 +193,13 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
                 gridLayoutCalendar.addView(dayTextView);
             }
         } catch (Exception e) {
-            Log.e("EmotionalCalendar", "Error updating calendar: " + e.getMessage(), e);
-            Toast.makeText(this, "Error updating the calendar.", Toast.LENGTH_LONG).show();
+            Log.e("EmotionalCalendar", "Erro ao atualizar o calendário: " + e.getMessage(), e);
+            Toast.makeText(this, "Erro ao atualizar o calendário.", Toast.LENGTH_LONG).show();
         }
     }
 
     private void showMotivationalMessage(int color) {
-        List<String> messages = colorMessages.getOrDefault(color, List.of("Stay positive!"));
+        List<String> messages = colorMessages.getOrDefault(color, List.of("Mantenha-se positivo!"));
         String message = messages.get(new Random().nextInt(messages.size()));
 
         Dialog dialog = new Dialog(this);
