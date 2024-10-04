@@ -33,12 +33,11 @@
         android:id="@+id/lblTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="257dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
         android:fontFamily="@font/yeseva_one"
-        android:layout_marginTop="15dp"
         android:text="@string/profile_page_title"
-        android:textColor="@color/blue_dark"
+        android:textColor="@color/blue_1"
         android:textSize="26dp"
         android:textStyle="bold" />
 
@@ -48,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="20dp"
-        app:cardBackgroundColor="@color/orange_1"
+        app:cardBackgroundColor="@color/blue_clearer"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp">
 
@@ -79,7 +78,7 @@
                     android:fontFamily="@font/bebas_neue"
                     android:text="@string/name_profile"
                     android:layout_marginLeft="20dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/blue_2"
                     android:textSize="18dp" />
 
                 <TextView
@@ -89,7 +88,7 @@
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/loading_lbl_profile"
-                    android:textColor="@color/light_orange"
+                    android:textColor="@color/white"
                     android:textSize="16dp" />
             </LinearLayout>
 
@@ -106,7 +105,7 @@
                     android:fontFamily="@font/bebas_neue"
                     android:text="@string/e_mail_profile"
                     android:layout_marginLeft="20dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/blue_2"
                     android:textSize="18dp" />
 
                 <TextView
@@ -116,7 +115,7 @@
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/loading_lbl_profile"
-                    android:textColor="@color/light_orange"
+                    android:textColor="@color/white"
                     android:textSize="16dp" />
             </LinearLayout>
 
@@ -133,7 +132,7 @@
                     android:layout_marginLeft="20dp"
                     android:fontFamily="@font/bebas_neue"
                     android:text="@string/date_of_birth_profile"
-                    android:textColor="@color/white"
+                    android:textColor="@color/blue_2"
                     android:textSize="18dp" />
 
                 <TextView
@@ -143,7 +142,7 @@
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/loading_lbl_profile"
-                    android:textColor="@color/light_orange"
+                    android:textColor="@color/white"
                     android:textSize="16dp" />
             </LinearLayout>
 
@@ -160,7 +159,7 @@
                     android:layout_marginLeft="20dp"
                     android:fontFamily="@font/bebas_neue"
                     android:text="@string/absence_profile"
-                    android:textColor="@color/white"
+                    android:textColor="@color/blue_2"
                     android:textSize="18dp" />
 
                 <TextView
@@ -170,7 +169,7 @@
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/loading_lbl_profile"
-                    android:textColor="@color/light_orange"
+                    android:textColor="@color/white"
                     android:textSize="16dp" />
             </LinearLayout>
 
@@ -187,7 +186,7 @@
                     android:layout_marginLeft="20dp"
                     android:fontFamily="@font/bebas_neue"
                     android:text="@string/recovery_profile"
-                    android:textColor="@color/white"
+                    android:textColor="@color/blue_2"
                     android:textSize="18dp" />
 
                 <TextView
@@ -197,7 +196,7 @@
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/loading_lbl_profile"
-                    android:textColor="@color/light_orange"
+                    android:textColor="@color/white"
                     android:textSize="16dp" />
             </LinearLayout>
 
@@ -209,7 +208,7 @@
                 android:layout_marginLeft="23dp"
                 android:layout_marginRight="23dp"
                 android:layout_marginBottom="23dp"
-                android:backgroundTint="@color/orange_2"
+                android:backgroundTint="@color/blue_1"
                 android:background="@drawable/bg_bnt_profile"
                 android:fontFamily="@font/bebas_neue"
                 android:text="@string/btn_log_out"
