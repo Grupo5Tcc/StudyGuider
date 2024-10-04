@@ -28,7 +28,7 @@
         android:layout_marginTop="30dp"
         android:fontFamily="@font/yeseva_one"
         android:text="@string/about_us_page_title"
-        android:textColor="@color/blue_dark"
+        android:textColor="@color/blue_1"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
