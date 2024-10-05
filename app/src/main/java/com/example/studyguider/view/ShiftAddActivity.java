@@ -1,11 +1,16 @@
 package com.example.studyguider.view;
 
+import static com.example.studyguider.view.App.plantoes;
+
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -21,6 +26,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -30,6 +36,7 @@ public class ShiftAddActivity extends AppCompatActivity {
     private EditText professorET, materiaET, diaET, horaET;
     private Button addUser;
     private FirebaseFirestore db;
+    private static final String TAG = "ShiftAddActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,26 +70,52 @@ public class ShiftAddActivity extends AppCompatActivity {
                     return;
                 }
 
-                Map<String, Object> user = new HashMap<>();
-                user.put("professor", professor);
-                user.put("materia", materia);
-                user.put("dia", dia);
-                user.put("hora", hora);
+                Map<String, Object> shift = new HashMap<>();
+                shift.put("professor", professor);
+                shift.put("materia", materia);
+                shift.put("dia", dia);
+                shift.put("hora", hora);
 
-                db.collection("shifts").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(ShiftAddActivity.this, "Usuário adicionado com sucesso", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ShiftAddActivity.this, "Erro ao adicionar usuário: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                db.collection("shifts").add(shift).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(ShiftAddActivity.this, "Usuário adicionado com sucesso", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ShiftAddActivity.this, "Falha Ao Tentar Adicionar Matéria: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Log.e(TAG, "Erro ao adicionar matéria", e);
+                            }
+                        });
 
             }
         });
+
+        horaET.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Obter a hora atual
+                final Calendar c = Calendar.getInstance();
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minute = c.get(Calendar.MINUTE);
+
+                // Criar o TimePickerDialog
+                TimePickerDialog timePickerDialog = new TimePickerDialog(ShiftAddActivity.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                // Formatar a hora como String e definir no campo horaET
+                                String formattedTime = String.format("%02d:%02d", hourOfDay, minute);
+                                horaET.setText(formattedTime);
+                            }
+                        }, hour, minute, true);
+                timePickerDialog.show();
+            }
+        });
+
     }
+
 }

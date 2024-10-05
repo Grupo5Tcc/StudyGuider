@@ -99,9 +99,9 @@
             android:id="@+id/horaLayout"
             style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:hint="Hora"
+            android:hint="Selecione a Hora"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
@@ -113,8 +113,10 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_orange"
                 android:fontFamily="@font/yeseva_one"
-                android:inputType="textCapSentences"
-                android:textColor="@color/blue_1" />
+                android:inputType="none"
+                android:textColor="@color/blue_1"
+                android:focusable="false"
+                android:clickable="true" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 

@@ -6,31 +6,28 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studyguider.R;
 import com.example.studyguider.adapter.ShiftAdapter;
 import com.example.studyguider.models.Shift;
 import com.example.studyguider.viewmodels.HeaderViewModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class ShiftActivity extends AppCompatActivity {
 
@@ -61,68 +58,40 @@ public class ShiftActivity extends AppCompatActivity {
         }
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        recyclerView = findViewById(R.id.recycler);
+        RecyclerView recyclerView = findViewById(R.id.recycler);
 
-        add = findViewById(R.id.addShift);
+        FloatingActionButton add = findViewById(R.id.addShift);
         add.setOnClickListener(view -> startActivity(new Intent(ShiftActivity.this, ShiftAddActivity.class)));
 
-        db.collection("shifts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    ArrayList<Shift> arrayList = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        Shift shift = document.toObject(Shift.class);
-                        shift.setId(document.getId());
-                        arrayList.add(shift);
-                    }
-                    ShiftAdapter adapter = new ShiftAdapter(ShiftActivity.this, arrayList);
-                    recyclerView.setAdapter(adapter);
 
-                    adapter.setOnItemClickListener(new ShiftAdapter.OnItemClickListener() {
-                        @Override
-                        public void onClick(Shift shift) {
-                            App.plantoes = shift;
-                            startActivity(new Intent(ShiftActivity.this, ShiftEditActivity.class));
-                        }
-                    });
-                } else {
-                    Toast.makeText(ShiftActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+        // Escutar alterações em tempo real com addSnapshotListener
+        db.collection("shifts").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null) {
+                    Toast.makeText(ShiftActivity.this, "Falha ao carregar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    return;
                 }
-            }
-        });
 
-        refresh = findViewById(R.id.refresh);
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                db.collection("shifts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                ArrayList<Shift> arrayList = new ArrayList<>();
+                assert value != null;
+                for (QueryDocumentSnapshot document : value) {
+                    Shift shifts = document.toObject(Shift.class);
+                    shifts.setId(document.getId());
+                    arrayList.add(shifts);
+                }
+
+                ShiftAdapter adapter = new ShiftAdapter(ShiftActivity.this, arrayList);
+                recyclerView.setAdapter(adapter);
+
+                adapter.setOnItemClickListener(new ShiftAdapter.OnItemClickListener() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            ArrayList<Shift> arrayList = new ArrayList<>();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Shift shift = document.toObject(Shift.class);
-                                shift.setId(document.getId());
-                                arrayList.add(shift);
-                            }
-                            ShiftAdapter adapter = new ShiftAdapter(ShiftActivity.this, arrayList);
-                            recyclerView.setAdapter(adapter);
-
-                            adapter.setOnItemClickListener(new ShiftAdapter.OnItemClickListener() {
-                                @Override
-                                public void onClick(Shift shift) {
-                                    App.plantoes = shift;
-                                    startActivity(new Intent(ShiftActivity.this, ShiftEditActivity.class));
-                                }
-                            });
-                        } else {
-                            Toast.makeText(ShiftActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                    public void onClick(Shift shifts) {
+                        App.plantoes = shifts;
+                        startActivity(new Intent(ShiftActivity.this, ShiftEditActivity.class));
                     }
                 });
             }
         });
     }
-
 }
