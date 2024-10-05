@@ -111,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewSchoolDuty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, ShiftsActivity.class);
+                Intent intent = new Intent(HomeActivity.this, ShiftActivity.class);
                 startActivity(intent);
             }
         });
