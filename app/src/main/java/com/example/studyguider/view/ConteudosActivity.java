@@ -5,9 +5,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.example.studyguider.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ConteudosActivity extends AppCompatActivity {
     private LinearLayout primeiroBimestre;
@@ -22,7 +28,15 @@ public class ConteudosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_conteudos);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         primeiroBimestre = findViewById(R.id.primeiro_bimestre);
         btnAdd1 = findViewById(R.id.btn_add1);
@@ -30,14 +44,14 @@ public class ConteudosActivity extends AppCompatActivity {
         btnAdd1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Cria um novo campo de texto
-                EditText editText = new EditText(ConteudosActivity.this);
-                editText.setLayoutParams(new LinearLayout.LayoutParams(
+                // cria um novo campo de texto
+                EditText conteudos_1_bim = new EditText(ConteudosActivity.this);
+                conteudos_1_bim.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT));
 
                 // adiciona o campo dentro do container
-                primeiroBimestre.addView(editText);
+                primeiroBimestre.addView(conteudos_1_bim);
             }
         });
 
@@ -48,13 +62,13 @@ public class ConteudosActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // cria um novo campo de texto
-                EditText editText = new EditText(ConteudosActivity.this);
-                editText.setLayoutParams(new LinearLayout.LayoutParams(
+                EditText conteudos_2_bim = new EditText(ConteudosActivity.this);
+                conteudos_2_bim.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT));
 
                 // adiciona o campo dentro do container
-                segundoBimestre.addView(editText);
+                segundoBimestre.addView(conteudos_2_bim);
             }
         });
 
@@ -65,13 +79,13 @@ public class ConteudosActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // cria um novo campo de texto
-                EditText editText = new EditText(ConteudosActivity.this);
-                editText.setLayoutParams(new LinearLayout.LayoutParams(
+                EditText conteudos_3_bim = new EditText(ConteudosActivity.this);
+                conteudos_3_bim.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT));
 
                 // adiciona o campo dentro do container
-                terceiroBimestre.addView(editText);
+                terceiroBimestre.addView(conteudos_3_bim);
             }
         });
 
@@ -82,13 +96,13 @@ public class ConteudosActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // cria um novo campo de texto
-                EditText editText = new EditText(ConteudosActivity.this);
-                editText.setLayoutParams(new LinearLayout.LayoutParams(
+                EditText conteudos_4_bim = new EditText(ConteudosActivity.this);
+                conteudos_4_bim.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT));
 
                 // adiciona o campo dentro do container
-                quartoBimestre.addView(editText);
+                quartoBimestre.addView(conteudos_4_bim);
             }
         });
     }

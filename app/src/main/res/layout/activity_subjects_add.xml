@@ -67,42 +67,13 @@
         android:layout_marginEnd="20sp"
         android:layout_marginBottom="20sp"
         android:background="@drawable/rnd_add_edit"
-        android:hint="Conteúdos">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/conteudosET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:inputType="textCapSentences|textMultiLine" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mediaLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/conteudosLayout"
-        android:layout_marginStart="20sp"
-        android:layout_marginEnd="20sp"
-        android:layout_marginBottom="20sp"
-        android:background="@drawable/rnd_add_edit"
-        android:hint="Média">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/mediaET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:inputType="textCapSentences|textMultiLine" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:hint="Conteúdos"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/addMateria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/mediaLayout"
+        android:layout_below="@id/professorLayout"
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/orange_1"
         android:text="Adicionar"

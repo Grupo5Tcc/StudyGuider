@@ -25,7 +25,9 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:fontFamily="@font/bebas_neue"
-            android:textSize="25sp"/>
+            android:gravity="center_horizontal"
+            android:textSize="30sp"
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/list_item_professor"
@@ -34,25 +36,9 @@
             android:layout_below="@id/list_item_materia"
             android:textColor="@color/white"
             android:fontFamily="@font/roboto_medium"
-            android:layout_marginTop="5dp"/>
-
-        <TextView
-            android:id="@+id/list_item_conteudos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/list_item_professor"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginTop="5dp"/>
-
-        <TextView
-            android:id="@+id/list_item_media"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/list_item_conteudos"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginTop="5dp"/>
+            android:gravity="center_horizontal"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="8dp"/>
 
     </RelativeLayout>
 

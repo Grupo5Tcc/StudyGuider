@@ -42,15 +42,11 @@ public class SubjectsEditActivity extends AppCompatActivity {
 
         TextInputEditText nomeMateriaET = findViewById(R.id.nomeMateriaET);
         TextInputEditText professorET = findViewById(R.id.professorET);
-        TextInputEditText conteudosET = findViewById(R.id.conteudosET);
-        TextInputEditText mediaET = findViewById(R.id.mediaET);
         MaterialButton save = findViewById(R.id.save);
         MaterialButton delete = findViewById(R.id.delete);
 
         nomeMateriaET.setText(App.materia.getNomeMateria());
         professorET.setText(App.materia.getProfessor());
-        conteudosET.setText(App.materia.getConteudos());
-        mediaET.setText(App.materia.getMedia());
 
         // Ação para deletar a matéria com confirmação
         delete.setOnClickListener(new View.OnClickListener() {
@@ -99,8 +95,6 @@ public class SubjectsEditActivity extends AppCompatActivity {
                                 Map<String, Object> materia = new HashMap<>();
                                 materia.put("nomeMateria", Objects.requireNonNull(nomeMateriaET.getText().toString()));
                                 materia.put("professor", Objects.requireNonNull(professorET.getText().toString()));
-                                materia.put("conteudos", Objects.requireNonNull(conteudosET.getText().toString()));
-                                materia.put("media", Objects.requireNonNull(mediaET.getText().toString()));
 
                                 db.collection("subjects").document(App.materia.getId()).set(materia)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {

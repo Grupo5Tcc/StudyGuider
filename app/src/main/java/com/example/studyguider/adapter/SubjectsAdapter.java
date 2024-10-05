@@ -35,8 +35,6 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.nomeMateria.setText(arrayList.get(position).getNomeMateria());
         holder.professor.setText(arrayList.get(position).getProfessor());
-        holder.conteudos.setText(arrayList.get(position).getConteudos());
-        holder.media.setText(arrayList.get(position).getMedia());
         holder.itemView.setOnClickListener(view -> onItemClickListener.onClick(arrayList.get(position)));
     }
 
@@ -45,14 +43,12 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView nomeMateria, professor, conteudos, media;
+        TextView nomeMateria, professor;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             nomeMateria = itemView.findViewById(R.id.list_item_materia);
             professor = itemView.findViewById(R.id.list_item_professor);
-            conteudos = itemView.findViewById(R.id.list_item_conteudos);
-            media = itemView.findViewById(R.id.list_item_media);
         }
     }
 

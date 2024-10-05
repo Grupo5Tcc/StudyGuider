@@ -45,8 +45,6 @@ public class SubjectsAddActivity extends AppCompatActivity {
 
         TextInputEditText nomeMateriaET = findViewById(R.id.nomeMateriaET);
         TextInputEditText professorET = findViewById(R.id.professorET);
-        TextInputEditText conteudosET = findViewById(R.id.conteudosET);
-        TextInputEditText mediaET = findViewById(R.id.mediaET);
         MaterialButton addMateria = findViewById(R.id.addMateria);
 
         addMateria.setOnClickListener(new View.OnClickListener() {
@@ -55,10 +53,10 @@ public class SubjectsAddActivity extends AppCompatActivity {
 
                 String nomeMateria = Objects.requireNonNull(nomeMateriaET.getText()).toString().trim();
                 String professor = Objects.requireNonNull(professorET.getText()).toString().trim();
-                String conteudos = Objects.requireNonNull(conteudosET.getText()).toString().trim();
-                String media = Objects.requireNonNull(mediaET.getText()).toString().trim();
+                //String conteudos = Objects.requireNonNull(conteudosET.getText()).toString().trim();
+                //String media = Objects.requireNonNull(mediaET.getText()).toString().trim();
 
-                if (nomeMateria.isEmpty() || professor.isEmpty() || conteudos.isEmpty() || media.isEmpty()) {
+                if (nomeMateria.isEmpty() || professor.isEmpty()) {
                     Toast.makeText(SubjectsAddActivity.this, "Por favor, preencha todos os campos!", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -67,8 +65,8 @@ public class SubjectsAddActivity extends AppCompatActivity {
                 Map<String, Object> materia = new HashMap<>();
                 materia.put("nomeMateria", nomeMateria);
                 materia.put("professor", professor);
-                materia.put("conteudos", conteudos);
-                materia.put("media", media);
+                //materia.put("conteudos", conteudos);
+                //materia.put("media", media);
 
                 // Adicionar a matéria ao Firestore
                 db.collection("subjects").add(materia)

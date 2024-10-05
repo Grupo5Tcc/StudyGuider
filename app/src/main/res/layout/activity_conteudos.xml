@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_orange"
-    tools:context=".view.ToDoListActivity">
+    tools:context=".view.ConteudosActivity">
 
     <include
         android:id="@+id/header"
@@ -71,8 +71,8 @@
 
         <ImageButton
             android:id="@+id/btn_add1"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/baseline_add_24"
             android:layout_margin="3dp"
             app:layout_constraintEnd_toEndOf="@id/primeiro_bimestre"
@@ -107,8 +107,8 @@
 
         <ImageButton
             android:id="@+id/btn_add2"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/baseline_add_24"
             android:layout_margin="3dp"
             app:layout_constraintEnd_toEndOf="@id/segundo_bimestre"
@@ -143,8 +143,8 @@
 
         <ImageButton
             android:id="@+id/btn_add3"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/baseline_add_24"
             android:layout_margin="3dp"
             app:layout_constraintEnd_toEndOf="@id/terceiro_bimestre"
@@ -179,8 +179,8 @@
 
         <ImageButton
             android:id="@+id/btn_add4"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/baseline_add_24"
             android:layout_margin="3dp"
             app:layout_constraintEnd_toEndOf="@id/quarto_bimestre"
