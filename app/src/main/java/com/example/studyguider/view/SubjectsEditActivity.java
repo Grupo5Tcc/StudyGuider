@@ -6,9 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.example.studyguider.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,12 +25,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class EditMateriaActivity extends AppCompatActivity {
+public class SubjectsEditActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_materia);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_subjects_edit);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -47,17 +57,17 @@ public class EditMateriaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Exibe o diálogo de confirmação
-                new AlertDialog.Builder(EditMateriaActivity.this)
+                new AlertDialog.Builder(SubjectsEditActivity.this)
                         .setTitle("Confirmar Exclusão")
                         .setMessage("Tem certeza que deseja deletar esta matéria?")
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Confirmado: Deletar a matéria
-                                db.collection("materia").document(App.materia.getId()).delete()
+                                db.collection("subjects").document(App.materia.getId()).delete()
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
-                                                Toast.makeText(EditMateriaActivity.this, "Matéria Deletada Com Sucesso!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SubjectsEditActivity.this, "Matéria Deletada Com Sucesso!!", Toast.LENGTH_SHORT).show();
                                                 Intent resultIntent = new Intent();
                                                 setResult(RESULT_OK, resultIntent);
                                                 finish();
@@ -65,7 +75,7 @@ public class EditMateriaActivity extends AppCompatActivity {
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(EditMateriaActivity.this, "Erro Ao Deletar A Matéria!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SubjectsEditActivity.this, "Erro Ao Deletar A Matéria!!", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                             }
@@ -80,7 +90,7 @@ public class EditMateriaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Exibe o diálogo de confirmação
-                new AlertDialog.Builder(EditMateriaActivity.this)
+                new AlertDialog.Builder(SubjectsEditActivity.this)
                         .setTitle("Confirmar Alteração")
                         .setMessage("Tem certeza que deseja salvar as alterações?")
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
@@ -92,11 +102,11 @@ public class EditMateriaActivity extends AppCompatActivity {
                                 materia.put("conteudos", Objects.requireNonNull(conteudosET.getText().toString()));
                                 materia.put("media", Objects.requireNonNull(mediaET.getText().toString()));
 
-                                db.collection("materia").document(App.materia.getId()).set(materia)
+                                db.collection("subjects").document(App.materia.getId()).set(materia)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
-                                                Toast.makeText(EditMateriaActivity.this, "Matéria Alterada Com Sucesso!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SubjectsEditActivity.this, "Matéria Alterada Com Sucesso!!", Toast.LENGTH_SHORT).show();
                                                 Intent resultIntent = new Intent();
                                                 setResult(RESULT_OK, resultIntent);
                                                 finish();
@@ -104,7 +114,7 @@ public class EditMateriaActivity extends AppCompatActivity {
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(EditMateriaActivity.this, "Erro Ao Alterar Matéria!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SubjectsEditActivity.this, "Erro Ao Alterar Matéria!!", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                             }

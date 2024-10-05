@@ -10,16 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studyguider.R;
-import com.example.studyguider.models.Materia;
+import com.example.studyguider.models.Subjects;
 
 import java.util.ArrayList;
 
-public class MateriaAdapter extends RecyclerView.Adapter<MateriaAdapter.ViewHolder> {
+public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHolder> {
     Context context;
-    ArrayList<Materia> arrayList;
+    ArrayList<Subjects> arrayList;
     OnItemClickListener onItemClickListener;
 
-    public MateriaAdapter(Context context, ArrayList<Materia> arrayList) {
+    public SubjectsAdapter(Context context, ArrayList<Subjects> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -61,6 +61,6 @@ public class MateriaAdapter extends RecyclerView.Adapter<MateriaAdapter.ViewHold
     }
 
     public interface OnItemClickListener {
-        void onClick(Materia materia);
+        void onClick(Subjects materia);
     }
 }

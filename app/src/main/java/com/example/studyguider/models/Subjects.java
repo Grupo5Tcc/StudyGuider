@@ -1,15 +1,9 @@
 package com.example.studyguider.models;
 
 public class Subjects {
-    String id, nomeMateria, professor, conteudos, media, situacao;
+    String id, nomeMateria, professor, conteudos, media;
 
-    public Subjects(String id, String nomeMateria, String professor, String conteudos, String media, String situacao) {
-        this.id = id;
-        this.nomeMateria = nomeMateria;
-        this.professor = professor;
-        this.conteudos = conteudos;
-        this.media = media;
-        this.situacao = situacao;
+    public Subjects() {
     }
 
     public String getId() {
@@ -50,13 +44,5 @@ public class Subjects {
 
     public void setMedia(String media) {
         this.media = media;
-    }
-
-    public String getSituacao() {
-        return situacao;
-    }
-
-    public void setSituacao(String situacao) {
-        this.situacao = situacao;
     }
 }

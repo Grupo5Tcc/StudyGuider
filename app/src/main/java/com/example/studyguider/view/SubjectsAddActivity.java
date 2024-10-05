@@ -1,12 +1,18 @@
 package com.example.studyguider.view;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.example.studyguider.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -20,14 +26,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class AddMateriaActivity extends AppCompatActivity {
+public class SubjectsAddActivity extends AppCompatActivity {
 
-    private static final String TAG = "AddMateriaActivity";
+    private static final String TAG = "SubjectsAddActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_materia);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_subjects_add);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -47,7 +59,7 @@ public class AddMateriaActivity extends AppCompatActivity {
                 String media = Objects.requireNonNull(mediaET.getText()).toString().trim();
 
                 if (nomeMateria.isEmpty() || professor.isEmpty() || conteudos.isEmpty() || media.isEmpty()) {
-                    Toast.makeText(AddMateriaActivity.this, "Por favor, preencha todos os campos!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SubjectsAddActivity.this, "Por favor, preencha todos os campos!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -59,11 +71,11 @@ public class AddMateriaActivity extends AppCompatActivity {
                 materia.put("media", media);
 
                 // Adicionar a matéria ao Firestore
-                db.collection("materia").add(materia)
+                db.collection("subjects").add(materia)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(AddMateriaActivity.this, "Matéria Adicionada Com Sucesso!!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SubjectsAddActivity.this, "Matéria Adicionada Com Sucesso!!", Toast.LENGTH_SHORT).show();
 
                                 // Chamar função para criar um novo "database" (nova coleção com base no campo adicionado)
                                 criarNovoDatabase(db, nomeMateria);
@@ -75,7 +87,7 @@ public class AddMateriaActivity extends AppCompatActivity {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(AddMateriaActivity.this, "Falha Ao Tentar Adicionar Matéria: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SubjectsAddActivity.this, "Falha Ao Tentar Adicionar Matéria: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 Log.e(TAG, "Erro ao adicionar matéria", e);
                             }
                         });
@@ -87,7 +99,7 @@ public class AddMateriaActivity extends AppCompatActivity {
      * Função para criar um novo "database" (na verdade, uma nova coleção ou documento)
      * com base em um campo específico adicionado em matérias.
      */
-    private void criarNovoDatabase(FirebaseFirestore db, String nomeMateria) {
+   private void criarNovoDatabase(FirebaseFirestore db, String nomeMateria) {
         // Novo documento ou coleção com base no campo adicionado
         Map<String, Object> newDatabaseData = new HashMap<>();
         newDatabaseData.put("nomeMateria", nomeMateria);
