@@ -15,9 +15,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.example.studyguider.R;
-import com.example.studyguider.models.Shift;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -29,7 +30,6 @@ public class ShiftEditActivity extends AppCompatActivity {
 
     private EditText professorET, materiaET, horaET;
     private Button save;
-    private Shift shiftEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,6 @@ public class ShiftEditActivity extends AppCompatActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // Inicialização dos campos
         professorET = findViewById(R.id.professorET);
         materiaET = findViewById(R.id.materiaET);
         horaET = findViewById(R.id.horaET);
@@ -62,32 +61,37 @@ public class ShiftEditActivity extends AppCompatActivity {
                 updates.put("materia", Objects.requireNonNull(materiaET.getText()).toString());
                 updates.put("hora", Objects.requireNonNull(horaET.getText()).toString());
 
-
-                db.collection("shifts").document(App.plantoes.getId()).set(shiftEdit).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(ShiftEditActivity.this, "Saved Successfully", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ShiftEditActivity.this, "Error while saving users", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                if (currentUser != null) {
+                    String userId = currentUser.getUid();
+                    db.collection("shifts").document(userId).collection("userShifts")
+                            .document(App.plantoes.getId()).update(updates)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(ShiftEditActivity.this, "Shift salvo com sucesso", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(ShiftEditActivity.this, "Erro ao salvar shift", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
             }
         });
+
 
         horaET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Obter a hora atual
+
                 final Calendar c = Calendar.getInstance();
                 int hour = c.get(Calendar.HOUR_OF_DAY);
                 int minute = c.get(Calendar.MINUTE);
 
-                // Criar o TimePickerDialog
                 TimePickerDialog timePickerDialog = new TimePickerDialog(ShiftEditActivity.this,
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override

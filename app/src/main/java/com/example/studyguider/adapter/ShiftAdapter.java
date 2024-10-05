@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studyguider.R;
 import com.example.studyguider.models.Shift;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -80,24 +82,32 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
     }
 
     private void deleteUser(Shift user, int position) {
-        Log.d(TAG, "deleteUser: Deleting user with ID: " + user.getId());
+        Log.d(TAG, "deleteUser: Deleting shift with ID: " + user.getId());
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("shifts").document(user.getId()).delete().addOnSuccessListener(aVoid -> {
-            Log.d(TAG, "deleteUser: User deleted successfully");
-            // Remove o item da lista local após a exclusão bem-sucedida no Firestore
-            arrayList.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, arrayList.size());
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
 
-            // Exibe uma mensagem de sucesso
-            Toast.makeText(context, "Usuário excluído com sucesso", Toast.LENGTH_SHORT).show();
-        }).addOnFailureListener(e -> {
-            Log.e(TAG, "deleteUser: Error", e);
-            // Exibe uma mensagem de erro caso a exclusão falhe
-            Toast.makeText(context, "Erro ao excluir usuário", Toast.LENGTH_SHORT).show();
-        });
+            // Atualizar o caminho para incluir a subcoleção
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("shifts").document(userId).collection("userShifts").document(user.getId())
+                    .delete().addOnSuccessListener(aVoid -> {
+                        Log.d(TAG, "deleteUser: Shift deleted successfully");
+                        // Remove o item da lista local após a exclusão bem-sucedida no Firestore
+                        arrayList.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, arrayList.size());
+
+                        // Exibe uma mensagem de sucesso
+                        Toast.makeText(context, "Shift excluído com sucesso", Toast.LENGTH_SHORT).show();
+                    }).addOnFailureListener(e -> {
+                        Log.e(TAG, "deleteUser: Error", e);
+                        // Exibe uma mensagem de erro caso a exclusão falhe
+                        Toast.makeText(context, "Erro ao excluir shift", Toast.LENGTH_SHORT).show();
+                    });
+        }
     }
+
 
     @Override
     public int getItemCount() {

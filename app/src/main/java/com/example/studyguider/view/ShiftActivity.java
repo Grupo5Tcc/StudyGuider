@@ -64,34 +64,41 @@ public class ShiftActivity extends AppCompatActivity {
         add.setOnClickListener(view -> startActivity(new Intent(ShiftActivity.this, ShiftAddActivity.class)));
 
 
-        // Escutar alterações em tempo real com addSnapshotListener
-        db.collection("shifts").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    Toast.makeText(ShiftActivity.this, "Falha ao carregar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                    return;
-                }
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
 
-                ArrayList<Shift> arrayList = new ArrayList<>();
-                assert value != null;
-                for (QueryDocumentSnapshot document : value) {
-                    Shift shifts = document.toObject(Shift.class);
-                    shifts.setId(document.getId());
-                    arrayList.add(shifts);
-                }
+            // Modifique a consulta para buscar shifts no documento correspondente ao userId
+            db.collection("shifts").document(userId).collection("userShifts")
+                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                            if (error != null) {
+                                Toast.makeText(ShiftActivity.this, "Falha ao carregar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                return;
+                            }
 
-                ShiftAdapter adapter = new ShiftAdapter(ShiftActivity.this, arrayList);
-                recyclerView.setAdapter(adapter);
+                            ArrayList<Shift> arrayList = new ArrayList<>();
+                            assert value != null;
+                            for (QueryDocumentSnapshot document : value) {
+                                Shift shifts = document.toObject(Shift.class);
+                                shifts.setId(document.getId());
+                                arrayList.add(shifts);
+                            }
 
-                adapter.setOnItemClickListener(new ShiftAdapter.OnItemClickListener() {
-                    @Override
-                    public void onClick(Shift shifts) {
-                        App.plantoes = shifts;
-                        startActivity(new Intent(ShiftActivity.this, ShiftEditActivity.class));
-                    }
-                });
-            }
-        });
+                            ShiftAdapter adapter = new ShiftAdapter(ShiftActivity.this, arrayList);
+                            recyclerView.setAdapter(adapter);
+
+                            adapter.setOnItemClickListener(new ShiftAdapter.OnItemClickListener() {
+                                @Override
+                                public void onClick(Shift shifts) {
+                                    App.plantoes = shifts;
+                                    startActivity(new Intent(ShiftActivity.this, ShiftEditActivity.class));
+                                }
+                            });
+                        }
+                    });
+        }
+
     }
 }

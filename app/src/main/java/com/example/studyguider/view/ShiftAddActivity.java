@@ -23,6 +23,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.studyguider.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -49,7 +51,6 @@ public class ShiftAddActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Inicialização dos campos e do Firestore
         professorET = findViewById(R.id.professorET);
         materiaET = findViewById(R.id.materiaET);
         diaET = findViewById(R.id.diaET);
@@ -76,23 +77,27 @@ public class ShiftAddActivity extends AppCompatActivity {
                 shift.put("dia", dia);
                 shift.put("hora", hora);
 
-                db.collection("shifts").add(shift).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(ShiftAddActivity.this, "Usuário adicionado com sucesso", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(ShiftAddActivity.this, "Falha Ao Tentar Adicionar Matéria: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                Log.e(TAG, "Erro ao adicionar matéria", e);
-                            }
-                        });
-
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                if (currentUser != null) {
+                    String userId = currentUser.getUid();
+                    db.collection("shifts").document(userId).collection("userShifts").add(shift)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Toast.makeText(ShiftAddActivity.this, "Shift adicionado com sucesso", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(ShiftAddActivity.this, "Falha Ao Tentar Adicionar Shift: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
             }
         });
+
 
         horaET.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +107,6 @@ public class ShiftAddActivity extends AppCompatActivity {
                 int hour = c.get(Calendar.HOUR_OF_DAY);
                 int minute = c.get(Calendar.MINUTE);
 
-                // Criar o TimePickerDialog
                 TimePickerDialog timePickerDialog = new TimePickerDialog(ShiftAddActivity.this,
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
