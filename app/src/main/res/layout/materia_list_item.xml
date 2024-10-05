@@ -15,33 +15,44 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/blue_2"
-        android:padding="10sp">
+        android:padding="12sp">
 
         <TextView
             android:id="@+id/list_item_materia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="18sp" />
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/bebas_neue"
+            android:textSize="25sp"/>
 
         <TextView
             android:id="@+id/list_item_professor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/list_item_materia" />
+            android:layout_below="@id/list_item_materia"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginTop="5dp"/>
 
         <TextView
             android:id="@+id/list_item_conteudos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/list_item_professor" />
+            android:layout_below="@id/list_item_professor"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginTop="5dp"/>
 
         <TextView
             android:id="@+id/list_item_media"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/list_item_conteudos" />
+            android:layout_below="@id/list_item_conteudos"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginTop="5dp"/>
 
     </RelativeLayout>
 
