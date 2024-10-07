@@ -103,7 +103,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewGrades.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, ControleNotas.class);
+                Intent intent = new Intent(HomeActivity.this, ControleNotasActivity.class);
                 startActivity(intent);
             }
         });

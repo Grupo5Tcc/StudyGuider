@@ -7,28 +7,53 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
-import com.example.studyguider.view.App;
+import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class EditNotas extends AppCompatActivity {
+public class ControleNotasEditActivity extends AppCompatActivity {
+
+    private HeaderViewModel headerViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_notas);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_controle_notas_edit);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
+
+        View headerView = findViewById(R.id.header);
+        HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
+
+        FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser1 != null) {
+            headerViewModel.fetchUsername(currentUser1);
+        }
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -60,17 +85,17 @@ public class EditNotas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                new AlertDialog.Builder(EditNotas.this)
+                new AlertDialog.Builder(ControleNotasEditActivity.this)
                         .setTitle("Confirmar Exclusão")
                         .setMessage("Tem certeza que deseja deletar essas notas?")
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
 
-                                db.collection("notas").document(App.notas.getId()).delete()
+                                db.collection("grades").document(App.notas.getId()).delete()
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
-                                                Toast.makeText(EditNotas.this, "Notas Deletada Com Sucesso!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ControleNotasEditActivity.this, "Notas Deletada Com Sucesso!!", Toast.LENGTH_SHORT).show();
                                                 Intent resultIntent = new Intent();
                                                 setResult(RESULT_OK, resultIntent);
                                                 finish();
@@ -79,7 +104,7 @@ public class EditNotas extends AppCompatActivity {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 Log.e("EditNotas", "Erro Ao Deletar As Notas!!", e);
-                                                Toast.makeText(EditNotas.this, "Erro Ao Deletar As Notas!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ControleNotasEditActivity.this, "Erro Ao Deletar As Notas!!", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                             }
@@ -92,7 +117,7 @@ public class EditNotas extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(EditNotas.this)
+                new AlertDialog.Builder(ControleNotasEditActivity.this)
                         .setTitle("Confirmar Alteração")
                         .setMessage("Tem certeza que deseja salvar as alterações?")
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
@@ -105,7 +130,7 @@ public class EditNotas extends AppCompatActivity {
                                         notaListaET.getText().toString().isEmpty() ||
                                         notaPrecisoET.getText().toString().isEmpty() ||
                                         notaProvaET.getText().toString().isEmpty()) {
-                                    Toast.makeText(EditNotas.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ControleNotasEditActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
@@ -117,11 +142,11 @@ public class EditNotas extends AppCompatActivity {
                                 notas.put("pre", Objects.requireNonNull(notaPrecisoET.getText()).toString());
                                 notas.put("prova", Objects.requireNonNull(notaProvaET.getText()).toString());
 
-                                db.collection("notas").document(App.notas.getId()).update(notas)
+                                db.collection("grades").document(App.notas.getId()).update(notas)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
-                                                Toast.makeText(EditNotas.this, "Notas Alteradas Com Sucesso!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ControleNotasEditActivity.this, "Notas Alteradas Com Sucesso!!", Toast.LENGTH_SHORT).show();
                                                 finish();
                                             }
                                         })
@@ -129,7 +154,7 @@ public class EditNotas extends AppCompatActivity {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 Log.e("EditNotas", "Erro ao salvar as notas", e);
-                                                Toast.makeText(EditNotas.this, "Erro ao salvar as notas", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ControleNotasEditActivity.this, "Erro ao salvar as notas", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                             }

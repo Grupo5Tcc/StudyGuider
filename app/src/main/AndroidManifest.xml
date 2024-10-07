@@ -58,12 +58,6 @@
             android:name=".view.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ControleNotas"
-            android:exported="false" />
-        <activity
-            android:name=".view.MateriaActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.ShiftEditActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider" />
@@ -78,13 +72,25 @@
         <activity
             android:name=".view.SubjectsEditActivity"
             android:exported="false"
-            android:theme="@style/Theme.Material3StudyGuider"/>
+            android:theme="@style/Theme.Material3StudyGuider" />
         <activity
             android:name=".view.SubjectsAddActivity"
             android:exported="false"
-            android:theme="@style/Theme.Material3StudyGuider"/>
+            android:theme="@style/Theme.Material3StudyGuider" />
         <activity
             android:name=".view.SubjectsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Material3StudyGuider" />
+        <activity
+            android:name=".view.ControleNotasEditActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Material3StudyGuider"/>
+        <activity
+            android:name=".view.ControleNotasAddActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Material3StudyGuider"/>
+        <activity
+            android:name=".view.ControleNotasActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider"/>
 

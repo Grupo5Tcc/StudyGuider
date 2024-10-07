@@ -14,12 +14,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
+import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -29,6 +33,7 @@ import java.util.Map;
 
 public class ControleRec extends AppCompatActivity {
 
+    private HeaderViewModel headerViewModel;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private boolean salvarDadosAutomaticamente = true;
 
@@ -37,8 +42,18 @@ public class ControleRec extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_controle_rec);
 
+        headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
+
+        View headerView = findViewById(R.id.header);
+        HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
+
+        FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser1 != null) {
+            headerViewModel.fetchUsername(currentUser1);
+        }
+
         // Verifique se o campo "prova" é menor que o campo "pre" no banco de dados
-        db.collection("notas").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("grades").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -193,7 +208,7 @@ public class ControleRec extends AppCompatActivity {
         dados.put("c4", c4.isChecked());
         dados.put("conteudos", conteudos.getText().toString()); // Acrescente isso aqui
 
-        db.collection("rec").document(nomeMateria).set(dados)
+        db.collection("recovery").document(nomeMateria).set(dados)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

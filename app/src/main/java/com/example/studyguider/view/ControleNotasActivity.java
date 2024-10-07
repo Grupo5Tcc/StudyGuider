@@ -8,6 +8,9 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,7 +30,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class ControleNotas extends AppCompatActivity {
+public class ControleNotasActivity extends AppCompatActivity {
 
     private HeaderViewModel headerViewModel;
 
@@ -35,8 +38,12 @@ public class ControleNotas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-
         setContentView(R.layout.activity_controle_notas);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
 
@@ -48,19 +55,19 @@ public class ControleNotas extends AppCompatActivity {
             headerViewModel.fetchUsername(currentUser1);
         }
 
-        FirebaseApp.initializeApp(ControleNotas.this);
+        FirebaseApp.initializeApp(ControleNotasActivity.this);
 
         FirebaseFirestore db =FirebaseFirestore.getInstance();
         RecyclerView recyclerView = findViewById(R.id.recycler);
 
         FloatingActionButton add = findViewById(R.id.addNota);
-        add.setOnClickListener(view -> startActivity(new Intent(ControleNotas.this, AddNotas.class)));
+        add.setOnClickListener(view -> startActivity(new Intent(ControleNotasActivity.this, ControleNotasAddActivity.class)));
 
-        db.collection("notas").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("grades").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null) {
-                    Toast.makeText(ControleNotas.this, "Falha ao carregar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ControleNotasActivity.this, "Falha ao carregar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -72,14 +79,14 @@ public class ControleNotas extends AppCompatActivity {
                     arrayList.add(notas);
                 }
 
-                NotasAdapter adapter = new NotasAdapter(ControleNotas.this, arrayList);
+                NotasAdapter adapter = new NotasAdapter(ControleNotasActivity.this, arrayList);
                 recyclerView.setAdapter(adapter);
 
                 adapter.setOnItemClickListener(new NotasAdapter.OnItemClickListener() {
                     @Override
                     public void onClick(Notas notas) {
                         App.notas = notas;
-                        startActivity(new Intent(ControleNotas.this, EditNotas.class));
+                        startActivity(new Intent(ControleNotasActivity.this, ControleNotasEditActivity.class));
                     }
                 });
             }
