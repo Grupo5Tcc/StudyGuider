@@ -1,112 +1,183 @@
 package com.example.studyguider.view;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
-import com.example.studyguider.models.DadosRec;
-import com.example.studyguider.viewmodels.HeaderViewModel;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.UUID;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ControleRec extends AppCompatActivity {
 
-    private HeaderViewModel headerViewModel;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private boolean salvarDadosAutomaticamente = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_controle_rec);
 
-        headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
+        // Verifique se o campo "prova" é menor que o campo "pre" no banco de dados
+        db.collection("notas").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    QuerySnapshot querySnapshot = task.getResult();
+                    boolean possuiRecuperacao = false;
 
-        View headerView = findViewById(R.id.header);
-        HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
+                    // Configura o LinearLayout para mostrar múltiplos containers
+                    LinearLayout linearLayout = findViewById(R.id.linerec);
+                    linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-        FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser1 != null) {
-            headerViewModel.fetchUsername(currentUser1);
-        }
+                    for (DocumentSnapshot document : querySnapshot.getDocuments()) {
+                        // Recupere os valores dos campos "prova" e "pre"
+                        String prova = document.getString("prova");
+                        String pre = document.getString("pre");
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+                        // Verifique se o campo "prova" é menor que o campo "pre"
+                        if (prova.compareTo(pre) < 0) {
+                            possuiRecuperacao = true;
 
-            EditText editText = findViewById(R.id.conteuos_txt);
+                            // Recupere os valores dos campos "nomeMateria" e "nota"
+                            String nomeMateria = document.getString("nomeMateria");
+                            String cred = document.getString("cred");
+                            String trab = document.getString("trab");
+                            String list = document.getString("list");
+                            String provaNota = document.getString("prova");
 
-            editText.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                }
+                            // Calcule a nota
+                            int nota = Integer.parseInt(cred) + Integer.parseInt(trab) + Integer.parseInt(list) + Integer.parseInt(provaNota);
 
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                }
+                            // Verifique se um container com o ID de nomeMateria já existe
+                            View existingContainer = linearLayout.findViewWithTag(nomeMateria);
+                            if (existingContainer != null) {
+                                // Atualize o container existente
+                                atualizarContainer(existingContainer, nomeMateria, nota);
+                            } else {
+                                // Crie um novo container
+                                View container = getLayoutInflater().inflate(R.layout.activity_add_rec, linearLayout, false); // Inflate com o LinearLayout como pai
+                                container.setTag(nomeMateria); // Define o nomeMateria como tag do container
 
-                @Override
-                public void afterTextChanged(Editable s) {
-                    editText.post(() -> {
+                                // Definir espaçamento entre os containers (margens)
+                                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams.MATCH_PARENT,
+                                        LinearLayout.LayoutParams.WRAP_CONTENT
+                                );
+                                int marginInPixels = (int) (10 * getResources().getDisplayMetrics().density); // Converte 10dp para pixels
+                                layoutParams.setMargins(0, marginInPixels, 0, marginInPixels); // Defina margem superior e inferior
 
-                        editText.scrollTo(0, editText.getLayout().getLineTop(editText.getLineCount()) - editText.getHeight());
+                                container.setLayoutParams(layoutParams); // Aplique as margens no container
+                                linearLayout.addView(container); // Adiciona o novo container ao LinearLayout
 
-
-                        if (s.length() > 0 && s.charAt(s.length() - 1) == '.') {
-                            EditText editText1 = editText;
-                            editText1.clearFocus();
-                            hideKeyboard(editText);
+                                // Preenche os valores no novo container
+                                atualizarContainer(container, nomeMateria, nota);
+                            }
                         }
-                    });
-                }
-            });
+                    }
 
-            return insets;
+                    if (!possuiRecuperacao) {
+                        // Se o campo "prova" não é menor que o campo "pre", não permita salvar
+                        Toast.makeText(ControleRec.this, "Não possui nenhuma Recuperação", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    // Se houver um erro, mostre uma mensagem de erro
+                    Toast.makeText(ControleRec.this, "Erro ao recuperar dados", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void atualizarContainer(View container, String nomeMateria, int nota) {
+        // Atualiza os TextViews dentro do container
+        TextView materiaTextView = container.findViewById(R.id.materiarec);
+        materiaTextView.setText(nomeMateria);
+
+        TextView notaTextView = container.findViewById(R.id.notarec);
+        notaTextView.setText(String.valueOf(nota));
+
+        // Adicione listeners aos checkboxes para salvar automaticamente
+        CheckBox c1 = container.findViewById(R.id.checkSujes1);
+        c1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (salvarDadosAutomaticamente) {
+                    salvarDados(nomeMateria, container);
+                }
+            }
         });
 
-        // Adicione os containers da página add_rec ao linearLayout
-        LinearLayout linearLayout = findViewById(R.id.linerec);
-        for (int i = 0; i < 3; i++) {
-            View container = getLayoutInflater().inflate(R.layout.activity_add_rec, null);
-            linearLayout.addView(container);
-
-            // Encontre o botão dentro do container e adicione um listener a ele
-            Button button = container.findViewById(R.id.salvar);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    salvarDados(container);
+        CheckBox c2 = container.findViewById(R.id.checkSujes2);
+        c2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (salvarDadosAutomaticamente) {
+                    salvarDados(nomeMateria, container);
                 }
-            });
-        }
+            }
+        });
+
+        CheckBox c3 = container.findViewById(R.id.checkSujes3);
+        c3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (salvarDadosAutomaticamente) {
+                    salvarDados(nomeMateria, container);
+                }
+            }
+        });
+
+        CheckBox c4 = container.findViewById(R.id.checkSujes4);
+        c4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (salvarDadosAutomaticamente) {
+                    salvarDados(nomeMateria, container);
+                }
+            }
+        });
+
+        EditText conteudosEditText = container.findViewById(R.id.conteuos_txt);
+        conteudosEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (salvarDadosAutomaticamente) {
+                    salvarDados(nomeMateria, container);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
 
-    private void hideKeyboard(View view) {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm != null) {
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
+    private void salvarDados(String nomeMateria, View container) {
+        salvarDadosAutomaticamente = false;
 
-    private void salvarDados(View container) {
         // Encontre os elementos dentro do container
         CheckBox c1 = container.findViewById(R.id.checkSujes1);
         CheckBox c2 = container.findViewById(R.id.checkSujes2);
@@ -114,20 +185,30 @@ public class ControleRec extends AppCompatActivity {
         CheckBox c4 = container.findViewById(R.id.checkSujes4);
         EditText conteudos = container.findViewById(R.id.conteuos_txt);
 
-        // Crie um ID único para cada container
-        String containerId = UUID.randomUUID().toString();
+        // Salvar os dados no Firestore usando nomeMateria como chave
+        Map<String, Object> dados = new HashMap<>();
+        dados.put("c1", c1.isChecked());
+        dados.put("c2", c2.isChecked());
+        dados.put("c3", c3.isChecked());
+        dados.put("c4", c4.isChecked());
+        dados.put("conteudos", conteudos.getText().toString()); // Acrescente isso aqui
 
-        // Salve os dados no banco de dados Firestore
-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        firestore.collection("rec").document(containerId).set(new DadosRec(
-                containerId,
-                c1.isChecked(),
-                c2.isChecked(),
-                c3.isChecked(),
-                c4.isChecked(),
-                conteudos.getText().toString()
-        ));
+        db.collection("rec").document(nomeMateria).set(dados)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("Firestore", "Dados de " + nomeMateria + " gravados com sucesso!");
+                        Toast.makeText(ControleRec.this, "Dados de " + nomeMateria + " salvos com sucesso!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Firestore", "Erro ao gravar dados: " + e.getMessage());
+                        Toast.makeText(ControleRec.this, "Erro ao salvar dados de " + nomeMateria, Toast.LENGTH_SHORT).show();
+                    }
+                });
 
-        Toast.makeText(this, "Dados salvos com sucesso!", Toast.LENGTH_SHORT).show();
+        salvarDadosAutomaticamente = true;
     }
 }

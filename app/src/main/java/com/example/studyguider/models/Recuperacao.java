@@ -1,6 +1,6 @@
 package com.example.studyguider.models;
 
-public class DadosRec {
+public class Recuperacao {
     private String containerId;
     private boolean checkbox1;
     private boolean checkbox2;
@@ -8,7 +8,7 @@ public class DadosRec {
     private boolean checkbox4;
     private String conteudos;
 
-    public DadosRec(String containerId, boolean checkbox1, boolean checkbox2, boolean checkbox3, boolean checkbox4, String conteudos) {
+    public Recuperacao(String containerId, boolean checkbox1, boolean checkbox2, boolean checkbox3, boolean checkbox4, String conteudos) {
         this.containerId = containerId;
         this.checkbox1 = checkbox1;
         this.checkbox2 = checkbox2;
