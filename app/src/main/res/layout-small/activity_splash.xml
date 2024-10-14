@@ -14,7 +14,7 @@
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="140dp"
-        android:src="@drawable/img_logo_main" />
+        android:src="@drawable/img_logo_background_main" />
 
     <!-- Título logo abaixo da imagemgm -->
     <TextView
@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/yeseva_one"
         android:text="StudyGuider"
-        android:textColor="#033469"
+        android:textColor="@color/white"
         android:textSize="50sp"/>
 
 </RelativeLayout>
