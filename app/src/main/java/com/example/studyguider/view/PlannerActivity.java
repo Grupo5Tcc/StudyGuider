@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
@@ -48,6 +49,14 @@ public class PlannerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_planner);
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        Button buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
+        buttonPreviousMonth.setText("<");
+
+        Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
+        buttonNextMonth.setText(">");
 
         plannerViewModel = new ViewModelProvider(this).get(PlannerViewModel.class);
 
