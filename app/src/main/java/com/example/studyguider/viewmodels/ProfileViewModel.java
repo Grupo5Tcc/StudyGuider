@@ -1,13 +1,11 @@
 package com.example.studyguider.viewmodels;
 
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.studyguider.models.UserProfile;
 import com.example.studyguider.repository.UserRepository;
-
 
 public class ProfileViewModel extends ViewModel {
     private final UserRepository userRepository;
@@ -18,7 +16,7 @@ public class ProfileViewModel extends ViewModel {
     }
 
     public LiveData<UserProfile> getUserProfile() {
-        return userRepository.getUserProfile();
+        return userRepository.getUserProfile(); // Assumindo que o repositório busca o perfil
     }
 
     public LiveData<Boolean> getIsLoading() {
