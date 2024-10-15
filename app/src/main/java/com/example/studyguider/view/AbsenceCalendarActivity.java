@@ -51,7 +51,8 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
     private EditText editTextNota;
     private Button saveButton;
     private Button backButton;
-
+    private Button  buttonPreviousMonth;
+    private Button buttonNextMonth;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private String userId;
@@ -94,8 +95,8 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.saveButton);
         backButton = findViewById(R.id.backButton);
 
-        Button buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
-        Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
+        buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
+        buttonNextMonth = findViewById(R.id.buttonNextMonth);
 
         buttonPreviousMonth.setText("<");
         buttonNextMonth.setText(">");
@@ -131,6 +132,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
             informationScrollView.setVisibility(View.GONE); // Esconde o formulário
             gridLayoutCalendar.setVisibility(View.VISIBLE); // Mostra o calendário
             savedFaltasLayout.setVisibility(View.VISIBLE);  // Mostra as faltas salvas
+
         });
 
         updateCalendar();
@@ -197,6 +199,8 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
             gridLayoutCalendar.setVisibility(View.GONE);
             savedFaltasLayout.setVisibility(View.GONE);
             monthTextView.setVisibility(View.INVISIBLE);
+            buttonPreviousMonth.setVisibility(View.VISIBLE);
+            buttonNextMonth.setVisibility(View.VISIBLE);
             buttonPreviousMonth.setText("");
             buttonNextMonth.setText("");
             buttonNextMonth.setEnabled(false);
@@ -293,6 +297,9 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
             informationScrollView.setVisibility(View.VISIBLE);
             gridLayoutCalendar.setVisibility(View.GONE);
             savedFaltasLayout.setVisibility(View.GONE);
+            monthTextView.setVisibility(View.INVISIBLE);
+            buttonPreviousMonth.setVisibility(View.INVISIBLE);
+            buttonNextMonth.setVisibility(View.INVISIBLE);
         });
 
         savedFaltasLayout.addView(faltaInfoLayout);
@@ -321,7 +328,9 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         informationScrollView.setVisibility(View.GONE);
         gridLayoutCalendar.setVisibility(View.VISIBLE);
         savedFaltasLayout.setVisibility(View.VISIBLE);
-        currentEditingDay = null; // Reset the editing day
+        buttonPreviousMonth.setVisibility(View.VISIBLE);
+        buttonNextMonth.setVisibility(View.VISIBLE);
+        currentEditingDay = null; // Redefinir o dia na edição
     }
 
     private void removeFalta(int day) {
@@ -332,7 +341,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         updateCalendar();
         clearForm();
         if (selectedDayTextView != null) {
-            selectedDayTextView.setBackgroundColor(Color.WHITE); // Reset day background
+            selectedDayTextView.setBackgroundColor(Color.WHITE); // Redefinir plano de fundo do dia
         }
     }
 
@@ -369,7 +378,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
                             String nota = document.getString("nota");
                             addFaltaToLayout(day, motivo, atestado, nota);
 
-                            // Highlight the day on the calendar
+                            //Destaque o dia no calendário
                             for (int i = 0; i < gridLayoutCalendar.getChildCount(); i++) {
                                 TextView dayView = (TextView) gridLayoutCalendar.getChildAt(i);
                                 if (dayView.getText().toString().equals(day)) {
