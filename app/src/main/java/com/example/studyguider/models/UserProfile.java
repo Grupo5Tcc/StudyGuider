@@ -5,14 +5,17 @@ public class UserProfile {
     private String email;
     private String dateOfBirth;
     private int absence;
+    private int recovery; // Novo campo para recuperações
 
-    public UserProfile(String name, String email, String dateOfBirth, int absence) {
+    public UserProfile(String name, String email, String dateOfBirth, int absence, int recovery) {
         this.name = name;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.absence = absence;
+        this.recovery = recovery; // Inicialização do campo
     }
 
+    // Getters e Setters
     public String getName() {
         return name;
     }
@@ -29,7 +32,7 @@ public class UserProfile {
         return absence;
     }
 
-    public void setAbsence(int absence) {
-        this.absence = absence;
+    public int getRecovery() {
+        return recovery; // Novo getter
     }
 }

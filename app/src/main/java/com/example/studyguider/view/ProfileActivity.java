@@ -15,16 +15,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
 import com.example.studyguider.viewmodels.ProfileViewModel;
-
 import com.google.firebase.auth.FirebaseAuth;
-
-
 
 public class ProfileActivity extends AppCompatActivity {
 
     private ProfileViewModel profileViewModel;
     private ProgressBar progressBar;
-    private TextView textViewName, textViewEmail, textViewDateOfBirth, textViewAbsence;
+    private TextView textViewName, textViewEmail, textViewDateOfBirth, textViewAbsence, textViewRecovery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +48,6 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-
     }
 
     private void initUI() {
@@ -59,7 +55,8 @@ public class ProfileActivity extends AppCompatActivity {
         textViewName = findViewById(R.id.lblNameLoading);
         textViewEmail = findViewById(R.id.lblEmailLoading);
         textViewDateOfBirth = findViewById(R.id.lblDateOfBirthLoading);
-        textViewAbsence = findViewById(R.id.lblAbsenceLoading); // Campo de ausência
+        textViewAbsence = findViewById(R.id.lblAbsenceLoading);
+        textViewRecovery = findViewById(R.id.lblRecoveryLoading); // Inicializa o campo de recuperação
     }
 
     private void observeViewModel() {
@@ -68,9 +65,10 @@ public class ProfileActivity extends AppCompatActivity {
                 textViewName.setText(userProfile.getName());
                 textViewEmail.setText(userProfile.getEmail());
                 textViewDateOfBirth.setText(userProfile.getDateOfBirth());
-
-                // Exibe o campo absence como int
                 textViewAbsence.setText(String.valueOf(userProfile.getAbsence()));
+
+                // Define o texto da lblRecoveryLoading
+                textViewRecovery.setText(String.valueOf(userProfile.getRecovery()));
             }
         });
 
