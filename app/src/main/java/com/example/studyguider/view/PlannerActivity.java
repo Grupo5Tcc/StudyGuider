@@ -77,6 +77,8 @@ public class PlannerActivity extends AppCompatActivity {
         currentMonth = calendar.get(Calendar.MONTH);
         currentYear = calendar.get(Calendar.YEAR);
 
+        TextView monthTextView = findViewById(R.id.textViewMonth);
+
         setupCalendar();
         setupObservers();
 
@@ -148,6 +150,17 @@ public class PlannerActivity extends AppCompatActivity {
     }
 
     private void handleDayClick(TextView dayTextView, int day) {
+
+        TextView monthTextView = findViewById(R.id.textViewMonth);
+        Button buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
+        Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
+
+        monthTextView.setVisibility(View.INVISIBLE);
+        buttonPreviousMonth.setText("");
+        buttonNextMonth.setText("");
+        buttonNextMonth.setEnabled(false);
+        buttonPreviousMonth.setEnabled(false);
+
         if (dayTextView.getBackground() instanceof ColorDrawable) {
             int backgroundColor = ((ColorDrawable) dayTextView.getBackground()).getColor();
             if (backgroundColor == Color.WHITE) {
@@ -200,8 +213,18 @@ public class PlannerActivity extends AppCompatActivity {
         String eventTime = textViewEventTime.getText().toString();
         String additionalInfo = editTextAdditionalInfo.getText().toString();
 
+        TextView monthTextView = findViewById(R.id.textViewMonth);
+        Button buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
+        Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
+
         if (eventName.isEmpty() || eventTime.isEmpty()) {
             Toast.makeText(this, "Preencha todos os campos obrigatórios!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Integer selectedColor = plannerViewModel.getSelectedColor().getValue();
+        if (selectedColor == null || selectedColor == Color.WHITE) {
+            Toast.makeText(this, "Selecione uma cor para o evento!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -221,6 +244,12 @@ public class PlannerActivity extends AppCompatActivity {
         editTextEventName.setText("");
         textViewEventTime.setText("Selecione o horário");
         editTextAdditionalInfo.setText("");
+
+        monthTextView.setVisibility(View.VISIBLE);
+        buttonPreviousMonth.setText("<");
+        buttonNextMonth.setText(">");
+        buttonNextMonth.setEnabled(true);
+        buttonPreviousMonth.setEnabled(true);
     }
 
     private void setupObservers() {
