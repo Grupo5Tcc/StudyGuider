@@ -288,7 +288,7 @@ public class PlannerActivity extends AppCompatActivity {
 
                 ImageView deleteIcon = new ImageView(this);
                 deleteIcon.setImageResource(R.drawable.ic_delete);
-                deleteIcon.setLayoutParams(new LinearLayout.LayoutParams(48, 48));
+                deleteIcon.setLayoutParams(new LinearLayout.LayoutParams(80, 80));
                 deleteIcon.setPadding(16, 0, 0, 0);
                 deleteIcon.setOnClickListener(v -> {
                     plannerViewModel.removeEvent(event);
