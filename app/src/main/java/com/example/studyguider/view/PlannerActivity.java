@@ -77,8 +77,6 @@ public class PlannerActivity extends AppCompatActivity {
         currentMonth = calendar.get(Calendar.MONTH);
         currentYear = calendar.get(Calendar.YEAR);
 
-        TextView monthTextView = findViewById(R.id.textViewMonth);
-
         setupCalendar();
         setupObservers();
 
@@ -217,8 +215,14 @@ public class PlannerActivity extends AppCompatActivity {
         Button buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
         Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
 
-        if (eventName.isEmpty() || eventTime.isEmpty()) {
+        if (eventName.isEmpty()) {
             Toast.makeText(this, "Preencha todos os campos obrigatórios!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Check if the event time is empty
+        if (eventTime.equals("Clique Aqui")) {
+            Toast.makeText(this, "Selecione um horário!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -259,6 +263,9 @@ public class PlannerActivity extends AppCompatActivity {
     private void updateSavedEvents(List<Planner> events) {
         savedEventsLayout.removeAllViews();
 
+        // Mapeia os dias que possuem eventos
+        Map<String, Boolean> daysWithEvents = new HashMap<>();
+
         for (Planner event : events) {
             String[] eventDateParts = event.getDay().split("-");
             int eventDay = Integer.parseInt(eventDateParts[0]);
@@ -266,6 +273,8 @@ public class PlannerActivity extends AppCompatActivity {
             int eventYear = Integer.parseInt(eventDateParts[2]);
 
             if (eventMonth == currentMonth && eventYear == currentYear) {
+                daysWithEvents.put(getDayKey(eventDay), true); // Marca o dia com evento
+
                 LinearLayout eventLayout = new LinearLayout(this);
                 eventLayout.setOrientation(LinearLayout.HORIZONTAL);
                 eventLayout.setPadding(16, 16, 16, 16);
@@ -285,6 +294,7 @@ public class PlannerActivity extends AppCompatActivity {
                     plannerViewModel.removeEvent(event);
                     Toast.makeText(this, "Evento removido", Toast.LENGTH_SHORT).show();
                     updateCalendarDayColor(event.getDay());
+                    updateSavedEvents(plannerViewModel.getEvents().getValue()); // Atualiza a lista de eventos
                 });
 
                 eventLayout.addView(eventTextView);
@@ -293,20 +303,27 @@ public class PlannerActivity extends AppCompatActivity {
             }
         }
 
+        // Atualiza as cores dos dias no calendário
         for (int i = 0; i < gridLayoutCalendar.getChildCount(); i++) {
             TextView dayTextView = (TextView) gridLayoutCalendar.getChildAt(i);
             String dayKey = getDayKey(Integer.parseInt(dayTextView.getText().toString()));
+
+            // Se o dia não tiver evento, define a cor como branco
+            if (!daysWithEvents.containsKey(dayKey)) {
+                dayColors.put(dayKey, Color.WHITE);
+            }
+
             dayTextView.setBackgroundColor(dayColors.getOrDefault(dayKey, Color.WHITE));
         }
     }
 
     private void updateCalendarDayColor(String dayKey) {
+        dayColors.put(dayKey, Color.WHITE); // Define a cor como branco ao remover o evento
+
         for (int i = 0; i < gridLayoutCalendar.getChildCount(); i++) {
             TextView dayTextView = (TextView) gridLayoutCalendar.getChildAt(i);
             String currentDayKey = getDayKey(Integer.parseInt(dayTextView.getText().toString()));
-            if (currentDayKey.equals(dayKey)) {
-                dayTextView.setBackgroundColor(dayColors.getOrDefault(currentDayKey, Color.WHITE));
-            }
+            dayTextView.setBackgroundColor(dayColors.getOrDefault(currentDayKey, Color.WHITE));
         }
     }
 
