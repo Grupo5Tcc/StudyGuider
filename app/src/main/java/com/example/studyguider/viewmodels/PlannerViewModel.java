@@ -51,4 +51,17 @@ public class PlannerViewModel extends ViewModel {
             events.setValue(currentEvents);
         }
     }
+
+    public void removeEventByDay(String day) {
+        List<Planner> currentEvents = events.getValue();
+        if (currentEvents != null) {
+            List<Planner> updatedEvents = new ArrayList<>(currentEvents);
+            for (Planner event : currentEvents) {
+                if (event.getDay().equals(day)) {
+                    updatedEvents.remove(event); // Remove o evento do dia
+                }
+            }
+            events.setValue(updatedEvents); // Atualiza a lista de eventos
+        }
+    }
 }

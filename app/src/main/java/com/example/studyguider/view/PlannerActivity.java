@@ -206,49 +206,60 @@ public class PlannerActivity extends AppCompatActivity {
     }
 
     private void saveEvent() {
+        // Obtém os valores do ViewModel e os campos do formulário
         String day = plannerViewModel.getSelectedDay().getValue();
-        String eventName = editTextEventName.getText().toString();
-        String eventTime = textViewEventTime.getText().toString();
-        String additionalInfo = editTextAdditionalInfo.getText().toString();
+        String eventName = editTextEventName.getText().toString().trim();
+        String eventTime = textViewEventTime.getText().toString().trim();
+        String additionalInfo = editTextAdditionalInfo.getText().toString().trim();
 
         TextView monthTextView = findViewById(R.id.textViewMonth);
         Button buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
         Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
 
+        // Valida se o nome do evento foi preenchido
         if (eventName.isEmpty()) {
             Toast.makeText(this, "Preencha todos os campos obrigatórios!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Check if the event time is empty
+        // Verifica se o horário foi selecionado
         if (eventTime.equals("Clique Aqui")) {
             Toast.makeText(this, "Selecione um horário!", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // Verifica se uma cor foi selecionada
         Integer selectedColor = plannerViewModel.getSelectedColor().getValue();
         if (selectedColor == null || selectedColor == Color.WHITE) {
             Toast.makeText(this, "Selecione uma cor para o evento!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        plannerViewModel.addEvent(eventName, eventTime, additionalInfo, plannerViewModel.getSelectedColor().getValue(), getDayKey(Integer.parseInt(day)));
+        // Remove o evento anterior, se já existir um para o mesmo dia
+        String dayKey = getDayKey(Integer.parseInt(day));
+        plannerViewModel.removeEventByDay(dayKey);
 
+        // Adiciona o novo evento ao ViewModel
+        plannerViewModel.addEvent(eventName, eventTime, additionalInfo, selectedColor, dayKey);
+
+        // Atualiza a cor do dia no calendário
         if (selectedDayTextView != null) {
-            Integer newColor = plannerViewModel.getSelectedColor().getValue();
-            dayColors.put(getDayKey(Integer.parseInt(day)), newColor);
-            selectedDayTextView.setBackgroundColor(newColor);
+            dayColors.put(dayKey, selectedColor); // Associa a cor ao dia
+            selectedDayTextView.setBackgroundColor(selectedColor); // Muda a cor de fundo do dia selecionado no calendário
         }
 
-        informationScrollView.setVisibility(View.GONE);
-        gridLayoutCalendar.setVisibility(View.VISIBLE);
-        savedEventsLayout.setVisibility(View.VISIBLE);
+        // Atualiza a visibilidade dos layouts após salvar
+        informationScrollView.setVisibility(View.GONE);  // Esconde o formulário de informações do evento
+        gridLayoutCalendar.setVisibility(View.VISIBLE);  // Mostra o calendário
+        savedEventsLayout.setVisibility(View.VISIBLE);   // Mostra a lista de eventos salvos
 
+        // Limpa os campos do formulário
         selectedDayTextView = null;
         editTextEventName.setText("");
         textViewEventTime.setText("Selecione o horário");
         editTextAdditionalInfo.setText("");
 
+        // Restaura a interface do mês e os botões de navegação
         monthTextView.setVisibility(View.VISIBLE);
         buttonPreviousMonth.setText("<");
         buttonNextMonth.setText(">");
@@ -297,8 +308,17 @@ public class PlannerActivity extends AppCompatActivity {
                     updateSavedEvents(plannerViewModel.getEvents().getValue()); // Atualiza a lista de eventos
                 });
 
+                ImageView editIcon = new ImageView(this);
+                editIcon.setImageResource(R.drawable.ic_password_form); // Replace with your edit icon resource
+                editIcon.setLayoutParams(new LinearLayout.LayoutParams(80, 80));
+                editIcon.setPadding(16, 0, 0, 0);
+                editIcon.setOnClickListener(v -> {
+                    editEvent(event); // Function to edit the event
+                });
+
                 eventLayout.addView(eventTextView);
                 eventLayout.addView(deleteIcon);
+                eventLayout.addView(editIcon);
                 savedEventsLayout.addView(eventLayout);
             }
         }
@@ -330,5 +350,44 @@ public class PlannerActivity extends AppCompatActivity {
     private String getDayKey(int day) {
         return day + "-" + currentMonth + "-" + currentYear;
     }
+
+    private void editEvent(Planner event) {
+        String[] eventDateParts = event.getDay().split("-");
+        int eventDay = Integer.parseInt(eventDateParts[0]);
+        int eventMonth = Integer.parseInt(eventDateParts[1]);
+        int eventYear = Integer.parseInt(eventDateParts[2]);
+
+        // Verifica se o mês e o ano do evento são iguais ao mês e ano atuais
+        if (eventMonth == currentMonth && eventYear == currentYear) {
+            // Seleciona o dia do evento no calendário
+            for (int i = 0; i < gridLayoutCalendar.getChildCount(); i++) {
+                TextView dayTextView = (TextView) gridLayoutCalendar.getChildAt(i);
+                int dayInCalendar = Integer.parseInt(dayTextView.getText().toString());
+
+                // Se for o dia do evento, atualiza o fundo para indicar que está selecionado
+                if (dayInCalendar == eventDay) {
+                    dayTextView.setBackgroundColor(Color.parseColor("#FFEFDE")); // Cor de destaque para o dia selecionado
+                    selectedDayTextView = dayTextView;  // Marca o TextView como selecionado
+                    break;
+                }
+            }
+
+            // Preenche os campos do formulário com os detalhes do evento
+            editTextEventName.setText(event.getName());
+            textViewEventTime.setText(event.getTime());
+            editTextAdditionalInfo.setText(event.getInfo());
+            plannerViewModel.setColor(event.getColor());
+
+            // Exibe o formulário de edição e oculta o layout do calendário e eventos salvos
+            informationScrollView.setVisibility(View.VISIBLE);
+            gridLayoutCalendar.setVisibility(View.GONE);
+            savedEventsLayout.setVisibility(View.GONE);
+
+        } else {
+            Toast.makeText(this, "O evento pertence a outro mês/ano. Mude para o mês correto para editá-lo.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
 
 }
