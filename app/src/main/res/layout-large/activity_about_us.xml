@@ -60,7 +60,6 @@
                         android:id="@+id/img1"
                         android:layout_width="85dp"
                         android:layout_height="85dp"
-                        android:background="@drawable/rounded_cornerss"
                         android:scaleType="centerCrop"
                         android:src="@drawable/img2" />
 
@@ -125,7 +124,6 @@
                         android:id="@+id/img2"
                         android:layout_width="85dp"
                         android:layout_height="85dp"
-                        android:background="@drawable/rounded_cornerss"
                         android:scaleType="centerCrop"
                         android:src="@drawable/img5" />
 
@@ -190,7 +188,6 @@
                         android:id="@+id/img3"
                         android:layout_width="85dp"
                         android:layout_height="85dp"
-                        android:background="@drawable/rounded_cornerss"
                         android:scaleType="centerCrop"
                         android:src="@drawable/img4" />
 
@@ -256,7 +253,6 @@
                         android:id="@+id/img4"
                         android:layout_width="85dp"
                         android:layout_height="85dp"
-                        android:background="@drawable/rounded_cornerss"
                         android:scaleType="centerCrop"
                         android:src="@drawable/img7" />
 
@@ -321,7 +317,6 @@
                         android:id="@+id/img5"
                         android:layout_width="85dp"
                         android:layout_height="85dp"
-                        android:background="@drawable/rounded_cornerss"
                         android:scaleType="centerCrop"
                         android:src="@drawable/img1" />
 
@@ -386,7 +381,6 @@
                         android:id="@+id/img6"
                         android:layout_width="85dp"
                         android:layout_height="85dp"
-                        android:background="@drawable/rounded_cornerss"
                         android:scaleType="centerCrop"
                         android:src="@drawable/img3" />
 
@@ -451,7 +445,6 @@
                         android:id="@+id/img7"
                         android:layout_width="85dp"
                         android:layout_height="85dp"
-                        android:background="@drawable/rounded_cornerss"
                         android:scaleType="centerCrop"
                         android:src="@drawable/img6" />
 
