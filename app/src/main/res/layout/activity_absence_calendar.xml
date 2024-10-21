@@ -1,96 +1,88 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_orange"
-    android:orientation="vertical"
-    tools:context=".view.AbsenceCalendarActivity">
+    android:background="#FFEFDE"
+    android:orientation="vertical">
 
     <include
         android:id="@+id/header"
         layout="@layout/activity_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="30dp">
 
         <Button
             android:id="@+id/buttonPreviousMonth"
-            android:layout_width="70dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_weight="1"
             android:background="@android:color/transparent"
             android:padding="8dp"
-            android:textSize="20dp" />
+            android:textColor="@color/blue_1"
+            android:textSize="20sp"
+            android:layout_marginEnd="8dp" />
 
         <TextView
             android:id="@+id/textViewMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="16dp"
             android:fontFamily="@font/yeseva_one"
             android:text="Controle de faltas"
             android:textColor="@color/blue_1"
-            android:textSize="26dp"
-            android:textStyle="bold" />
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
 
         <Button
             android:id="@+id/buttonNextMonth"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_weight="1"
             android:background="@android:color/transparent"
             android:padding="8dp"
-            android:textSize="20dp" />
-
+            android:textColor="@color/blue_1"
+            android:textSize="20sp"
+            android:layout_marginStart="8dp" />
     </LinearLayout>
 
-    <GridLayout
-        android:id="@+id/gridLayoutCalendar"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:background="@color/white"
-        android:columnCount="7"
+        android:layout_margin="20dp"
+        app:cardBackgroundColor="@color/blue_clearer"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp">
 
-        android:padding="16dp"></GridLayout>
-
-    <ScrollView
-        android:id="@+id/scrollViewSavedFaltas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
-
-        <LinearLayout
-            android:id="@+id/savedFaltasLayout"
+        <GridLayout
+            android:id="@+id/gridLayoutCalendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp" />
-    </ScrollView>
+            android:padding="16dp"
+            android:columnCount="7" />
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/savedEventsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp" />
 
     <ScrollView
         android:id="@+id/informationScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/ct_background_absence_form"
+        android:background="#FFEFDE"
         android:padding="16dp"
         android:visibility="gone">
 
@@ -98,12 +90,17 @@
             android:id="@+id/informationLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="#4C7DAA"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="4dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="INFORMAÇÕES DA FALTA"
+                android:text="INFORMAÇÕES DO EVENTO"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -113,92 +110,82 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Motivo?"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:layout_marginBottom="5dp"
+                android:text="Nome do Evento"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:padding="10dp"
-                />
+                android:fontFamily="@font/bebas_neue"
+                android:paddingBottom="6dp" />
 
             <EditText
-                android:id="@+id/editTextMotivo"
+                android:id="@+id/editTextEventName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_textview_absence_form"
-                android:layout_marginBottom="14dp"/>
+                android:padding="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Possui atestado?"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:layout_marginBottom="5dp"
-                android:textStyle="bold" />
-
-            <CheckBox
-                android:id="@+id/checkBoxAtestado"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:text="Selecione o horário"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:text="SIM"
-                android:textColor="@color/white"
-                android:buttonTint="@color/orange_2" />
+                android:fontFamily="@font/bebas_neue"
+                android:paddingBottom="6dp" />
 
+            <TextView
+                android:id="@+id/textViewEventTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Clique Aqui"
+                android:textSize="18sp"
+                android:padding="12dp"
+                android:gravity="center"
+                android:layout_marginBottom="12dp"
+                android:background="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Perdeu alguma atividade?"
-                android:textColor="@color/white"
-                android:textSize="16sp"
+                android:text="Informações Adicionais"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:padding="10dp"
-
-                />
+                android:fontFamily="@font/bebas_neue"
+                android:paddingBottom="6dp" />
 
             <EditText
-                android:id="@+id/editTextNota"
+                android:id="@+id/editTextAdditionalInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_textview_absence_form"
-                android:layout_marginBottom="20dp" />
+                android:padding="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@android:color/white" />
 
-            <LinearLayout
+            <Button
+                android:id="@+id/colorPickerButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:text="Escolher Cor"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="#AACFE4"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:padding="12dp"
+                android:fontFamily="@font/bebas_neue" />
 
-                <Button
-                    android:id="@+id/saveButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Salvar"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:background="@drawable/bg_bnt_absence_form"
-                    android:layout_gravity="start" />
-
-                <!-- Espaço flexível entre os botões -->
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/backButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_bnt_absence_form"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:text="Voltar"
-                    android:layout_gravity="end" />
-
-            </LinearLayout>
-
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Salvar"
+                android:textSize="18sp"
+                android:backgroundTint="#AACFE4"
+                android:textColor="#FFFFFF"
+                android:padding="12dp"
+                android:fontFamily="@font/bebas_neue" />
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>
