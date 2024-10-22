@@ -18,8 +18,8 @@
 
         <ImageView
             android:id="@+id/imglogo"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="start|center_vertical"
             android:layout_marginStart="5dp"
             app:srcCompat="@drawable/img_logo" />
@@ -29,17 +29,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="150dp"
+
+            android:layout_marginRight="80dp"
+            android:fontFamily="@font/yeseva_one"
             android:text="@string/name_user_navbar"
             android:textColor="@color/white"
-            android:fontFamily="@font/yeseva_one"
-            android:textStyle="bold"
-            android:textSize="40dp" />
+            android:textSize="28dp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imgPerfil"
-            android:layout_width="145dp"
-            android:layout_height="145dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="end|center_vertical"
             app:srcCompat="@drawable/img_perfil" />
     </FrameLayout>
@@ -62,7 +63,7 @@
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/blue_dark"
                 android:clickable="true"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="10dp">
 
                 <TextView
                     android:id="@+id/txtToDoList"
@@ -70,14 +71,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_to_do_list"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="50dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
                     android:id="@+id/imgAfazeres"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_gravity="end"
                     android:layout_marginRight="-10dp"
                     android:layout_marginBottom="10dp"
@@ -93,7 +94,7 @@
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/blue_dark"
                 android:clickable="true"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="10dp">
 
                 <TextView
                     android:id="@+id/txtPlanner"
@@ -101,14 +102,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_planner"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="50dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
                     android:id="@+id/imgPlanner"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/img_agenda"
                     android:layout_gravity="end"
                     android:layout_marginTop="29dp"
@@ -123,7 +124,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/blue_dark"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="10dp">
 
                 <TextView
                     android:id="@+id/txtMaterias"
@@ -131,14 +132,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_subjects"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="50dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
                     android:id="@+id/imgMaterias"
-                    android:layout_width="170dp"
-                    android:layout_height="170dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:src="@drawable/img_materias"
                     android:layout_gravity="end"
                     android:layout_marginTop="10dp"
@@ -155,7 +156,7 @@
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/blue_dark"
                 android:clickable="true"
-                app:cardCornerRadius="20dp"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
@@ -164,14 +165,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_absence"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="50dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
                     android:id="@+id/imgAbsence"
-                    android:layout_width="135dp"
-                    android:layout_height="135dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/faltas"
                     android:layout_gravity="end"
                     android:layout_marginTop="26dp"
@@ -187,7 +188,7 @@
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/blue_dark"
                 android:transitionName="btn3"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="10dp">
 
                 <TextView
                     android:id="@+id/txtEmotionalCalendar"
@@ -195,14 +196,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_emotional"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="50dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
                     android:id="@+id/imgEmotionalCalendar"
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/emocoes"
                     android:layout_gravity="end"
                     android:layout_marginTop="35dp"
@@ -217,7 +218,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/blue_dark"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="10dp">
 
                 <TextView
                     android:id="@+id/txtPlantoes"
@@ -225,13 +226,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_school_duty"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="50dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/img_plantoes"
                     android:layout_gravity="end"
                     android:layout_marginTop="20dp"
@@ -247,7 +248,7 @@
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/blue_dark"
                 android:clickable="true"
-                app:cardCornerRadius="20dp"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
@@ -256,13 +257,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_grades"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="50dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:layout_width="115dp"
-                    android:layout_height="115dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/img_notas"
                     android:layout_gravity="end"
                     android:layout_marginEnd="26dp"
@@ -278,7 +279,7 @@
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/blue_dark"
                 android:clickable="true"
-                app:cardCornerRadius="20dp"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
@@ -287,13 +288,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_recovery"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="50dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:layout_width="152dp"
-                    android:layout_height="152dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/img_recuperacoes"
                     android:layout_gravity="end"
                     android:layout_marginTop="28dp"
@@ -309,7 +310,7 @@
                 android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/blue_dark"
                 android:clickable="true"
-                app:cardCornerRadius="20dp"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
@@ -318,13 +319,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_about_us"
                     android:fontFamily="@font/bebas_neue"
-                    android:textSize="50dp"
+                    android:textSize="40dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center" />
 
                 <ImageView
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:src="@drawable/img_menu_about_us"
                     android:layout_gravity="end"
                     android:layout_marginTop="34dp"
