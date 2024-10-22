@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
-import com.example.studyguider.models.Planner;
+import com.example.studyguider.models.Agenda;
 import com.example.studyguider.viewmodels.AgendaViewModel;
 
 import java.util.Calendar;
@@ -271,13 +271,13 @@ public class AgendaActivity extends AppCompatActivity {
         plannerViewModel.getEvents().observe(this, this::updateSavedEvents);
     }
 
-    private void updateSavedEvents(List<Planner> events) {
+    private void updateSavedEvents(List<Agenda> events) {
         savedEventsLayout.removeAllViews();
 
         // Mapeia os dias que possuem eventos
         Map<String, Boolean> daysWithEvents = new HashMap<>();
 
-        for (Planner event : events) {
+        for (Agenda event : events) {
             String[] eventDateParts = event.getDay().split("-");
             int eventDay = Integer.parseInt(eventDateParts[0]);
             int eventMonth = Integer.parseInt(eventDateParts[1]);
@@ -351,7 +351,7 @@ public class AgendaActivity extends AppCompatActivity {
         return day + "-" + currentMonth + "-" + currentYear;
     }
 
-    private void editEvent(Planner event) {
+    private void editEvent(Agenda event) {
         String[] eventDateParts = event.getDay().split("-");
         int eventDay = Integer.parseInt(eventDateParts[0]);
         int eventMonth = Integer.parseInt(eventDateParts[1]);
