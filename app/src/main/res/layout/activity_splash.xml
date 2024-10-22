@@ -23,8 +23,8 @@
         android:layout_below="@+id/splash"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/yeseva_one"
-        android:text="StudyGuider"
+        android:text="STUDYGUIDER"
         android:textColor="@color/white"
-        android:textSize="50sp"/>
+        android:textSize="30dp"/>
 
 </RelativeLayout>
