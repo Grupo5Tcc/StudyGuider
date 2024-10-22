@@ -11,7 +11,7 @@
     <FrameLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="100dp"
         android:background="@color/blue_dark"
         android:paddingTop="5dp"
         tools:ignore="MissingConstraints">
@@ -55,8 +55,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardToDoList"
-                android:layout_width="900dp"
-                android:layout_height="210dp"
+                android:layout_width="450dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="12dp"
@@ -87,8 +87,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardPlanner"
-                android:layout_width="900dp"
-                android:layout_height="210dp"
+                android:layout_width="450dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/blue_dark"
@@ -118,8 +118,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardSupplies"
-                android:layout_width="900dp"
-                android:layout_height="210dp"
+                android:layout_width="450dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/blue_dark"
@@ -149,8 +149,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardAbsence"
-                android:layout_width="900dp"
-                android:layout_height="210dp"
+                android:layout_width="450dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/blue_dark"
@@ -181,8 +181,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardEmotionalCalendar"
-                android:layout_width="900dp"
-                android:layout_height="210dp"
+                android:layout_width="450dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/blue_dark"
@@ -212,8 +212,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardSchoolDuty"
-                android:layout_width="900dp"
-                android:layout_height="210dp"
+                android:layout_width="450dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/blue_dark"
@@ -241,8 +241,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardGrades"
-                android:layout_width="900dp"
-                android:layout_height="210dp"
+                android:layout_width="450dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/blue_dark"
@@ -272,8 +272,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardRecovery"
-                android:layout_width="900dp"
-                android:layout_height="210dp"
+                android:layout_width="450dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/blue_dark"
@@ -303,8 +303,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardAboutUs"
-                android:layout_width="900dp"
-                android:layout_height="210dp"
+                android:layout_width="450dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/blue_dark"
