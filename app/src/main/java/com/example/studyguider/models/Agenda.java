@@ -1,13 +1,13 @@
 package com.example.studyguider.models;
 
-public class Planner {
+public class Agenda {
     private String name;
     private String time;
     private String info;
     private int color;
     private String day; // Novo campo para o dia do evento
 
-    public Planner(String name, String time, String info, int color, String day) {
+    public Agenda(String name, String time, String info, int color, String day) {
         this.name = name;
         this.time = time;
         this.info = info;

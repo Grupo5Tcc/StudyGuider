@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,12 +13,12 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
-import com.example.studyguider.viewmodels.ProfileViewModel;
+import com.example.studyguider.viewmodels.PerfilViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ProfileActivity extends AppCompatActivity {
+public class PerfilActivity extends AppCompatActivity {
 
-    private ProfileViewModel profileViewModel;
+    private PerfilViewModel profileViewModel;
     private ProgressBar progressBar;
     private TextView textViewName, textViewEmail, textViewDateOfBirth, textViewAbsence, textViewRecovery;
 
@@ -36,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         initUI();
 
-        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        profileViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
         observeViewModel();
 
         profileViewModel.fetchUserProfile();
@@ -44,7 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
         Button buttonLogOut = findViewById(R.id.btnLogOut);
         buttonLogOut.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+            Intent intent = new Intent(PerfilActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         });

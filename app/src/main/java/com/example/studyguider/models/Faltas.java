@@ -1,16 +1,16 @@
 package com.example.studyguider.models;
 
-public class Absence {
+public class Faltas {
     private String day;
     private String motivo;
     private boolean atestado;
     private String nota;
 
     // Construtor vazio necessário para Firebase
-    public Absence() {}
+    public Faltas() {}
 
     // Construtor completo
-    public Absence(String day, String motivo, boolean atestado, String nota) {
+    public Faltas(String day, String motivo, boolean atestado, String nota) {
         this.day = day;
         this.motivo = motivo;
         this.atestado = atestado;

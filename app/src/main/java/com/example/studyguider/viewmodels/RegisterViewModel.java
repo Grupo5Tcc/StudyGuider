@@ -8,7 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
-import com.example.studyguider.models.User;
+import com.example.studyguider.models.Usuario;
 import com.example.studyguider.view.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,7 +26,7 @@ import java.util.Map;
 public class RegisterViewModel extends ViewModel {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-    public void registerUser(User user, String password, Context context) {
+    public void registerUser(Usuario user, String password, Context context) {
         mAuth.createUserWithEmailAndPassword(user.getEmail(), password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -57,7 +57,7 @@ public class RegisterViewModel extends ViewModel {
                 });
     }
 
-    private void saveUserDetails(User user) {
+    private void saveUserDetails(Usuario user) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

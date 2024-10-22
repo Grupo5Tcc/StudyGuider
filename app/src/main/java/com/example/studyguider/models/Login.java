@@ -1,10 +1,10 @@
 package com.example.studyguider.models;
 
-public class UserLogin {
+public class Login {
     private String email;
     private String password;
 
-    public UserLogin(String email, String password) {
+    public Login(String email, String password) {
         this.email = email;
         this.password = password;
     }

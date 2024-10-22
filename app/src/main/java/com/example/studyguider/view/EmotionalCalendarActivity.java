@@ -1,7 +1,6 @@
 package com.example.studyguider.view;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +8,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,12 +16,11 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
-import com.example.studyguider.viewmodels.EmotionalCalendarViewModel;
+import com.example.studyguider.viewmodels.EmocoesViewModel;
 import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +32,7 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
     private GridLayout gridLayoutCalendar;
     private TextView monthTextView;
     private int selectedColor = Color.WHITE;
-    private EmotionalCalendarViewModel viewModel;
+    private EmocoesViewModel viewModel;
     private boolean isEmotionSelected = false; // Para controlar a seleção de emoção
 
     // Mapeia cores para listas de frases motivacionais
@@ -105,7 +102,7 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
         Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
         buttonNextMonth.setText(">");
 
-        viewModel = new ViewModelProvider(this).get(EmotionalCalendarViewModel.class);
+        viewModel = new ViewModelProvider(this).get(EmocoesViewModel.class);
 
         gridLayoutCalendar = findViewById(R.id.gridLayoutCalendar);
         monthTextView = findViewById(R.id.textViewMonth);

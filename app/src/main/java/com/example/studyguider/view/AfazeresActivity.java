@@ -19,23 +19,23 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
-import com.example.studyguider.models.TaskItemToDoList;
+import com.example.studyguider.models.ItemAfazeresList;
 import com.example.studyguider.viewmodels.HeaderViewModel;
-import com.example.studyguider.viewmodels.ToDoListViewModel;
+import com.example.studyguider.viewmodels.AfazeresViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToDoListActivity extends AppCompatActivity {
+public class AfazeresActivity extends AppCompatActivity {
 
     private HeaderViewModel headerViewModel;
-    private ArrayList<TaskItemToDoList> items;
+    private ArrayList<ItemAfazeresList> items;
     private ItemAdapter itemsAdapter;
     private ListView lvItems;
     private EditText editText;
-    private ToDoListViewModel viewModel;
+    private AfazeresViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +58,10 @@ public class ToDoListActivity extends AppCompatActivity {
         itemsAdapter = new ItemAdapter(items);
         lvItems.setAdapter(itemsAdapter);
 
-        viewModel = new ViewModelProvider(this).get(ToDoListViewModel.class);
-        viewModel.getTasks().observe(this, new Observer<List<TaskItemToDoList>>() {
+        viewModel = new ViewModelProvider(this).get(AfazeresViewModel.class);
+        viewModel.getTasks().observe(this, new Observer<List<ItemAfazeresList>>() {
             @Override
-            public void onChanged(List<TaskItemToDoList> taskItems) {
+            public void onChanged(List<ItemAfazeresList> taskItems) {
                 items.clear();
                 items.addAll(taskItems);
                 itemsAdapter.notifyDataSetChanged();
@@ -118,14 +118,14 @@ public class ToDoListActivity extends AppCompatActivity {
 
             boolean allChecked = true;
             // Verifica todos os itens na lista de dados (items)
-            for (TaskItemToDoList item : items) {
+            for (ItemAfazeresList item : items) {
                 if (!item.isCompleted()) {
                     allChecked = false;
                     break; // Saia do loop assim que encontrar um item não selecionado
                 }
             }
             // Atualiza o estado de cada item na lista de dados
-            for (TaskItemToDoList item : items) {
+            for (ItemAfazeresList item : items) {
                 boolean newCheckedState = !allChecked; // Alterna o estado
                 item.setCompleted(newCheckedState);
                 viewModel.updateTaskCompletion(item.getId(), newCheckedState);
@@ -136,7 +136,7 @@ public class ToDoListActivity extends AppCompatActivity {
 
         btnDeleteSelected.setOnClickListener(v -> {
             ArrayList<String> itemsToRemoveIds = new ArrayList<>();
-            for (TaskItemToDoList item : items) {
+            for (ItemAfazeresList item : items) {
                 if (item.isCompleted()) {
                     itemsToRemoveIds.add(item.getId());
                 }
@@ -160,11 +160,11 @@ public class ToDoListActivity extends AppCompatActivity {
         });
     }
 
-    private class ItemAdapter extends ArrayAdapter<TaskItemToDoList> {
-        private ArrayList<TaskItemToDoList> items;
+    private class ItemAdapter extends ArrayAdapter<ItemAfazeresList> {
+        private ArrayList<ItemAfazeresList> items;
 
-        public ItemAdapter(ArrayList<TaskItemToDoList> items) {
-            super(ToDoListActivity.this, R.layout.dialog_to_do_list, items);
+        public ItemAdapter(ArrayList<ItemAfazeresList> items) {
+            super(AfazeresActivity.this, R.layout.dialog_to_do_list, items);
             this.items = items;
         }
 
@@ -175,7 +175,7 @@ public class ToDoListActivity extends AppCompatActivity {
                 convertView = inflater.inflate(R.layout.dialog_to_do_list, parent, false);
             }
 
-            TaskItemToDoList item = items.get(position);
+            ItemAfazeresList item = items.get(position);
             TextView itemText = convertView.findViewById(R.id.item_text);
             CheckBox checkBox = convertView.findViewById(R.id.checkBox);
 

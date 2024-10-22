@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:screenOrientation="portrait"
     android:background="@color/orange_clearer"
-    tools:context=".view.SingUpActivity">
+    tools:context=".view.CadastroActivity">
 
 
     <FrameLayout

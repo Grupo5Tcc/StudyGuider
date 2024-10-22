@@ -1,9 +1,9 @@
 package com.example.studyguider.models;
 
-public class Subjects {
+public class Materias {
     String id, nomeMateria, professor, conteudos, media;
 
-    public Subjects() {
+    public Materias() {
     }
 
     public String getId() {

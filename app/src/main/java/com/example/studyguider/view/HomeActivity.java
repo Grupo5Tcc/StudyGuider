@@ -62,7 +62,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewAboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, AboutUsActivity.class);
+                Intent intent = new Intent(HomeActivity.this, SobreNosActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,7 +70,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewPlanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, PlannerActivity.class);
+                Intent intent = new Intent(HomeActivity.this, AgendaActivity.class);
                 startActivity(intent);
             }
         });
@@ -79,7 +79,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewAbsence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, AbsenceCalendarActivity.class);
+                Intent intent = new Intent(HomeActivity.this, FaltasActivity.class);
                 startActivity(intent);
             }
         });
@@ -87,7 +87,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewToDoList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this,ToDoListActivity.class);
+                Intent intent = new Intent(HomeActivity.this, AfazeresActivity.class);
                 startActivity(intent);
             }
         });
@@ -111,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewSchoolDuty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, ShiftActivity.class);
+                Intent intent = new Intent(HomeActivity.this, PlantoesActivity.class);
                 startActivity(intent);
             }
         });
@@ -119,7 +119,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewRecovery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, ControleRec.class);
+                Intent intent = new Intent(HomeActivity.this, ControleRecuperacoes.class);
                 startActivity(intent);
             }
         });
@@ -127,7 +127,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewSupplies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, SubjectsActivity.class);
+                Intent intent = new Intent(HomeActivity.this, MateriasActivity.class);
                 startActivity(intent);
             }
         });
@@ -135,7 +135,7 @@ public class HomeActivity extends AppCompatActivity {
         imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(HomeActivity.this, PerfilActivity.class);
                 startActivity(intent);
             }
         });

@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.studyguider.view.ProfileActivity;
+import com.example.studyguider.view.PerfilActivity;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,7 +40,7 @@ public class HeaderViewModel extends ViewModel {
     }
 
     public void onProfileImageClicked(Context context) {
-        Intent intent = new Intent(context, ProfileActivity.class);
+        Intent intent = new Intent(context, PerfilActivity.class);
         context.startActivity(intent);
     }
 }

@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class ShiftEditActivity extends AppCompatActivity {
+public class PlantoesEditActivity extends AppCompatActivity {
 
     private HeaderViewModel headerViewModel;
     private EditText professorET, materiaET, horaET;
@@ -83,14 +83,14 @@ public class ShiftEditActivity extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(ShiftEditActivity.this, "Shift salvo com sucesso", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PlantoesEditActivity.this, "Shift salvo com sucesso", Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(ShiftEditActivity.this, "Erro ao salvar shift", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PlantoesEditActivity.this, "Erro ao salvar shift", Toast.LENGTH_SHORT).show();
                                 }
                             });
                 }
@@ -106,7 +106,7 @@ public class ShiftEditActivity extends AppCompatActivity {
                 int hour = c.get(Calendar.HOUR_OF_DAY);
                 int minute = c.get(Calendar.MINUTE);
 
-                TimePickerDialog timePickerDialog = new TimePickerDialog(ShiftEditActivity.this,
+                TimePickerDialog timePickerDialog = new TimePickerDialog(PlantoesEditActivity.this,
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {

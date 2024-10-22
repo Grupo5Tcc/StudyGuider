@@ -25,7 +25,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
-import com.example.studyguider.models.UserLogin;
+import com.example.studyguider.models.Login;
 import com.example.studyguider.viewmodels.LoginViewModel;
 
 
@@ -81,12 +81,12 @@ public class LoginActivity extends AppCompatActivity {
         btnMenu.setOnClickListener(v -> {
             String textEMail = etEMail.getText().toString();
             String textPassword = etPassword.getText().toString();
-            UserLogin user = new UserLogin(textEMail, textPassword);
+            Login user = new Login(textEMail, textPassword);
             loginViewModel.loginUser(user);
         });
 
         btnSingUp.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, SingUpActivity.class);
+            Intent intent = new Intent(LoginActivity.this, CadastroActivity.class);
             startActivity(intent);
         });
 

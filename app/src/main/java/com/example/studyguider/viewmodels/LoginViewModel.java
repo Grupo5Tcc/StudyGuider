@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.studyguider.models.UserLogin;
+import com.example.studyguider.models.Login;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginViewModel extends AndroidViewModel {
@@ -25,7 +25,7 @@ public class LoginViewModel extends AndroidViewModel {
         visibilidadeProgressBar = new MutableLiveData<>();
     }
 
-    public void loginUser(UserLogin user) {
+    public void loginUser(Login user) {
         if (isValidEmail(user.getEmail()) && isValidPassword(user.getPassword())) {
             visibilidadeProgressBar.setValue(true);
             auth.signInWithEmailAndPassword(user.getEmail(), user.getPassword())

@@ -1,9 +1,9 @@
 package com.example.studyguider.models;
 
-public class Shift {
+public class Plantoes {
     String id, professor, materia, dia, hora;
 
-    public Shift() {
+    public Plantoes() {
     }
 
     // Getters

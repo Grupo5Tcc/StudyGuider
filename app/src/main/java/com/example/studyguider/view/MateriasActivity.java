@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studyguider.R;
 import com.example.studyguider.adapter.SubjectsAdapter;
-import com.example.studyguider.models.Subjects;
+import com.example.studyguider.models.Materias;
 import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,7 +34,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 
-public class SubjectsActivity extends AppCompatActivity {
+public class MateriasActivity extends AppCompatActivity {
 
 
     private HeaderViewModel headerViewModel;
@@ -70,7 +70,7 @@ public class SubjectsActivity extends AppCompatActivity {
 
 
         FloatingActionButton add = findViewById(R.id.addMateria);
-        add.setOnClickListener(view -> startActivity(new Intent(SubjectsActivity.this, SubjectsAddActivity.class)));
+        add.setOnClickListener(view -> startActivity(new Intent(MateriasActivity.this, MateriasAddActivity.class)));
 
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -84,29 +84,29 @@ public class SubjectsActivity extends AppCompatActivity {
                         @Override
                         public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                             if (error != null) {
-                                Toast.makeText(SubjectsActivity.this, "Falha ao carregar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MateriasActivity.this, "Falha ao carregar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                                 return;
                             }
 
 
-                            ArrayList<Subjects> arrayList = new ArrayList<>();
+                            ArrayList<Materias> arrayList = new ArrayList<>();
                             assert value != null;
                             for (QueryDocumentSnapshot document : value) {
-                                Subjects subjects = document.toObject(Subjects.class);
+                                Materias subjects = document.toObject(Materias.class);
                                 subjects.setId(document.getId());
                                 arrayList.add(subjects);
                             }
 
 
-                            SubjectsAdapter adapter = new SubjectsAdapter(SubjectsActivity.this, arrayList);
+                            SubjectsAdapter adapter = new SubjectsAdapter(MateriasActivity.this, arrayList);
                             recyclerView.setAdapter(adapter);
 
 
                             adapter.setOnItemClickListener(new SubjectsAdapter.OnItemClickListener() {
                                 @Override
-                                public void onClick(Subjects subjects) {
+                                public void onClick(Materias subjects) {
                                     App.materia = subjects;
-                                    startActivity(new Intent(SubjectsActivity.this, SubjectsEditActivity.class));
+                                    startActivity(new Intent(MateriasActivity.this, MateriasEditActivity.class));
                                 }
                             });
                         }

@@ -10,7 +10,7 @@ import com.example.studyguider.models.Planner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlannerViewModel extends ViewModel {
+public class AgendaViewModel extends ViewModel {
 
     private final MutableLiveData<List<Planner>> events = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<String> selectedDay = new MutableLiveData<>();

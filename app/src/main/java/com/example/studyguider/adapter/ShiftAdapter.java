@@ -15,7 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studyguider.R;
-import com.example.studyguider.models.Shift;
+import com.example.studyguider.models.Plantoes;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,10 +25,10 @@ import java.util.ArrayList;
 public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> {
     private static final String TAG = "UserAdapter";
     private final Context context;
-    private final ArrayList<Shift> arrayList;
+    private final ArrayList<Plantoes> arrayList;
     private OnItemClickListener onItemClickListener;
 
-    public ShiftAdapter(Context context, ArrayList<Shift> arrayList) {
+    public ShiftAdapter(Context context, ArrayList<Plantoes> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -42,7 +42,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Shift user = arrayList.get(position);
+        Plantoes user = arrayList.get(position);
 
         // Configura os dados nos TextViews
         holder.professor.setText(user.getProfessor());
@@ -65,7 +65,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
         });
     }
 
-    private void showConfirmationDialog(Shift user, int position) {
+    private void showConfirmationDialog(Plantoes user, int position) {
         new AlertDialog.Builder(context)
                 .setTitle("Confirme a exclusão")
                 .setMessage("Você tem certeza de que deseja excluir esse campo?")
@@ -81,7 +81,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
                 .show();
     }
 
-    private void deleteUser(Shift user, int position) {
+    private void deleteUser(Plantoes user, int position) {
         Log.d(TAG, "deleteUser: Deleting shift with ID: " + user.getId());
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -136,6 +136,6 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
     }
 
     public interface OnItemClickListener {
-        void onClick(Shift user);
+        void onClick(Plantoes user);
     }
 }

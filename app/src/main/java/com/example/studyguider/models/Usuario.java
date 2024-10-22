@@ -1,12 +1,12 @@
 package com.example.studyguider.models;
 
-public class User {
+public class Usuario {
     private String name;
     private String email;
     private String dateOfBirth;
 
     // Construtor
-    public User(String name, String email, String dateOfBirth) {
+    public Usuario(String name, String email, String dateOfBirth) {
         this.name = name;
         this.email = email;
         this.dateOfBirth = dateOfBirth;

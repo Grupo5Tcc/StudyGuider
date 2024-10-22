@@ -1,7 +1,6 @@
 package com.example.studyguider.view;
 
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -23,7 +21,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
-import com.example.studyguider.models.Absence;
+import com.example.studyguider.models.Faltas;
 import com.example.studyguider.viewmodels.AbsenceCalendarViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,7 +32,7 @@ import com.example.studyguider.viewmodels.HeaderViewModel;
 import java.util.Calendar;
 
 
-public class AbsenceCalendarActivity extends AppCompatActivity {
+public class FaltasActivity extends AppCompatActivity {
 
 
 
@@ -232,7 +230,7 @@ public class AbsenceCalendarActivity extends AppCompatActivity {
         boolean atestado = checkBoxAtestado.isChecked();
         String nota = editTextNota.getText().toString();
 
-        Absence falta = new Absence(day, motivo, atestado, nota);
+        Faltas falta = new Faltas(day, motivo, atestado, nota);
 
         // Verificar se já existe uma falta para esse dia antes de incrementar a contagem
         if (!dayAlreadyExists(day)) {

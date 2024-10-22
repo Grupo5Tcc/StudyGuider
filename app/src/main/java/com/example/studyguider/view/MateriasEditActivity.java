@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class SubjectsEditActivity extends AppCompatActivity {
+public class MateriasEditActivity extends AppCompatActivity {
 
     private HeaderViewModel headerViewModel;
 
@@ -69,7 +69,7 @@ public class SubjectsEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Exibe o diálogo de confirmação
-                new AlertDialog.Builder(SubjectsEditActivity.this)
+                new AlertDialog.Builder(MateriasEditActivity.this)
                         .setTitle("Confirmar Exclusão")
                         .setMessage("Tem certeza que deseja deletar esta matéria?")
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
@@ -79,7 +79,7 @@ public class SubjectsEditActivity extends AppCompatActivity {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
-                                                Toast.makeText(SubjectsEditActivity.this, "Matéria Deletada Com Sucesso!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(MateriasEditActivity.this, "Matéria Deletada Com Sucesso!!", Toast.LENGTH_SHORT).show();
                                                 Intent resultIntent = new Intent();
                                                 setResult(RESULT_OK, resultIntent);
                                                 finish();
@@ -87,7 +87,7 @@ public class SubjectsEditActivity extends AppCompatActivity {
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(SubjectsEditActivity.this, "Erro Ao Deletar A Matéria!!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(MateriasEditActivity.this, "Erro Ao Deletar A Matéria!!", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                             }
@@ -102,7 +102,7 @@ public class SubjectsEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Exibe o diálogo de confirmação
-                new AlertDialog.Builder(SubjectsEditActivity.this)
+                new AlertDialog.Builder(MateriasEditActivity.this)
                         .setTitle("Confirmar Alteração")
                         .setMessage("Tem certeza que deseja salvar as alterações?")
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
@@ -120,7 +120,7 @@ public class SubjectsEditActivity extends AppCompatActivity {
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
-                                                    Toast.makeText(SubjectsEditActivity.this, "Matéria Alterada Com Sucesso!!", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(MateriasEditActivity.this, "Matéria Alterada Com Sucesso!!", Toast.LENGTH_SHORT).show();
                                                     Intent resultIntent = new Intent();
                                                     setResult(RESULT_OK, resultIntent);
                                                     finish();
@@ -128,7 +128,7 @@ public class SubjectsEditActivity extends AppCompatActivity {
                                             }).addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(SubjectsEditActivity.this, "Erro Ao Alterar Matéria!!", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(MateriasEditActivity.this, "Erro Ao Alterar Matéria!!", Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                 }

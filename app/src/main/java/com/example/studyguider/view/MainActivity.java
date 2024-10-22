@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SingUpActivity.class);
+                Intent intent = new Intent(MainActivity.this, CadastroActivity.class);
                 startActivity(intent);
             }
         });

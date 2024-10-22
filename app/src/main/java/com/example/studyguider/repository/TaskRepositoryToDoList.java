@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.studyguider.models.TaskItemToDoList;
+import com.example.studyguider.models.ItemAfazeresList;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,14 +25,14 @@ import java.util.Map;
 public class TaskRepositoryToDoList {
     private static final String TAG = "TaskRepository";
     private FirebaseFirestore db;
-    private MutableLiveData<List<TaskItemToDoList>> tasksLiveData;
+    private MutableLiveData<List<ItemAfazeresList>> tasksLiveData;
 
     public TaskRepositoryToDoList() {
         db = FirebaseFirestore.getInstance();
         tasksLiveData = new MutableLiveData<>();
     }
 
-    public LiveData<List<TaskItemToDoList>> getTasks() {
+    public LiveData<List<ItemAfazeresList>> getTasks() {
         loadTasksFromFirebase();
         return tasksLiveData;
     }
@@ -45,11 +45,11 @@ public class TaskRepositoryToDoList {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            List<TaskItemToDoList> items = new ArrayList<>();
+                            List<ItemAfazeresList> items = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String taskName = document.getString("task");
                                 boolean completed = document.getBoolean("completed");
-                                items.add(new TaskItemToDoList(document.getId(), taskName, completed));
+                                items.add(new ItemAfazeresList(document.getId(), taskName, completed));
                             }
                             tasksLiveData.postValue(items);
                         } else {

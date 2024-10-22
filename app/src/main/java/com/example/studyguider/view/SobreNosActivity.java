@@ -1,11 +1,8 @@
 package com.example.studyguider.view;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +16,7 @@ import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AboutUsActivity extends AppCompatActivity {
+public class SobreNosActivity extends AppCompatActivity {
 
     private HeaderViewModel headerViewModel;
 

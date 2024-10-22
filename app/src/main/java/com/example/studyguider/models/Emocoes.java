@@ -1,11 +1,11 @@
 package com.example.studyguider.models;
 
-public class EmotionalCalendar {
+public class Emocoes {
     private int day;
     private int color;
 
     // Construtores, getters e setters
-    public EmotionalCalendar(int day, int color) {
+    public Emocoes(int day, int color) {
         this.day = day;
         this.color = color;
     }

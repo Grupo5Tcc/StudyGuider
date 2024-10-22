@@ -23,14 +23,14 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
-import com.example.studyguider.models.User;
+import com.example.studyguider.models.Usuario;
 import com.example.studyguider.viewmodels.RegisterViewModel;
 
 
 import java.util.Calendar;
 
 
-public class SingUpActivity extends AppCompatActivity {
+public class CadastroActivity extends AppCompatActivity {
 
     private RegisterViewModel registerViewModel;
 
@@ -63,7 +63,7 @@ public class SingUpActivity extends AppCompatActivity {
                 int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
 
-                picker = new DatePickerDialog(SingUpActivity.this, new DatePickerDialog.OnDateSetListener() {
+                picker = new DatePickerDialog(CadastroActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         etDateOfBirth.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
@@ -85,8 +85,8 @@ public class SingUpActivity extends AppCompatActivity {
 
                 if (validateInput(txtUsername, txtEmail, txtPassword, txtDateOfBirth)) {
                     progressBar.setVisibility(View.VISIBLE);
-                    User user = new User(txtUsername, txtEmail, txtDateOfBirth);
-                    registerViewModel.registerUser(user, txtPassword, SingUpActivity.this);
+                    Usuario user = new Usuario(txtUsername, txtEmail, txtDateOfBirth);
+                    registerViewModel.registerUser(user, txtPassword, CadastroActivity.this);
                 }
             }
         });
@@ -108,19 +108,19 @@ public class SingUpActivity extends AppCompatActivity {
 
     private boolean validateInput(String username, String email, String password, String dateOfBirth) {
         if (TextUtils.isEmpty(username)) {
-            Toast.makeText(SingUpActivity.this, "Please enter your full username", Toast.LENGTH_LONG).show();
+            Toast.makeText(CadastroActivity.this, "Please enter your full username", Toast.LENGTH_LONG).show();
             return false;
         } else if (TextUtils.isEmpty(email)) {
-            Toast.makeText(SingUpActivity.this, "Please enter your email", Toast.LENGTH_LONG).show();
+            Toast.makeText(CadastroActivity.this, "Please enter your email", Toast.LENGTH_LONG).show();
             return false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(SingUpActivity.this, "Please re-enter your email", Toast.LENGTH_LONG).show();
+            Toast.makeText(CadastroActivity.this, "Please re-enter your email", Toast.LENGTH_LONG).show();
             return false;
         } else if (password.length() < 8) {
-            Toast.makeText(SingUpActivity.this, "Password should be at least 8 digits", Toast.LENGTH_LONG).show();
+            Toast.makeText(CadastroActivity.this, "Password should be at least 8 digits", Toast.LENGTH_LONG).show();
             return false;
         } else if (TextUtils.isEmpty(dateOfBirth)) {
-            Toast.makeText(SingUpActivity.this, "Please enter your date of birth", Toast.LENGTH_LONG).show();
+            Toast.makeText(CadastroActivity.this, "Please enter your date of birth", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

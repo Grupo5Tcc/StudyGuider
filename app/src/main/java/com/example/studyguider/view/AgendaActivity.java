@@ -21,14 +21,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
 import com.example.studyguider.models.Planner;
-import com.example.studyguider.viewmodels.PlannerViewModel;
+import com.example.studyguider.viewmodels.AgendaViewModel;
 
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PlannerActivity extends AppCompatActivity {
+public class AgendaActivity extends AppCompatActivity {
 
     private GridLayout gridLayoutCalendar;
     private ScrollView informationScrollView;
@@ -42,7 +42,7 @@ public class PlannerActivity extends AppCompatActivity {
     private TextView selectedDayTextView;
     private TextView textViewEventTime;
 
-    private PlannerViewModel plannerViewModel;
+    private AgendaViewModel plannerViewModel;
     private Map<String, Integer> dayColors = new HashMap<>();
 
     private int currentMonth;
@@ -61,7 +61,7 @@ public class PlannerActivity extends AppCompatActivity {
         Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
         buttonNextMonth.setText(">");
 
-        plannerViewModel = new ViewModelProvider(this).get(PlannerViewModel.class);
+        plannerViewModel = new ViewModelProvider(this).get(AgendaViewModel.class);
 
         gridLayoutCalendar = findViewById(R.id.gridLayoutCalendar);
         informationScrollView = findViewById(R.id.informationScrollView);

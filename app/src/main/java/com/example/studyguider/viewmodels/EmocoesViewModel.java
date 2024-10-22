@@ -14,14 +14,14 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EmotionalCalendarViewModel extends ViewModel {
+public class EmocoesViewModel extends ViewModel {
     private final MutableLiveData<Map<Integer, Integer>> moodData = new MutableLiveData<>();
     private final MutableLiveData<String> userId = new MutableLiveData<>();
     private final MutableLiveData<String> monthYearDisplayName = new MutableLiveData<>();
     private final Calendar calendar;
     private final FirebaseFirestore db;
 
-    public EmotionalCalendarViewModel() {
+    public EmocoesViewModel() {
         calendar = Calendar.getInstance();
         db = FirebaseFirestore.getInstance();
         checkUserAuthentication();

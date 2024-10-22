@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/orange_clearer"
-    tools:context=".view.SubjectsAddActivity">
+    tools:context=".view.MateriasAddActivity">
 
     <include
         android:id="@+id/header"

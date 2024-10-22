@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_orange"
     android:orientation="vertical"
-    tools:context=".view.AbsenceCalendarActivity">
+    tools:context=".view.FaltasActivity">
 
     <include
         android:id="@+id/header"

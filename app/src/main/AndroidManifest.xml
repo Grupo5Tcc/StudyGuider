@@ -28,57 +28,57 @@
             android:name=".view.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.PlannerActivity"
+            android:name=".view.AgendaActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ControleRec"
+            android:name=".view.ControleRecuperacoes"
             android:exported="false" />
         <activity
-            android:name=".view.AbsenceCalendarActivity"
+            android:name=".view.FaltasActivity"
             android:exported="false" />
         <activity
             android:name=".view.EmotionalCalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ToDoListActivity"
+            android:name=".view.AfazeresActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ProfileActivity"
+            android:name=".view.PerfilActivity"
             android:exported="false" />
         <activity
-            android:name=".view.AboutUsActivity"
+            android:name=".view.SobreNosActivity"
             android:exported="false" />
         <activity
             android:name=".view.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".view.SingUpActivity"
+            android:name=".view.CadastroActivity"
             android:exported="false" />
         <activity
             android:name=".view.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ShiftEditActivity"
+            android:name=".view.PlantoesEditActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider" />
         <activity
-            android:name=".view.ShiftAddActivity"
+            android:name=".view.PlantoesAddActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider" />
         <activity
-            android:name=".view.ShiftActivity"
+            android:name=".view.PlantoesActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider" />
         <activity
-            android:name=".view.SubjectsEditActivity"
+            android:name=".view.MateriasEditActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider" />
         <activity
-            android:name=".view.SubjectsAddActivity"
+            android:name=".view.MateriasAddActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider" />
         <activity
-            android:name=".view.SubjectsActivity"
+            android:name=".view.MateriasActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider" />
         <activity

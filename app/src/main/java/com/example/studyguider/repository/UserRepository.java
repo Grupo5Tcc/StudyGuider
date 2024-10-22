@@ -3,7 +3,7 @@ package com.example.studyguider.repository;
 import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import com.example.studyguider.models.UserProfile;
+import com.example.studyguider.models.Perfil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -25,8 +25,8 @@ public class UserRepository {
         return firebaseAuth.getCurrentUser();
     }
 
-    public LiveData<UserProfile> getUserProfile() {
-        MutableLiveData<UserProfile> userProfileLiveData = new MutableLiveData<>();
+    public LiveData<Perfil> getUserProfile() {
+        MutableLiveData<Perfil> userProfileLiveData = new MutableLiveData<>();
 
         FirebaseUser currentUser = getCurrentUser();
         if (currentUser == null) {
@@ -56,7 +56,7 @@ public class UserRepository {
 
                         Log.d("UserRepository", "Name: " + name + ", Email: " + email + ", DOB: " + dob + ", Absence: " + absence + ", Recovery: " + recovery);
 
-                        UserProfile userProfile = new UserProfile(name, email, dob, absence, recovery); // Adiciona recuperação
+                        Perfil userProfile = new Perfil(name, email, dob, absence, recovery); // Adiciona recuperação
                         userProfileLiveData.setValue(userProfile);
                     } else {
                         Log.e("UserRepository", "User document not found");

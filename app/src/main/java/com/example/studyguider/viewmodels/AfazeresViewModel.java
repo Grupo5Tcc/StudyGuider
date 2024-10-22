@@ -3,21 +3,21 @@ package com.example.studyguider.viewmodels;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.studyguider.models.TaskItemToDoList;
+import com.example.studyguider.models.ItemAfazeresList;
 import com.example.studyguider.repository.TaskRepositoryToDoList;
 
 import java.util.List;
 
-public class ToDoListViewModel extends ViewModel {
+public class AfazeresViewModel extends ViewModel {
     private TaskRepositoryToDoList repository;
-    private LiveData<List<TaskItemToDoList>> tasks;
+    private LiveData<List<ItemAfazeresList>> tasks;
 
-    public ToDoListViewModel() {
+    public AfazeresViewModel() {
         repository = new TaskRepositoryToDoList();
         tasks = repository.getTasks();
     }
 
-    public LiveData<List<TaskItemToDoList>> getTasks() {
+    public LiveData<List<ItemAfazeresList>> getTasks() {
         return tasks;
     }
 

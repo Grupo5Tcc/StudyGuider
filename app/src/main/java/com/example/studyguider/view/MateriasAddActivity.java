@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public class SubjectsAddActivity extends AppCompatActivity {
+public class MateriasAddActivity extends AppCompatActivity {
 
     private HeaderViewModel headerViewModel;
     private static final String TAG = "SubjectsAddActivity";
@@ -81,7 +81,7 @@ public class SubjectsAddActivity extends AppCompatActivity {
 
 
                 if (nomeMateria.isEmpty() || professor.isEmpty()) {
-                    Toast.makeText(SubjectsAddActivity.this, "Por favor, preencha todos os campos!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MateriasAddActivity.this, "Por favor, preencha todos os campos!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -101,14 +101,14 @@ public class SubjectsAddActivity extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    Toast.makeText(SubjectsAddActivity.this, "Materia adicionada com sucesso", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MateriasAddActivity.this, "Materia adicionada com sucesso", Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(SubjectsAddActivity.this, "Falha Ao Tentar Adicionar Materia: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MateriasAddActivity.this, "Falha Ao Tentar Adicionar Materia: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
                 }

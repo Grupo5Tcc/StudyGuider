@@ -31,7 +31,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ControleRec extends AppCompatActivity {
+public class ControleRecuperacoes extends AppCompatActivity {
 
     private HeaderViewModel headerViewModel;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -112,11 +112,11 @@ public class ControleRec extends AppCompatActivity {
 
                     if (!possuiRecuperacao) {
                         // Se o campo "prova" não é menor que o campo "pre", não permita salvar
-                        Toast.makeText(ControleRec.this, "Não possui nenhuma Recuperação", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ControleRecuperacoes.this, "Não possui nenhuma Recuperação", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     // Se houver um erro, mostre uma mensagem de erro
-                    Toast.makeText(ControleRec.this, "Erro ao recuperar dados", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ControleRecuperacoes.this, "Erro ao recuperar dados", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -213,14 +213,14 @@ public class ControleRec extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("Firestore", "Dados de " + nomeMateria + " gravados com sucesso!");
-                        Toast.makeText(ControleRec.this, "Dados de " + nomeMateria + " salvos com sucesso!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ControleRecuperacoes.this, "Dados de " + nomeMateria + " salvos com sucesso!", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.e("Firestore", "Erro ao gravar dados: " + e.getMessage());
-                        Toast.makeText(ControleRec.this, "Erro ao salvar dados de " + nomeMateria, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ControleRecuperacoes.this, "Erro ao salvar dados de " + nomeMateria, Toast.LENGTH_SHORT).show();
                     }
                 });
 

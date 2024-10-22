@@ -1,15 +1,10 @@
 package com.example.studyguider.view;
 
-import static com.example.studyguider.view.App.plantoes;
-
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -35,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class ShiftAddActivity extends AppCompatActivity {
+public class PlantoesAddActivity extends AppCompatActivity {
 
     private HeaderViewModel headerViewModel;
     private EditText professorET, materiaET, diaET, horaET;
@@ -80,7 +75,7 @@ public class ShiftAddActivity extends AppCompatActivity {
                 String hora = Objects.requireNonNull(horaET.getText()).toString().trim();
 
                 if (professor.isEmpty() || materia.isEmpty() || dia.isEmpty() || hora.isEmpty()) {
-                    Toast.makeText(ShiftAddActivity.this, "Todos os campos devem ser preenchidos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PlantoesAddActivity.this, "Todos os campos devem ser preenchidos", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -97,14 +92,14 @@ public class ShiftAddActivity extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    Toast.makeText(ShiftAddActivity.this, "Shift adicionado com sucesso", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PlantoesAddActivity.this, "Shift adicionado com sucesso", Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(ShiftAddActivity.this, "Falha Ao Tentar Adicionar Shift: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PlantoesAddActivity.this, "Falha Ao Tentar Adicionar Shift: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
                 }
@@ -120,7 +115,7 @@ public class ShiftAddActivity extends AppCompatActivity {
                 int hour = c.get(Calendar.HOUR_OF_DAY);
                 int minute = c.get(Calendar.MINUTE);
 
-                TimePickerDialog timePickerDialog = new TimePickerDialog(ShiftAddActivity.this,
+                TimePickerDialog timePickerDialog = new TimePickerDialog(PlantoesAddActivity.this,
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {

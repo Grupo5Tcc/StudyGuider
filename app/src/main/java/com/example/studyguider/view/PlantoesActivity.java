@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studyguider.R;
 import com.example.studyguider.adapter.ShiftAdapter;
-import com.example.studyguider.models.Shift;
+import com.example.studyguider.models.Plantoes;
 import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +29,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class ShiftActivity extends AppCompatActivity {
+public class PlantoesActivity extends AppCompatActivity {
 
     private HeaderViewModel headerViewModel;
     private RecyclerView recyclerView;
@@ -61,7 +61,7 @@ public class ShiftActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler);
 
         FloatingActionButton add = findViewById(R.id.addShift);
-        add.setOnClickListener(view -> startActivity(new Intent(ShiftActivity.this, ShiftAddActivity.class)));
+        add.setOnClickListener(view -> startActivity(new Intent(PlantoesActivity.this, PlantoesAddActivity.class)));
 
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -74,26 +74,26 @@ public class ShiftActivity extends AppCompatActivity {
                         @Override
                         public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                             if (error != null) {
-                                Toast.makeText(ShiftActivity.this, "Falha ao carregar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PlantoesActivity.this, "Falha ao carregar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                                 return;
                             }
 
-                            ArrayList<Shift> arrayList = new ArrayList<>();
+                            ArrayList<Plantoes> arrayList = new ArrayList<>();
                             assert value != null;
                             for (QueryDocumentSnapshot document : value) {
-                                Shift shifts = document.toObject(Shift.class);
+                                Plantoes shifts = document.toObject(Plantoes.class);
                                 shifts.setId(document.getId());
                                 arrayList.add(shifts);
                             }
 
-                            ShiftAdapter adapter = new ShiftAdapter(ShiftActivity.this, arrayList);
+                            ShiftAdapter adapter = new ShiftAdapter(PlantoesActivity.this, arrayList);
                             recyclerView.setAdapter(adapter);
 
                             adapter.setOnItemClickListener(new ShiftAdapter.OnItemClickListener() {
                                 @Override
-                                public void onClick(Shift shifts) {
+                                public void onClick(Plantoes shifts) {
                                     App.plantoes = shifts;
-                                    startActivity(new Intent(ShiftActivity.this, ShiftEditActivity.class));
+                                    startActivity(new Intent(PlantoesActivity.this, PlantoesEditActivity.class));
                                 }
                             });
                         }
