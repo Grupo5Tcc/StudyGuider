@@ -99,31 +99,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/notaPrecisoLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/notaListaLayout"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_weight="1"
-        android:background="@drawable/rnd_add_edit"
-        android:hint="Preciso">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/notaPrecisoET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/black"
-            android:inputType="numberDecimal" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/notaProvaLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/notaPrecisoLayout"
+        android:layout_below="@id/notaListaLayout"
         android:layout_margin="20dp"
         android:layout_weight="1"
         android:background="@drawable/rnd_add_edit"
