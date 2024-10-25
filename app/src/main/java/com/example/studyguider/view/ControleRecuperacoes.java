@@ -44,132 +44,136 @@ public class ControleRecuperacoes extends AppCompatActivity {
 
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
 
+
         View headerView = findViewById(R.id.header);
         HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
+
 
         FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser1 != null) {
             headerViewModel.fetchUsername(currentUser1);
         }
 
-        // Verifique se o campo "prova" é menor que o campo "pre" no banco de dados
-        db.collection("grades").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+         db.collection("notas").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     QuerySnapshot querySnapshot = task.getResult();
                     boolean possuiRecuperacao = false;
 
-                    // Configura o LinearLayout para mostrar múltiplos containers
                     LinearLayout linearLayout = findViewById(R.id.linerec);
                     linearLayout.setOrientation(LinearLayout.VERTICAL);
 
                     for (DocumentSnapshot document : querySnapshot.getDocuments()) {
-                        // Recupere os valores dos campos "prova" e "pre"
-                        String prova = document.getString("prova");
-                        String pre = document.getString("pre");
+                        String po = document.getString("prova");
+                        String pe = document.getString("pre");
+                        float prova, pre;
 
-                        // Verifique se o campo "prova" é menor que o campo "pre"
-                        if (prova.compareTo(pre) < 0) {
+                        prova = Float.parseFloat(po);
+                        pre = Float.parseFloat(pe);
+
+                        if ((prova - pre) < 0) {
                             possuiRecuperacao = true;
 
-                            // Recupere os valores dos campos "nomeMateria" e "nota"
                             String nomeMateria = document.getString("nomeMateria");
-                            String cred = document.getString("cred");
-                            String trab = document.getString("trab");
-                            String list = document.getString("list");
-                            String provaNota = document.getString("prova");
+                            float nota = calcularNota(document);
 
-                            // Calcule a nota
-                            int nota = Integer.parseInt(cred) + Integer.parseInt(trab) + Integer.parseInt(list) + Integer.parseInt(provaNota);
-
-                            // Verifique se um container com o ID de nomeMateria já existe
                             View existingContainer = linearLayout.findViewWithTag(nomeMateria);
                             if (existingContainer != null) {
-                                // Atualize o container existente
                                 atualizarContainer(existingContainer, nomeMateria, nota);
                             } else {
-                                // Crie um novo container
-                                View container = getLayoutInflater().inflate(R.layout.activity_add_rec, linearLayout, false); // Inflate com o LinearLayout como pai
-                                container.setTag(nomeMateria); // Define o nomeMateria como tag do container
+                                View container = getLayoutInflater().inflate(R.layout.activity_add_rec, linearLayout, false);
+                                container.setTag(nomeMateria);
 
-                                // Definir espaçamento entre os containers (margens)
                                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                                         LinearLayout.LayoutParams.MATCH_PARENT,
                                         LinearLayout.LayoutParams.WRAP_CONTENT
                                 );
-                                int marginInPixels = (int) (10 * getResources().getDisplayMetrics().density); // Converte 10dp para pixels
-                                layoutParams.setMargins(0, marginInPixels, 0, marginInPixels); // Defina margem superior e inferior
+                                int marginInPixels = (int) (10 * getResources().getDisplayMetrics().density);
+                                layoutParams.setMargins(0, marginInPixels, 0, marginInPixels);
+                                container.setLayoutParams(layoutParams);
 
-                                container.setLayoutParams(layoutParams); // Aplique as margens no container
-                                linearLayout.addView(container); // Adiciona o novo container ao LinearLayout
-
-                                // Preenche os valores no novo container
+                                linearLayout.addView(container);
                                 atualizarContainer(container, nomeMateria, nota);
+
+                                preencherDadosDoFirestore(nomeMateria, container);
                             }
                         }
                     }
 
                     if (!possuiRecuperacao) {
-                        // Se o campo "prova" não é menor que o campo "pre", não permita salvar
                         Toast.makeText(ControleRecuperacoes.this, "Não possui nenhuma Recuperação", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    // Se houver um erro, mostre uma mensagem de erro
                     Toast.makeText(ControleRecuperacoes.this, "Erro ao recuperar dados", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    private void atualizarContainer(View container, String nomeMateria, int nota) {
-        // Atualiza os TextViews dentro do container
+    private void preencherDadosDoFirestore(String nomeMateria, View container) {
+        db.collection("rec").document(nomeMateria).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+
+                        CheckBox c1 = container.findViewById(R.id.checkSujes1);
+                        CheckBox c2 = container.findViewById(R.id.checkSujes2);
+                        CheckBox c3 = container.findViewById(R.id.checkSujes3);
+                        CheckBox c4 = container.findViewById(R.id.checkSujes4);
+                        EditText conteudos = container.findViewById(R.id.conteuos_txt);
+
+                        c1.setChecked(document.getBoolean("c1"));
+                        c2.setChecked(document.getBoolean("c2"));
+                        c3.setChecked(document.getBoolean("c3"));
+                        c4.setChecked(document.getBoolean("c4"));
+                        conteudos.setText(document.getString("conteudos"));
+                    }
+                } else {
+                    Toast.makeText(ControleRecuperacoes.this, "Erro ao carregar dados", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private float calcularNota(DocumentSnapshot document) {
+        float cred = Float.parseFloat(document.getString("cred"));
+        float trab = Float.parseFloat(document.getString("trab"));
+        float list = Float.parseFloat(document.getString("list"));
+        float prova = Float.parseFloat(document.getString("prova"));
+        return cred + trab + list + prova;
+    }
+
+
+    private void atualizarContainer(View container, String nomeMateria, float nota) {
+
         TextView materiaTextView = container.findViewById(R.id.materiarec);
         materiaTextView.setText(nomeMateria);
 
         TextView notaTextView = container.findViewById(R.id.notarec);
         notaTextView.setText(String.valueOf(nota));
 
-        // Adicione listeners aos checkboxes para salvar automaticamente
+
         CheckBox c1 = container.findViewById(R.id.checkSujes1);
-        c1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (salvarDadosAutomaticamente) {
-                    salvarDados(nomeMateria, container);
-                }
-            }
-        });
-
         CheckBox c2 = container.findViewById(R.id.checkSujes2);
-        c2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (salvarDadosAutomaticamente) {
-                    salvarDados(nomeMateria, container);
-                }
-            }
-        });
-
         CheckBox c3 = container.findViewById(R.id.checkSujes3);
-        c3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (salvarDadosAutomaticamente) {
-                    salvarDados(nomeMateria, container);
-                }
-            }
-        });
-
         CheckBox c4 = container.findViewById(R.id.checkSujes4);
-        c4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (salvarDadosAutomaticamente) {
                     salvarDados(nomeMateria, container);
                 }
             }
-        });
+        };
+
+        c1.setOnCheckedChangeListener(checkedChangeListener);
+        c2.setOnCheckedChangeListener(checkedChangeListener);
+        c3.setOnCheckedChangeListener(checkedChangeListener);
+        c4.setOnCheckedChangeListener(checkedChangeListener);
 
         EditText conteudosEditText = container.findViewById(R.id.conteuos_txt);
         conteudosEditText.addTextChangedListener(new TextWatcher() {
@@ -190,40 +194,62 @@ public class ControleRecuperacoes extends AppCompatActivity {
         });
     }
 
+
+    private void excluirDados(String nomeMateria, View container) {
+        db.collection("rec").document(nomeMateria)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("Firestore", "Dados de " + nomeMateria + " excluídos com sucesso!");
+                        Toast.makeText(ControleRecuperacoes.this, "Dados de " + nomeMateria + " excluídos com sucesso!", Toast.LENGTH_SHORT).show();
+
+                        LinearLayout linearLayout = findViewById(R.id.linerec);
+                        linearLayout.removeView(container);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Firestore", "Erro ao excluir dados: " + e.getMessage());
+                        Toast.makeText(ControleRecuperacoes.this, "Erro ao excluir dados de " + nomeMateria, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     private void salvarDados(String nomeMateria, View container) {
         salvarDadosAutomaticamente = false;
 
-        // Encontre os elementos dentro do container
         CheckBox c1 = container.findViewById(R.id.checkSujes1);
         CheckBox c2 = container.findViewById(R.id.checkSujes2);
         CheckBox c3 = container.findViewById(R.id.checkSujes3);
         CheckBox c4 = container.findViewById(R.id.checkSujes4);
         EditText conteudos = container.findViewById(R.id.conteuos_txt);
 
-        // Salvar os dados no Firestore usando nomeMateria como chave
         Map<String, Object> dados = new HashMap<>();
         dados.put("c1", c1.isChecked());
         dados.put("c2", c2.isChecked());
         dados.put("c3", c3.isChecked());
         dados.put("c4", c4.isChecked());
-        dados.put("conteudos", conteudos.getText().toString()); // Acrescente isso aqui
+        dados.put("conteudos", conteudos.getText().toString());
 
-        db.collection("recovery").document(nomeMateria).set(dados)
+        db.collection("rec").document(nomeMateria).set(dados)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("Firestore", "Dados de " + nomeMateria + " gravados com sucesso!");
-                        Toast.makeText(ControleRecuperacoes.this, "Dados de " + nomeMateria + " salvos com sucesso!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ControleRecuperacoes.this, "Dados de " + nomeMateria + " salvos com sucesso!", Toast.LENGTH_SHORT);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.e("Firestore", "Erro ao gravar dados: " + e.getMessage());
-                        Toast.makeText(ControleRecuperacoes.this, "Erro ao salvar dados de " + nomeMateria, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ControleRecuperacoes.this, "Erro ao salvar dados de " + nomeMateria, Toast.LENGTH_SHORT);
                     }
                 });
 
         salvarDadosAutomaticamente = true;
     }
+
 }

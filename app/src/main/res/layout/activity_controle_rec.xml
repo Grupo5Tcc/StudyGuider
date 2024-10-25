@@ -23,6 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Texto de título que exibe "Recuperações" -->
         <TextView
             android:id="@+id/controleRec"
             android:layout_width="wrap_content"
@@ -33,19 +34,19 @@
             android:textColor="@color/blue_1"
             android:textSize="26dp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/header"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/header" />
 
+        <!-- LinearLayout para conter as recuperações -->
         <LinearLayout
             android:id="@+id/linerec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/controleRec"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/controleRec"></LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

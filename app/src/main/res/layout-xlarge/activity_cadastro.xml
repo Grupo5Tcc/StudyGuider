@@ -5,10 +5,11 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:screenOrientation="portrait"
     android:background="@color/orange_clearer"
+    android:screenOrientation="portrait"
     tools:context=".view.CadastroActivity">
 
+    <!-- Barra de progresso que indica que algo está carregando -->
     <ProgressBar
         android:id="@+id/pgbLoading"
         android:layout_width="wrap_content"
@@ -20,6 +21,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- Container principal do cadastro com fundo customizado -->
     <View
         android:id="@+id/ctrCadastro"
         android:layout_width="763dp"
@@ -33,6 +35,7 @@
         app:layout_constraintTop_toTopOf="@+id/frameLayout"
         app:layout_constraintVertical_bias="0.63" />
 
+    <!-- Imagem do usuário na parte superior do cadastro -->
     <ImageView
         android:id="@+id/imgUser"
         android:layout_width="229dp"
@@ -43,6 +46,7 @@
         app:layout_constraintTop_toTopOf="@id/ctrCadastro"
         app:srcCompat="@drawable/img_perfil" />
 
+    <!-- Título do cadastro -->
     <TextView
         android:id="@+id/textViewMonth"
         android:layout_width="wrap_content"
@@ -57,6 +61,7 @@
         app:layout_constraintStart_toStartOf="@id/ctrCadastro"
         app:layout_constraintTop_toBottomOf="@id/imgUser" />
 
+    <!-- Campo para o nome do usuário -->
     <EditText
         android:id="@+id/txtName"
         android:layout_width="700dp"
@@ -80,6 +85,7 @@
         app:layout_constraintTop_toBottomOf="@id/textViewMonth"
         tools:ignore="TextFields" />
 
+    <!-- Campo para o e-mail do usuário -->
     <EditText
         android:id="@+id/txtEmail"
         android:layout_width="700dp"
@@ -96,15 +102,15 @@
         android:maxLength="25"
         android:maxLines="1"
         android:padding="10dp"
-        android:textSize="25dp"
         android:textColor="@color/black"
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="@id/ctrCadastro"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="@id/ctrCadastro"
         app:layout_constraintTop_toBottomOf="@id/txtName"
         tools:ignore="TextFields" />
 
-
+    <!-- Campo para a senha do usuário -->
     <EditText
         android:id="@+id/txtPassword"
         android:layout_width="700dp"
@@ -128,6 +134,7 @@
         app:layout_constraintTop_toBottomOf="@id/txtDate"
         tools:ignore="TextFields" />
 
+    <!-- Campo para a data do usuário -->
     <EditText
         android:id="@+id/txtDate"
         android:layout_width="700dp"
@@ -152,6 +159,7 @@
         app:layout_constraintTop_toBottomOf="@id/txtEmail"
         tools:ignore="TextFields" />
 
+    <!-- Botão para criar o usuário -->
     <Button
         android:id="@+id/btnMenu"
         android:layout_width="540dp"
@@ -170,6 +178,7 @@
         app:layout_constraintStart_toStartOf="@+id/ctrCadastro"
         app:layout_constraintTop_toBottomOf="@id/txtPassword" />
 
+    <!-- Barragem que pode ser usada para posicionar outros elementos -->
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barr1"
         android:layout_width="wrap_content"
@@ -182,6 +191,7 @@
         android:layout_height="wrap_content"
         app:barrierDirection="left" />
 
+    <!-- FrameLayout que contém o título e o logotipo do aplicativo -->
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="963dp"
@@ -197,6 +207,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
+            <!-- Logotipo do aplicativo -->
             <ImageView
                 android:id="@+id/imglogo"
                 android:layout_width="63dp"
@@ -204,6 +215,7 @@
                 android:layout_marginRight="15dp"
                 app:srcCompat="@drawable/img_logo" />
 
+            <!-- Título do aplicativo -->
             <TextView
                 android:id="@+id/lblTittle"
                 android:layout_width="wrap_content"
@@ -215,6 +227,7 @@
         </LinearLayout>
     </FrameLayout>
 
+    <!-- CheckBox para mostrar/ocultar senha -->
     <CheckBox
         android:id="@+id/ckb_mostrarSenhaCadastro"
         android:layout_width="639dp"
