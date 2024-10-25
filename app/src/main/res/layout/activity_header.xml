@@ -32,7 +32,7 @@
             android:layout_marginEnd="80dp"
             android:text="@string/name_user_navbar"
             android:textColor="@color/white"
-            android:fontFamily="@font/yeseva_one"
+            android:fontFamily="@font/outfit"
             android:textStyle="bold"
             android:textSize="18dp" />
 
