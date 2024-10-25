@@ -106,7 +106,7 @@ public class MateriasActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(Materias subjects) {
                                     App.materia = subjects;
-                                    startActivity(new Intent(MateriasActivity.this, MateriasEditActivity.class));
+                                    startActivity(new Intent(MateriasActivity.this, ConteudosActivity.class));
                                 }
                             });
                         }
