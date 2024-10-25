@@ -18,9 +18,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
+    <!-- Título da tela -->
     <TextView
-
         android:id="@+id/lblTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header" />
 
-    <!-- Campo de entrada de texto -->
+    <!-- Campo de entrada para os afazeres -->
     <EditText
         android:id="@+id/edit_text"
         android:layout_width="340dp"
@@ -51,7 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lblTitle" />
 
-    <!-- Lista de itens -->
+    <!-- Lista para exibir os itens de afazeres -->
     <ListView
         android:id="@+id/item_list"
         android:layout_width="0dp"
@@ -69,6 +68,7 @@
         app:layout_constraintTop_toBottomOf="@id/edit_text"
         app:layout_constraintVertical_bias="0.168" />
 
+
     <!-- Rodapé com botões -->
     <LinearLayout
         android:id="@+id/footer"
@@ -82,6 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <!-- Botão para adicionar um novo afazer -->
         <Button
             android:id="@+id/btn_add"
             android:layout_width="0dp"
@@ -93,6 +94,7 @@
             android:textColor="@color/blue_dark"
             android:textSize="16sp" />
 
+        <!-- Botão para selecionar todos os itens -->
         <Button
             android:id="@+id/btn_select_all"
             android:layout_width="0dp"
@@ -105,6 +107,7 @@
             android:textColor="@color/blue_dark"
             android:textSize="16sp" />
 
+        <!-- Botão para excluir os itens selecionados -->
         <Button
             android:id="@+id/btn_delete_selected"
             android:layout_width="0dp"
@@ -117,5 +120,6 @@
             android:textColor="@color/blue_dark"
             android:textSize="16sp" />
     </LinearLayout>
+    <!-- Fim do rodapé -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

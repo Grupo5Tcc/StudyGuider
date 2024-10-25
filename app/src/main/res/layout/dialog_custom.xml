@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -7,6 +8,7 @@
     android:padding="20dp"
     android:background="@drawable/rounded_dialog_background">
 
+    <!-- TextView para exibir a mensagem motivacional -->
     <TextView
         android:id="@+id/dialogTextView"
         android:layout_width="wrap_content"
@@ -18,4 +20,6 @@
         android:textColor="@color/blue_2"
         android:gravity="center"
         android:padding="10dp" />
+    <!-- Fim do TextView -->
+
 </LinearLayout>

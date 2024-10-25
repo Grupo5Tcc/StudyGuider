@@ -7,7 +7,7 @@
     android:background="@drawable/img_background_main"
     tools:context=".view.SplashActivity">
 
-
+    <!-- Logo do App -->
     <ImageView
         android:id="@+id/splash"
         android:layout_width="211dp"
@@ -23,8 +23,8 @@
         android:layout_below="@+id/splash"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/yeseva_one"
-        android:text="STUDYGUIDER"
+        android:text="StudyGuider"
         android:textColor="@color/white"
-        android:textSize="30dp"/>
+        android:textSize="50sp" />
 
 </RelativeLayout>

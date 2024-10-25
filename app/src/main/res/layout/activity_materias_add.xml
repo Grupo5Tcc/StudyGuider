@@ -8,6 +8,7 @@
     android:background="@color/orange_clearer"
     tools:context=".view.MateriasAddActivity">
 
+    <!-- Inclusão do cabeçalho da atividade -->
     <include
         android:id="@+id/header"
         layout="@layout/activity_header"
@@ -17,14 +18,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
+    <!-- Campo de entrada para o nome da matéria -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nomeMateriaLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/header"
-        android:layout_margin="20sp"
-        android:layout_weight="1"
+        android:layout_margin="20dp"
         android:background="@drawable/rnd_add_edit"
         android:hint="Matéria">
 
@@ -37,15 +37,15 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
+    <!-- Campo de entrada para o nome do professor -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/professorLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/nomeMateriaLayout"
-        android:layout_marginStart="20sp"
-        android:layout_marginEnd="20sp"
-        android:layout_marginBottom="20sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/rnd_add_edit"
         android:hint="Professor">
 
@@ -58,22 +58,32 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Campo de entrada para os conteúdos da matéria -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/conteudosLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/professorLayout"
-        android:layout_marginStart="20sp"
-        android:layout_marginEnd="20sp"
-        android:layout_marginBottom="20sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/rnd_add_edit"
-        android:hint="Conteúdos"/>
+        android:hint="Conteúdos">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/conteudosET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:inputType="textCapSentences" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Botão para adicionar a matéria -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/addMateria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/professorLayout"
+        android:layout_below="@id/conteudosLayout"
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/orange_1"
         android:text="Adicionar"

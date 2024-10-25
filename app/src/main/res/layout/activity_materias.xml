@@ -8,6 +8,7 @@
     android:background="@color/orange_clearer"
     tools:context=".view.MateriasActivity">
 
+    <!-- Inclusão do cabeçalho do app -->
     <include
         android:id="@+id/header"
         layout="@layout/activity_header"
@@ -17,12 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- LinearLayout que centraliza o título 'Matérias' -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:layout_below="@+id/header">
 
+        <!-- TextView exibindo o título das matérias -->
         <TextView
             android:id="@+id/txtMaterias"
             android:layout_width="wrap_content"
@@ -31,12 +34,12 @@
             android:layout_marginTop="20dp"
             android:text="Matérias"
             android:textColor="@color/blue_1"
-            android:textSize="26dp"
+            android:textSize="26sp"
             android:textStyle="bold"/>
 
     </LinearLayout>
 
-    <!-- RecyclerView -->
+    <!-- RecyclerView para exibir a lista de matérias -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_marginTop="70dp"
@@ -45,7 +48,7 @@
         android:layout_below="@id/header"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <!-- Floating Action Buttons -->
+    <!-- Botão flutuante para adicionar novas matérias -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addMateria"
         android:layout_width="wrap_content"

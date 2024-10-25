@@ -17,49 +17,55 @@
         android:background="@color/blue_clearer"
         android:padding="10dp">
 
+        <!-- Texto que exibe a matéria -->
         <TextView
             android:id="@+id/list_item_materia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
             android:fontFamily="@font/yeseva_one"
+            android:singleLine="true"
             android:textColor="@color/blue_2"
             android:textSize="20dp" />
 
+        <!-- Texto que exibe as crediaria -->
         <TextView
             android:id="@+id/list_item_cred"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_below="@id/list_item_materia" />
+            android:layout_below="@id/list_item_materia"
+            android:textColor="@color/black" />
 
+        <!-- Texto que exibe o trabalho -->
         <TextView
             android:id="@+id/list_item_trab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_below="@id/list_item_cred" />
+            android:layout_below="@id/list_item_cred"
+            android:textColor="@color/black" />
 
+        <!-- Texto que exibe a lista -->
         <TextView
             android:id="@+id/list_item_lista"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_below="@id/list_item_trab" />
+            android:layout_below="@id/list_item_trab"
+            android:textColor="@color/black" />
 
+        <!-- Texto que exibe a pré -->
         <TextView
             android:id="@+id/list_item_pre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_below="@id/list_item_lista" />
+            android:layout_below="@id/list_item_lista"
+            android:textColor="@color/black" />
 
+        <!-- Texto que exibe o professor -->
         <TextView
             android:id="@+id/list_item_pro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_below="@id/list_item_pre" />
+            android:layout_below="@id/list_item_pre"
+            android:textColor="@color/black" />
 
     </RelativeLayout>
 
