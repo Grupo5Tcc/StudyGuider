@@ -4,55 +4,61 @@
     style="@style/Widget.Material3.CardView.Elevated"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="4sp"
-    android:layout_marginTop="2sp"
-    android:layout_marginEnd="4sp"
-    android:layout_marginBottom="2sp"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginBottom="5dp"
     app:cardCornerRadius="15dp"
     app:cardElevation="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/blue_1"
-        android:padding="10sp">
+        android:background="@color/blue_clearer"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/list_item_materia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="18sp" />
+            android:fontFamily="@font/yeseva_one"
+            android:textColor="@color/blue_2"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/list_item_cred"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:layout_below="@id/list_item_materia" />
 
         <TextView
             android:id="@+id/list_item_trab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:layout_below="@id/list_item_cred" />
 
         <TextView
             android:id="@+id/list_item_lista"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:layout_below="@id/list_item_trab" />
 
         <TextView
             android:id="@+id/list_item_pre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:layout_below="@id/list_item_lista" />
 
         <TextView
             android:id="@+id/list_item_pro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:layout_below="@id/list_item_pre" />
 
     </RelativeLayout>

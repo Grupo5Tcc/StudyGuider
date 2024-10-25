@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/orange_clearer"
+    tools:context=".view.ControleNotasEditActivity">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/activity_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nomeMateriaLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:layout_margin="20dp"
+        android:layout_weight="1"
+        android:background="@drawable/rnd_add_edit"
+        android:hint="Matéria">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nomeMateriaET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:inputType="textCapSentences" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/notaCredLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nomeMateriaLayout"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1"
+        android:background="@drawable/rnd_add_edit"
+        android:hint="Cred">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/notaCredET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/notaTrabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notaCredLayout"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1"
+        android:background="@drawable/rnd_add_edit"
+        android:hint="Trabalho">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/notaTrabET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/notaListaLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notaTrabLayout"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1"
+        android:background="@drawable/rnd_add_edit"
+        android:hint="Lista">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/notaListaET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/notaProvaLayout"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notaListaLayout"
+        android:layout_margin="20dp"
+        android:layout_weight="1"
+        android:hint="Prova"
+        android:visibility="visible">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/notaProvaET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:text="Presciso:"
+        android:textSize="18dp"
+        android:fontFamily="@font/yeseva_one"
+        android:layout_below="@id/save"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/notaPrecisoLayout"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/save"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/notaPrecisoTxt"
+            android:layout_width="match_parent"
+            android:layout_height="55.2dp"
+            android:background="@drawable/rnd_add_edit"
+            android:paddingLeft="10dp"
+            android:paddingTop="20dp"
+            android:text="Preciso"
+            android:textSize="15dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notaProvaLayout"
+        android:layout_alignStart="@id/notaProvaLayout"
+        android:layout_marginStart="20dp"
+        android:backgroundTint="@color/orange_1"
+        android:text="Deletar"
+        app:backgroundTint="@android:color/holo_red_light" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notaProvaLayout"
+        android:layout_alignEnd="@id/notaProvaLayout"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/orange_1"
+        android:text="Salvar" />
+
+</RelativeLayout>

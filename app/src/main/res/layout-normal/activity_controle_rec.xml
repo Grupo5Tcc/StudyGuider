@@ -29,13 +29,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/yeseva_one"
-                android:text="Recuperações:"
+            android:text="Recuperações:"
             android:textColor="@color/blue_1"
             android:textSize="26dp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/header"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <LinearLayout
             android:id="@+id/linerec"
