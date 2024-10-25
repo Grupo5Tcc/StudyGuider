@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!-- Layout principal da atividade de cadastro -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:screenOrientation="portrait"
     android:background="@color/orange_clearer"
+    android:screenOrientation="portrait"
     tools:context=".view.CadastroActivity">
 
-
+    <!-- FrameLayout para o cabeçalho da página -->
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
@@ -23,9 +23,10 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
+            <!-- Logo da aplicação -->
             <ImageView
                 android:id="@+id/imglogo"
                 android:layout_width="63dp"
@@ -33,6 +34,7 @@
                 android:layout_marginRight="15dp"
                 app:srcCompat="@drawable/img_logo" />
 
+            <!-- Título da aplicação -->
             <TextView
                 android:id="@+id/lblTittle"
                 android:layout_width="wrap_content"
@@ -44,15 +46,15 @@
         </LinearLayout>
     </FrameLayout>
 
-    <!-- Scrollable content -->
+    <!-- Contêiner rolável para o conteúdo do formulário -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/frameLayout"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/frameLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,40 +62,48 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Container View with background -->
+            <!-- Contêiner para o formulário de cadastro -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/ct_background_sing_up"
                 android:layout_marginHorizontal="40dp"
+                android:background="@drawable/ct_background_sing_up"
+                android:orientation="vertical"
                 android:padding="16dp">
 
+                <!-- Imagem do usuário -->
                 <ImageView
                     android:id="@+id/imgUser"
                     android:layout_width="102dp"
                     android:layout_height="99dp"
-                    android:layout_marginTop="20dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
                     app:srcCompat="@drawable/img_perfil" />
 
+                <!-- Título da seção de cadastro -->
                 <TextView
                     android:id="@+id/textViewMonth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/yeseva_one"
                     android:text="CADASTRO"
                     android:textColor="@color/blue_dark"
                     android:textSize="26dp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="5dp" />
+                    android:textStyle="bold" />
+
+                <!-- Campo para nome do usuário -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nome:" />
 
                 <EditText
                     android:id="@+id/txtName"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/ct_background_text_area_form"
                     android:drawableRight="@drawable/ic_name_form"
                     android:hint="@string/hint_username"
@@ -101,6 +111,12 @@
                     android:maxLength="25"
                     android:padding="10dp"
                     android:textColor="@color/black" />
+
+                <!-- Campo para e-mail do usuário -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="E-mail:" />
 
                 <EditText
                     android:id="@+id/txtEmail"
@@ -115,6 +131,12 @@
                     android:padding="10dp"
                     android:textColor="@color/black" />
 
+                <!-- Campo para senha do usuário -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Senha:" />
+
                 <EditText
                     android:id="@+id/txtPassword"
                     android:layout_width="match_parent"
@@ -127,6 +149,12 @@
                     android:maxLength="25"
                     android:padding="10dp"
                     android:textColor="@color/black" />
+
+                <!-- Campo para data de nascimento -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Data de Nascimento:" />
 
                 <EditText
                     android:id="@+id/txtDate"
@@ -142,24 +170,25 @@
                     android:padding="10dp"
                     android:textColor="@color/black" />
 
+                <!-- Botão para criar usuário -->
                 <Button
                     android:id="@+id/btnMenu"
                     android:layout_width="250dp"
                     android:layout_height="45dp"
+                    android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="48dp"
-                    android:layout_gravity="center"
                     android:background="@drawable/bg_bnt_sing"
                     android:fontFamily="@font/yeseva_one"
-                    android:textStyle="bold"
                     android:text="@string/btn_crate_user_form"
                     android:textColor="@color/blue_dark"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <!-- Loading ProgressBar -->
+    <!-- Barra de progresso para carregamento -->
     <ProgressBar
         android:id="@+id/pgbLoading"
         android:layout_width="wrap_content"
@@ -169,5 +198,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
