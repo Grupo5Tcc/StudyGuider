@@ -26,7 +26,7 @@
         android:fontFamily="@font/yeseva_one"
         android:text="Conteúdos"
         android:textColor="@color/blue_2"
-        android:textSize="26dp"
+        android:textSize="35dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
         android:fontFamily="@font/bebas_neue"
         android:text="Nome da Matéria"
         android:textColor="@color/blue_1"
-        android:textSize="20dp"
+        android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/conteudos" />
@@ -50,7 +50,7 @@
     <!-- Layout para o primeiro bimestre -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/primeiro_bimestre"
-        android:layout_width="370dp"
+        android:layout_width="450dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/ct_background_conteudos"
@@ -88,7 +88,7 @@
     <!-- Layout para o segundo bimestre -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/segundo_bimestre"
-        android:layout_width="370dp"
+        android:layout_width="450dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/ct_background_conteudos"
@@ -126,7 +126,7 @@
     <!-- Layout para o terceiro bimestre -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/terceiro_bimestre"
-        android:layout_width="370dp"
+        android:layout_width="450dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/ct_background_conteudos"
@@ -164,7 +164,7 @@
     <!-- Layout para o quarto bimestre -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/quarto_bimestre"
-        android:layout_width="370dp"
+        android:layout_width="450dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/ct_background_conteudos"
