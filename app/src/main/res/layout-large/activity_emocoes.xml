@@ -8,6 +8,7 @@
     android:background="@color/light_orange"
     tools:context=".view.EmotionalCalendarActivity">
 
+    <!-- Cabeçalho do app -->
     <include
         android:id="@+id/header"
         layout="@layout/activity_header"
@@ -17,18 +18,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- ScrollView para permitir rolagem do conteúdo principal -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/footerLayout"
         app:layout_constraintTop_toBottomOf="@id/header">
 
+        <!-- Layout vertical para conter os elementos principais -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
+            <!-- Título principal da tela -->
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
@@ -50,7 +53,7 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Legenda Títulos -->
+                <!-- Título da legenda -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -63,7 +66,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <!-- Legenda Itens -->
+                <!-- Layout horizontal para exibir cada emoção -->
                 <!-- Ótimo -->
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -71,6 +74,7 @@
                     android:orientation="horizontal"
                     android:paddingBottom="8dp">
 
+                    <!-- cor da emoção-->
                     <ImageView
                         android:id="@+id/colorOtimo"
                         android:layout_width="30dp"
@@ -78,6 +82,7 @@
                         android:layout_gravity="center_vertical"
                         android:background="#2196F3" />
 
+                    <!-- Texto "Ótimo" -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -96,6 +101,7 @@
                     android:orientation="horizontal"
                     android:paddingBottom="8dp">
 
+                    <!-- cor da emoção-->
                     <ImageView
                         android:id="@+id/colorBom"
                         android:layout_width="30dp"
@@ -103,6 +109,7 @@
                         android:layout_gravity="center_vertical"
                         android:background="#4CAF50" />
 
+                    <!-- Texto "bom" -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -121,6 +128,7 @@
                     android:orientation="horizontal"
                     android:paddingBottom="8dp">
 
+                    <!-- cor da emoção-->
                     <ImageView
                         android:id="@+id/colorNormal"
                         android:layout_width="30dp"
@@ -128,6 +136,7 @@
                         android:layout_gravity="center_vertical"
                         android:background="#FFEB3B" />
 
+                    <!-- Texto "normal" -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -146,6 +155,7 @@
                     android:orientation="horizontal"
                     android:paddingBottom="8dp">
 
+                    <!-- cor da emoção-->
                     <ImageView
                         android:id="@+id/colorRuim"
                         android:layout_width="30dp"
@@ -153,6 +163,7 @@
                         android:layout_gravity="center_vertical"
                         android:background="#FF9800" />
 
+                    <!-- Texto "ruim" -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -170,6 +181,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <!-- cor da emoção-->
                     <ImageView
                         android:id="@+id/colorPessimo"
                         android:layout_width="30dp"
@@ -177,6 +189,7 @@
                         android:layout_gravity="center_vertical"
                         android:background="#F44336" />
 
+                    <!-- Texto "péssimo" -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -190,6 +203,7 @@
             </LinearLayout>
 
 
+            <!-- Instrução para pintar o dia -->
             <TextView
                 android:id="@+id/textViewLeg"
                 android:layout_width="wrap_content"
@@ -211,16 +225,18 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
+                <!-- Botão para ir ao mês anterior -->
                 <Button
                     android:id="@+id/buttonPreviousMonth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
+                    android:background="@android:color/transparent"
                     android:text="Anterior"
                     android:textColor="@color/blue_1"
-                    android:textSize="16sp"
-                    android:background="@android:color/transparent" />
+                    android:textSize="16sp" />
 
+                <!-- Texto exibindo o mês atual -->
                 <TextView
                     android:id="@+id/textViewMonth"
                     android:layout_width="wrap_content"
@@ -230,32 +246,34 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
+                <!-- Botão para ir ao próximo mês -->
                 <Button
                     android:id="@+id/buttonNextMonth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:background="@android:color/transparent"
                     android:text="Próximo"
                     android:textColor="@color/blue_1"
-                    android:textSize="16sp"
-                    android:background="@android:color/transparent" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
-
+            <!-- Layout para o calendário -->
             <GridLayout
                 android:id="@+id/gridLayoutCalendar"
                 android:layout_width="355dp"
                 android:layout_height="218dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="50dp"
                 android:background="@drawable/rounded_grid_background"
                 android:columnCount="7"
-                android:padding="10dp"
-                android:layout_marginBottom="50dp" />
+                android:padding="10dp" />
 
         </LinearLayout>
     </ScrollView>
 
+    <!-- Rodapé do app -->
     <LinearLayout
         android:id="@+id/footerLayout"
         android:layout_width="0dp"
