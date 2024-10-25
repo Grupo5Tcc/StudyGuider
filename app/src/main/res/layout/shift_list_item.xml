@@ -29,7 +29,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <!-- Professor -->
+            <!-- campo de professor -->
             <TextView
                 android:id="@+id/list_item_professor"
                 android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                 android:textColor="?attr/colorPrimary"
                 android:textSize="18sp" />
 
-            <!-- Matéria -->
+            <!-- campo de matéria -->
             <TextView
                 android:id="@+id/list_item_materia"
                 android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                 android:ellipsize="end"
                 android:singleLine="true" />
 
-            <!-- Dia -->
+            <!-- campo de dia -->
             <TextView
                 android:id="@+id/list_item_dia"
                 android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                 android:ellipsize="end"
                 android:singleLine="true" />
 
-            <!-- Hora -->
+            <!-- campo de hora -->
             <TextView
                 android:id="@+id/list_item_hora"
                 android:layout_width="match_parent"
