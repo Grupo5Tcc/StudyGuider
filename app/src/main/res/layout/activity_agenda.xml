@@ -6,54 +6,60 @@
     android:background="#FFEFDE"
     android:orientation="vertical">
 
+    <!-- Cabeçalho incluído no layout, com largura total e altura ajustada ao conteúdo -->
     <include
         android:id="@+id/header"
         layout="@layout/activity_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <!-- Contêiner para navegação do mês, com botões de navegação e título centralizado -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
         android:gravity="center_vertical"
-        android:layout_marginTop="30dp">
+        android:orientation="horizontal">
 
+        <!-- Botão para navegar para o mês anterior, transparente e sem bordas -->
         <Button
             android:id="@+id/buttonPreviousMonth"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:padding="8dp"
             android:textColor="@color/blue_1"
-            android:textSize="20sp"
-            android:layout_marginEnd="8dp" />
+            android:textSize="20sp" />
 
+        <!-- Título do mês atual, exibido entre os botões de navegação -->
         <TextView
             android:id="@+id/textViewMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/yeseva_one"
             android:text="Controle de eventos"
             android:textColor="@color/blue_1"
             android:textSize="26sp"
-            android:textStyle="bold"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp" />
+            android:textStyle="bold" />
 
+        <!-- Botão para navegar para o próximo mês, transparente e sem bordas -->
         <Button
             android:id="@+id/buttonNextMonth"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:padding="8dp"
             android:textColor="@color/blue_1"
-            android:textSize="20sp"
-            android:layout_marginStart="8dp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
+    <!-- CardView para exibir o calendário, com bordas arredondadas e sombra -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,23 +68,25 @@
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp">
 
+        <!-- GridLayout para o calendário, organizado em colunas para representar os dias da semana -->
         <GridLayout
             android:id="@+id/gridLayoutCalendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:columnCount="7" />
+            android:columnCount="7"
+            android:padding="16dp" />
     </androidx.cardview.widget.CardView>
 
+    <!-- Layout para exibir eventos salvos, organizado verticalmente -->
     <LinearLayout
         android:id="@+id/savedEventsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:outlineProvider="none"
-        android:padding="16dp"
-        />
+        android:padding="16dp" />
 
+    <!-- ScrollView para informações detalhadas de um evento, inicialmente invisível -->
     <ScrollView
         android:id="@+id/informationScrollView"
         android:layout_width="match_parent"
@@ -88,106 +96,116 @@
         android:padding="16dp"
         android:visibility="gone">
 
+        <!-- Layout interno com detalhes do evento, incluindo título, campos de texto e botões -->
         <LinearLayout
             android:id="@+id/informationLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:background="#4C7DAA"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:elevation="4dp">
+            android:background="#4C7DAA"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="16dp">
 
+            <!-- Título da seção de informações do evento -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bebas_neue"
+                android:paddingBottom="16dp"
                 android:text="INFORMAÇÕES DO EVENTO"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/bebas_neue"
-                android:paddingBottom="16dp" />
+                android:textStyle="bold" />
 
+            <!-- Subtítulo para o nome do evento -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bebas_neue"
+                android:paddingBottom="6dp"
                 android:text="Nome do Evento"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/bebas_neue"
-                android:paddingBottom="6dp" />
+                android:textStyle="bold" />
 
+            <!-- Campo de edição para o nome do evento -->
             <EditText
                 android:id="@+id/editTextEventName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
                 android:layout_marginBottom="12dp"
-                android:background="@android:color/white" />
+                android:background="@android:color/white"
+                android:padding="12dp" />
 
+            <!-- Subtítulo para a seleção do horário do evento -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bebas_neue"
+                android:paddingBottom="6dp"
                 android:text="Selecione o horário"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/bebas_neue"
-                android:paddingBottom="6dp" />
+                android:textStyle="bold" />
 
+            <!-- Campo para exibir e selecionar o horário do evento -->
             <TextView
                 android:id="@+id/textViewEventTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Clique Aqui"
-                android:textSize="18sp"
-                android:padding="12dp"
-                android:gravity="center"
                 android:layout_marginBottom="12dp"
-                android:background="@android:color/white" />
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="Clique Aqui"
+                android:textSize="18sp" />
 
+            <!-- Subtítulo para informações adicionais do evento -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bebas_neue"
+                android:paddingBottom="6dp"
                 android:text="Informações Adicionais"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/bebas_neue"
-                android:paddingBottom="6dp" />
+                android:textStyle="bold" />
 
+            <!-- Campo de edição para informações adicionais do evento -->
             <EditText
                 android:id="@+id/editTextAdditionalInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
                 android:layout_marginBottom="12dp"
-                android:background="@android:color/white" />
+                android:background="@android:color/white"
+                android:padding="12dp" />
 
+            <!-- Botão para escolher a cor do evento -->
             <Button
                 android:id="@+id/colorPickerButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Escolher Cor"
                 android:layout_marginBottom="8dp"
                 android:backgroundTint="#AACFE4"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:fontFamily="@font/bebas_neue"
                 android:padding="12dp"
-                android:fontFamily="@font/bebas_neue" />
+                android:text="Escolher Cor"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
 
+            <!-- Botão para salvar as informações do evento -->
             <Button
                 android:id="@+id/saveButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Salvar"
-                android:textSize="18sp"
                 android:backgroundTint="#AACFE4"
-                android:textColor="#FFFFFF"
+                android:fontFamily="@font/bebas_neue"
                 android:padding="12dp"
-                android:fontFamily="@font/bebas_neue" />
+                android:text="Salvar"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

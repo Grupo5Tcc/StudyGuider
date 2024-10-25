@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- View que serve como container para o conteúdo -->
     <View
         android:id="@+id/containerRec"
         android:layout_width="match_parent"
@@ -12,16 +13,17 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:background="@drawable/container_rec"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
+    <!-- TextView para exibir o título "MATÉRIA:" -->
     <TextView
         android:id="@+id/materia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/bebas_neue"
         android:text="MATÉRIA:"
         android:textColor="@color/blue_2"
@@ -29,12 +31,13 @@
         app:layout_constraintStart_toStartOf="@+id/containerRec"
         app:layout_constraintTop_toTopOf="@+id/containerRec" />
 
+    <!-- TextView para exibir o nome da matéria -->
     <TextView
         android:id="@+id/materiarec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15.7dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="15.7dp"
         android:fontFamily="@font/gabriela"
         android:text="XXXX-xxxx"
         android:textColor="@color/blue_2"
@@ -42,25 +45,27 @@
         app:layout_constraintStart_toStartOf="@+id/materia"
         app:layout_constraintTop_toTopOf="@+id/containerRec" />
 
+    <!-- TextView para exibir o título "PROFESSOR(A):" -->
     <TextView
         android:id="@+id/professor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="52dp"
         android:fontFamily="@font/bebas_neue"
-        android:text="PROFFESSOR(A):"
+        android:text="PROFESSOR(A):"
         android:textColor="@color/blue_2"
         android:textSize="16dp"
         app:layout_constraintStart_toStartOf="@+id/containerRec"
         app:layout_constraintTop_toTopOf="@+id/containerRec" />
 
+    <!-- TextView para exibir o nome do professor -->
     <TextView
         android:id="@+id/profrec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="51.7dp"
         android:layout_marginLeft="85dp"
+        android:layout_marginTop="51.7dp"
         android:fontFamily="@font/gabriela"
         android:text="XXXX-xxxx"
         android:textColor="@color/blue_2"
@@ -68,12 +73,13 @@
         app:layout_constraintStart_toStartOf="@+id/professor"
         app:layout_constraintTop_toTopOf="@+id/containerRec" />
 
+    <!-- TextView para exibir o título "NOTA:" -->
     <TextView
         android:id="@+id/nota"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="88dp"
         android:fontFamily="@font/bebas_neue"
         android:text="NOTA:"
         android:textColor="@color/blue_2"
@@ -81,12 +87,13 @@
         app:layout_constraintStart_toStartOf="@+id/containerRec"
         app:layout_constraintTop_toTopOf="@+id/containerRec" />
 
+    <!-- TextView para exibir a nota da matéria -->
     <TextView
         android:id="@+id/notarec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="87.7dp"
         android:layout_marginLeft="35dp"
+        android:layout_marginTop="87.7dp"
         android:fontFamily="@font/gabriela"
         android:text="XXXX-xxxx"
         android:textColor="@color/blue_2"
@@ -94,12 +101,13 @@
         app:layout_constraintStart_toStartOf="@+id/nota"
         app:layout_constraintTop_toTopOf="@+id/containerRec" />
 
+    <!-- TextView para exibir o título "CONTEÚDOS:" -->
     <TextView
         android:id="@+id/conteudos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="124dp"
         android:fontFamily="@font/bebas_neue"
         android:text="CONTEÚDOS:"
         android:textColor="@color/blue_2"
@@ -107,6 +115,7 @@
         app:layout_constraintStart_toStartOf="@+id/containerRec"
         app:layout_constraintTop_toTopOf="@+id/containerRec" />
 
+    <!-- LinearLayout para conter um campo de texto EditText -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -114,6 +123,7 @@
         app:layout_constraintBottom_toBottomOf="@id/conteudos"
         app:layout_constraintTop_toTopOf="@id/sujestoesrec">
 
+        <!-- EditText para inserção de conteúdos -->
         <EditText
             android:id="@+id/conteuos_txt"
             android:layout_width="match_parent"
@@ -128,81 +138,84 @@
             android:scrollbars="vertical"
             android:textColor="@color/blue_2"
             android:textSize="18dp" />
-
     </LinearLayout>
 
+    <!-- TextView para exibir o título "SUGESTÕES:" -->
     <TextView
         android:id="@+id/sujestoesrec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="310dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="310dp"
         android:fontFamily="@font/bebas_neue"
-        android:text="SUJESTÕES:"
+        android:text="SUGESTÕES:"
         android:textColor="@color/blue_2"
         android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@id/checkSujes1"
         app:layout_constraintStart_toStartOf="@+id/containerRec"
-        app:layout_constraintTop_toTopOf="@+id/containerRec"
-        app:layout_constraintBottom_toTopOf="@id/checkSujes1" />
+        app:layout_constraintTop_toTopOf="@+id/containerRec" />
 
+    <!-- Checkbox para sugestão 1 -->
     <CheckBox
         android:id="@+id/checkSujes1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:fontFamily="@font/gabriela"
-        android:text=" Refazer crediarias e exercicisos de sala;"
-        android:textColor="@color/black"
-        android:textSize="14dp"
         android:button="@drawable/checkbox"
         android:buttonTintMode="multiply"
+        android:fontFamily="@font/gabriela"
+        android:text=" Refazer atividades e exercícios de sala;"
+        android:textColor="@color/black"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@id/containerRec"
         app:layout_constraintBottom_toTopOf="@id/checkSujes2"
-        app:layout_constraintStart_toStartOf="@id/containerRec" />
+        app:layout_constraintStart_toStartOf="@+id/containerRec" />
 
+    <!-- Checkbox para sugestão 2 -->
     <CheckBox
         android:id="@+id/checkSujes2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:text=" Frequentaar os Plantões;"
-        android:textSize="14dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/gabriela"
         android:button="@drawable/checkbox"
         android:buttonTintMode="multiply"
+        android:fontFamily="@font/gabriela"
+        android:text=" Frequentar os plantões;"
+        android:textColor="@color/black"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@id/containerRec"
         app:layout_constraintBottom_toTopOf="@id/checkSujes3"
-        app:layout_constraintStart_toStartOf="@id/containerRec" />
+        app:layout_constraintStart_toStartOf="@+id/containerRec" />
 
+    <!-- Checkbox para sugestão 3 -->
     <CheckBox
         android:id="@+id/checkSujes3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:text=" Fazer listas (e corrigir); "
-        android:textSize="14dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/gabriela"
         android:button="@drawable/checkbox"
         android:buttonTintMode="multiply"
+        android:fontFamily="@font/gabriela"
+        android:text=" Fazer listas e corrigir;"
+        android:textColor="@color/black"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@id/containerRec"
         app:layout_constraintBottom_toTopOf="@id/checkSujes4"
-        app:layout_constraintStart_toStartOf="@id/containerRec" />
+        app:layout_constraintStart_toStartOf="@+id/containerRec" />
 
+    <!-- Checkbox para sugestão 4 -->
     <CheckBox
         android:id="@+id/checkSujes4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginBottom="10dp"
-        android:text=" Pesquisar exerc[cicios e corrigi-los. "
-        android:textSize="14dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/gabriela"
         android:button="@drawable/checkbox"
         android:buttonTintMode="multiply"
+        android:fontFamily="@font/gabriela"
+        android:text=" Resolver as provas anteriores."
+        android:textColor="@color/black"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@id/containerRec"
-        app:layout_constraintStart_toStartOf="@id/containerRec" />
+        app:layout_constraintStart_toStartOf="@+id/containerRec" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

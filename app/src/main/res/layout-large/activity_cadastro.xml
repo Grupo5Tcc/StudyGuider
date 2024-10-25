@@ -5,10 +5,11 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:screenOrientation="portrait"
     android:background="@color/orange_clearer"
+    android:screenOrientation="portrait"
     tools:context=".view.CadastroActivity">
 
+    <!-- ProgressBar para mostrar o carregamento -->
     <ProgressBar
         android:id="@+id/pgbLoading"
         android:layout_width="wrap_content"
@@ -20,6 +21,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- Container principal para cadastro -->
     <View
         android:id="@+id/ctrCadastro"
         android:layout_width="399dp"
@@ -33,31 +35,34 @@
         app:layout_constraintTop_toBottomOf="@+id/frameLayout"
         app:layout_constraintVertical_bias="0.858" />
 
+    <!-- Imagem de usuário -->
     <ImageView
         android:id="@+id/imgUser"
         android:layout_width="102dp"
         android:layout_height="99dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toTopOf="@id/ctrCadastro"
         app:layout_constraintEnd_toEndOf="@id/ctrCadastro"
         app:layout_constraintStart_toStartOf="@id/ctrCadastro"
+        app:layout_constraintTop_toTopOf="@id/ctrCadastro"
         app:layout_constraintVertical_bias="0.1"
         app:srcCompat="@drawable/img_perfil" />
 
+    <!-- Título da tela de cadastro -->
     <TextView
         android:id="@+id/textViewMonth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/yeseva_one"
         android:text="CADASTRO"
         android:textColor="@color/blue_dark"
         android:textSize="26dp"
         android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        app:layout_constraintTop_toBottomOf="@id/imgUser"
         app:layout_constraintEnd_toEndOf="@id/ctrCadastro"
-        app:layout_constraintStart_toStartOf="@id/ctrCadastro" />
+        app:layout_constraintStart_toStartOf="@id/ctrCadastro"
+        app:layout_constraintTop_toBottomOf="@id/imgUser" />
 
+    <!-- Campo para nome do usuário -->
     <EditText
         android:id="@+id/txtName"
         android:layout_width="match_parent"
@@ -79,6 +84,7 @@
         app:layout_constraintTop_toBottomOf="@id/textViewMonth"
         tools:ignore="TextFields" />
 
+    <!-- Campo para email do usuário -->
     <EditText
         android:id="@+id/txtEmail"
         android:layout_width="match_parent"
@@ -100,6 +106,7 @@
         app:layout_constraintTop_toBottomOf="@id/txtName"
         tools:ignore="TextFields" />
 
+    <!-- Campo para data de aniversario-->
     <EditText
         android:id="@+id/txtDate"
         android:layout_width="match_parent"
@@ -122,6 +129,7 @@
         app:layout_constraintTop_toBottomOf="@id/txtEmail"
         tools:ignore="TextFields" />
 
+    <!-- Campo para senha -->
     <EditText
         android:id="@+id/txtPassword"
         android:layout_width="match_parent"
@@ -143,6 +151,7 @@
         app:layout_constraintTop_toBottomOf="@id/txtDate"
         tools:ignore="TextFields" />
 
+    <!-- Botão para criar usuário -->
     <Button
         android:id="@+id/btnMenu"
         android:layout_width="250dp"
@@ -173,6 +182,7 @@
         android:layout_height="wrap_content"
         app:barrierDirection="left" />
 
+    <!-- FrameLayout para a parte superior da tela -->
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
@@ -182,12 +192,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!-- LinearLayout para o cabecalho da tela -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
+            <!-- Logo do app -->
             <ImageView
                 android:id="@+id/imglogo"
                 android:layout_width="63dp"
@@ -195,6 +207,7 @@
                 android:layout_marginRight="15dp"
                 app:srcCompat="@drawable/img_logo" />
 
+            <!-- Nome do app -->
             <TextView
                 android:id="@+id/lblTittle"
                 android:layout_width="wrap_content"
@@ -207,6 +220,8 @@
         </LinearLayout>
     </FrameLayout>
 
+
+    <!-- CheckBox para mostrar/ocultar senha -->
     <CheckBox
         android:id="@+id/ckb_mostrarSenhaCadastro"
         android:layout_width="match_parent"

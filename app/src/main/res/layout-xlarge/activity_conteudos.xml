@@ -13,31 +13,33 @@
         layout="@layout/activity_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- TextView que exibe o título da seção "Conteúdos" -->
     <TextView
         android:id="@+id/conteudos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Conteúdos"
         android:fontFamily="@font/yeseva_one"
+        android:text="Conteúdos"
+        android:textColor="@color/blue_2"
         android:textSize="26dp"
         android:textStyle="bold"
-        android:textColor="@color/blue_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header" />
 
+    <!-- TextView que exibe o nome da matéria -->
     <TextView
         android:id="@+id/nome_materia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/bebas_neue"
-        android:layout_marginLeft="20dp"
         android:text="Nome da Matéria"
         android:textColor="@color/blue_1"
         android:textSize="20dp"
@@ -45,18 +47,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/conteudos" />
 
+    <!-- Layout para o primeiro bimestre -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/primeiro_bimestre"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:paddingBottom="5dp"
         android:background="@drawable/ct_background_conteudos"
         android:fontFamily="@font/roboto_medium"
+        android:paddingBottom="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nome_materia">
 
+        <!-- TextView que exibe o título do primeiro bimestre -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,30 +73,32 @@
             app:layout_constraintStart_toStartOf="@id/primeiro_bimestre"
             app:layout_constraintTop_toTopOf="@id/primeiro_bimestre" />
 
+        <!-- Botão para adicionar conteúdo ao primeiro bimestre -->
         <ImageButton
             android:id="@+id/btn_add1"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/baseline_add_24"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_margin="3dp"
+            android:background="@drawable/baseline_add_24"
             app:layout_constraintEnd_toEndOf="@id/primeiro_bimestre"
             app:layout_constraintTop_toTopOf="@id/primeiro_bimestre" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Layout para o segundo bimestre -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/segundo_bimestre"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:paddingBottom="5dp"
         android:background="@drawable/ct_background_conteudos"
         android:fontFamily="@font/roboto_medium"
+        android:paddingBottom="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/primeiro_bimestre">
 
+        <!-- TextView que exibe o título do segundo bimestre -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -105,30 +111,32 @@
             app:layout_constraintStart_toStartOf="@id/segundo_bimestre"
             app:layout_constraintTop_toTopOf="@id/segundo_bimestre" />
 
+        <!-- Botão para adicionar conteúdo ao segundo bimestre -->
         <ImageButton
             android:id="@+id/btn_add2"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/baseline_add_24"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_margin="3dp"
+            android:background="@drawable/baseline_add_24"
             app:layout_constraintEnd_toEndOf="@id/segundo_bimestre"
             app:layout_constraintTop_toTopOf="@id/segundo_bimestre" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Layout para o terceiro bimestre -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/terceiro_bimestre"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:paddingBottom="5dp"
         android:background="@drawable/ct_background_conteudos"
         android:fontFamily="@font/roboto_medium"
+        android:paddingBottom="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/segundo_bimestre">
 
+        <!-- TextView que exibe o título do terceiro bimestre -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -141,30 +149,32 @@
             app:layout_constraintStart_toStartOf="@id/terceiro_bimestre"
             app:layout_constraintTop_toTopOf="@id/terceiro_bimestre" />
 
+        <!-- Botão para adicionar conteúdo ao terceiro bimestre -->
         <ImageButton
             android:id="@+id/btn_add3"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/baseline_add_24"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_margin="3dp"
+            android:background="@drawable/baseline_add_24"
             app:layout_constraintEnd_toEndOf="@id/terceiro_bimestre"
             app:layout_constraintTop_toTopOf="@id/terceiro_bimestre" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Layout para o quarto bimestre -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/quarto_bimestre"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:paddingBottom="5dp"
         android:background="@drawable/ct_background_conteudos"
         android:fontFamily="@font/roboto_medium"
+        android:paddingBottom="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/terceiro_bimestre">
 
+        <!-- TextView que exibe o título do quarto bimestre -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -177,18 +187,16 @@
             app:layout_constraintStart_toStartOf="@id/quarto_bimestre"
             app:layout_constraintTop_toTopOf="@id/quarto_bimestre" />
 
+        <!-- Botão para adicionar conteúdo ao quarto bimestre -->
         <ImageButton
             android:id="@+id/btn_add4"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/baseline_add_24"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_margin="3dp"
+            android:background="@drawable/baseline_add_24"
             app:layout_constraintEnd_toEndOf="@id/quarto_bimestre"
             app:layout_constraintTop_toTopOf="@id/quarto_bimestre" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
