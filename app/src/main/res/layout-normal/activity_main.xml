@@ -9,7 +9,7 @@
     android:background="@drawable/img_background_main"
     tools:context=".view.MainActivity" >
 
-
+    <!-- LinearLayout que contém os botões de login e cadastro -->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -20,8 +20,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.838">
+        app:layout_constraintVertical_bias="0.843">
 
+        <!-- Botão para login -->
         <Button
             android:id="@+id/btn_login"
             style="@android:style/Widget.Button"
@@ -37,6 +38,7 @@
             android:textSize="25sp"
             android:textStyle="bold" />
 
+        <!-- Botão para cadastro -->
         <Button
             android:id="@+id/btn_sing_up"
             style="@android:style/Widget.Button"
@@ -49,10 +51,11 @@
             android:background="@drawable/bg_bnt_intro_secundary_main"
             android:text="@string/btn_sing_up_main"
             android:textColor="@android:color/background_light"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textStyle="bold" />
     </LinearLayout>
 
+    <!-- Texto exibindo o nome do aplicativo -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="215dp"
@@ -67,6 +70,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.392" />
 
+    <!-- Imagem do logo do aplicativo -->
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="188dp"
@@ -76,7 +80,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.833"
+        app:layout_constraintVertical_bias="0.834"
         app:srcCompat="@drawable/img_logo_background_main" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

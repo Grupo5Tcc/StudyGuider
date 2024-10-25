@@ -7,13 +7,13 @@
     android:background="@drawable/img_background_main"
     tools:context=".view.SplashActivity">
 
-
+    <!-- Logo do App -->
     <ImageView
         android:id="@+id/splash"
-        android:layout_width="200dp"
+        android:layout_width="211dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="208dp"
+        android:layout_marginTop="140dp"
         android:src="@drawable/img_logo_background_main" />
 
     <!-- Título logo abaixo da imagemgm -->
@@ -22,10 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/splash"
         android:layout_centerHorizontal="true"
-        android:fontFamily="@font/outfit"
-        android:text="STUDYGUIDER"
+        android:fontFamily="@font/yeseva_one"
+        android:text="StudyGuider"
         android:textColor="@color/white"
-        android:textSize="35dp"
-        android:layout_marginTop="-15dp"/>
+        android:textSize="50sp" />
 
 </RelativeLayout>

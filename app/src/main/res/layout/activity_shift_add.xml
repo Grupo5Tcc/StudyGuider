@@ -7,15 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".view.PlantoesAddActivity">
 
+    <!-- Inclui o cabeçalho da atividade -->
     <include
         android:id="@+id/header"
         layout="@layout/activity_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- LinearLayout que contém todos os campos de entrada -->
     <LinearLayout
         android:id="@+id/fieldsLayout"
         android:layout_width="373dp"
@@ -29,6 +31,7 @@
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
 
+        <!-- Campo para inserir o nome do professor -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/professorLayout"
             style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
@@ -41,6 +44,7 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp">
 
+            <!-- Campo de entrada para o nome do professor -->
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/professorET"
                 android:layout_width="match_parent"
@@ -51,6 +55,7 @@
                 android:textColor="@color/blue_1" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Campo para inserir a matéria -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/materiaLayout"
             style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
@@ -63,6 +68,7 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp">
 
+            <!-- Campo de entrada para a materia -->
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/materiaET"
                 android:layout_width="match_parent"
@@ -73,6 +79,7 @@
                 android:textColor="@color/blue_1" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Campo para selecionar o dia -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/diaLayout"
             style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
@@ -85,6 +92,7 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp">
 
+            <!-- Campo de entrada para o dia -->
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/diaET"
                 android:layout_width="match_parent"
@@ -95,6 +103,7 @@
                 android:textColor="@color/blue_1" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Campo para selecionar a hora -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/horaLayout"
             style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
@@ -107,16 +116,17 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp">
 
+            <!-- Campo de entrada para a hora -->
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/horaET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_orange"
+                android:clickable="true"
+                android:focusable="false"
                 android:fontFamily="@font/yeseva_one"
                 android:inputType="none"
-                android:textColor="@color/blue_1"
-                android:focusable="false"
-                android:clickable="true" />
+                android:textColor="@color/blue_1" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
@@ -134,5 +144,4 @@
         android:textSize="16dp"
         app:backgroundTint="@color/blue_1"
         app:cornerRadius="10dp" />
-
 </RelativeLayout>

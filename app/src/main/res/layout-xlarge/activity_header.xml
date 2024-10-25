@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,6 +9,7 @@
     android:orientation="vertical"
     tools:context=".view.HomeActivity">
 
+    <!-- Cabeçalho do app que contém o logo, nome do usuário e imagem de perfil -->
     <FrameLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -16,6 +18,7 @@
         android:paddingTop="5dp"
         tools:ignore="MissingConstraints">
 
+        <!-- Logo do app-->
         <ImageView
             android:id="@+id/imglogo"
             android:layout_width="120dp"
@@ -24,6 +27,7 @@
             android:layout_marginStart="5dp"
             app:srcCompat="@drawable/img_logo" />
 
+        <!-- Nome do usuário exibido na barra de navegação -->
         <TextView
             android:id="@+id/txtUsuario"
             android:layout_width="wrap_content"
@@ -36,6 +40,7 @@
             android:textStyle="bold"
             android:textSize="38dp" />
 
+        <!-- Imagem do perfil do usuário -->
         <ImageView
             android:id="@+id/imgPerfil"
             android:layout_width="125dp"

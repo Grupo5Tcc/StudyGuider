@@ -28,16 +28,16 @@
                 android:id="@+id/lblTittle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/yeseva_one"
                 android:text="@string/about_us_page_title"
                 android:textColor="@color/blue_1"
                 android:textSize="26dp"
-                android:layout_gravity="center"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/header"/>
+                app:layout_constraintTop_toBottomOf="@id/header" />
 
             <!-- Item 1 -->
             <androidx.cardview.widget.CardView
@@ -45,8 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
 
@@ -109,8 +109,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
 
@@ -173,8 +173,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
 
@@ -238,8 +238,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
 
@@ -302,8 +302,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
 
@@ -366,8 +366,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
 
@@ -430,8 +430,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
 
@@ -494,8 +494,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="60dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginBottom="60dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
@@ -503,8 +503,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:gravity="center"
+                    android:orientation="vertical"
                     android:padding="10dp">
 
                     <ImageView
@@ -524,7 +524,7 @@
                         android:fontFamily="@font/roboto_medium"
                         android:text="@string/about_us_page_text_description_devs"
                         android:textColor="@color/blue_2"
-                        android:textSize="16dp"/>
+                        android:textSize="16dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

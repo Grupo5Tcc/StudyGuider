@@ -17,6 +17,7 @@
         android:background="@color/blue_2"
         android:padding="12sp">
 
+        <!-- Texto que exibe a matéria -->
         <TextView
             android:id="@+id/list_item_materia"
             android:layout_width="match_parent"
@@ -29,6 +30,7 @@
             android:textSize="30sp"
             android:layout_marginTop="8dp"/>
 
+        <!-- Texto que exibe o nome do professor -->
         <TextView
             android:id="@+id/list_item_professor"
             android:layout_width="match_parent"
