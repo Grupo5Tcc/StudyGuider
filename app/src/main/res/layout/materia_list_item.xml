@@ -12,6 +12,7 @@
     app:cardElevation="10dp">
 
     <RelativeLayout
+        android:id="@+id/materia_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/blue_2"
@@ -41,6 +42,26 @@
             android:gravity="center_horizontal"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="8dp"/>
+
+        <ImageView
+            android:id="@+id/image_editar"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="12dp"
+            android:contentDescription="@string/password_form_button"
+            android:src="@drawable/ic_password_form_branco" />
+
+        <ImageView
+            android:id="@+id/image_remover"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="45dp"
+            android:contentDescription="@string/delete_button"
+            android:src="@drawable/ic_delete_branco" />
 
     </RelativeLayout>
 

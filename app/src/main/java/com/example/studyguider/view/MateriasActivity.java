@@ -3,6 +3,7 @@ package com.example.studyguider.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.studyguider.R;
-import com.example.studyguider.adapter.SubjectsAdapter;
+import com.example.studyguider.adapter.MateriasAdapter;
 import com.example.studyguider.models.Materias;
 import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -98,14 +99,15 @@ public class MateriasActivity extends AppCompatActivity {
                             }
 
 
-                            SubjectsAdapter adapter = new SubjectsAdapter(MateriasActivity.this, arrayList);
+                            MateriasAdapter adapter = new MateriasAdapter(MateriasActivity.this, arrayList);
                             recyclerView.setAdapter(adapter);
 
 
-                            adapter.setOnItemClickListener(new SubjectsAdapter.OnItemClickListener() {
+                            adapter.setOnItemClickListener(new MateriasAdapter.OnItemClickListener() {
                                 @Override
-                                public void onClick(Materias subjects) {
-                                    App.materia = subjects;
+                                public void onClick(Materias materias) {
+                                    Log.d("MateriasAdapter", "Item clicked: " + materias.toString());
+                                    App.materia = materias;
                                     startActivity(new Intent(MateriasActivity.this, ConteudosActivity.class));
                                 }
                             });

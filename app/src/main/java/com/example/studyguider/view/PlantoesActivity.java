@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studyguider.R;
-import com.example.studyguider.adapter.ShiftAdapter;
+import com.example.studyguider.adapter.PlantoesAdapter;
 import com.example.studyguider.models.Plantoes;
 import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,7 +34,7 @@ public class PlantoesActivity extends AppCompatActivity {
     private HeaderViewModel headerViewModel;
     private RecyclerView recyclerView;
     private FloatingActionButton add, refresh;
-    private ShiftAdapter adapter;
+    private PlantoesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,10 +86,10 @@ public class PlantoesActivity extends AppCompatActivity {
                                 arrayList.add(shifts);
                             }
 
-                            ShiftAdapter adapter = new ShiftAdapter(PlantoesActivity.this, arrayList);
+                            PlantoesAdapter adapter = new PlantoesAdapter(PlantoesActivity.this, arrayList);
                             recyclerView.setAdapter(adapter);
 
-                            adapter.setOnItemClickListener(new ShiftAdapter.OnItemClickListener() {
+                            adapter.setOnItemClickListener(new PlantoesAdapter.OnItemClickListener() {
                                 @Override
                                 public void onClick(Plantoes shifts) {
                                     App.plantoes = shifts;

@@ -22,13 +22,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> {
+public class PlantoesAdapter extends RecyclerView.Adapter<PlantoesAdapter.ViewHolder> {
     private static final String TAG = "UserAdapter";
     private final Context context;
     private final ArrayList<Plantoes> arrayList;
     private OnItemClickListener onItemClickListener;
 
-    public ShiftAdapter(Context context, ArrayList<Plantoes> arrayList) {
+    public PlantoesAdapter(Context context, ArrayList<Plantoes> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -36,7 +36,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.shift_list_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.plantoes_list_item, parent, false);
         return new ViewHolder(view);
     }
 

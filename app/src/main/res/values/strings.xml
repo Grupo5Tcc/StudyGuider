@@ -74,6 +74,7 @@
 
     <!-- Shifts string-->
     <string name="delete_button" translatable="false">Remover item</string>
+    <string name="password_form_button" translatable="false">Editar item</string>
     <string name="back_button_description" translatable="false">Voltar</string>
 
 </resources>

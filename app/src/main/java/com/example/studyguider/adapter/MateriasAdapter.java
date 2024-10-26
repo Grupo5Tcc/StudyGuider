@@ -1,6 +1,7 @@
 package com.example.studyguider.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,12 @@ import com.example.studyguider.models.Materias;
 
 import java.util.ArrayList;
 
-public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHolder> {
+public class MateriasAdapter extends RecyclerView.Adapter<MateriasAdapter.ViewHolder> {
     Context context;
-    ArrayList<Materias> arrayList;
-    OnItemClickListener onItemClickListener;
+    private ArrayList<Materias> arrayList;
+    private OnItemClickListener onItemClickListener;
 
-    public SubjectsAdapter(Context context, ArrayList<Materias> arrayList) {
+    public MateriasAdapter(Context context, ArrayList<Materias> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -33,9 +34,15 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.nomeMateria.setText(arrayList.get(position).getNomeMateria());
-        holder.professor.setText(arrayList.get(position).getProfessor());
-        holder.itemView.setOnClickListener(view -> onItemClickListener.onClick(arrayList.get(position)));
+        Materias materia = arrayList.get(position);
+        holder.nomeMateria.setText(materia.getNomeMateria());
+        holder.professor.setText(materia.getProfessor());
+
+        holder.itemView.setOnClickListener(view -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onClick(materia);
+            }
+        });
     }
 
     public int getItemCount() {

@@ -82,6 +82,10 @@
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider" />
         <activity
+            android:name=".view.ConteudosActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Material3StudyGuider" />
+        <activity
             android:name=".view.ControleNotasEditActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider"/>
