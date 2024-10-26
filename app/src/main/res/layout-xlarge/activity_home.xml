@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/light_orange"
     android:orientation="vertical"
-    tools:context=".view.HomeActivity">
+    tools:context=".view.HomeActivity"
+    tools:ignore="MissingDefaultResource">
 
     <FrameLayout
         android:id="@+id/header"
@@ -29,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
-            android:layout_marginRight="150"
+            android:layout_marginRight="150dp"
             android:fontFamily="@font/yeseva_one"
             android:text="@string/name_user_navbar"
             android:textColor="@color/white"
