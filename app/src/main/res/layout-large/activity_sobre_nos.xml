@@ -8,12 +8,14 @@
     android:orientation="vertical"
     tools:context=".view.SobreNosActivity">
 
+    <!-- cabeçalho incluso -->
     <include
         android:id="@+id/header"
         layout="@layout/activity_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <!-- scroll para rolagem de tela -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -23,39 +25,41 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Título com estilo mais suave e alinhamento -->
+            <!-- Título com alinhamento -->
             <TextView
                 android:id="@+id/lblTittle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/yeseva_one"
                 android:text="@string/about_us_page_title"
                 android:textColor="@color/blue_1"
                 android:textSize="26dp"
-                android:layout_gravity="center"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/header"/>
+                app:layout_constraintTop_toBottomOf="@id/header" />
 
-            <!-- Item 1 -->
+            <!-- card para PO -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/item1_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
 
+                <!-- alinhar informações -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="10dp">
 
+                    <!-- foto da PO -->
                     <ImageView
                         android:id="@+id/img1"
                         android:layout_width="85dp"
@@ -63,12 +67,14 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/img2" />
 
+                    <!-- alinhar informações -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:orientation="vertical">
 
+                        <!-- nome do integrante -->
                         <TextView
                             android:id="@+id/name1"
                             android:layout_width="wrap_content"
@@ -80,6 +86,8 @@
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
+
+                        <!-- idade -->
                         <TextView
                             android:id="@+id/age1"
                             android:layout_width="wrap_content"
@@ -90,6 +98,7 @@
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
+                        <!-- função -->
                         <TextView
                             android:id="@+id/role1"
                             android:layout_width="wrap_content"
@@ -103,23 +112,25 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Item 2 -->
+            <!-- card para UI/UX -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/item2_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
 
+                <!-- alinhar informações -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="10dp">
 
+                    <!-- foto da UI/UX -->
                     <ImageView
                         android:id="@+id/img2"
                         android:layout_width="85dp"
@@ -127,12 +138,14 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/img5" />
 
+                    <!-- alinhar informações -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:orientation="vertical">
 
+                        <!-- nome do integrante -->
                         <TextView
                             android:id="@+id/name2"
                             android:layout_width="wrap_content"
@@ -144,6 +157,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
+                        <!-- idade -->
                         <TextView
                             android:id="@+id/age2"
                             android:layout_width="wrap_content"
@@ -154,6 +168,7 @@
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
+                        <!-- função -->
                         <TextView
                             android:id="@+id/role2"
                             android:layout_width="wrap_content"
@@ -167,23 +182,25 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Item 3 -->
+            <!-- card para LT -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/item3_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
 
+                <!-- alinhar informações -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="10dp">
 
+                    <!-- foto da LT -->
                     <ImageView
                         android:id="@+id/img3"
                         android:layout_width="85dp"
@@ -191,12 +208,14 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/img4" />
 
+                    <!-- alinhar informações -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:orientation="vertical">
 
+                        <!-- nome do integrante -->
                         <TextView
                             android:id="@+id/name3"
                             android:layout_width="wrap_content"
@@ -208,6 +227,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
+                        <!-- idade -->
                         <TextView
                             android:id="@+id/age3"
                             android:layout_width="wrap_content"
@@ -218,6 +238,7 @@
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
+                        <!-- função -->
                         <TextView
                             android:id="@+id/role3"
                             android:layout_width="wrap_content"
@@ -232,23 +253,25 @@
             </androidx.cardview.widget.CardView>
 
 
-            <!-- Item 4 -->
+            <!-- card para Deselvolvedor -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/item4_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
 
+                <!-- alinhar informações -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="10dp">
 
+                    <!-- foto do Desenvolvedor -->
                     <ImageView
                         android:id="@+id/img4"
                         android:layout_width="85dp"
@@ -256,12 +279,14 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/img7" />
 
+                    <!-- alinhar informações -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:orientation="vertical">
 
+                        <!-- nome do integrante -->
                         <TextView
                             android:id="@+id/name4"
                             android:layout_width="wrap_content"
@@ -273,6 +298,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
+                        <!-- idade -->
                         <TextView
                             android:id="@+id/age4"
                             android:layout_width="wrap_content"
@@ -283,6 +309,7 @@
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
+                        <!-- função -->
                         <TextView
                             android:id="@+id/role4"
                             android:layout_width="wrap_content"
@@ -296,23 +323,25 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Item 5 -->
+            <!-- card para Deselvolvedora -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/item5_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
 
+                <!-- alinhar informações -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="10dp">
 
+                    <!-- foto da Desenvolvedora -->
                     <ImageView
                         android:id="@+id/img5"
                         android:layout_width="85dp"
@@ -320,12 +349,14 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/img1" />
 
+                    <!-- alinhar informações -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:orientation="vertical">
 
+                        <!-- nome do integrante -->
                         <TextView
                             android:id="@+id/name5"
                             android:layout_width="wrap_content"
@@ -337,6 +368,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
+                        <!-- idade -->
                         <TextView
                             android:id="@+id/age5"
                             android:layout_width="wrap_content"
@@ -347,6 +379,7 @@
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
+                        <!-- função -->
                         <TextView
                             android:id="@+id/role5"
                             android:layout_width="wrap_content"
@@ -360,23 +393,25 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-
+            <!-- card para Deselvolvedora -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/item6_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
 
+                <!-- alinhar informações -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="10dp">
 
+                    <!-- foto da Desenvolvedora -->
                     <ImageView
                         android:id="@+id/img6"
                         android:layout_width="85dp"
@@ -384,12 +419,14 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/img3" />
 
+                    <!-- alinhar informações -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:orientation="vertical">
 
+                        <!-- nome do integrante -->
                         <TextView
                             android:id="@+id/name6"
                             android:layout_width="wrap_content"
@@ -401,6 +438,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
+                        <!-- idade -->
                         <TextView
                             android:id="@+id/age6"
                             android:layout_width="wrap_content"
@@ -411,6 +449,7 @@
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
+                        <!-- função -->
                         <TextView
                             android:id="@+id/role6"
                             android:layout_width="wrap_content"
@@ -424,23 +463,25 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Item 7 -->
+            <!-- card para Deselvolvedora -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/item7_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
 
+                <!-- alinhar informações -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="10dp">
 
+                    <!-- foto da Desenvolvedora -->
                     <ImageView
                         android:id="@+id/img7"
                         android:layout_width="85dp"
@@ -448,12 +489,14 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/img6" />
 
+                    <!-- alinhar informações -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:orientation="vertical">
 
+                        <!-- nome do integrante -->
                         <TextView
                             android:id="@+id/name7"
                             android:layout_width="wrap_content"
@@ -465,6 +508,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
+                        <!-- idade -->
                         <TextView
                             android:id="@+id/age7"
                             android:layout_width="wrap_content"
@@ -475,6 +519,7 @@
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
+                        <!-- função -->
                         <TextView
                             android:id="@+id/role7"
                             android:layout_width="wrap_content"
@@ -488,25 +533,27 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Item 8 -->
+            <!-- card para todos -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/item8_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_marginTop="60dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginBottom="60dp"
                 app:cardBackgroundColor="#FFF3E6"
                 app:cardCornerRadius="10dp">
 
+                <!-- alinhar informações -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:gravity="center"
+                    android:orientation="vertical"
                     android:padding="10dp">
 
+                    <!-- foto de todos os integrantes -->
                     <ImageView
                         android:id="@+id/img8"
                         android:layout_width="350dp"
@@ -515,7 +562,7 @@
                         android:scaleType="fitCenter"
                         android:src="@drawable/img_sobre_nos" />
 
-
+                    <!-- descrição sobre os integrantes  -->
                     <TextView
                         android:id="@+id/lblDescription"
                         android:layout_width="wrap_content"
@@ -524,7 +571,7 @@
                         android:fontFamily="@font/roboto_medium"
                         android:text="@string/about_us_page_text_description_devs"
                         android:textColor="@color/blue_2"
-                        android:textSize="16dp"/>
+                        android:textSize="16dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

@@ -20,12 +20,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!-- alinhar logo e titulo -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
+            <!-- logo -->
             <ImageView
                 android:id="@+id/imglogo"
                 android:layout_width="63dp"
@@ -33,6 +35,7 @@
                 android:layout_marginRight="15dp"
                 app:srcCompat="@drawable/img_logo" />
 
+            <!-- titulo -->
             <TextView
                 android:id="@+id/lblTittle"
                 android:layout_width="wrap_content"
@@ -60,7 +63,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Container View with background -->
+            <!-- Container login -->
             <LinearLayout
                 android:layout_width="370dp"
                 android:layout_height="600dp"
@@ -70,6 +73,7 @@
                 android:layout_marginTop="30dp"
                 android:padding="16dp">
 
+                <!-- imagem de user -->
                 <ImageView
                     android:id="@+id/imgUser"
                     android:layout_width="122dp"
@@ -78,6 +82,7 @@
                     android:layout_marginTop="20dp"
                     app:srcCompat="@drawable/img_perfil" />
 
+                <!-- Titulo da tela -->
                 <TextView
                     android:id="@+id/txtViewMonth"
                     android:layout_width="wrap_content"
@@ -90,6 +95,7 @@
                     android:textSize="26dp"
                     android:textStyle="bold" />
 
+                <!-- Campo para e-mail do usuário -->
                 <EditText
                     android:id="@+id/txtEmail"
                     android:layout_width="match_parent"
@@ -103,6 +109,7 @@
                     android:padding="10dp"
                     android:textColor="@color/black" />
 
+                <!-- Campo para a senha do usuário -->
                 <EditText
                     android:id="@+id/txtPassword"
                     android:layout_width="match_parent"
@@ -116,6 +123,7 @@
                     android:padding="10dp"
                     android:textColor="@color/black" />
 
+                <!-- CheckBox para mostrar/ocultar senha -->
                 <CheckBox
                     android:id="@+id/ckb_mostrarSenhaLogin"
                     android:layout_width="match_parent"
@@ -127,6 +135,7 @@
                     android:textColor="@color/black"
                     app:layout_constraintHorizontal_bias="0.498" />
 
+                <!-- esqueci senha -->
                 <TextView
                     android:id="@+id/lblForgetPassword"
                     android:layout_width="wrap_content"
@@ -138,6 +147,7 @@
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
+                <!-- botao para cadastrar -->
                 <Button
                     android:id="@+id/btnMenu"
                     android:layout_width="250dp"
@@ -151,6 +161,7 @@
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
+                <!-- botao para logar -->
                 <Button
                     android:id="@+id/btnSingUp"
                     android:layout_width="250dp"
@@ -168,7 +179,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Loading ProgressBar -->
+    <!-- ProgressBar para mostrar o carregamento -->
     <ProgressBar
         android:id="@+id/pgbLoading"
         android:layout_width="wrap_content"
