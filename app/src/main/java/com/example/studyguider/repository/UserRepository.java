@@ -50,8 +50,8 @@ public class UserRepository {
                                 : 0; // Valor padrão
 
                         // Verificando a existência do campo "recovery" e convertendo para int
-                        int recovery = documentSnapshot.contains("recovery")
-                                ? documentSnapshot.getLong("recovery").intValue()
+                        int recovery = documentSnapshot.contains("rec")
+                                ? documentSnapshot.getLong("rec").intValue()
                                 : 0; // Valor padrão
 
                         Log.d("UserRepository", "Name: " + name + ", Email: " + email + ", DOB: " + dob + ", Absence: " + absence + ", Recovery: " + recovery);
@@ -73,7 +73,7 @@ public class UserRepository {
         userProfileData.put("e_mail", email);
         userProfileData.put("date_of_birth", dob);
         userProfileData.put("absence", 0); // ou outro valor inicial
-        userProfileData.put("recovery", 0); // Adiciona o campo de recuperação com valor inicial
+        userProfileData.put("rec", 0); // Adiciona o campo de recuperação com valor inicial
 
         firebaseFirestore.collection("user").document(userID).set(userProfileData)
                 .addOnSuccessListener(aVoid -> Log.d("UserRepository", "User profile created successfully"))
@@ -83,7 +83,7 @@ public class UserRepository {
     public void updateRecovery(String userID, int newRecoveryValue) {
         DocumentReference documentReference = firebaseFirestore.collection("user").document(userID);
 
-        documentReference.update("recovery", newRecoveryValue)
+        documentReference.update("rec", newRecoveryValue)
                 .addOnSuccessListener(aVoid -> Log.d("UserRepository", "Recovery updated successfully"))
                 .addOnFailureListener(e -> Log.e("UserRepository", "Error updating recovery: " + e.getMessage()));
     }

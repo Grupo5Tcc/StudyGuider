@@ -21,6 +21,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -30,6 +32,8 @@ import java.util.Objects;
 public class ControleNotasEditActivity extends AppCompatActivity {
 
     private HeaderViewModel headerViewModel;
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +146,7 @@ public class ControleNotasEditActivity extends AppCompatActivity {
                                     }else{
                                         notaPreciso = "Não precisa de pontos para passsar!!!" ;
                                         Toast.makeText(ControleNotasEditActivity.this, "Não está de recuperação!!", Toast.LENGTH_SHORT).show();
+                                        updateUserRecCount(-1);
                                     }
 
                                 }
@@ -177,5 +182,27 @@ public class ControleNotasEditActivity extends AppCompatActivity {
         });
         Log.d("EditNotas", "App.notas.getId(): " + App.notas.getId());
 
+    }
+
+    public void updateUserRecCount(int count) {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            return;
+        }
+
+        DocumentReference userDocRef = db.collection("user").document(currentUser.getUid());
+
+        db.runTransaction(transaction -> {
+            DocumentSnapshot snapshot = transaction.get(userDocRef);
+            long currentAbsenceCount = snapshot.contains("rec") ? snapshot.getLong("rec") : 0;
+            long newAbsenceCount = currentAbsenceCount + count;
+            transaction.update(userDocRef, "rec", newAbsenceCount);
+            return null;
+        }).addOnSuccessListener(aVoid -> {
+            // Successfully updated
+            Log.d("db", "Successful update of absence count");
+        }).addOnFailureListener(e -> {
+            Log.d("db_error", "Error updating absence count: " + e.toString());
+        });
     }
 }
