@@ -19,6 +19,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -29,6 +30,8 @@ public class ControleNotasAddActivity extends AppCompatActivity {
 
     private HeaderViewModel headerViewModel;
     private static final String TAG = "AddNotas";
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +89,7 @@ public class ControleNotasAddActivity extends AppCompatActivity {
                     if(ntSoma < 6){
                         ntPreciso = 6 - ntSoma;
                         notaPreciso = String.valueOf(ntPreciso);
+                        updateUserRecCount(1);
                     }else{
                         notaPreciso = "Não precisa de pontos para passar!!";
                         Toast.makeText(ControleNotasAddActivity.this, "Não está de recuperação!!", Toast.LENGTH_SHORT).show();
@@ -117,6 +121,28 @@ public class ControleNotasAddActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void updateUserRecCount(int count) {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            return;
+        }
+
+        DocumentReference userDocRef = db.collection("user").document(currentUser.getUid());
+
+        db.runTransaction(transaction -> {
+            DocumentSnapshot snapshot = transaction.get(userDocRef);
+            long currentAbsenceCount = snapshot.contains("rec") ? snapshot.getLong("rec") : 0;
+            long newAbsenceCount = currentAbsenceCount + count;
+            transaction.update(userDocRef, "rec", newAbsenceCount);
+            return null;
+        }).addOnSuccessListener(aVoid -> {
+            // Successfully updated
+            Log.d("db", "Successful update of absence count");
+        }).addOnFailureListener(e -> {
+            Log.d("db_error", "Error updating absence count: " + e.toString());
+        });
     }
 
 }
