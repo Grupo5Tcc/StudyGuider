@@ -54,7 +54,8 @@ public class ControleRecuperacoes extends AppCompatActivity {
             headerViewModel.fetchUsername(currentUser1);
         }
 
-         db.collection("notas").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        // Obtém coleção "notas" do Firestore e verifica se o aluno está em recuperação
+        db.collection("notas").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -71,6 +72,7 @@ public class ControleRecuperacoes extends AppCompatActivity {
 
                         prova = Float.parseFloat(po);
                         pre = Float.parseFloat(pe);
+
 
                         if ((prova - pre) < 0) {
                             possuiRecuperacao = true;
@@ -100,7 +102,7 @@ public class ControleRecuperacoes extends AppCompatActivity {
                             }
                         }
                     }
-
+                    // Se nenhuma recuperação é encontrada, exibe um aviso
                     if (!possuiRecuperacao) {
                         Toast.makeText(ControleRecuperacoes.this, "Não possui nenhuma Recuperação", Toast.LENGTH_SHORT).show();
                     }
@@ -111,6 +113,7 @@ public class ControleRecuperacoes extends AppCompatActivity {
         });
     }
 
+    // Método que carrega os dados da recuperação de Firestore para preencher o container correspondente
     private void preencherDadosDoFirestore(String nomeMateria, View container) {
         db.collection("rec").document(nomeMateria).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -125,6 +128,7 @@ public class ControleRecuperacoes extends AppCompatActivity {
                         CheckBox c4 = container.findViewById(R.id.checkSujes4);
                         EditText conteudos = container.findViewById(R.id.conteuos_txt);
 
+                        // Define o status de cada checkbox e o conteúdo do campo de texto
                         c1.setChecked(document.getBoolean("c1"));
                         c2.setChecked(document.getBoolean("c2"));
                         c3.setChecked(document.getBoolean("c3"));
@@ -138,6 +142,7 @@ public class ControleRecuperacoes extends AppCompatActivity {
         });
     }
 
+    // Método para calcular a nota total da matéria
     private float calcularNota(DocumentSnapshot document) {
         float cred = Float.parseFloat(document.getString("cred"));
         float trab = Float.parseFloat(document.getString("trab"));
@@ -146,7 +151,7 @@ public class ControleRecuperacoes extends AppCompatActivity {
         return cred + trab + list + prova;
     }
 
-
+    // Atualiza visualmente o container com informações de matéria e nota, incluindo checkboxes e campo de texto
     private void atualizarContainer(View container, String nomeMateria, float nota) {
 
         TextView materiaTextView = container.findViewById(R.id.materiarec);
@@ -194,7 +199,7 @@ public class ControleRecuperacoes extends AppCompatActivity {
         });
     }
 
-
+    // Exclui dados de recuperação do Firestore e remove o container do layout
     private void excluirDados(String nomeMateria, View container) {
         db.collection("rec").document(nomeMateria)
                 .delete()
@@ -217,8 +222,9 @@ public class ControleRecuperacoes extends AppCompatActivity {
                 });
     }
 
+    // Salva dados de checkboxes e conteúdo no Firestore
     private void salvarDados(String nomeMateria, View container) {
-        salvarDadosAutomaticamente = false;
+        salvarDadosAutomaticamente = false; // Desativa o salvamento automático enquanto salva dados manualmente
 
         CheckBox c1 = container.findViewById(R.id.checkSujes1);
         CheckBox c2 = container.findViewById(R.id.checkSujes2);
@@ -239,6 +245,7 @@ public class ControleRecuperacoes extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         Log.d("Firestore", "Dados de " + nomeMateria + " gravados com sucesso!");
                         Toast.makeText(ControleRecuperacoes.this, "Dados de " + nomeMateria + " salvos com sucesso!", Toast.LENGTH_SHORT);
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -249,7 +256,8 @@ public class ControleRecuperacoes extends AppCompatActivity {
                     }
                 });
 
-        salvarDadosAutomaticamente = true;
+        salvarDadosAutomaticamente = true; // Reativa o salvamento automático
+
     }
 
 }

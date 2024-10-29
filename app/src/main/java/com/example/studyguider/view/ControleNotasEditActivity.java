@@ -54,17 +54,19 @@ public class ControleNotasEditActivity extends AppCompatActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        // Inicializa os campos de entrada para edição das notas
         TextInputEditText nomeMateriaET = findViewById(R.id.nomeMateriaET);
         TextInputEditText notaCredET = findViewById(R.id.notaCredET);
         TextInputEditText notaTrabET = findViewById(R.id.notaTrabET);
         TextInputEditText notaListaET = findViewById(R.id.notaListaET);
         TextInputEditText notaProvaET = findViewById(R.id.notaProvaET);
 
-        TextView notaPrecisoTxt = findViewById(R.id.notaPrecisoTxt);
+        TextView notaPrecisoTxt = findViewById(R.id.notaPrecisoTxt);  // Campo para exibir a nota necessária
 
-        MaterialButton save = findViewById(R.id.save);
-        MaterialButton delete = findViewById(R.id.delete);
+        MaterialButton save = findViewById(R.id.save); // Botão para salvar as alterações
+        MaterialButton delete = findViewById(R.id.delete); // Botão para excluir as notas
 
+        // Define os valores atuais das notas nos campos de entrada
         nomeMateriaET.setText(App.notas.getNomeMateria());
         notaCredET.setText(App.notas.getCred());
         notaListaET.setText(App.notas.getList());
@@ -72,6 +74,7 @@ public class ControleNotasEditActivity extends AppCompatActivity {
         notaPrecisoTxt.setText(App.notas.getPre());
         notaProvaET.setText(App.notas.getProva());
 
+        // Logs para ajudar no diagnóstico dos valores que estão sendo carregados
         Log.d("EditNotas", "nomeMateria: " + App.notas.getNomeMateria());
         Log.d("EditNotas", "notaCred: " + App.notas.getCred());
         Log.d("EditNotas", "notaLista: " + App.notas.getList());
@@ -79,6 +82,8 @@ public class ControleNotasEditActivity extends AppCompatActivity {
         Log.d("EditNotas", "notaPreciso: " + App.notas.getPre());
         Log.d("EditNotas", "notaProva: " + App.notas.getProva());
 
+
+        // Lógica de exclusão de notas
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +116,7 @@ public class ControleNotasEditActivity extends AppCompatActivity {
                         .show();
             }
         });
-
+        // Lógica de salvamento de alterações
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +127,7 @@ public class ControleNotasEditActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 String notaPreciso;
 
+                                // Recupera e valida os valores inseridos nos campos de entrada
                                 String nomeMateria = Objects.requireNonNull(nomeMateriaET.getText()).toString().trim();
                                 String notaCred = Objects.requireNonNull(notaCredET.getText()).toString().trim();
                                 String notaTrab = Objects.requireNonNull(notaTrabET.getText()).toString().trim();
@@ -151,6 +157,7 @@ public class ControleNotasEditActivity extends AppCompatActivity {
 
                                 }
 
+                                // Cria um mapa para atualizar as informações da nota no Firestore
                                 Map<String, Object> notas = new HashMap<>();
                                 notas.put("nomeMateria", Objects.requireNonNull(nomeMateriaET.getText()).toString());
                                 notas.put("cred", Objects.requireNonNull(notaCredET.getText()).toString());
@@ -180,6 +187,7 @@ public class ControleNotasEditActivity extends AppCompatActivity {
                         .show();
             }
         });
+        // Log para o ID da nota sendo editada
         Log.d("EditNotas", "App.notas.getId(): " + App.notas.getId());
 
     }

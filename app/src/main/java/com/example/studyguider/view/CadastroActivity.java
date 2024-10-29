@@ -40,12 +40,14 @@ public class CadastroActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_cadastro);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        // Define padding automático para evitar sobreposição com barras de sistema
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        // Inicializa ViewModel para gerenciar lógica de registro
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
 
         EditText etUsername = findViewById(R.id.txtName);
@@ -54,6 +56,7 @@ public class CadastroActivity extends AppCompatActivity {
         EditText etDateOfBirth = findViewById(R.id.txtDate);
         CheckBox ckb_mostrarSenhaCadastro  = findViewById(R.id.ckb_mostrarSenhaCadastro);
 
+        // Configura o campo de data de nascimento com um DatePickerDialog
         etDateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +76,7 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
 
+        // Botão de registro: valida campos e exibe barra de progresso
         Button buttonMenu = findViewById(R.id.btnMenu);
         View progressBar = findViewById(R.id.pgbLoading);
         buttonMenu.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +95,7 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
 
-        //Botão mostrar senha
+        // Checkbox para exibir/ocultar senha
         ckb_mostrarSenhaCadastro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -105,7 +109,7 @@ public class CadastroActivity extends AppCompatActivity {
         });
 
     }
-
+    // Valida os campos obrigatórios e formatações de entrada
     private boolean validateInput(String username, String email, String password, String dateOfBirth) {
         if (TextUtils.isEmpty(username)) {
             Toast.makeText(CadastroActivity.this, "Please enter your full username", Toast.LENGTH_LONG).show();

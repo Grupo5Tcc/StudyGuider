@@ -54,6 +54,7 @@ public class ControleNotasAddActivity extends AppCompatActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        // Referência aos campos de entrada para inserir informações sobre a nota
         TextInputEditText nomeMateriaET = findViewById(R.id.nomeMateriaET);
         TextInputEditText notaCredET = findViewById(R.id.notaCredET);
         TextInputEditText notaTrabET = findViewById(R.id.notaTrabET);
@@ -66,18 +67,21 @@ public class ControleNotasAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String notaPreciso;
+                String notaPreciso; // Variável para armazenar a nota necessária para aprovação
 
+                // Recupera e valida os valores inseridos nos campos de entrada
                 String nomeMateria = Objects.requireNonNull(nomeMateriaET.getText()).toString().trim();
                 String notaCred = Objects.requireNonNull(notaCredET.getText()).toString().trim();
                 String notaTrab = Objects.requireNonNull(notaTrabET.getText()).toString().trim();
                 String notaList = Objects.requireNonNull(notaListaET.getText()).toString().trim();
                 String notaPro = Objects.requireNonNull(notaProvaET.getText()).toString().trim();
 
+                // Verifica se todos os campos foram preenchidos
                 if (nomeMateria.isEmpty() || notaCred.isEmpty() || notaTrab.isEmpty() || notaList.isEmpty() || notaPro.isEmpty()) {
                     Toast.makeText(ControleNotasAddActivity.this, "Por favor, preencha todos os campos!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
+                    // Calcula se é necessário mais pontos para aprovação
                     float ntPreciso, ntCred, ntTrab, ntList;
 
                     ntCred = Float.parseFloat(notaCred);
@@ -97,6 +101,7 @@ public class ControleNotasAddActivity extends AppCompatActivity {
 
                 }
 
+                // Cria um mapa para armazenar as informações da nota a serem enviadas ao Firestore
                 Map<String, Object> notas = new HashMap<>();
                 notas.put("nomeMateria", Objects.requireNonNull(nomeMateriaET.getText()).toString());
                 notas.put("cred", Objects.requireNonNull(notaCredET.getText()).toString());
@@ -105,6 +110,7 @@ public class ControleNotasAddActivity extends AppCompatActivity {
                 notas.put("pre", Objects.requireNonNull(notaPreciso));
                 notas.put("prova", Objects.requireNonNull(notaProvaET.getText()).toString());
 
+                // Adiciona a nova nota ao Firestore e define os callbacks para sucesso ou falha
                 db.collection("notas").add(notas).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
