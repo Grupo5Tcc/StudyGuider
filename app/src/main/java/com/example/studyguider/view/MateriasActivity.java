@@ -55,6 +55,8 @@ public class MateriasActivity extends AppCompatActivity {
 
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
 
+        View materiaView = findViewById(R.id.materia_item);
+
 
         View headerView = findViewById(R.id.header);
         HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
@@ -103,12 +105,12 @@ public class MateriasActivity extends AppCompatActivity {
                             recyclerView.setAdapter(adapter);
 
 
-                            adapter.setOnItemClickListener(new MateriasAdapter.OnItemClickListener() {
+                            materiaView.setOnClickListener(new View.OnClickListener() {
                                 @Override
-                                public void onClick(Materias materias) {
-                                    Log.d("MateriasAdapter", "Item clicked: " + materias.toString());
-                                    App.materia = materias;
-                                    startActivity(new Intent(MateriasActivity.this, ConteudosActivity.class));
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(MateriasActivity.this, ConteudosActivity.class);
+                                    startActivity(intent);
+
                                 }
                             });
                         }
