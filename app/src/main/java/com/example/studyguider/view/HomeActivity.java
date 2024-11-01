@@ -41,6 +41,7 @@ public class HomeActivity extends AppCompatActivity {
         View headerView = findViewById(R.id.header);
         HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
 
+        // Verifica se o usuário está logado e busca o nome de usuário
         FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser1 != null) {
             headerViewModel.fetchUsername(currentUser1);
@@ -58,7 +59,7 @@ public class HomeActivity extends AppCompatActivity {
 
         ImageView imageProfile = findViewById(R.id.imgPerfil);
 
-
+// Configura os listeners dos CardViews para abrir atividades correspondentes
         cardViewAboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +68,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        // Configurações semelhantes para os outros CardViews
         cardViewPlanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +76,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+// Código similar repetido para os outros CardViews (cardViewAbsence, cardViewToDoList, etc.)
 
         cardViewAbsence.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,11 +134,12 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        // Configura o listener de clique para a imagem de perfil, abrindo a tela de Perfil
         imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, PerfilActivity.class);
-                startActivity(intent);
+                startActivity(intent);  // Inicia a atividade PerfilActivity
             }
         });
 
