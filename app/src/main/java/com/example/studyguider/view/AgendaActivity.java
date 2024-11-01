@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.studyguider.R;
 import com.example.studyguider.models.Agenda;
 import com.example.studyguider.viewmodels.AgendaViewModel;
+import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -62,6 +63,7 @@ public class AgendaActivity extends AppCompatActivity {
 
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
+    private HeaderViewModel headerViewModel;
 
 
     @Override
@@ -82,6 +84,16 @@ public class AgendaActivity extends AppCompatActivity {
 
 
         plannerViewModel = new ViewModelProvider(this).get(AgendaViewModel.class);
+
+        headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
+
+        View headerView = findViewById(R.id.header);
+        HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
+
+        FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser1 != null) {
+            headerViewModel.fetchUsername(currentUser1);
+        }
 
 
         gridLayoutCalendar = findViewById(R.id.gridLayoutCalendar);
@@ -332,14 +344,11 @@ public class AgendaActivity extends AppCompatActivity {
         plannerViewModel.getEvents().observe(this, this::updateSavedEvents);
     }
 
-
     private void updateSavedEvents(List<Agenda> events) {
         savedEventsLayout.removeAllViews();
 
-
         // Mapeia os dias que possuem eventos
         Map<String, Boolean> daysWithEvents = new HashMap<>();
-
 
         for (Agenda event : events) {
             String[] eventDateParts = event.getDay().split("-");
@@ -347,28 +356,55 @@ public class AgendaActivity extends AppCompatActivity {
             int eventMonth = Integer.parseInt(eventDateParts[1]);
             int eventYear = Integer.parseInt(eventDateParts[2]);
 
-
             if (eventMonth == currentMonth && eventYear == currentYear) {
                 daysWithEvents.put(getDayKey(eventDay), true); // Marca o dia com evento
 
-
+                // Configuração do layout do evento com fundo arredondado
                 LinearLayout eventLayout = new LinearLayout(this);
                 eventLayout.setOrientation(LinearLayout.HORIZONTAL);
-                eventLayout.setPadding(16, 16, 16, 16);
 
+                // Define as margens para o layout do evento
+                LinearLayout.LayoutParams eventLayoutParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                eventLayoutParams.setMargins(0, 16, 0, 16); // Adiciona margem superior e inferior
+                eventLayout.setLayoutParams(eventLayoutParams);
+
+                // Define o fundo arredondado e aplica a cor do evento ao layout
+                eventLayout.setBackgroundResource(R.drawable.ct_task_agenda);
+                eventLayout.getBackground().setTint(event.getColor()); // Define a cor de fundo do evento
 
                 TextView eventTextView = new TextView(this);
                 eventTextView.setText(String.format("Evento: %s\nDia: %d\nHora: %s\nInformações: %s",
                         event.getEventName(), eventDay, event.getEventTime(), event.getAdditionalInfo()));
-                eventTextView.setBackgroundColor(event.getColor());
-                eventTextView.setTextColor(Color.BLACK);
-                eventTextView.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+                eventTextView.setTextSize(16);
+                eventTextView.setTextColor(Color.BLACK); // Cor do texto
+                eventTextView.setLineSpacing(1, 1.2f);
 
+                // Define as margens para o TextView
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        0, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+                params.setMargins(16, 0, 0, 0); // Margem esquerda de 16 pixels
+                eventTextView.setLayoutParams(params);
+
+                // Aumenta o padding do TextView
+                eventTextView.setPadding(16, 24, 16, 16); // Padding: (esquerda, cima, direita, baixo)
+
+                // Cria um layout vertical para os ícones de exclusão e edição
+                LinearLayout iconLayout = new LinearLayout(this);
+                iconLayout.setOrientation(LinearLayout.VERTICAL);
+                iconLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT));
+                iconLayout.setPadding(16, 0, 0, 0);
+
+                // Aumenta o padding do layout de ícones
+                iconLayout.setPadding(16, 16, 16, 16); // Padding: (esquerda, cima, direita, baixo)
 
                 ImageView deleteIcon = new ImageView(this);
                 deleteIcon.setImageResource(R.drawable.ic_delete);
                 deleteIcon.setLayoutParams(new LinearLayout.LayoutParams(80, 80));
-                deleteIcon.setPadding(16, 0, 0, 0);
                 deleteIcon.setOnClickListener(v -> {
                     plannerViewModel.removeEvent(event);
                     Toast.makeText(this, "Evento removido", Toast.LENGTH_SHORT).show();
@@ -376,35 +412,33 @@ public class AgendaActivity extends AppCompatActivity {
                     updateSavedEvents(plannerViewModel.getEvents().getValue()); // Atualiza a lista de eventos
                 });
 
-
                 ImageView editIcon = new ImageView(this);
-                editIcon.setImageResource(R.drawable.ic_password_form); // Replace with your edit icon resource
+                editIcon.setImageResource(R.drawable.ic_password_form); // Substitua pelo recurso de ícone de edição
                 editIcon.setLayoutParams(new LinearLayout.LayoutParams(80, 80));
-                editIcon.setPadding(16, 0, 0, 0);
                 editIcon.setOnClickListener(v -> {
-                    editEvent(event); // Function to edit the event
+                    editEvent(event); // Função para editar o evento
                 });
 
+                // Adiciona os ícones ao layout vertical
+                iconLayout.addView(deleteIcon);
+                iconLayout.addView(editIcon);
 
+                // Adiciona o TextView e o layout dos ícones ao layout principal
                 eventLayout.addView(eventTextView);
-                eventLayout.addView(deleteIcon);
-                eventLayout.addView(editIcon);
+                eventLayout.addView(iconLayout);
                 savedEventsLayout.addView(eventLayout);
             }
         }
-
 
         // Atualiza as cores dos dias no calendário
         for (int i = 0; i < gridLayoutCalendar.getChildCount(); i++) {
             TextView dayTextView = (TextView) gridLayoutCalendar.getChildAt(i);
             String dayKey = getDayKey(Integer.parseInt(dayTextView.getText().toString()));
 
-
             // Se o dia não tiver evento, define a cor como branco
             if (!daysWithEvents.containsKey(dayKey)) {
                 dayColors.put(dayKey, Color.WHITE);
             }
-
 
             dayTextView.setBackgroundColor(dayColors.getOrDefault(dayKey, Color.WHITE));
         }
