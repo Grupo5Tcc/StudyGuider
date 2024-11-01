@@ -55,10 +55,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Logo do App -->
-
-    <!-- Título logo abaixo da imagem -->
-
     <ImageView
         android:id="@+id/splash"
         android:layout_width="200dp"

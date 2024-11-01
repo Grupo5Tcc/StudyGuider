@@ -4,8 +4,8 @@
     <string name="app_name_title" translatable="false">STUDYGUIDER</string>
 
     <!-- main string -->
-    <string name="btn_login_main">sing in</string>
-    <string name="btn_sing_up_main">sing up</string>
+    <string name="btn_login_main">log in</string>
+    <string name="btn_sing_up_main">cadastro</string>
 
     <!-- btn form string -->
     <string name="btn_sing_up_form">SING UP</string>

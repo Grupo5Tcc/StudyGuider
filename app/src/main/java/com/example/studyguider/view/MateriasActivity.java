@@ -110,7 +110,6 @@ public class MateriasActivity extends AppCompatActivity {
                                 public void onClick(View v) {
                                     Intent intent = new Intent(MateriasActivity.this, ConteudosActivity.class);
                                     startActivity(intent);
-
                                 }
                             });
                         }
