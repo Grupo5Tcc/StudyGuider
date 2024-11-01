@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        // Ajusta o padding para evitar sobreposição com as barras do sistema
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -64,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Observa o resultado do login e direciona para HomeActivity se for bem-sucedido
         loginViewModel.loginSucesso.observe(this, isSuccess -> {
             if (isSuccess != null && isSuccess) {
                 Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
@@ -72,12 +74,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Observa falhas de login e exibe uma mensagem de erro
         loginViewModel.loginFalhou.observe(this, isFailed -> {
             if (isFailed != null && isFailed) {
                 Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
             }
         });
 
+        // Configura o botão de login, pegando os dados do usuário e chamando o login no ViewModel
         btnMenu.setOnClickListener(v -> {
             String textEMail = etEMail.getText().toString();
             String textPassword = etPassword.getText().toString();
@@ -85,11 +89,13 @@ public class LoginActivity extends AppCompatActivity {
             loginViewModel.loginUser(user);
         });
 
+        // Configura o botão de cadastro para redirecionar para a tela de CadastroActivity
         btnSingUp.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, CadastroActivity.class);
             startActivity(intent);
         });
 
+        // Configura a recuperação de senha ao clicar em "Esqueci minha senha"
         txtforgetPassword.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
             View dialogView = getLayoutInflater().inflate(R.layout.dialog_forgot_password, null);
@@ -98,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
             builder.setView(dialogView);
             AlertDialog dialog = builder.create();
 
+            // Configura o botão de resetar senha e envia o email ao ViewModel
             dialogView.findViewById(R.id.btnReset).setOnClickListener(view -> {
                 String userEmail = emailBox.getText().toString();
                 loginViewModel.resetPassword(userEmail);
@@ -112,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
             dialog.show();
         });
 
-        //Botão mostrar senha
+        // Configura a opção para mostrar ou esconder a senha
         ckb_mostrarSenhaLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
