@@ -39,7 +39,7 @@ public class PlantoesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        EdgeToEdge.enable(this);   // Ativa o modo de tela cheia para uma experiência imersiva
         setContentView(R.layout.activity_shift);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -60,19 +60,21 @@ public class PlantoesActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         RecyclerView recyclerView = findViewById(R.id.recycler);
 
+        // Configura o botão para adicionar um novo plantão, redirecionando para a tela de adição
         FloatingActionButton add = findViewById(R.id.addShift);
         add.setOnClickListener(view -> startActivity(new Intent(PlantoesActivity.this, PlantoesAddActivity.class)));
 
-
+        // Verifica o usuário autenticado para carregar seus dados específicos
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             String userId = currentUser.getUid();
 
-            // Modifique a consulta para buscar shifts no documento correspondente ao userId
+            // Define uma consulta ao Firestore para buscar os plantões do usuário atual
             db.collection("shifts").document(userId).collection("userShifts")
                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                         @Override
                         public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                            // Tratamento de erro ao buscar dados
                             if (error != null) {
                                 Toast.makeText(PlantoesActivity.this, "Falha ao carregar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                                 return;
@@ -86,9 +88,11 @@ public class PlantoesActivity extends AppCompatActivity {
                                 arrayList.add(shifts);
                             }
 
+                            // Configura o adapter para exibir a lista de plantões no RecyclerView
                             PlantoesAdapter adapter = new PlantoesAdapter(PlantoesActivity.this, arrayList);
                             recyclerView.setAdapter(adapter);
 
+                            // Define um listener para clique nos itens do RecyclerView, redirecionando para edição do plantão
                             adapter.setOnItemClickListener(new PlantoesAdapter.OnItemClickListener() {
                                 @Override
                                 public void onClick(Plantoes shifts) {

@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Define a ação para o botão de login para abrir a LoginActivity
         Button buttonLogin = findViewById(R.id.btn_login);
         Button buttonSingUp = findViewById(R.id.btn_sing_up);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Define a ação para o botão de cadastro para abrir a CadastroActivity
         buttonSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
