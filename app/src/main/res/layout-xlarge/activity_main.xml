@@ -18,7 +18,8 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/img_logo_background_main"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <!-- Título logo abaixo da imagem -->
     <TextView
@@ -65,7 +66,7 @@
 
         <!-- Botão para cadastro -->
         <Button
-            android:id="@+id/btn_sing_up"
+            android:id="@+id/btn_sign_up"
             style="@android:style/Widget.Button"
             android:layout_width="match_parent"
             android:layout_height="70dp"
@@ -74,7 +75,7 @@
             android:layout_marginRight="40dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/bg_bnt_intro_secundary_main"
-            android:text="@string/btn_sing_up_main"
+            android:text="@string/btn_sign_up_main"
             android:textColor="@android:color/background_light"
             android:textSize="40sp"
             android:textStyle="bold" />

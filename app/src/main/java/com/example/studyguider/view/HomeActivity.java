@@ -47,20 +47,20 @@ public class HomeActivity extends AppCompatActivity {
             headerViewModel.fetchUsername(currentUser1);
         }
 
-        CardView cardViewAboutUs = findViewById(R.id.cardAboutUs);
-        CardView cardViewPlanner = findViewById(R.id.cardPlanner);
-        CardView cardViewToDoList = findViewById(R.id.cardToDoList);
-        CardView cardViewAbsence = findViewById(R.id.cardAbsence);
-        CardView cardViewEmotionalCalendar = findViewById(R.id.cardEmotionalCalendar);
-        CardView cardViewGrades = findViewById(R.id.cardGrades);
-        CardView cardViewRecovery = findViewById(R.id.cardRecovery);
-        CardView cardViewSupplies = findViewById(R.id.cardSupplies);
-        CardView cardViewSchoolDuty = findViewById(R.id.cardSchoolDuty);
+        CardView cardViewSobreNos = findViewById(R.id.cardSobreNos);
+        CardView cardViewAgenda = findViewById(R.id.cardAgenda);
+        CardView cardViewAfazeres = findViewById(R.id.cardAfazeres);
+        CardView cardViewFaltas = findViewById(R.id.cardFaltas);
+        CardView cardViewEmocoes = findViewById(R.id.cardEmocoes);
+        CardView cardViewNotas = findViewById(R.id.cardGrades);
+        CardView cardViewRecuperacoes = findViewById(R.id.cardRecuperacoes);
+        CardView cardViewMaterias = findViewById(R.id.cardMaterias);
+        CardView cardViewPlantoes = findViewById(R.id.cardPlantoes);
 
         ImageView imageProfile = findViewById(R.id.imgPerfil);
 
 // Configura os listeners dos CardViews para abrir atividades correspondentes
-        cardViewAboutUs.setOnClickListener(new View.OnClickListener() {
+        cardViewSobreNos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, SobreNosActivity.class);
@@ -69,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // Configurações semelhantes para os outros CardViews
-        cardViewPlanner.setOnClickListener(new View.OnClickListener() {
+        cardViewAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AgendaActivity.class);
@@ -78,7 +78,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 // Código similar repetido para os outros CardViews (cardViewAbsence, cardViewToDoList, etc.)
 
-        cardViewAbsence.setOnClickListener(new View.OnClickListener() {
+        cardViewFaltas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, FaltasActivity.class);
@@ -86,7 +86,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        cardViewToDoList.setOnClickListener(new View.OnClickListener() {
+        cardViewAfazeres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AfazeresActivity.class);
@@ -94,7 +94,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        cardViewEmotionalCalendar.setOnClickListener(new View.OnClickListener() {
+        cardViewEmocoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, EmotionalCalendarActivity.class);
@@ -102,7 +102,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        cardViewGrades.setOnClickListener(new View.OnClickListener() {
+        cardViewNotas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, ControleNotasActivity.class);
@@ -110,7 +110,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        cardViewSchoolDuty.setOnClickListener(new View.OnClickListener() {
+        cardViewPlantoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, PlantoesActivity.class);
@@ -118,7 +118,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        cardViewRecovery.setOnClickListener(new View.OnClickListener() {
+        cardViewRecuperacoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, ControleRecuperacoes.class);
@@ -126,7 +126,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        cardViewSupplies.setOnClickListener(new View.OnClickListener() {
+        cardViewMaterias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, MateriasActivity.class);
