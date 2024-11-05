@@ -17,14 +17,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AbsenceCalendarViewModel extends ViewModel {
+
+    // Inicializa FirebaseFirestore e FirebaseAuth para manipulação de dados no Firestore e autenticação
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+    // LiveData para armazenar dados de ausência, estado de carregamento e mensagens de erro
     private final MutableLiveData<Map<String, Faltas>> absenceData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false);
     private final MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
+    // Carrega as faltas de um usuário com base no mês/ano fornecido
     public void loadFaltas(String userId, String monthYearKey) {
-        isLoading.setValue(true);
+        isLoading.setValue(true); // Indica que o carregamento está em andamento
         db.collection("absence_calendar").document(userId).collection(monthYearKey)
                 .addSnapshotListener((querySnapshot, e) -> {
                     if (e != null) {
@@ -40,7 +45,7 @@ public class AbsenceCalendarViewModel extends ViewModel {
                         }
                         absenceData.setValue(result);
                     }
-                    isLoading.setValue(false);
+                    isLoading.setValue(false); // Finaliza o carregamento
                 });
     }
 
@@ -56,7 +61,8 @@ public class AbsenceCalendarViewModel extends ViewModel {
         return errorMessage;
     }
 
-   public void saveFalta(String userId, String monthYearKey, String day, Faltas falta) {
+    // Salva uma falta para um dia específico
+    public void saveFalta(String userId, String monthYearKey, String day, Faltas falta) {
         DocumentReference docRef = db.collection("absence_calendar").document(userId)
                 .collection(monthYearKey).document(day);
 
@@ -68,6 +74,7 @@ public class AbsenceCalendarViewModel extends ViewModel {
         });
     }
 
+    // Remove uma falta de um dia específico e recarrega os dados
     public void removeFalta(String userId, String monthYearKey, int day) {
         isLoading.setValue(true);
 
@@ -89,6 +96,7 @@ public class AbsenceCalendarViewModel extends ViewModel {
                 .addOnCompleteListener(task -> isLoading.setValue(false));
     }
 
+    // Atualiza o total de faltas do usuário
     public void updateUserAbsenceCount(int count) {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
@@ -105,7 +113,7 @@ public class AbsenceCalendarViewModel extends ViewModel {
             transaction.update(userDocRef, "absence", newAbsenceCount);
             return null;
         }).addOnSuccessListener(aVoid -> {
-            // Successfully updated
+            // Atualizado com sucesso
             Log.d("db", "Successful update of absence count");
         }).addOnFailureListener(e -> {
             errorMessage.setValue("Error updating absence count: " + e.getMessage());
