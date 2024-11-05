@@ -56,7 +56,7 @@
             android:orientation="vertical" >
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardToDoList"
+                android:id="@+id/cardAfazeres"
                 android:layout_width="900dp"
                 android:layout_height="250dp"
                 android:layout_gravity="center_horizontal"
@@ -67,7 +67,7 @@
                 app:cardCornerRadius="10dp">
 
                 <TextView
-                    android:id="@+id/txtToDoList"
+                    android:id="@+id/txtTAfazeres"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_to_do_list"
@@ -87,7 +87,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardPlanner"
+                android:id="@+id/cardAgenda"
                 android:layout_width="900dp"
                 android:layout_height="250dp"
                 android:layout_gravity="center_horizontal"
@@ -97,7 +97,7 @@
                 app:cardCornerRadius="10dp">
 
                 <TextView
-                    android:id="@+id/txtPlanner"
+                    android:id="@+id/txtAgenda"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_planner"
@@ -107,7 +107,7 @@
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:id="@+id/imgPlanner"
+                    android:id="@+id/imgAgenda"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:src="@drawable/img_agenda"
@@ -118,7 +118,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardSupplies"
+                android:id="@+id/cardMaterias"
                 android:layout_width="900dp"
                 android:layout_height="250dp"
                 android:layout_gravity="center_horizontal"
@@ -149,7 +149,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardAbsence"
+                android:id="@+id/cardFaltas"
                 android:layout_width="900dp"
                 android:layout_height="250dp"
                 android:layout_gravity="center_horizontal"
@@ -160,7 +160,7 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
-                    android:id="@+id/txtAbsence"
+                    android:id="@+id/txtFaltas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_absence"
@@ -170,7 +170,7 @@
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:id="@+id/imgAbsence"
+                    android:id="@+id/imgFaltas"
                     android:layout_width="160dp"
                     android:layout_height="160dp"
                     android:src="@drawable/faltas"
@@ -181,7 +181,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardEmotionalCalendar"
+                android:id="@+id/cardEmocoes"
                 android:layout_width="900dp"
                 android:layout_height="250dp"
                 android:layout_gravity="center_horizontal"
@@ -191,7 +191,7 @@
                 app:cardCornerRadius="10dp">
 
                 <TextView
-                    android:id="@+id/txtEmotionalCalendar"
+                    android:id="@+id/txtEmocoes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_emotional"
@@ -201,7 +201,7 @@
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:id="@+id/imgEmotionalCalendar"
+                    android:id="@+id/imgEmocoes"
                     android:layout_width="160dp"
                     android:layout_height="160dp"
                     android:src="@drawable/emocoes"
@@ -212,7 +212,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardSchoolDuty"
+                android:id="@+id/cardPlantoes"
                 android:layout_width="900dp"
                 android:layout_height="250dp"
                 android:layout_gravity="center_horizontal"
@@ -241,7 +241,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardGrades"
+                android:id="@+id/cardNotas"
                 android:layout_width="900dp"
                 android:layout_height="250dp"
                 android:layout_gravity="center_horizontal"
@@ -272,7 +272,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardRecovery"
+                android:id="@+id/cardRecuperacoes"
                 android:layout_width="900dp"
                 android:layout_height="250dp"
                 android:layout_gravity="center_horizontal"
@@ -303,7 +303,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardAboutUs"
+                android:id="@+id/cardSobreNos"
                 android:layout_width="900dp"
                 android:layout_height="250dp"
                 android:layout_gravity="center_horizontal"
@@ -314,7 +314,7 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
-                    android:id="@+id/txtAboutUs"
+                    android:id="@+id/txtSobreNos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_about_us"
