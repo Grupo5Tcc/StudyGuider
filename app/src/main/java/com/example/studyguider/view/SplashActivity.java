@@ -25,11 +25,13 @@ public class SplashActivity extends AppCompatActivity {
 
         SplashViewModel splashViewModel = new ViewModelProvider(this).get(SplashViewModel.class);
 
+        // Observa a autenticação do usuário e direciona para a tela apropriada após o tempo da splash
         splashViewModel.isUserAuthenticated().observe(this, isAuthenticated -> {
             timerTask = new TimerTask() {
                 @Override
                 public void run() {
                     runOnUiThread(() -> {
+                        // Direciona para a Home se autenticado; caso contrário, para o login
                         if (isAuthenticated) {
                             gotoMenuActivity();
                         } else {
@@ -38,10 +40,12 @@ public class SplashActivity extends AppCompatActivity {
                     });
                 }
             };
-            timer.schedule(timerTask, 2500);
+            timer.schedule(timerTask, 2500); // Splash é exibida por 2,5 segundos antes do redirecionamento
+
         });
     }
 
+    // Direciona para a tela de login (MainActivity)
     private void gotoMainActivity() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -49,6 +53,7 @@ public class SplashActivity extends AppCompatActivity {
         finish();
     }
 
+    // Direciona para a tela inicial do app (HomeActivity) após autenticação
     private void gotoMenuActivity() {
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

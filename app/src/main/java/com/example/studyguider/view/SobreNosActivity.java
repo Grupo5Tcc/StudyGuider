@@ -23,9 +23,12 @@ public class SobreNosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Ativa o modo de bordas para uma experiência em tela cheia
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sobre_nos);
+        // Define orientação da tela para retrato
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        // Ajusta o layout para considerar as barras de sistema
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -37,6 +40,7 @@ public class SobreNosActivity extends AppCompatActivity {
         View headerView = findViewById(R.id.header);
         HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
 
+        // Obtém o usuário autenticado e busca o nome do usuário, se ele estiver logado
         FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser1 != null) {
             headerViewModel.fetchUsername(currentUser1);

@@ -54,11 +54,13 @@ public class PlantoesAddActivity extends AppCompatActivity {
         View headerView = findViewById(R.id.header);
         HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
 
+        // Recupera o usuário atual e busca o nome de usuário se ele estiver autenticado
         FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser1 != null) {
             headerViewModel.fetchUsername(currentUser1);
         }
 
+        // Configura os campos de entrada e o botão para adicionar um novo "shift"
         professorET = findViewById(R.id.professorET);
         materiaET = findViewById(R.id.materiaET);
         diaET = findViewById(R.id.diaET);
@@ -74,17 +76,20 @@ public class PlantoesAddActivity extends AppCompatActivity {
                 String dia = Objects.requireNonNull(diaET.getText()).toString().trim();
                 String hora = Objects.requireNonNull(horaET.getText()).toString().trim();
 
+                // Verifica se todos os campos estão preenchidos antes de prosseguir
                 if (professor.isEmpty() || materia.isEmpty() || dia.isEmpty() || hora.isEmpty()) {
                     Toast.makeText(PlantoesAddActivity.this, "Todos os campos devem ser preenchidos", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
+                // Cria um novo documento com as informações do shift
                 Map<String, Object> shift = new HashMap<>();
                 shift.put("professor", professor);
                 shift.put("materia", materia);
                 shift.put("dia", dia);
                 shift.put("hora", hora);
 
+                // Adiciona o shift ao Firestore no caminho do usuário autenticado
                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                 if (currentUser != null) {
                     String userId = currentUser.getUid();
@@ -92,6 +97,7 @@ public class PlantoesAddActivity extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
+                                    // Notifica o sucesso da operação e finaliza a atividade
                                     Toast.makeText(PlantoesAddActivity.this, "Shift adicionado com sucesso", Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
@@ -99,6 +105,7 @@ public class PlantoesAddActivity extends AppCompatActivity {
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+                                    // Notifica falha na operação
                                     Toast.makeText(PlantoesAddActivity.this, "Falha Ao Tentar Adicionar Shift: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -106,7 +113,7 @@ public class PlantoesAddActivity extends AppCompatActivity {
             }
         });
 
-
+        // Configura a seleção de horário ao clicar no campo horaET
         horaET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,6 +122,7 @@ public class PlantoesAddActivity extends AppCompatActivity {
                 int hour = c.get(Calendar.HOUR_OF_DAY);
                 int minute = c.get(Calendar.MINUTE);
 
+                // Exibe um diálogo para seleção de horário e define o valor escolhido
                 TimePickerDialog timePickerDialog = new TimePickerDialog(PlantoesAddActivity.this,
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
