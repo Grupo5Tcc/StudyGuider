@@ -2,10 +2,13 @@ package com.example.studyguider.view;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ConteudosActivity extends AppCompatActivity {
     private ConstraintLayout primeiroBimestre;
+    private TextView primBimestre;
     private ImageButton btnAdd1;
     private ConstraintLayout segundoBimestre;
     private ImageButton btnAdd2;
@@ -42,19 +46,62 @@ public class ConteudosActivity extends AppCompatActivity {
 
         primeiroBimestre = findViewById(R.id.primeiro_bimestre);
         btnAdd1 = findViewById(R.id.btn_add1);
+        primBimestre = findViewById(R.id.primBimestre);
 
         btnAdd1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // cria um novo campo de texto
+                /* cria um novo campo de texto
                 EditText conteudos_1_bim = new EditText(ConteudosActivity.this);
                 conteudos_1_bim.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT));
 
-                // adiciona o campo dentro do container
                 primeiroBimestre.addView(conteudos_1_bim);
+                */
+
+                EditText conteudos_1_bim = new EditText(ConteudosActivity.this);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+
+                params.setMargins(0, 0, 0, 0);
+
+                conteudos_1_bim.setLayoutParams(params);
+
+                // Adiciona o EditText ao container primeiroBimestre
+                primeiroBimestre.addView(conteudos_1_bim);
+
+                conteudos_1_bim.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        // Adiciona um OnClickListener no container "primeiroBimestre"
+                        primeiroBimestre.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                // Pega o texto digitado no EditText
+                                String textoDigitado = conteudos_1_bim.getText().toString();
+
+                                // Desabilita o EditText para que não seja mais editável
+                                conteudos_1_bim.setEnabled(false);
+
+                                // Cria um TextView para exibir o texto digitado
+                                TextView textoExibido = new TextView(ConteudosActivity.this);
+                                textoExibido.setText(textoDigitado);
+                                textoExibido.setLayoutParams(conteudos_1_bim.getLayoutParams()); // Aplica o mesmo layout do EditText ao TextView
+
+                                // Substitui o EditText pelo TextView
+                                primeiroBimestre.removeView(conteudos_1_bim); // Remove o EditText
+                                primeiroBimestre.addView(textoExibido); // Adiciona o TextView com o texto
+                            }
+                        });
+                        return false;
+                    }
+                });
+
             }
+
         });
 
         segundoBimestre = findViewById(R.id.segundo_bimestre);
