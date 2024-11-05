@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/light_orange"
     android:orientation="vertical"
-    tools:context=".view.HomeActivity">
+    tools:context=".view.HomeActivity"
+    tools:ignore="MissingDefaultResource">
 
     <include
         android:id="@+id/header"
@@ -27,7 +28,7 @@
             android:orientation="vertical" >
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardAfazeres"
+                android:id="@+id/cardToDoList"
                 android:layout_width="379dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
@@ -38,7 +39,7 @@
                 app:cardCornerRadius="10dp">
 
                 <TextView
-                    android:id="@+id/txtAfazeres"
+                    android:id="@+id/txtToDoList"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_to_do_list"
@@ -48,7 +49,7 @@
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:id="@+id/imgAfazeres"
+                    android:id="@+id/imgToDoList"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
                     android:layout_gravity="end"
@@ -59,7 +60,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardAgenda"
+                android:id="@+id/cardPlanner"
                 android:layout_width="379dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
@@ -69,7 +70,7 @@
                 app:cardCornerRadius="10dp">
 
                 <TextView
-                    android:id="@+id/txtAgenda"
+                    android:id="@+id/txtPlanner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_planner"
@@ -79,7 +80,7 @@
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:id="@+id/imgAgenda"
+                    android:id="@+id/imgPlanner"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/img_agenda"
@@ -90,7 +91,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardMaterias"
+                android:id="@+id/cardSupplies"
                 android:layout_width="379dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
@@ -99,7 +100,7 @@
                 app:cardCornerRadius="10dp">
 
                 <TextView
-                    android:id="@+id/txtMaterias"
+                    android:id="@+id/txtSupplies"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_subjects"
@@ -109,7 +110,7 @@
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:id="@+id/imgMaterias"
+                    android:id="@+id/imgSupplies"
                     android:layout_width="85dp"
                     android:layout_height="85dp"
                     android:src="@drawable/img_materias"
@@ -121,7 +122,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardFaltas"
+                android:id="@+id/cardAbsence"
                 android:layout_width="379dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
@@ -132,7 +133,7 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
-                    android:id="@+id/txtFaltas"
+                    android:id="@+id/txtAbsence"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_absence"
@@ -142,7 +143,7 @@
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:id="@+id/imgFaltas"
+                    android:id="@+id/imgAbsence"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     android:src="@drawable/faltas"
@@ -153,7 +154,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardEmocoes"
+                android:id="@+id/cardEmotionalCalendar"
                 android:layout_width="379dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
@@ -163,7 +164,7 @@
                 app:cardCornerRadius="10dp">
 
                 <TextView
-                    android:id="@+id/txtEmocoes"
+                    android:id="@+id/txtEmotionalCalendar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_emotional"
@@ -173,7 +174,7 @@
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:id="@+id/imgEmocoes"
+                    android:id="@+id/imgEmotionalCalendar"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/emocoes"
@@ -184,7 +185,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardPlantoes"
+                android:id="@+id/cardSchoolDuty"
                 android:layout_width="379dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
@@ -193,7 +194,7 @@
                 app:cardCornerRadius="10dp">
 
                 <TextView
-                    android:id="@+id/txtPlantoes"
+                    android:id="@+id/txtSchoolDuty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_school_duty"
@@ -213,7 +214,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardNotas"
+                android:id="@+id/cardGrades"
                 android:layout_width="379dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
@@ -224,7 +225,7 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
-                    android:id="@+id/txtNotas"
+                    android:id="@+id/txtGrades"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_grades"
@@ -244,7 +245,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardRecuperacoes"
+                android:id="@+id/cardRecovery"
                 android:layout_width="379dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
@@ -255,7 +256,7 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
-                    android:id="@+id/txtRecuperacoes"
+                    android:id="@+id/txtRecovery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_recovery"
@@ -275,7 +276,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardSobreNos"
+                android:id="@+id/cardAboutUs"
                 android:layout_width="379dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center_horizontal"
@@ -286,7 +287,7 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
-                    android:id="@+id/txtSobreNos"
+                    android:id="@+id/txtAboutUs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_page_about_us"

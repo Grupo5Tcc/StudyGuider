@@ -47,15 +47,15 @@ public class HomeActivity extends AppCompatActivity {
             headerViewModel.fetchUsername(currentUser1);
         }
 
-        CardView cardViewSobreNos = findViewById(R.id.cardSobreNos);
-        CardView cardViewAgenda = findViewById(R.id.cardAgenda);
-        CardView cardViewAfazeres = findViewById(R.id.cardAfazeres);
-        CardView cardViewFaltas = findViewById(R.id.cardFaltas);
-        CardView cardViewEmocoes = findViewById(R.id.cardEmocoes);
+        CardView cardViewSobreNos = findViewById(R.id.cardAboutUs);
+        CardView cardViewAgenda = findViewById(R.id.cardPlanner);
+        CardView cardViewAfazeres = findViewById(R.id.cardToDoList);
+        CardView cardViewFaltas = findViewById(R.id.cardAbsence);
+        CardView cardViewEmocoes = findViewById(R.id.cardEmotionalCalendar);
         CardView cardViewNotas = findViewById(R.id.cardGrades);
-        CardView cardViewRecuperacoes = findViewById(R.id.cardRecuperacoes);
-        CardView cardViewMaterias = findViewById(R.id.cardMaterias);
-        CardView cardViewPlantoes = findViewById(R.id.cardPlantoes);
+        CardView cardViewRecuperacoes = findViewById(R.id.cardRecovery);
+        CardView cardViewMaterias = findViewById(R.id.cardSupplies);
+        CardView cardViewPlantoes = findViewById(R.id.cardSchoolDuty);
 
         ImageView imageProfile = findViewById(R.id.imgPerfil);
 
