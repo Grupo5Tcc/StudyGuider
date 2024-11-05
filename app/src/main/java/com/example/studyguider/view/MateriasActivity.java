@@ -105,9 +105,10 @@ public class MateriasActivity extends AppCompatActivity {
                             recyclerView.setAdapter(adapter);
 
 
-                            materiaView.setOnClickListener(new View.OnClickListener() {
+                            adapter.setOnClickListener(new MateriasAdapter.OnItemClickListener() {
                                 @Override
-                                public void onClick(View v) {
+                                public void onClick(Materias materias) {
+                                    App.materia = materias;
                                     Intent intent = new Intent(MateriasActivity.this, ConteudosActivity.class);
                                     startActivity(intent);
                                 }

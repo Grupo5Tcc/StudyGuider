@@ -34,19 +34,18 @@ public class MateriasAdapter extends RecyclerView.Adapter<MateriasAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Materias materia = arrayList.get(position);
-        holder.nomeMateria.setText(materia.getNomeMateria());
-        holder.professor.setText(materia.getProfessor());
+        holder.nomeMateria.setText(arrayList.get(position).getNomeMateria());
+        holder.professor.setText(arrayList.get(position).getProfessor());
+        holder.itemView.setOnClickListener(view -> onItemClickListener.onClick(arrayList.get(position)));
 
-        holder.itemView.setOnClickListener(view -> {
-            if (onItemClickListener != null) {
-                onItemClickListener.onClick(materia);
-            }
-        });
     }
 
     public int getItemCount() {
         return arrayList.size();
+    }
+
+    public void setOnClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -57,10 +56,6 @@ public class MateriasAdapter extends RecyclerView.Adapter<MateriasAdapter.ViewHo
             nomeMateria = itemView.findViewById(R.id.list_item_materia);
             professor = itemView.findViewById(R.id.list_item_professor);
         }
-    }
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
     }
 
     public interface OnItemClickListener {
