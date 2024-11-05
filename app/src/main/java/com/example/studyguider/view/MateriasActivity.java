@@ -22,6 +22,7 @@ import com.example.studyguider.R;
 import com.example.studyguider.adapter.MateriasAdapter;
 import com.example.studyguider.models.Materias;
 import com.example.studyguider.viewmodels.HeaderViewModel;
+import com.example.studyguider.viewmodels.MateriasViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -91,13 +92,12 @@ public class MateriasActivity extends AppCompatActivity {
                                 return;
                             }
 
-
                             ArrayList<Materias> arrayList = new ArrayList<>();
                             assert value != null;
                             for (QueryDocumentSnapshot document : value) {
-                                Materias subjects = document.toObject(Materias.class);
-                                subjects.setId(document.getId());
-                                arrayList.add(subjects);
+                                Materias materias = document.toObject(Materias.class);
+                                materias.setId(document.getId());
+                                arrayList.add(materias);
                             }
 
 
@@ -105,10 +105,12 @@ public class MateriasActivity extends AppCompatActivity {
                             recyclerView.setAdapter(adapter);
 
 
+
                             adapter.setOnClickListener(new MateriasAdapter.OnItemClickListener() {
                                 @Override
-                                public void onClick(Materias materias) {
-                                    App.materia = materias;
+                                public void onClick(Materias materia) {
+                                    //Log.d("MateriasActivity", "Item clicked: " + materias.toString());
+                                    App.materia = materia;
                                     Intent intent = new Intent(MateriasActivity.this, ConteudosActivity.class);
                                     startActivity(intent);
                                 }

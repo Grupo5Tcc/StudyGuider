@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -17,13 +18,13 @@ import com.example.studyguider.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ConteudosActivity extends AppCompatActivity {
-    private LinearLayout primeiroBimestre;
+    private ConstraintLayout primeiroBimestre;
     private ImageButton btnAdd1;
-    private LinearLayout segundoBimestre;
+    private ConstraintLayout segundoBimestre;
     private ImageButton btnAdd2;
-    private LinearLayout terceiroBimestre;
+    private ConstraintLayout terceiroBimestre;
     private ImageButton btnAdd3;
-    private LinearLayout quartoBimestre;
+    private ConstraintLayout quartoBimestre;
     private ImageButton btnAdd4;
 
     @Override
