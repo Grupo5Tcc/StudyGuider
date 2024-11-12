@@ -1,5 +1,6 @@
 package com.example.studyguider.view;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,6 +40,9 @@ public class ControleNotasAddActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
 
         setContentView(R.layout.activity_controle_notas_add);
+
+        // Define orientação da tela para retrato
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
 

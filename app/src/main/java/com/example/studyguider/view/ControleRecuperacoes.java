@@ -1,5 +1,6 @@
 package com.example.studyguider.view;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -41,6 +42,9 @@ public class ControleRecuperacoes extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_controle_rec);
+
+        // Define orientação da tela para retrato
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
 

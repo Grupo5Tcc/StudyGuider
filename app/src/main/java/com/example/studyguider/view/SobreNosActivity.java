@@ -26,8 +26,10 @@ public class SobreNosActivity extends AppCompatActivity {
         // Ativa o modo de bordas para uma experiência em tela cheia
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sobre_nos);
+
         // Define orientação da tela para retrato
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         // Ajusta o layout para considerar as barras de sistema
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

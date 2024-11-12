@@ -43,7 +43,7 @@
 
             <!-- card para PO -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/item1_container"
+                android:id="@+id/item1Container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -61,11 +61,11 @@
 
                     <!-- foto da PO -->
                     <ImageView
-                        android:id="@+id/img1"
+                        android:id="@+id/image1"
                         android:layout_width="85dp"
                         android:layout_height="85dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/img2" />
+                        android:src="@drawable/img1" />
 
                     <!-- alinhar informações -->
                     <LinearLayout
@@ -114,7 +114,7 @@
 
             <!-- card para UI/UX -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/item2_container"
+                android:id="@+id/item2Container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -132,11 +132,11 @@
 
                     <!-- foto da UI/UX -->
                     <ImageView
-                        android:id="@+id/img2"
+                        android:id="@+id/image2"
                         android:layout_width="85dp"
                         android:layout_height="85dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/img5" />
+                        android:src="@drawable/img2" />
 
                     <!-- alinhar informações -->
                     <LinearLayout
@@ -184,7 +184,7 @@
 
             <!-- card para LT -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/item3_container"
+                android:id="@+id/item3Container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -202,11 +202,11 @@
 
                     <!-- foto da LT -->
                     <ImageView
-                        android:id="@+id/img3"
+                        android:id="@+id/image3"
                         android:layout_width="85dp"
                         android:layout_height="85dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/img4" />
+                        android:src="@drawable/img3" />
 
                     <!-- alinhar informações -->
                     <LinearLayout
@@ -255,7 +255,7 @@
 
             <!-- card para Deselvolvedor -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/item4_container"
+                android:id="@+id/item4Container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -273,11 +273,11 @@
 
                     <!-- foto do Desenvolvedor -->
                     <ImageView
-                        android:id="@+id/img4"
+                        android:id="@+id/image4"
                         android:layout_width="85dp"
                         android:layout_height="85dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/img7" />
+                        android:src="@drawable/img4" />
 
                     <!-- alinhar informações -->
                     <LinearLayout
@@ -325,7 +325,7 @@
 
             <!-- card para Deselvolvedora -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/item5_container"
+                android:id="@+id/item5Container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -343,11 +343,11 @@
 
                     <!-- foto da Desenvolvedora -->
                     <ImageView
-                        android:id="@+id/img5"
+                        android:id="@+id/image5"
                         android:layout_width="85dp"
                         android:layout_height="85dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/img1" />
+                        android:src="@drawable/img5" />
 
                     <!-- alinhar informações -->
                     <LinearLayout
@@ -395,7 +395,7 @@
 
             <!-- card para Deselvolvedora -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/item6_container"
+                android:id="@+id/item6Container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -413,11 +413,11 @@
 
                     <!-- foto da Desenvolvedora -->
                     <ImageView
-                        android:id="@+id/img6"
+                        android:id="@+id/image6"
                         android:layout_width="85dp"
                         android:layout_height="85dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/img3" />
+                        android:src="@drawable/img6" />
 
                     <!-- alinhar informações -->
                     <LinearLayout
@@ -465,7 +465,7 @@
 
             <!-- card para Deselvolvedora -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/item7_container"
+                android:id="@+id/item7Container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -483,11 +483,11 @@
 
                     <!-- foto da Desenvolvedora -->
                     <ImageView
-                        android:id="@+id/img7"
+                        android:id="@+id/image7"
                         android:layout_width="85dp"
                         android:layout_height="85dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/img6" />
+                        android:src="@drawable/img7" />
 
                     <!-- alinhar informações -->
                     <LinearLayout
@@ -535,7 +535,7 @@
 
             <!-- card para todos -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/item8_container"
+                android:id="@+id/item8Container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -555,7 +555,7 @@
 
                     <!-- foto de todos os integrantes -->
                     <ImageView
-                        android:id="@+id/img8"
+                        android:id="@+id/image8"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:layout_margin="20dp"

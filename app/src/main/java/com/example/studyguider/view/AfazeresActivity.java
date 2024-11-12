@@ -1,5 +1,6 @@
 package com.example.studyguider.view;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -41,6 +42,9 @@ public class AfazeresActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do_list);
+
+        // Define orientação da tela para retrato
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
 

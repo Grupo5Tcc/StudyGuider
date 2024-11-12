@@ -1,6 +1,7 @@
 package com.example.studyguider.view;
 
 import android.app.TimePickerDialog;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +33,7 @@ import java.util.Objects;
 public class PlantoesEditActivity extends AppCompatActivity {
 
     private HeaderViewModel headerViewModel;
-    private EditText professorET, materiaET, horaET;
+    private EditText professorET, materiaET, horaET, diaET;
     private Button save;
 
     @Override
@@ -40,6 +41,9 @@ public class PlantoesEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this); // Ativa o modo de tela cheia para uma experiência imersiva
         setContentView(R.layout.activity_shift_edit);
+
+        // Define orientação da tela para retrato
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // Configura o padding para evitar sobreposição com as barras do sistema
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -66,12 +70,14 @@ public class PlantoesEditActivity extends AppCompatActivity {
         professorET = findViewById(R.id.professorET);
         materiaET = findViewById(R.id.materiaET);
         horaET = findViewById(R.id.horaET);
+        diaET = findViewById(R.id.diaET);
         save = findViewById(R.id.save);
 
         // Preenche os campos com os dados do plantão selecionado
         professorET.setText(App.plantoes.getProfessor());
         materiaET.setText(App.plantoes.getMateria());
         horaET.setText(App.plantoes.getHora());
+        diaET.setText(App.plantoes.getDia());
 
         // Configura o botão de salvar para atualizar os dados no Firestore
         save.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +88,7 @@ public class PlantoesEditActivity extends AppCompatActivity {
                 updates.put("professor", Objects.requireNonNull(professorET.getText()).toString());
                 updates.put("materia", Objects.requireNonNull(materiaET.getText()).toString());
                 updates.put("hora", Objects.requireNonNull(horaET.getText()).toString());
+                updates.put("dia", Objects.requireNonNull(diaET.getText()).toString());
 
                 // Obtém o usuário atual e o ID do plantão para salvar as atualizações no Firestore
                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();

@@ -1,6 +1,7 @@
 package com.example.studyguider.view;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -37,6 +38,10 @@ public class ControleNotasActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
 
         setContentView(R.layout.activity_controle_notas);
+
+        // Define orientação da tela para retrato
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         FirebaseApp.initializeApp(ControleNotasActivity.this);
 
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
