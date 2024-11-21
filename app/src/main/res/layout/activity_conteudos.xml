@@ -49,7 +49,6 @@
         android:id="@+id/primeiro_bimestre"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:paddingBottom="5dp"
         android:background="@drawable/ct_background_conteudos"
         android:fontFamily="@font/roboto_medium"

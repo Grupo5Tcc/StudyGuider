@@ -17,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- TextView que exibe o título da seção "Conteúdos" -->
     <TextView
         android:id="@+id/conteudos"
         android:layout_width="wrap_content"
@@ -101,6 +100,7 @@
 
         <!-- TextView que exibe o título do segundo bimestre -->
         <TextView
+            android:id="@+id/segBimestre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -139,6 +139,7 @@
 
         <!-- TextView que exibe o título do terceiro bimestre -->
         <TextView
+            android:id="@+id/tercBimestre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -177,6 +178,7 @@
 
         <!-- TextView que exibe o título do quarto bimestre -->
         <TextView
+            android:id="@+id/quarBimestre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
