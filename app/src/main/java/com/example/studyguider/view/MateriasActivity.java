@@ -109,14 +109,13 @@ public class MateriasActivity extends AppCompatActivity {
                             MateriasAdapter adapter = new MateriasAdapter(MateriasActivity.this, arrayList);
                             recyclerView.setAdapter(adapter);
 
-
-
                             adapter.setOnClickListener(new MateriasAdapter.OnItemClickListener() {
                                 @Override
                                 public void onClick(Materias materia) {
-                                    //Log.d("MateriasActivity", "Item clicked: " + materias.toString());
                                     App.materia = materia;
+                                    String mat = materia.getNomeMateria().toUpperCase();
                                     Intent intent = new Intent(MateriasActivity.this, ConteudosActivity.class);
+                                    intent.putExtra("materia", String.valueOf(mat));
                                     startActivity(intent);
                                 }
                             });
