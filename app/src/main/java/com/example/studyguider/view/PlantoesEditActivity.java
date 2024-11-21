@@ -100,7 +100,7 @@ public class PlantoesEditActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     // Exibe uma mensagem de sucesso e finaliza a Activity
-                                    Toast.makeText(PlantoesEditActivity.this, "Shift salvo com sucesso", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PlantoesEditActivity.this, "Plantão salvo com sucesso", Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
                             })
@@ -108,7 +108,7 @@ public class PlantoesEditActivity extends AppCompatActivity {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     // Exibe uma mensagem de erro caso ocorra uma falha ao salvar
-                                    Toast.makeText(PlantoesEditActivity.this, "Erro ao salvar shift", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PlantoesEditActivity.this, "Erro ao salvar plantão", Toast.LENGTH_SHORT).show();
                                 }
                             });
                 }

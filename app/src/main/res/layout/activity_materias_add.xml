@@ -58,32 +58,12 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Campo de entrada para os conteúdos da matéria -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/conteudosLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/professorLayout"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/rnd_add_edit"
-        android:hint="Conteúdos">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/conteudosET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:inputType="textCapSentences" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <!-- Botão para adicionar a matéria -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/addMateria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/conteudosLayout"
+        android:layout_below="@id/professorLayout"
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/orange_1"
         android:text="Adicionar"
