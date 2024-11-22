@@ -17,7 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:background="@color/blue_clearer">
 
         <!-- Conteúdo com os TextViews -->
         <RelativeLayout
@@ -37,7 +38,8 @@
                 android:layout_marginBottom="8dp"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:textSize="18sp" />
 
             <!-- campo de matéria -->
@@ -47,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/list_item_professor"
                 android:layout_marginBottom="8dp"
+                android:textColor="@color/black"
                 android:ellipsize="end"
                 android:singleLine="true" />
 
@@ -57,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/list_item_materia"
                 android:layout_marginBottom="8dp"
+                android:textColor="@color/black"
                 android:ellipsize="end"
                 android:singleLine="true" />
 
@@ -66,6 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/list_item_dia"
+                android:textColor="@color/black"
                 android:ellipsize="end"
                 android:singleLine="true" />
         </RelativeLayout>
