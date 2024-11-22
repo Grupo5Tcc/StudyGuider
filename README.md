@@ -2,11 +2,11 @@
 
 ###
 
-<p align="left">Welcome to the Emotional and Academic Organizer thesis project. This Android application aims to help students manage their academic activities and emotional well-being. With a user-friendly interface, the organizer allows users to plan their tasks, track their academic progress, and record their emotional state.</p>
+<p align="left">Bem-vindo ao projeto de tese *Emotional and Academic Organizer*. Este aplicativo Android tem como objetivo ajudar os estudantes a gerenciar suas atividades acadêmicas e o bem-estar emocional. Com uma interface amigável, o organizador permite que os usuários planejem suas tarefas, acompanhem seu progresso acadêmico e registrem seu estado emocional.</p>
 
 ###
 
-<h2 align="left">Technologies Used</h2>
+<h2 align="left">Tecnologias Utilizadas</h2>
 
 ###
 
@@ -20,7 +20,7 @@
 
 ###
 
-<h2 align="left">Contact</h2>
+<h2 align="left">Contato</h2>
 
 ###
 
