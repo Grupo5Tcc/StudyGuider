@@ -1,7 +1,6 @@
 package com.example.studyguider.view;
 
 
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
@@ -70,9 +69,6 @@ public class FaltasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faltas);
 
-        // Define orientação da tela para retrato
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         viewModel = new ViewModelProvider(this).get(AbsenceCalendarViewModel.class);
@@ -138,7 +134,24 @@ public class FaltasActivity extends AppCompatActivity {
             gridLayoutCalendar.setVisibility(View.VISIBLE); // Mostra o calendário
             savedFaltasLayout.setVisibility(View.VISIBLE);  // Mostra as faltas salvas
 
+            // Desmarcar o dia selecionado, se houver
+            if (selectedDayTextView != null) {
+                selectedDayTextView.setBackgroundColor(defaultColor); // Redefine a cor de fundo
+                selectedDayTextView = null; // Limpa a referência
+            }
+
+            // Certifique-se de que o mês e o ano do calendário estão visíveis
+            monthTextView.setVisibility(View.VISIBLE); // Garante que o mês esteja visível
+
+            // Restaura visibilidade, texto e habilitação dos botões
+            buttonPreviousMonth.setVisibility(View.VISIBLE);
+            buttonNextMonth.setVisibility(View.VISIBLE);
+            buttonPreviousMonth.setText("<");
+            buttonNextMonth.setText(">");
+            buttonPreviousMonth.setEnabled(true);
+            buttonNextMonth.setEnabled(true);
         });
+
 
         updateCalendar();
     }
@@ -197,9 +210,13 @@ public class FaltasActivity extends AppCompatActivity {
 
         ColorDrawable background = (ColorDrawable) dayTextView.getBackground();
         if (background.getColor() == defaultColor) {
+            // Limpa o formulário antes de carregar os dados
+            clearForm();
+
             selectedDayTextView = dayTextView;
-            currentEditingDay = String.valueOf(day); // Set the day to edit
-            loadFormForDay(day); // Load existing data into the form
+            currentEditingDay = String.valueOf(day); // Define o dia para edição
+            loadFormForDay(day); // Carrega os dados existentes no formulário
+
             informationScrollView.setVisibility(View.VISIBLE);
             gridLayoutCalendar.setVisibility(View.GONE);
             savedFaltasLayout.setVisibility(View.GONE);
@@ -219,38 +236,63 @@ public class FaltasActivity extends AppCompatActivity {
         }
     }
 
+
+
     private void loadFormForDay(int day) {
         viewModel.loadFaltas(userId, getMonthYearKey());
+        viewModel.getAbsenceData().observe(this, absenceData -> {
+            if (absenceData != null && absenceData.containsKey(String.valueOf(day))) {
+                Faltas falta = absenceData.get(String.valueOf(day));
+                if (falta != null) {
+                    editTextMotivo.setText(falta.getMotivo());
+                    checkBoxAtestado.setChecked(falta.getAtestado());
+                    editTextNota.setText(falta.getNota());
+                }
+            }
+        });
     }
 
     private void saveFalta() {
         if (currentEditingDay == null) {
-            Toast.makeText(this, "No day selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Nenhum dia selecionado", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // Captura os dados do formulário
         String day = currentEditingDay;
-        String motivo = editTextMotivo.getText().toString();
+        String motivo = editTextMotivo.getText().toString().trim();
         boolean atestado = checkBoxAtestado.isChecked();
-        String nota = editTextNota.getText().toString();
+        String nota = editTextNota.getText().toString().trim();
 
+        // Verifica se os campos obrigatórios estão preenchidos
+        if (motivo.isEmpty() && nota.isEmpty()) {
+            Toast.makeText(this, "Preencha ao menos um campo!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Cria um objeto Faltas
         Faltas falta = new Faltas(day, motivo, atestado, nota);
 
-        // Verificar se já existe uma falta para esse dia antes de incrementar a contagem
+        // Verifica se o dia já existe no layout (para evitar duplicação)
         if (!dayAlreadyExists(day)) {
-            int countChange = 1;  // Incrementa a contagem de ausências
+            int countChange = 1; // Incrementa o contador de faltas
             viewModel.updateUserAbsenceCount(countChange);
         }
 
-        // Salvar a falta usando o ViewModel
+        // Salva a falta no banco de dados
         viewModel.saveFalta(userId, getMonthYearKey(), day, falta);
+
+        // Atualiza o layout com a nova falta
         updateFaltaInLayout(day, motivo, atestado, nota);
-        updateCalendar();
+
+        // Limpa o formulário e redefine a seleção
         clearForm();
-        if (selectedDayTextView != null) {
-            selectedDayTextView.setBackgroundColor(selectedColor);
-        }
+        currentEditingDay = null;
+
+        // Atualiza o calendário para refletir mudanças
+        updateCalendar();
     }
+
 
     private void addFaltaToLayout(String day, String motivo, boolean atestado, String nota) {
         LinearLayout faltaInfoLayout = new LinearLayout(this);
@@ -335,7 +377,13 @@ public class FaltasActivity extends AppCompatActivity {
         savedFaltasLayout.setVisibility(View.VISIBLE);
         buttonPreviousMonth.setVisibility(View.VISIBLE);
         buttonNextMonth.setVisibility(View.VISIBLE);
-        currentEditingDay = null; // Redefinir o dia na edição
+
+        if (selectedDayTextView != null) {
+            selectedDayTextView.setBackgroundColor(defaultColor);
+            selectedDayTextView = null; // Limpa a referência
+        }
+
+        currentEditingDay = null;
     }
 
     private void removeFalta(int day) {

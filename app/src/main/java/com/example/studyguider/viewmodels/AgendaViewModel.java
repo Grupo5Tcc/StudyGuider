@@ -2,6 +2,8 @@ package com.example.studyguider.viewmodels;
 
 
 import android.graphics.Color;
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -61,14 +63,10 @@ public class AgendaViewModel extends ViewModel {
     }
 
 
-    public void addEvent(String userId,String eventName, String eventTime, String additionalInfo, int color, String day) {
-        Agenda newEvent = new Agenda(userId,eventName, eventTime, additionalInfo, color, day);
-
-
-        // Save the event to Firestore
+    public void addEvent(String userId, String eventName, String eventTime, String additionalInfo, int color, String day) {
+        Agenda newEvent = new Agenda(userId, eventName, eventTime, additionalInfo, color, day);
         eventsCollection.add(newEvent)
                 .addOnSuccessListener(documentReference -> {
-                    // Set the ID of the event
                     newEvent.setId(documentReference.getId());
                     List<Agenda> currentEvents = events.getValue();
                     if (currentEvents != null) {
@@ -77,23 +75,23 @@ public class AgendaViewModel extends ViewModel {
                     }
                 })
                 .addOnFailureListener(e -> {
-                    // Handle error
+                    // Lidar com erro
                 });
     }
 
 
     public void removeEvent(Agenda event) {
-        // Check if the event is null
+        // Checa se o evento é nulo
         if (event == null) {
             return;
         }
 
 
-        // Remove the event from Firestore
+        // Remove o evento no Firestore
         eventsCollection.document(event.getId()) // Assuming you have a method getId() in your Agenda class
                 .delete()
                 .addOnSuccessListener(aVoid -> {
-                    // Successfully deleted from Firestore, now remove from the local list
+                    // Removido com Sucesso
                     List<Agenda> currentEvents = events.getValue();
                     if (currentEvents != null) {
                         currentEvents.remove(event);
@@ -101,7 +99,7 @@ public class AgendaViewModel extends ViewModel {
                     }
                 })
                 .addOnFailureListener(e -> {
-                    // Handle error when trying to delete from Firestore
+                    // Lidar com erro ao tentar excluir do Firestore
                 });
     }
 
@@ -130,30 +128,48 @@ public class AgendaViewModel extends ViewModel {
 
 
     public void loadEventsByUserId(String userId) {
-        // Clear the current list of events before loading new ones
         List<Agenda> currentEvents = new ArrayList<>();
-        events.setValue(currentEvents); // Avoid showing an empty screen while loading
+        events.setValue(currentEvents); // Limpar eventos atuais
 
-
-        // Query Firestore to get events for the specific user ID
         eventsCollection.whereEqualTo("userId", userId).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (DocumentSnapshot document : task.getResult()) {
-                            // Convert Firestore document to Agenda object
                             Agenda agenda = document.toObject(Agenda.class);
                             if (agenda != null) {
-                                agenda.setId(document.getId()); // Set the document ID
-                                currentEvents.add(agenda); // Add the event to the list
+                                agenda.setId(document.getId());
+                                currentEvents.add(agenda);
                             }
                         }
-                        events.setValue(currentEvents); // Update LiveData with the new list
+                        events.setValue(currentEvents); // Atualizar a lista de eventos
                     } else {
-                        // Handle failure in retrieving events
+                        Log.e("AgendaViewModel", "Erro ao obter documentos: ", task.getException());
                     }
                 })
                 .addOnFailureListener(e -> {
-                    // Handle errors in the Firestore query
+                    Log.e("AgendaViewModel", "Erro ao carregar eventos: ", e);
+                });
+    }
+
+    public void updateEvent(Agenda event) {
+        if (event == null || event.getId() == null) {
+            return;
+        }
+
+        eventsCollection.document(event.getId()).set(event)
+                .addOnSuccessListener(aVoid -> {
+                    // Update the local list of events
+                    List<Agenda> currentEvents = events.getValue();
+                    if (currentEvents != null) {
+                        int index = currentEvents.indexOf(event);
+                        if (index >= 0) {
+                            currentEvents.set(index, event);
+                            events.setValue(currentEvents);
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("AgendaViewModel", "Error updating event: ", e);
                 });
     }
 }

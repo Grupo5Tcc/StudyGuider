@@ -2,7 +2,6 @@ package com.example.studyguider.view;
 
 
 import android.app.AlertDialog;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -39,7 +38,7 @@ import java.util.Map;
 
 public class AgendaActivity extends AppCompatActivity {
 
-
+    private Agenda currentEditingEvent;
     private GridLayout gridLayoutCalendar;
     private ScrollView informationScrollView;
     private LinearLayout savedEventsLayout;
@@ -47,12 +46,15 @@ public class AgendaActivity extends AppCompatActivity {
 
     private EditText editTextEventName;
     private EditText editTextAdditionalInfo;
+
     private Button saveButton;
     private Button colorPickerButton;
-
+    private Button buttonNextMonth;
+    private Button buttonPreviousMonth;
 
     private TextView selectedDayTextView;
     private TextView textViewEventTime;
+    private TextView monthTextView;
 
 
     private AgendaViewModel plannerViewModel;
@@ -66,22 +68,20 @@ public class AgendaActivity extends AppCompatActivity {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     private HeaderViewModel headerViewModel;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agenda);
 
-// Define orientação da tela para retrato
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        Button buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
+        monthTextView = findViewById(R.id.textViewMonth);
+        buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
         buttonPreviousMonth.setText("<");
 
 
-        Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
+        buttonNextMonth = findViewById(R.id.buttonNextMonth);
         buttonNextMonth.setText(">");
 
 
@@ -92,10 +92,13 @@ public class AgendaActivity extends AppCompatActivity {
         View headerView = findViewById(R.id.header);
         HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
 
-        FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
+        // Configurações do cabeçalho
+        FirebaseUser  currentUser1 = FirebaseAuth.getInstance().getCurrentUser ();
         if (currentUser1 != null) {
             headerViewModel.fetchUsername(currentUser1);
         }
+
+        setupObservers(); // Certifique-se de que isso está após o carregamento dos eventos
 
 
         gridLayoutCalendar = findViewById(R.id.gridLayoutCalendar);
@@ -154,8 +157,19 @@ public class AgendaActivity extends AppCompatActivity {
             setupCalendar();
             updateSavedEvents(plannerViewModel.getEvents().getValue());
         });
-    }
 
+        setupCalendar();
+        setupObservers();
+
+        // Carregar eventos do Firestore
+        FirebaseUser  currentUser  = auth.getCurrentUser ();
+        if (currentUser  != null) {
+            String userId = currentUser.getUid();
+            plannerViewModel.loadEventsByUserId(userId); // Carrega eventos do usuário
+        }
+
+        setupObservers(); // Certifique-se de que isso está após o carregamento dos eventos
+    }
 
     private void setupCalendar() {
         gridLayoutCalendar.removeAllViews();
@@ -200,41 +214,25 @@ public class AgendaActivity extends AppCompatActivity {
 
 
     private void handleDayClick(TextView dayTextView, int day) {
-
-
-        TextView monthTextView = findViewById(R.id.textViewMonth);
-        Button buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
-        Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
-
-
-        monthTextView.setVisibility(View.INVISIBLE);
-        buttonPreviousMonth.setText("");
-        buttonNextMonth.setText("");
-        buttonNextMonth.setEnabled(false);
-        buttonPreviousMonth.setEnabled(false);
-
-
-        if (dayTextView.getBackground() instanceof ColorDrawable) {
-            int backgroundColor = ((ColorDrawable) dayTextView.getBackground()).getColor();
-            if (backgroundColor == Color.WHITE) {
-                selectedDayTextView = dayTextView;
-                dayTextView.setBackgroundColor(plannerViewModel.getSelectedColor().getValue());
-                dayColors.put(getDayKey(day), plannerViewModel.getSelectedColor().getValue());
-                plannerViewModel.selectDay(String.valueOf(day));
-                informationScrollView.setVisibility(View.VISIBLE);
-                gridLayoutCalendar.setVisibility(View.GONE);
-                savedEventsLayout.setVisibility(View.GONE);
-            } else {
-                dayTextView.setBackgroundColor(Color.WHITE);
-                dayColors.put(getDayKey(day), Color.WHITE);
-                selectedDayTextView = null;
-                informationScrollView.setVisibility(View.GONE);
-                gridLayoutCalendar.setVisibility(View.VISIBLE);
-                savedEventsLayout.setVisibility(View.VISIBLE);
-            }
+        String dayKey = getDayKey(day);
+        if (dayColors.getOrDefault(dayKey, Color.WHITE) != Color.WHITE) {
+            Toast.makeText(this, "Este dia já tem um evento", Toast.LENGTH_SHORT).show();
+            return;
         }
-    }
 
+        selectedDayTextView = dayTextView;
+        dayTextView.setBackgroundColor(plannerViewModel.getSelectedColor().getValue());
+        dayColors.put(dayKey, plannerViewModel.getSelectedColor().getValue());
+        plannerViewModel.selectDay(String.valueOf(day));
+        informationScrollView.setVisibility(View.VISIBLE);
+        gridLayoutCalendar.setVisibility(View.GONE);
+        savedEventsLayout.setVisibility(View.GONE);
+
+        // Esconde os botões e o TextView do mês
+        buttonPreviousMonth.setVisibility(View.GONE);
+        buttonNextMonth.setVisibility(View.GONE);
+        monthTextView.setVisibility(View.GONE);
+    }
 
     private void showColorPickerDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -274,25 +272,17 @@ public class AgendaActivity extends AppCompatActivity {
         String eventTime = textViewEventTime.getText().toString().trim();
         String additionalInfo = editTextAdditionalInfo.getText().toString().trim();
 
-
-        TextView monthTextView = findViewById(R.id.textViewMonth);
-        Button buttonPreviousMonth = findViewById(R.id.buttonPreviousMonth);
-        Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
-
-
         // Valida se o nome do evento foi preenchido
         if (eventName.isEmpty()) {
             Toast.makeText(this, "Preencha todos os campos obrigatórios!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-
         // Verifica se o horário foi selecionado
         if (eventTime.equals("Clique Aqui")) {
             Toast.makeText(this, "Selecione um horário!", Toast.LENGTH_SHORT).show();
             return;
         }
-
 
         // Verifica se uma cor foi selecionada
         Integer selectedColor = plannerViewModel.getSelectedColor().getValue();
@@ -301,49 +291,78 @@ public class AgendaActivity extends AppCompatActivity {
             return;
         }
 
-
-        // Remove o evento anterior, se já existir um para o mesmo dia
-        String dayKey = getDayKey(Integer.parseInt(day));
-        plannerViewModel.removeEventByDay(dayKey);
-
-
-        // Adiciona o novo evento ao ViewModel
-        FirebaseUser user = auth.getCurrentUser();
-        String userId = user.getUid();
-        plannerViewModel.addEvent(userId, eventName, eventTime, additionalInfo, selectedColor, dayKey);
-
+        // Se estivermos editando um evento existente
+        if (currentEditingEvent != null) {
+            // Atualiza o evento existente
+            currentEditingEvent.setEventName(eventName);
+            currentEditingEvent.setEventTime(eventTime);
+            currentEditingEvent.setAdditionalInfo(additionalInfo);
+            currentEditingEvent.setColor(selectedColor);
+            plannerViewModel.updateEvent(currentEditingEvent); // Adicione este método no ViewModel
+        } else {
+            // Adiciona um novo evento
+            String dayKey = getDayKey(Integer.parseInt(day));
+            plannerViewModel.removeEventByDay(dayKey);
+            FirebaseUser  user = auth.getCurrentUser ();
+            String userId = user.getUid();
+            plannerViewModel.addEvent(userId, eventName, eventTime, additionalInfo, selectedColor, dayKey);
+        }
 
         // Atualiza a cor do dia no calendário
         if (selectedDayTextView != null) {
-            dayColors.put(dayKey, selectedColor); // Associa a cor ao dia
-            selectedDayTextView.setBackgroundColor(selectedColor); // Muda a cor de fundo do dia selecionado no calendário
+            dayColors.put(getDayKey(Integer.parseInt(day)), selectedColor);
+            selectedDayTextView.setBackgroundColor(selectedColor);
         }
 
-
-        // Atualiza a visibilidade dos layouts após salvar
-        informationScrollView.setVisibility(View.GONE);  // Esconde o formulário de informações do evento
-        gridLayoutCalendar.setVisibility(View.VISIBLE);  // Mostra o calendário
-        savedEventsLayout.setVisibility(View.VISIBLE);   // Mostra a lista de eventos salvos
-
-
         // Limpa os campos do formulário
+        resetForm();
+
+        // Atualiza a interface
+        updateInterfaceAfterSave();
+    }
+
+    private void resetForm() {
         selectedDayTextView = null;
         editTextEventName.setText("");
         textViewEventTime.setText("Selecione o horário");
         editTextAdditionalInfo.setText("");
+    }
 
+    private void updateInterfaceAfterSave() {
+        informationScrollView.setVisibility(View.GONE);
+        gridLayoutCalendar.setVisibility(View.VISIBLE);
+        savedEventsLayout.setVisibility(View.VISIBLE);
 
-        // Restaura a interface do mês e os botões de navegação
+        // Torna os botões e o TextView do mês visíveis novamente
+        buttonPreviousMonth.setVisibility(View.VISIBLE);
+        buttonNextMonth.setVisibility(View.VISIBLE);
         monthTextView.setVisibility(View.VISIBLE);
-        buttonPreviousMonth.setText("<");
-        buttonNextMonth.setText(">");
-        buttonNextMonth.setEnabled(true);
-        buttonPreviousMonth.setEnabled(true);
     }
 
 
+    // Atualizar o método setupObservers para incluir a atualização de cores
     private void setupObservers() {
-        plannerViewModel.getEvents().observe(this, this::updateSavedEvents);
+        plannerViewModel.getEvents().observe(this, events -> {
+            updateSavedEvents(events);
+            updateCalendarDayColors(events);
+        });
+    }
+
+    // Método para atualizar as cores dos dias no calendário
+    private void updateCalendarDayColors(List<Agenda> events) {
+        dayColors.clear(); // Limpa as cores anteriores
+        for (Agenda event : events) {
+            String[] eventDateParts = event.getDay().split("-");
+            int eventDay = Integer.parseInt(eventDateParts[0]);
+            int eventMonth = Integer.parseInt(eventDateParts[1]);
+            int eventYear = Integer.parseInt(eventDateParts[2]);
+
+            if (eventMonth == currentMonth && eventYear == currentYear) {
+                String dayKey = getDayKey(eventDay);
+                dayColors.put(dayKey, event.getColor()); // Associa a cor ao dia
+            }
+        }
+        setupCalendar(); // Atualiza o calendário com as novas cores
     }
 
     private void updateSavedEvents(List<Agenda> events) {
@@ -465,11 +484,11 @@ public class AgendaActivity extends AppCompatActivity {
 
 
     private void editEvent(Agenda event) {
+        currentEditingEvent = event; // Armazena o evento que está sendo editado
         String[] eventDateParts = event.getDay().split("-");
         int eventDay = Integer.parseInt(eventDateParts[0]);
         int eventMonth = Integer.parseInt(eventDateParts[1]);
         int eventYear = Integer.parseInt(eventDateParts[2]);
-
 
         // Verifica se o mês e o ano do evento são iguais ao mês e ano atuais
         if (eventMonth == currentMonth && eventYear == currentYear) {
@@ -477,7 +496,6 @@ public class AgendaActivity extends AppCompatActivity {
             for (int i = 0; i < gridLayoutCalendar.getChildCount(); i++) {
                 TextView dayTextView = (TextView) gridLayoutCalendar.getChildAt(i);
                 int dayInCalendar = Integer.parseInt(dayTextView.getText().toString());
-
 
                 // Se for o dia do evento, atualiza o fundo para indicar que está selecionado
                 if (dayInCalendar == eventDay) {
@@ -487,28 +505,23 @@ public class AgendaActivity extends AppCompatActivity {
                 }
             }
 
-
             // Preenche os campos do formulário com os detalhes do evento
             editTextEventName.setText(event.getEventName());
             textViewEventTime.setText(event.getEventTime());
             editTextAdditionalInfo.setText(event.getAdditionalInfo());
             plannerViewModel.setColor(event.getColor());
 
-
-            // Exibe o formulário de edição e oculta o layout do calendário e eventos salvos
             informationScrollView.setVisibility(View.VISIBLE);
             gridLayoutCalendar.setVisibility(View.GONE);
             savedEventsLayout.setVisibility(View.GONE);
 
-
+            // Esconde os botões e o TextView do mês
+            buttonPreviousMonth.setVisibility(View.GONE);
+            buttonNextMonth.setVisibility(View.GONE);
+            monthTextView.setVisibility(View.GONE);
         } else {
             Toast.makeText(this, "O evento pertence a outro mês/ano. Mude para o mês correto para editá-lo.", Toast.LENGTH_LONG).show();
         }
     }
-
-
-
-
-
 
 }

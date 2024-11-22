@@ -200,12 +200,12 @@
 
                 <!-- Botão para salvar as informações -->
                 <Button
-                    android:id="@+id/saveButton"
+                    android:id="@+id/backButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:background="@drawable/bg_bnt_absence_form"
-                    android:text="Salvar"
+                    android:text="Voltar"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
 
@@ -217,12 +217,12 @@
 
                 <!-- Botão para voltar à tela anterior -->
                 <Button
-                    android:id="@+id/backButton"
+                    android:id="@+id/saveButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:background="@drawable/bg_bnt_absence_form"
-                    android:text="Voltar"
+                    android:text="Salvar"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>

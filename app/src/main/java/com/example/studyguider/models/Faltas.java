@@ -34,7 +34,7 @@ public class Faltas {
         this.motivo = motivo;
     }
 
-    public boolean isAtestado() {
+    public boolean getAtestado() {
         return atestado;
     }
 
