@@ -45,13 +45,13 @@ public class PlantoesAdapter extends RecyclerView.Adapter<PlantoesAdapter.ViewHo
         Plantoes user = arrayList.get(position);
 
         // Configura os dados nos TextViews
-        holder.professor.setText(user.getProfessor());
-        holder.materia.setText(user.getMateria());
-        holder.dia.setText(user.getDia());
-        holder.hora.setText(user.getHora());
+        holder.teacher.setText(user.getProfessor());
+        holder.subject.setText(user.getMateria());
+        holder.day.setText(user.getDia());
+        holder.time.setText(user.getHora());
 
         // Define o clique no RelativeLayout para ações do usuário
-        holder.relativeLayout.setOnClickListener(view -> {
+        holder.containerLayout.setOnClickListener(view -> {
             Log.d(TAG, "onClick: User item clicked");
             if (onItemClickListener != null) {
                 onItemClickListener.onClick(user);
@@ -59,7 +59,7 @@ public class PlantoesAdapter extends RecyclerView.Adapter<PlantoesAdapter.ViewHo
         });
 
         // Lógica do botão de remover com confirmação
-        holder.imageRemover.setOnClickListener(v -> {
+        holder.deleteIcon.setOnClickListener(v -> {
             Log.d(TAG, "onClick: Remove button clicked");
             showConfirmationDialog(user, position);
         });
@@ -115,20 +115,22 @@ public class PlantoesAdapter extends RecyclerView.Adapter<PlantoesAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView professor, materia, dia, hora;
-        RelativeLayout relativeLayout;
-        ImageView imageRemover;
+        TextView teacher, subject, day, time;
+        RelativeLayout containerLayout;
+        ImageView deleteIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            // Referências aos componentes do layout
-            professor = itemView.findViewById(R.id.list_item_professor);
-            materia = itemView.findViewById(R.id.list_item_materia);
-            dia = itemView.findViewById(R.id.list_item_dia);
-            hora = itemView.findViewById(R.id.list_item_hora);
-            relativeLayout = itemView.findViewById(R.id.relative_layout);
-            imageRemover = itemView.findViewById(R.id.image_remover);
+
+            // References to layout components
+            teacher = itemView.findViewById(R.id.list_item_professor); // TextView for teacher's name
+            subject = itemView.findViewById(R.id.list_item_materia); // TextView for subject
+            day = itemView.findViewById(R.id.list_item_dia); // TextView for day
+            time = itemView.findViewById(R.id.list_item_hora); // TextView for time
+            containerLayout = itemView.findViewById(R.id.relative_layout); // Container layout
+            deleteIcon = itemView.findViewById(R.id.image_remover); // ImageView for the delete icon
         }
+
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

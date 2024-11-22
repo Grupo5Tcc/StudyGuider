@@ -33,12 +33,12 @@ public class NotasAdapter extends RecyclerView.Adapter<NotasAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.nomeMateria.setText(arrayList.get(position).getNomeMateria());
-        holder.notaCred.setText(arrayList.get(position).getCred());
-        holder.notaTrab.setText(arrayList.get(position).getTrab());
-        holder.notaList.setText(arrayList.get(position).getList());
-        holder.notaPrec.setText(arrayList.get(position).getPre());
-        holder.notaPro.setText(arrayList.get(position).getProva());
+        holder.subjectName.setText(arrayList.get(position).getNomeMateria());
+        holder.creditScore.setText(arrayList.get(position).getCred());
+        holder.workScore.setText(arrayList.get(position).getTrab());
+        holder.listScore.setText(arrayList.get(position).getList());
+        holder.precScore.setText(arrayList.get(position).getPre());
+        holder.projectScore.setText(arrayList.get(position).getProva());
         holder.itemView.setOnClickListener(view -> onItemClickListener.onClick(arrayList.get(position)));
     }
 
@@ -47,17 +47,20 @@ public class NotasAdapter extends RecyclerView.Adapter<NotasAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView nomeMateria, notaCred, notaTrab, notaList, notaPrec, notaPro;
+        TextView subjectName, creditScore, workScore, listScore, precScore, projectScore;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nomeMateria = itemView.findViewById(R.id.list_item_materia);
-            notaCred = itemView.findViewById(R.id.list_item_cred);
-            notaTrab = itemView.findViewById(R.id.list_item_trab);
-            notaList = itemView.findViewById(R.id.list_item_lista);
-            notaPrec = itemView.findViewById(R.id.list_item_pre);
-            notaPro = itemView.findViewById(R.id.list_item_pro);
+
+            // References to layout components
+            subjectName = itemView.findViewById(R.id.list_item_materia); // TextView for subject name
+            creditScore = itemView.findViewById(R.id.list_item_cred); // TextView for credit score
+            workScore = itemView.findViewById(R.id.list_item_trab); // TextView for work score
+            listScore = itemView.findViewById(R.id.list_item_lista); // TextView for list score
+            precScore = itemView.findViewById(R.id.list_item_pre); // TextView for pre-evaluation score
+            projectScore = itemView.findViewById(R.id.list_item_pro); // TextView for project score
         }
+
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

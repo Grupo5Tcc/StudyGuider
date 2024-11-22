@@ -61,6 +61,8 @@ public class MateriasAdapter extends RecyclerView.Adapter<MateriasAdapter.ViewHo
             Log.d(TAG, "onClick: Remove button clicked");
             showConfirmationDialog(user, position);
         });
+
+
     }
 
     private void showConfirmationDialog(Materias user, int position) {

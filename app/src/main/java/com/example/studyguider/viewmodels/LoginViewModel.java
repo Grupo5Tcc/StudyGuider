@@ -16,29 +16,29 @@ public class LoginViewModel extends AndroidViewModel {
     private final FirebaseAuth auth;
 
     // LiveData para acompanhar o status do login e a visibilidade da progress bar
-    public MutableLiveData<Boolean> loginSucesso;
-    public MutableLiveData<Boolean> loginFalhou;
-    public MutableLiveData<Boolean> visibilidadeProgressBar;
+    public MutableLiveData<Boolean> loginSuccess;
+    public MutableLiveData<Boolean> loginFailed;
+    public MutableLiveData<Boolean> progressBarVisibility;
 
     // Construtor que inicializa a autenticação e os LiveData
     public LoginViewModel(@NonNull Application application) {
         super(application);
         auth = FirebaseAuth.getInstance();
-        loginSucesso = new MutableLiveData<>();
-        loginFalhou = new MutableLiveData<>();
-        visibilidadeProgressBar = new MutableLiveData<>();
+        loginSuccess = new MutableLiveData<>();
+        loginFailed = new MutableLiveData<>();
+        progressBarVisibility = new MutableLiveData<>();
     }
 
     // Método para realizar o login do usuário
     public void loginUser(Login user) {
         if (isValidEmail(user.getEmail()) && isValidPassword(user.getPassword())) {
-            visibilidadeProgressBar.setValue(true); // Mostra a progress bar
+            progressBarVisibility.setValue(true); // Mostra a progress bar
             // Tenta fazer o login com email e senha
             auth.signInWithEmailAndPassword(user.getEmail(), user.getPassword())
-                    .addOnSuccessListener(authResult -> loginSucesso.setValue(true)) // Login bem-sucedido
+                    .addOnSuccessListener(authResult -> loginSuccess.setValue(true)) // Login bem-sucedido
                     .addOnFailureListener(e -> {
-                        loginFalhou.setValue(true);  // Login falhou
-                        visibilidadeProgressBar.setValue(false);  // Esconde a progress bar
+                        loginFailed.setValue(true);  // Login falhou
+                        progressBarVisibility.setValue(false);  // Esconde a progress bar
                     });
         }
     }
@@ -46,10 +46,10 @@ public class LoginViewModel extends AndroidViewModel {
     // Verifica se o email fornecido é válido
     private boolean isValidEmail(String email) {
         if (email.isEmpty()) {
-            Toast.makeText(getApplication(), "Please enter your email", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplication(), "Entre com seu e-mail", Toast.LENGTH_LONG).show();
             return false; // Email vazio
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(getApplication(), "Please enter a valid email", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplication(), "Entre com um e-mail valido", Toast.LENGTH_LONG).show();
             return false; // Email inválido
         }
         return true;  // Email válido
