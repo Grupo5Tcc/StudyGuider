@@ -45,10 +45,10 @@ public class PlantoesAdapter extends RecyclerView.Adapter<PlantoesAdapter.ViewHo
         Plantoes user = arrayList.get(position);
 
         // Configura os dados nos TextViews
-        holder.teacher.setText(user.getProfessor());
-        holder.subject.setText(user.getMateria());
-        holder.day.setText(user.getDia());
-        holder.time.setText(user.getHora());
+        holder.teacher.setText(user.getTeacher());
+        holder.subject.setText(user.getSubject());
+        holder.day.setText(user.getDay());
+        holder.time.setText(user.getTime());
 
         // Define o clique no RelativeLayout para ações do usuário
         holder.containerLayout.setOnClickListener(view -> {

@@ -33,8 +33,8 @@ public class NotasAdapter extends RecyclerView.Adapter<NotasAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.subjectName.setText(arrayList.get(position).getNomeMateria());
-        holder.creditScore.setText(arrayList.get(position).getCred());
+        holder.subjectName.setText(arrayList.get(position).getSubjectName());
+        holder.creditScore.setText(arrayList.get(position).getCreditScore());
         holder.workScore.setText(arrayList.get(position).getTrab());
         holder.listScore.setText(arrayList.get(position).getList());
         holder.precScore.setText(arrayList.get(position).getPre());
