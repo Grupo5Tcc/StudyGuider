@@ -2,22 +2,22 @@ package com.example.studyguider.models;
 
 public class Faltas {
     private String day;
-    private String motivo;
-    private boolean atestado;
-    private String nota;
+    private String reason;
+    private boolean medicalCertificate;
+    private String grade;
 
-    // Construtor vazio necessário para Firebase
+    // Empty constructor needed for Firebase
     public Faltas() {}
 
-    // Construtor completo
-    public Faltas(String day, String motivo, boolean atestado, String nota) {
+    // Full constructor
+    public Faltas(String day, String reason, boolean medicalCertificate, String grade) {
         this.day = day;
-        this.motivo = motivo;
-        this.atestado = atestado;
-        this.nota = nota;
+        this.reason = reason;
+        this.medicalCertificate = medicalCertificate;
+        this.grade = grade;
     }
 
-    // Getters e Setters
+    // Getters and Setters
     public String getDay() {
         return day;
     }
@@ -26,27 +26,28 @@ public class Faltas {
         this.day = day;
     }
 
-    public String getMotivo() {
-        return motivo;
+    public String getReason() {
+        return reason;
     }
 
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
-    public boolean getAtestado() {
-        return atestado;
+    public boolean getMedicalCertificate() {
+        return medicalCertificate;
     }
 
-    public void setAtestado(boolean atestado) {
-        this.atestado = atestado;
+    public void setMedicalCertificate(boolean medicalCertificate) {
+        this.medicalCertificate = medicalCertificate;
     }
 
-    public String getNota() {
-        return nota;
+    public String getGrade() {
+        return grade;
     }
 
-    public void setNota(String nota) {
-        this.nota = nota;
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
+
 }

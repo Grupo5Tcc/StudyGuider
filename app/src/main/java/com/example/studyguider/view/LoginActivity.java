@@ -59,14 +59,14 @@ public class LoginActivity extends AppCompatActivity {
         View progressBar = findViewById(R.id.pgbLoading);
         CheckBox ckb_mostrarSenhaLogin  = findViewById(R.id.ckb_mostrarSenhaLogin);
 
-        loginViewModel.visibilidadeProgressBar.observe(this, isVisible -> {
+        loginViewModel.progressBarVisibility.observe(this, isVisible -> {
             if (isVisible != null) {
                 progressBar.setVisibility(isVisible ? View.VISIBLE : View.INVISIBLE);
             }
         });
 
         // Observa o resultado do login e direciona para HomeActivity se for bem-sucedido
-        loginViewModel.loginSucesso.observe(this, isSuccess -> {
+        loginViewModel.loginSuccess.observe(this, isSuccess -> {
             if (isSuccess != null && isSuccess) {
                 Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Observa falhas de login e exibe uma mensagem de erro
-        loginViewModel.loginFalhou.observe(this, isFailed -> {
+        loginViewModel.loginFailed.observe(this, isFailed -> {
             if (isFailed != null && isFailed) {
                 Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
             }

@@ -1,14 +1,14 @@
 package com.example.studyguider.models;
 
 public class Notas {
-    String id, nomeMateria, cred, list,trab, pre, prova;
+    String id, subjectName, creditScore, list,trab, pre, prova;
 
     public Notas() {
     }
 
-    public String getNomeMateria() { return nomeMateria; }
+    public String getSubjectName() { return subjectName; }
 
-    public void setNomeMateria(String nomeMateria) { this.nomeMateria = nomeMateria; }
+    public void setSubjectName(String subjectName) { this.subjectName = subjectName; }
 
     public String getId() {
         return id;
@@ -18,12 +18,12 @@ public class Notas {
         this.id = id;
     }
 
-    public String getCred() {
-        return cred;
+    public String getCreditScore() {
+        return creditScore;
     }
 
-    public void setCred(String cred) {
-        this.cred = cred;
+    public void setCreditScore(String cred) {
+        this.creditScore = cred;
     }
 
     public String getList() {
