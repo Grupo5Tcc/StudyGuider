@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/Widget.Material3.CardView.Elevated"
@@ -11,38 +10,50 @@
     app:cardCornerRadius="15dp"
     app:cardElevation="10dp">
 
-    <RelativeLayout
-        android:id="@+id/materia_item"
+    <!-- Layout horizontal para alinhar o conteúdo e o botão -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/blue_2"
-        android:padding="12sp">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-        <!-- Texto que exibe a matéria -->
-        <TextView
-            android:id="@+id/list_item_materia"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:id="@+id/materia_item"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:fontFamily="@font/bebas_neue"
-            android:gravity="center_horizontal"
-            android:textSize="30sp"
-            android:layout_marginTop="8dp"/>
+            android:layout_weight="1"
+            android:background="@color/blue_2"
+            android:clickable="true"
+            android:focusable="true">
 
-        <!-- Texto que exibe o nome do professor -->
-        <TextView
-            android:id="@+id/list_item_professor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/list_item_materia"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="8dp"/>
+            <!-- Texto que exibe a matéria -->
+            <TextView
+                android:id="@+id/list_item_materia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/bebas_neue"
+                android:gravity="center_horizontal"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
+            <!-- Texto que exibe o nome do professor -->
+            <TextView
+                android:id="@+id/list_item_professor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/list_item_materia"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center_horizontal"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <!--
         <ImageView
             android:id="@+id/image_editar"
             android:layout_width="25dp"
@@ -53,16 +64,17 @@
             android:layout_marginTop="12dp"
             android:contentDescription="@string/password_form_button"
             android:src="@drawable/ic_password_form_branco" />
+        -->
 
         <ImageView
             android:id="@+id/image_remover"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="45dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
             android:contentDescription="@string/delete_button"
             android:src="@drawable/ic_delete_branco" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -4,7 +4,6 @@ package com.example.studyguider.view;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,7 +22,6 @@ import com.example.studyguider.R;
 import com.example.studyguider.adapter.MateriasAdapter;
 import com.example.studyguider.models.Materias;
 import com.example.studyguider.viewmodels.HeaderViewModel;
-import com.example.studyguider.viewmodels.MateriasViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -61,9 +59,6 @@ public class MateriasActivity extends AppCompatActivity {
 
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
 
-        View materiaView = findViewById(R.id.materia_item);
-
-
         View headerView = findViewById(R.id.header);
         HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
 
@@ -73,15 +68,14 @@ public class MateriasActivity extends AppCompatActivity {
             headerViewModel.fetchUsername(currentUser1);
         }
 
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         RecyclerView recyclerView = findViewById(R.id.recycler);
 
-
+        // Configura o botão para adicionar uma nova matéria, redirecionando para a tela de adição
         FloatingActionButton add = findViewById(R.id.addMateria);
         add.setOnClickListener(view -> startActivity(new Intent(MateriasActivity.this, MateriasAddActivity.class)));
 
-
+        // Verifica o usuário autenticado para carregar seus dados específicos
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             String userId = currentUser.getUid();
@@ -92,6 +86,7 @@ public class MateriasActivity extends AppCompatActivity {
                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                         @Override
                         public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                            // Tratamento de erro ao buscar dados
                             if (error != null) {
                                 Toast.makeText(MateriasActivity.this, "Falha ao carregar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                                 return;
@@ -109,7 +104,7 @@ public class MateriasActivity extends AppCompatActivity {
                             MateriasAdapter adapter = new MateriasAdapter(MateriasActivity.this, arrayList);
                             recyclerView.setAdapter(adapter);
 
-                            adapter.setOnClickListener(new MateriasAdapter.OnItemClickListener() {
+                            adapter.setOnItemClickListener(new MateriasAdapter.OnItemClickListener() {
                                 @Override
                                 public void onClick(Materias materia) {
                                     App.materia = materia;
