@@ -1,11 +1,15 @@
 package com.example.studyguider.models;
 
 public class Notas {
+
+    // Criação de Variáveis
     String id, subjectName, creditScore, list,trab, pre, prova;
 
+    // Construtor
     public Notas() {
     }
 
+    // Getters e Setters
     public String getSubjectName() { return subjectName; }
 
     public void setSubjectName(String subjectName) { this.subjectName = subjectName; }

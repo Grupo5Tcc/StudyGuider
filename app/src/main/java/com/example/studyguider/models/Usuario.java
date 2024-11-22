@@ -1,6 +1,8 @@
 package com.example.studyguider.models;
 
 public class Usuario {
+
+    // Criação de Variáveis
     private String name;
     private String email;
     private String dateOfBirth;

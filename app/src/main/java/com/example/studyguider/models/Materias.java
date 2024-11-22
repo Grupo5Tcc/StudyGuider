@@ -1,11 +1,19 @@
 package com.example.studyguider.models;
 
 public class Materias {
-    String id, nomeMateria, professor, conteudos, media;
 
+    // Criação de Variáveis
+    String id;
+    String nomeMateria;
+    String professor;
+    String conteudos;
+    String media;
+
+    // Construtor
     public Materias() {
     }
 
+    // Getters e Setters
     public String getId() {
         return id;
     }

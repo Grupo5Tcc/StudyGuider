@@ -1,12 +1,16 @@
 package com.example.studyguider.models;
 
 public class Perfil {
+
+    // Criação de Variáveis
     private String name;
     private String email;
     private String dateOfBirth;
     private int absence;
     private int recovery; // Novo campo para recuperações
 
+
+    // Construtor
     public Perfil(String name, String email, String dateOfBirth, int absence, int recovery) {
         this.name = name;
         this.email = email;

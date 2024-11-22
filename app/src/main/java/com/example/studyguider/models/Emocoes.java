@@ -1,15 +1,18 @@
 package com.example.studyguider.models;
 
 public class Emocoes {
+
+   // Criação de Variáveis
     private int day;
     private int color;
 
-    // Construtores, getters e setters
+    // Construtor
     public Emocoes(int day, int color) {
         this.day = day;
         this.color = color;
     }
 
+    // Getters e Setters
     public int getDay() {
         return day;
     }

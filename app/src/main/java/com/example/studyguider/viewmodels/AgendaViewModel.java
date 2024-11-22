@@ -158,7 +158,7 @@ public class AgendaViewModel extends ViewModel {
 
         eventsCollection.document(event.getId()).set(event)
                 .addOnSuccessListener(aVoid -> {
-                    // Update the local list of events
+                    // Atualiza a lista local de eventos
                     List<Agenda> currentEvents = events.getValue();
                     if (currentEvents != null) {
                         int index = currentEvents.indexOf(event);

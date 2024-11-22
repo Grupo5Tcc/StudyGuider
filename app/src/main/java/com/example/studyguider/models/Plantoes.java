@@ -1,51 +1,53 @@
 package com.example.studyguider.models;
 
 public class Plantoes {
-    private String id, teacher, subject, day, time;
 
+    // Criação de Variáveis
+    String id, professor, materia, dia, hora;
+
+    // Construtor
     public Plantoes() {
     }
 
-    // Getters
+    // Getters e Setters
     public String getId() {
         return id;
     }
 
-    public String getTeacher() {
-        return teacher;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    // Setters
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setTeacher(String teacher) {
-        this.teacher = teacher;
+    public String getProfessor() {
+        return professor;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setProfessor(String professor) {
+        this.professor = professor;
     }
 
-    public void setDay(String day) {
-        this.day = day;
+    public String getMateria() {
+        return materia;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setMateria(String materia) {
+        this.materia = materia;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
 }

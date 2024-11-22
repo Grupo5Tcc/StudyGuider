@@ -244,9 +244,9 @@ public class FaltasActivity extends AppCompatActivity {
             if (absenceData != null && absenceData.containsKey(String.valueOf(day))) {
                 Faltas falta = absenceData.get(String.valueOf(day));
                 if (falta != null) {
-                    editTextMotivo.setText(falta.getMotivo());
-                    checkBoxAtestado.setChecked(falta.getAtestado());
-                    editTextNota.setText(falta.getNota());
+                    editTextMotivo.setText(falta.getReason());
+                    checkBoxAtestado.setChecked(falta.getMedicalCertificate());
+                    editTextNota.setText(falta.getGrade());
                 }
             }
         });

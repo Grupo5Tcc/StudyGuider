@@ -1,6 +1,8 @@
 package com.example.studyguider.models;
 
 public class Recuperacao {
+
+    // Criação de Variáveis
     private String containerId;
     private boolean checkbox1;
     private boolean checkbox2;
@@ -8,6 +10,7 @@ public class Recuperacao {
     private boolean checkbox4;
     private String conteudos;
 
+    // Construtor
     public Recuperacao(String containerId, boolean checkbox1, boolean checkbox2, boolean checkbox3, boolean checkbox4, String conteudos) {
         this.containerId = containerId;
         this.checkbox1 = checkbox1;
@@ -17,6 +20,7 @@ public class Recuperacao {
         this.conteudos = conteudos;
     }
 
+    // Getters e Setters
     public String getContainerId() {
         return containerId;
     }
