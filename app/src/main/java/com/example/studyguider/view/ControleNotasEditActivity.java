@@ -71,16 +71,16 @@ public class ControleNotasEditActivity extends AppCompatActivity {
         MaterialButton delete = findViewById(R.id.delete); // Botão para excluir as notas
 
         // Define os valores atuais das notas nos campos de entrada
-        nomeMateriaET.setText(App.notas.getNomeMateria());
-        notaCredET.setText(App.notas.getCred());
+        nomeMateriaET.setText(App.notas.getSubjectName());
+        notaCredET.setText(App.notas.getCreditScore());
         notaListaET.setText(App.notas.getList());
         notaTrabET.setText(App.notas.getTrab());
         notaPrecisoTxt.setText(App.notas.getPre());
         notaProvaET.setText(App.notas.getProva());
 
         // Logs para ajudar no diagnóstico dos valores que estão sendo carregados
-        Log.d("EditNotas", "nomeMateria: " + App.notas.getNomeMateria());
-        Log.d("EditNotas", "notaCred: " + App.notas.getCred());
+        Log.d("EditNotas", "nomeMateria: " + App.notas.getSubjectName());
+        Log.d("EditNotas", "notaCred: " + App.notas.getCreditScore());
         Log.d("EditNotas", "notaLista: " + App.notas.getList());
         Log.d("EditNotas", "notaTrab: " + App.notas.getTrab());
         Log.d("EditNotas", "notaPreciso: " + App.notas.getPre());
