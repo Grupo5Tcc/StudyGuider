@@ -58,63 +58,71 @@ public class ControleRecuperacoes extends AppCompatActivity {
             headerViewModel.fetchUsername(currentUser1);
         }
 
-        // Obtém coleção "notas" do Firestore e verifica se o aluno está em recuperação
-        db.collection("notas").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    QuerySnapshot querySnapshot = task.getResult();
-                    boolean possuiRecuperacao = false;
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
 
-                    LinearLayout linearLayout = findViewById(R.id.linerec);
-                    linearLayout.setOrientation(LinearLayout.VERTICAL);
+            // Obtém coleção "notas" do Firestore e verifica se o aluno está em recuperação
+            db.collection("grades").document(userId).collection("userGrades").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        QuerySnapshot querySnapshot = task.getResult();
+                        boolean possuiRecuperacao = false;
 
-                    for (DocumentSnapshot document : querySnapshot.getDocuments()) {
-                        String po = document.getString("prova");
-                        String pe = document.getString("pre");
-                        float prova, pre;
+                        LinearLayout linearLayout = findViewById(R.id.linerec);
+                        linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-                        prova = Float.parseFloat(po);
-                        pre = Float.parseFloat(pe);
+                        for (DocumentSnapshot document : querySnapshot.getDocuments()) {
+                            String po = document.getString("prova");
+                            String pe = document.getString("pre");
+                            float prova, pre;
+
+                            prova = Float.parseFloat(po);
+                            pre = Float.parseFloat(pe);
 
 
-                        if ((prova - pre) < 0) {
-                            possuiRecuperacao = true;
+                            if ((prova - pre) < 0) {
+                                possuiRecuperacao = true;
 
-                            String nomeMateria = document.getString("nomeMateria");
-                            float nota = calcularNota(document);
+                                String nomeMateria = document.getString("nomeMateria");
+                                float nota = calcularNota(document);
 
-                            View existingContainer = linearLayout.findViewWithTag(nomeMateria);
-                            if (existingContainer != null) {
-                                atualizarContainer(existingContainer, nomeMateria, nota);
-                            } else {
-                                View container = getLayoutInflater().inflate(R.layout.activity_add_rec, linearLayout, false);
-                                container.setTag(nomeMateria);
+                                View existingContainer = linearLayout.findViewWithTag(nomeMateria);
+                                if (existingContainer != null) {
+                                    atualizarContainer(existingContainer, nomeMateria, nota);
+                                } else {
+                                    View container = getLayoutInflater().inflate(R.layout.activity_add_rec, linearLayout, false);
+                                    container.setTag(nomeMateria);
 
-                                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                                        LinearLayout.LayoutParams.MATCH_PARENT,
-                                        LinearLayout.LayoutParams.WRAP_CONTENT
-                                );
-                                int marginInPixels = (int) (10 * getResources().getDisplayMetrics().density);
-                                layoutParams.setMargins(0, marginInPixels, 0, marginInPixels);
-                                container.setLayoutParams(layoutParams);
+                                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                                            LinearLayout.LayoutParams.MATCH_PARENT,
+                                            LinearLayout.LayoutParams.WRAP_CONTENT
+                                    );
+                                    int marginInPixels = (int) (10 * getResources().getDisplayMetrics().density);
+                                    layoutParams.setMargins(0, marginInPixels, 0, marginInPixels);
+                                    container.setLayoutParams(layoutParams);
 
-                                linearLayout.addView(container);
-                                atualizarContainer(container, nomeMateria, nota);
+                                    linearLayout.addView(container);
+                                    atualizarContainer(container, nomeMateria, nota);
 
-                                preencherDadosDoFirestore(nomeMateria, container);
+                                    preencherDadosDoFirestore(nomeMateria, container);
+                                }
                             }
                         }
+
+                        // Se nenhuma recuperação é encontrada, exibe um aviso
+                        if (!possuiRecuperacao) {
+                            Toast.makeText(ControleRecuperacoes.this, "Não possui nenhuma Recuperação", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(ControleRecuperacoes.this, "Erro ao recuperar dados", Toast.LENGTH_SHORT).show();
                     }
-                    // Se nenhuma recuperação é encontrada, exibe um aviso
-                    if (!possuiRecuperacao) {
-                        Toast.makeText(ControleRecuperacoes.this, "Não possui nenhuma Recuperação", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(ControleRecuperacoes.this, "Erro ao recuperar dados", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
+            });
+        }
+
     }
 
     // Método que carrega os dados da recuperação de Firestore para preencher o container correspondente

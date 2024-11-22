@@ -39,7 +39,7 @@ public class ControleNotasEditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_controle_notas_edit);
+        setContentView(R.layout.activity_grades_edit);
 
         // Define orientação da tela para retrato
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -86,6 +86,10 @@ public class ControleNotasEditActivity extends AppCompatActivity {
         Log.d("EditNotas", "notaPreciso: " + App.notas.getPre());
         Log.d("EditNotas", "notaProva: " + App.notas.getProva());
 
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+        }
 
         // Lógica de exclusão de notas
         delete.setOnClickListener(new View.OnClickListener() {
@@ -93,31 +97,31 @@ public class ControleNotasEditActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 new AlertDialog.Builder(ControleNotasEditActivity.this)
-                        .setTitle("Confirmar Exclusão")
-                        .setMessage("Tem certeza que deseja deletar essas notas?")
-                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
+                    .setTitle("Confirmar Exclusão")
+                    .setMessage("Tem certeza que deseja deletar essas notas?")
+                    .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
-                                db.collection("notas").document(App.notas.getId()).delete()
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                Toast.makeText(ControleNotasEditActivity.this, "Notas Deletada Com Sucesso!!", Toast.LENGTH_SHORT).show();
-                                                Intent resultIntent = new Intent();
-                                                setResult(RESULT_OK, resultIntent);
-                                                finish();
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.e("EditNotas", "Erro Ao Deletar As Notas!!", e);
-                                                Toast.makeText(ControleNotasEditActivity.this, "Erro Ao Deletar As Notas!!", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                            }
-                        })
-                        .setNegativeButton("Não", null)
-                        .show();
+                            db.collection("grades").document(App.notas.getId()).delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(ControleNotasEditActivity.this, "Notas Deletada Com Sucesso!!", Toast.LENGTH_SHORT).show();
+                                        Intent resultIntent = new Intent();
+                                        setResult(RESULT_OK, resultIntent);
+                                        finish();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.e("EditNotas", "Erro Ao Deletar As Notas!!", e);
+                                        Toast.makeText(ControleNotasEditActivity.this, "Erro Ao Deletar As Notas!!", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                        }
+                    })
+                    .setNegativeButton("Não", null)
+                    .show();
             }
         });
         // Lógica de salvamento de alterações
@@ -125,70 +129,77 @@ public class ControleNotasEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(ControleNotasEditActivity.this)
-                        .setTitle("Confirmar Alteração")
-                        .setMessage("Tem certeza que deseja salvar as alterações?")
-                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                String notaPreciso;
+                    .setTitle("Confirmar Alteração")
+                    .setMessage("Tem certeza que deseja salvar as alterações?")
+                    .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            String notaPreciso;
 
-                                // Recupera e valida os valores inseridos nos campos de entrada
-                                String nomeMateria = Objects.requireNonNull(nomeMateriaET.getText()).toString().trim();
-                                String notaCred = Objects.requireNonNull(notaCredET.getText()).toString().trim();
-                                String notaTrab = Objects.requireNonNull(notaTrabET.getText()).toString().trim();
-                                String notaList = Objects.requireNonNull(notaListaET.getText()).toString().trim();
-                                String notaPro = Objects.requireNonNull(notaProvaET.getText()).toString().trim();
+                            // Recupera e valida os valores inseridos nos campos de entrada
+                            String nomeMateria = Objects.requireNonNull(nomeMateriaET.getText()).toString().trim();
+                            String notaCred = Objects.requireNonNull(notaCredET.getText()).toString().trim();
+                            String notaTrab = Objects.requireNonNull(notaTrabET.getText()).toString().trim();
+                            String notaList = Objects.requireNonNull(notaListaET.getText()).toString().trim();
+                            String notaPro = Objects.requireNonNull(notaProvaET.getText()).toString().trim();
 
-                                if (nomeMateria.isEmpty() || notaCred.isEmpty() || notaTrab.isEmpty() || notaList.isEmpty() || notaPro.isEmpty()) {
-                                    Toast.makeText(ControleNotasEditActivity.this, "Por favor, preencha todos os campos!", Toast.LENGTH_SHORT).show();
-                                    return;
+                            if (nomeMateria.isEmpty() || notaCred.isEmpty() || notaTrab.isEmpty() || notaList.isEmpty() || notaPro.isEmpty()) {
+                                Toast.makeText(ControleNotasEditActivity.this, "Por favor, preencha todos os campos!", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else {
+                                float ntPreciso, ntCred, ntTrab, ntList;
+
+                                ntCred = Float.parseFloat(notaCred);
+                                ntTrab = Float.parseFloat(notaTrab);
+                                ntList = Float.parseFloat(notaList);
+
+                                float ntSoma = ntCred + ntTrab + ntList;
+
+                                if (ntSoma < 6) {
+                                    ntPreciso = 6 - ntSoma;
+                                    notaPreciso = String.valueOf(ntPreciso);
                                 } else {
-                                    float ntPreciso, ntCred, ntTrab, ntList;
-
-                                    ntCred = Float.parseFloat(notaCred);
-                                    ntTrab = Float.parseFloat(notaTrab);
-                                    ntList = Float.parseFloat(notaList);
-
-                                    float ntSoma = ntCred + ntTrab + ntList;
-
-                                    if(ntSoma < 6){
-                                        ntPreciso = 6 - ntSoma;
-                                        notaPreciso = String.valueOf(ntPreciso);
-                                    }else{
-                                        notaPreciso = "Não precisa de pontos para passsar!!!" ;
-                                        Toast.makeText(ControleNotasEditActivity.this, "Não está de recuperação!!", Toast.LENGTH_SHORT).show();
-                                        updateUserRecCount(-1);
-                                    }
-
+                                    notaPreciso = "Não precisa de pontos para passsar!!!";
+                                    Toast.makeText(ControleNotasEditActivity.this, "Não está de recuperação!!", Toast.LENGTH_SHORT).show();
+                                    updateUserRecCount(-1);
                                 }
 
-                                // Cria um mapa para atualizar as informações da nota no Firestore
-                                Map<String, Object> notas = new HashMap<>();
-                                notas.put("nomeMateria", Objects.requireNonNull(nomeMateriaET.getText()).toString());
-                                notas.put("cred", Objects.requireNonNull(notaCredET.getText()).toString());
-                                notas.put("trab", Objects.requireNonNull(notaTrabET.getText()).toString());
-                                notas.put("list", Objects.requireNonNull(notaListaET.getText()).toString());
-                                notas.put("pre", Objects.requireNonNull(notaPreciso).toString());
-                                notas.put("prova", Objects.requireNonNull(notaProvaET.getText()).toString());
-
-                                db.collection("notas").document(App.notas.getId()).update(notas)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                Toast.makeText(ControleNotasEditActivity.this, "Notas Alteradas Com Sucesso!!", Toast.LENGTH_SHORT).show();
-                                                finish();
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.e("EditNotas", "Erro ao salvar as notas", e);
-                                                Toast.makeText(ControleNotasEditActivity.this, "Erro ao salvar as notas", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
                             }
-                        })
-                        .setNegativeButton("Não", null)
-                        .show();
+
+                            // Cria um mapa para atualizar as informações da nota no Firestore
+                            Map<String, Object> notas = new HashMap<>();
+                            notas.put("nomeMateria", Objects.requireNonNull(nomeMateriaET.getText()).toString());
+                            notas.put("cred", Objects.requireNonNull(notaCredET.getText()).toString());
+                            notas.put("trab", Objects.requireNonNull(notaTrabET.getText()).toString());
+                            notas.put("list", Objects.requireNonNull(notaListaET.getText()).toString());
+                            notas.put("pre", Objects.requireNonNull(notaPreciso).toString());
+                            notas.put("prova", Objects.requireNonNull(notaProvaET.getText()).toString());
+
+                            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                            if (currentUser != null) {
+                                String userId = currentUser.getUid();
+
+                                // Adiciona a nova nota ao Firestore e define os callbacks para sucesso ou falha
+                                db.collection("grades").document(userId).collection("userGrades")
+                                    .document(App.notas.getId()).update(notas)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(ControleNotasEditActivity.this, "Notas Alteradas Com Sucesso!!", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.e("EditNotas", "Erro ao salvar as notas", e);
+                                            Toast.makeText(ControleNotasEditActivity.this, "Erro ao salvar as notas", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                            }
+                        }
+                    })
+                .setNegativeButton("Não", null)
+                .show();
             }
         });
         // Log para o ID da nota sendo editada

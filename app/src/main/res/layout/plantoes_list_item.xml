@@ -11,7 +11,6 @@
     app:cardCornerRadius="15dp"
     app:cardElevation="10dp">
 
-
     <!-- Layout horizontal para alinhar o conteúdo e o botão -->
     <LinearLayout
         android:layout_width="match_parent"

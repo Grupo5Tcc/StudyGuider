@@ -37,9 +37,7 @@ import java.util.ArrayList;
 
 public class MateriasActivity extends AppCompatActivity {
 
-
     private HeaderViewModel headerViewModel;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,42 +78,41 @@ public class MateriasActivity extends AppCompatActivity {
         if (currentUser != null) {
             String userId = currentUser.getUid();
 
-
             // Modifique a consulta para buscar materias no documento correspondente ao userId
             db.collection("subjects").document(userId).collection("userSubjects")
-                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                        @Override
-                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                            // Tratamento de erro ao buscar dados
-                            if (error != null) {
-                                Toast.makeText(MateriasActivity.this, "Falha ao carregar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-
-                            ArrayList<Materias> arrayList = new ArrayList<>();
-                            assert value != null;
-                            for (QueryDocumentSnapshot document : value) {
-                                Materias materias = document.toObject(Materias.class);
-                                materias.setId(document.getId());
-                                arrayList.add(materias);
-                            }
-
-
-                            MateriasAdapter adapter = new MateriasAdapter(MateriasActivity.this, arrayList);
-                            recyclerView.setAdapter(adapter);
-
-                            adapter.setOnItemClickListener(new MateriasAdapter.OnItemClickListener() {
-                                @Override
-                                public void onClick(Materias materia) {
-                                    App.materia = materia;
-                                    String mat = materia.getNomeMateria().toUpperCase();
-                                    Intent intent = new Intent(MateriasActivity.this, ConteudosActivity.class);
-                                    intent.putExtra("materia", String.valueOf(mat));
-                                    startActivity(intent);
-                                }
-                            });
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        // Tratamento de erro ao buscar dados
+                        if (error != null) {
+                            Toast.makeText(MateriasActivity.this, "Falha ao carregar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            return;
                         }
-                    });
+
+                        ArrayList<Materias> arrayList = new ArrayList<>();
+                        assert value != null;
+                        for (QueryDocumentSnapshot document : value) {
+                            Materias materias = document.toObject(Materias.class);
+                            materias.setId(document.getId());
+                            arrayList.add(materias);
+                        }
+
+
+                        MateriasAdapter adapter = new MateriasAdapter(MateriasActivity.this, arrayList);
+                        recyclerView.setAdapter(adapter);
+
+                        adapter.setOnItemClickListener(new MateriasAdapter.OnItemClickListener() {
+                            @Override
+                            public void onClick(Materias materia) {
+                                App.materia = materia;
+                                String mat = materia.getNomeMateria().toUpperCase();
+                                Intent intent = new Intent(MateriasActivity.this, ConteudosActivity.class);
+                                intent.putExtra("materia", String.valueOf(mat));
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
         }
     }
 }

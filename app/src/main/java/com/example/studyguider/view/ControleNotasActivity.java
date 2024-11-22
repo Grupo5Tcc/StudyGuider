@@ -37,7 +37,7 @@ public class ControleNotasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
-        setContentView(R.layout.activity_controle_notas);
+        setContentView(R.layout.activity_grades);
 
         // Define orientação da tela para retrato
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -62,37 +62,43 @@ public class ControleNotasActivity extends AppCompatActivity {
         FloatingActionButton add = findViewById(R.id.addNota);
         add.setOnClickListener(view -> startActivity(new Intent(ControleNotasActivity.this, ControleNotasAddActivity.class)));
 
-        // Listener para atualizar notas em tempo real
-        db.collection("notas").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    // Exibe mensagem de erro caso falhe ao carregar dados
-                    Toast.makeText(ControleNotasActivity.this, "Falha ao carregar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    // Processa e exibe as notas no RecyclerView
-                    ArrayList<Notas> arrayList = new ArrayList<>();
-                    assert value != null;
-                    for (QueryDocumentSnapshot document : value) {
-                        Notas notas = document.toObject(Notas.class);
-                        notas.setId(document.getId());
-                        arrayList.add(notas);
-                    }
-                    // Define o adapter para o RecyclerView e atualiza a lista de notas
-                    NotasAdapter adapter = new NotasAdapter(ControleNotasActivity.this, arrayList);
-                    recyclerView.setAdapter(adapter);
+        // Verifica o usuário autenticado para carregar seus dados específicos
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
 
-                    // Configura o evento de clique para editar uma nota
-                    adapter.setOnItemClickListener(new NotasAdapter.OnItemClickListener() {
-                        @Override
-                        public void onClick(Notas notas) {
-                            App.notas = notas; // Define a nota selecionada
-                            startActivity(new Intent(ControleNotasActivity.this, ControleNotasEditActivity.class));
+            db.collection("grades").document(userId).collection("userGrades")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null) {
+                            // Exibe mensagem de erro caso falhe ao carregar dados
+                            Toast.makeText(ControleNotasActivity.this, "Falha ao carregar dados: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            return;
+                        } else {
+                            // Processa e exibe as notas no RecyclerView
+                            ArrayList<Notas> arrayList = new ArrayList<>();
+                            assert value != null;
+                            for (QueryDocumentSnapshot document : value) {
+                                Notas notas = document.toObject(Notas.class);
+                                notas.setId(document.getId());
+                                arrayList.add(notas);
+                            }
+                            // Define o adapter para o RecyclerView e atualiza a lista de notas
+                            NotasAdapter adapter = new NotasAdapter(ControleNotasActivity.this, arrayList);
+                            recyclerView.setAdapter(adapter);
+
+                            // Configura o evento de clique para editar uma nota
+                            adapter.setOnItemClickListener(new NotasAdapter.OnItemClickListener() {
+                                @Override
+                                public void onClick(Notas notas) {
+                                    App.notas = notas; // Define a nota selecionada
+                                    startActivity(new Intent(ControleNotasActivity.this, ControleNotasEditActivity.class));
+                                }
+                            });
                         }
-                    });
-                }
-            }
-        });
+                    }
+                });
+        }
     }
 }
