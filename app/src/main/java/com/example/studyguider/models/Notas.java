@@ -1,14 +1,18 @@
 package com.example.studyguider.models;
 
 public class Notas {
-    String id, nomeMateria, cred, list,trab, pre, prova;
+    private String id, subjectName, credits, assignments, projects, presentations, exam;
 
     public Notas() {
     }
 
-    public String getNomeMateria() { return nomeMateria; }
+    public String getSubjectName() {
+        return subjectName;
+    }
 
-    public void setNomeMateria(String nomeMateria) { this.nomeMateria = nomeMateria; }
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
+    }
 
     public String getId() {
         return id;
@@ -18,43 +22,44 @@ public class Notas {
         this.id = id;
     }
 
-    public String getCred() {
-        return cred;
+    public String getCredits() {
+        return credits;
     }
 
-    public void setCred(String cred) {
-        this.cred = cred;
+    public void setCredits(String credits) {
+        this.credits = credits;
     }
 
-    public String getList() {
-        return list;
+    public String getAssignments() {
+        return assignments;
     }
 
-    public void setList(String list) {
-        this.list = list;
+    public void setAssignments(String assignments) {
+        this.assignments = assignments;
     }
 
-    public String getTrab() {
-        return trab;
+    public String getProjects() {
+        return projects;
     }
 
-    public void setTrab(String trab) {
-        this.trab = trab;
+    public void setProjects(String projects) {
+        this.projects = projects;
     }
 
-    public String getPre() {
-        return pre;
+    public String getPresentations() {
+        return presentations;
     }
 
-    public void setPre(String pre) {
-        this.pre = pre;
+    public void setPresentations(String presentations) {
+        this.presentations = presentations;
     }
 
-    public String getProva() {
-        return prova;
+    public String getExam() {
+        return exam;
     }
 
-    public void setProva(String prova) {
-        this.prova = prova;
+    public void setExam(String exam) {
+        this.exam = exam;
     }
+
 }

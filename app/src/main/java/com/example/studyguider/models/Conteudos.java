@@ -1,14 +1,15 @@
 package com.example.studyguider.models;
 
 public class Conteudos {
-    private String conteudos;
-    private String bimestre;
+    private String contents;
+    private String term;
 
     public Conteudos() {
     }
 
-    public Conteudos(String conteudos, String bimestre) {
-        this.conteudos = conteudos;
-        this.bimestre = bimestre;
+    public Conteudos(String contents, String term) {
+        this.contents = contents;
+        this.term = term;
     }
+
 }

@@ -1,7 +1,7 @@
 package com.example.studyguider.models;
 
 public class Plantoes {
-    String id, professor, materia, dia, hora;
+    private String id, teacher, subject, day, time;
 
     public Plantoes() {
     }
@@ -11,20 +11,20 @@ public class Plantoes {
         return id;
     }
 
-    public String getProfessor() {
-        return professor;
+    public String getTeacher() {
+        return teacher;
     }
 
-    public String getMateria() {
-        return materia;
+    public String getSubject() {
+        return subject;
     }
 
-    public String getDia() {
-        return dia;
+    public String getDay() {
+        return day;
     }
 
-    public String getHora() {
-        return hora;
+    public String getTime() {
+        return time;
     }
 
     // Setters
@@ -32,19 +32,20 @@ public class Plantoes {
         this.id = id;
     }
 
-    public void setProfessor(String professor) {
-        this.professor = professor;
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
     }
 
-    public void setMateria(String materia) {
-        this.materia = materia;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
-    public void setDia(String dia) {
-        this.dia = dia;
+    public void setDay(String day) {
+        this.day = day;
     }
 
-    public void setHora(String hora) {
-        this.hora = hora;
+    public void setTime(String time) {
+        this.time = time;
     }
+
 }
