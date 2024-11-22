@@ -2,37 +2,53 @@ package com.example.studyguider.models;
 
 public class Faltas {
 
-    // Criação de Variáveis
+    //Declaração de Variáveis
     private String day;
-    private String reason;
-    private boolean medicalCertificate;
-    private String grade;
+    private String motivo;
+    private boolean atestado;
+    private String nota;
 
-    // Construtor
+    // Construtor vazio necessário para Firebase
     public Faltas() {}
 
-    public Faltas(String day, String reason, boolean medicalCertificate, String grade) {
+    // Construtor completo
+    public Faltas(String day, String motivo, boolean atestado, String nota) {
         this.day = day;
-        this.reason = reason;
-        this.medicalCertificate = medicalCertificate;
-        this.grade = grade;
+        this.motivo = motivo;
+        this.atestado = atestado;
+        this.nota = nota;
     }
 
     // Getters e Setters
-    public String getDay() { return day; }
+    public String getDay() {
+        return day;
+    }
 
-    public void setDay(String day) { this.day = day; }
+    public void setDay(String day) {
+        this.day = day;
+    }
 
-    public String getReason() { return reason; }
+    public String getMotivo() {
+        return motivo;
+    }
 
-    public void setReason(String reason) { this.reason = reason; }
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
 
-    public boolean getMedicalCertificate() { return medicalCertificate; }
+    public boolean getAtestado() {
+        return atestado;
+    }
 
-    public void setMedicalCertificate(boolean medicalCertificate) { this.medicalCertificate = medicalCertificate; }
+    public void setAtestado(boolean atestado) {
+        this.atestado = atestado;
+    }
 
-    public String getGrade() { return grade; }
+    public String getNota() {
+        return nota;
+    }
 
-    public void setGrade(String grade) { this.grade = grade; }
-
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
 }
