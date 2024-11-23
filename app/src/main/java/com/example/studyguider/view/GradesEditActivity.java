@@ -28,6 +28,7 @@ public class GradesEditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_notas);
 
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
 
@@ -39,8 +40,6 @@ public class GradesEditActivity extends AppCompatActivity {
         if (currentUser1 != null) {
             headerViewModel.fetchUsername(currentUser1);
         }
-
-        setContentView(R.layout.activity_edit_notas);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 

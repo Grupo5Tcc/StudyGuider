@@ -37,6 +37,7 @@ public class GradesAddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_add_notas);
 
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
 
@@ -48,8 +49,6 @@ public class GradesAddActivity extends AppCompatActivity {
         if (currentUser1 != null) {
             headerViewModel.fetchUsername(currentUser1);
         }
-
-        setContentView(R.layout.activity_add_notas);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 

@@ -33,6 +33,7 @@ public class GradesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_controle_notas);
 
         headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
 
@@ -44,8 +45,6 @@ public class GradesActivity extends AppCompatActivity {
         if (currentUser1 != null) {
             headerViewModel.fetchUsername(currentUser1);
         }
-
-        setContentView(R.layout.activity_controle_notas);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         RecyclerView recyclerView = findViewById(R.id.recycler);
