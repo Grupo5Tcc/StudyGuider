@@ -43,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Define a ação para o botão de cadastro para abrir a CadastroActivity
+        // Define a ação para o botão de cadastro para abrir a RegisterActivity
         buttonSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CadastroActivity.class);
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });

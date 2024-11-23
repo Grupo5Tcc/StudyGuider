@@ -4,7 +4,7 @@ package com.example.studyguider.repository;
 import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import com.example.studyguider.models.Perfil;
+import com.example.studyguider.models.Profile;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser ;
 import com.google.firebase.firestore.DocumentReference;
@@ -30,8 +30,8 @@ public class UserRepository {
     }
 
     // Método para obter o perfil do usuário
-    public LiveData<Perfil> getUserProfile() {
-        MutableLiveData<Perfil> userProfileLiveData = new MutableLiveData<>(); // Cria um LiveData para o perfil do usuário
+    public LiveData<Profile> getUserProfile() {
+        MutableLiveData<Profile> userProfileLiveData = new MutableLiveData<>(); // Cria um LiveData para o perfil do usuário
 
         FirebaseUser  currentUser  = getCurrentUser (); // Obtém o usuário autenticado
         if (currentUser  == null) { // Verifica se não há usuário autenticado
@@ -64,8 +64,8 @@ public class UserRepository {
                         // Log dos dados do usuário
                         Log.d("User Repository", "Name: " + name + ", Email: " + email + ", DOB: " + dob + ", Absence: " + absence + ", Recovery: " + recovery);
 
-                        // Cria um objeto Perfil com os dados obtidos
-                        Perfil userProfile = new Perfil(name, email, dob, absence, recovery);
+                        // Cria um objeto Profile com os dados obtidos
+                        Profile userProfile = new Profile(name, email, dob, absence, recovery);
                         userProfileLiveData.setValue(userProfile); // Atualiza o LiveData com o perfil do usuário
                     } else {
                         Log.e("User Repository", "User  document not found"); // Log de erro se o documento não for encontrado

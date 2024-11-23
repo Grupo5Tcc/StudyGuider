@@ -8,7 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
-import com.example.studyguider.models.Usuario;
+import com.example.studyguider.models.User;
 import com.example.studyguider.view.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,7 +27,7 @@ public class RegisterViewModel extends ViewModel {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance(); // Inicializa o FirebaseAuth para gerenciar a autenticação
 
     // Método para registrar um novo usuário
-    public void registerUser(Usuario user, String password, Context context) {
+    public void registerUser(User user, String password, Context context) {
         // Cria um usuário com email e senha
         mAuth.createUserWithEmailAndPassword(user.getEmail(), password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -65,7 +65,7 @@ public class RegisterViewModel extends ViewModel {
     }
 
     // Método para salvar os detalhes do usuário no Firestore
-    private void saveUserDetails(Usuario user) {
+    private void saveUserDetails(User user) {
         FirebaseFirestore db = FirebaseFirestore.getInstance(); // Obtém a instância do Firestore
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid(); // Obtém o ID do usuário autenticado
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/orange_clearer"
-    tools:context=".view.ControleNotasActivity">
+    tools:context=".view.GradesActivity">
 
     <!-- Cabeçalho da atividade, incluído de um layout externo -->
     <include
@@ -18,14 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- LinearLayout centralizado para o título de controle de notas -->
+    <!-- LinearLayout centralizado para o título de controle de grades -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/header"
         android:gravity="center_horizontal">
 
-        <!-- TextView para exibir o título "Notas:" -->
+        <!-- TextView para exibir o título "Grades:" -->
         <TextView
             android:id="@+id/controleRec"
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- RecyclerView para exibir a lista de notas -->
+    <!-- RecyclerView para exibir a lista de grades -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"

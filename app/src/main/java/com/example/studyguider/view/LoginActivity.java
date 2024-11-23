@@ -89,9 +89,9 @@ public class LoginActivity extends AppCompatActivity {
             loginViewModel.loginUser(user);
         });
 
-        // Configura o botão de cadastro para redirecionar para a tela de CadastroActivity
+        // Configura o botão de cadastro para redirecionar para a tela de RegisterActivity
         btnSingUp.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, CadastroActivity.class);
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
 

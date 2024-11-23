@@ -66,7 +66,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewSobreNos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, SobreNosActivity.class);
+                Intent intent = new Intent(HomeActivity.this, AboutUsActivity.class);
                 startActivity(intent);
             }
         });
@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, AgendaActivity.class);
+                Intent intent = new Intent(HomeActivity.this, PlannerActivity.class);
                 startActivity(intent);
             }
         });
@@ -84,7 +84,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewFaltas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, FaltasActivity.class);
+                Intent intent = new Intent(HomeActivity.this, AbsenceCalendarActivity.class);
                 startActivity(intent);
             }
         });
@@ -92,7 +92,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewAfazeres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, AfazeresActivity.class);
+                Intent intent = new Intent(HomeActivity.this, TasksActivity.class);
                 startActivity(intent);
             }
         });
@@ -108,7 +108,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewNotas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, ControleNotasActivity.class);
+                Intent intent = new Intent(HomeActivity.this, GradesActivity.class);
                 startActivity(intent);
             }
         });
@@ -116,7 +116,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewPlantoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, PlantoesActivity.class);
+                Intent intent = new Intent(HomeActivity.this, ShiftsActivity.class);
                 startActivity(intent);
             }
         });
@@ -124,7 +124,7 @@ public class HomeActivity extends AppCompatActivity {
         cardViewRecuperacoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, ControleRecuperacoes.class);
+                Intent intent = new Intent(HomeActivity.this, RecoveryActivity.class);
                 startActivity(intent);
             }
         });
@@ -132,17 +132,17 @@ public class HomeActivity extends AppCompatActivity {
         cardViewMaterias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, MateriasActivity.class);
+                Intent intent = new Intent(HomeActivity.this, SubjectsActivity.class);
                 startActivity(intent);
             }
         });
 
-        // Configura o listener de clique para a imagem de perfil, abrindo a tela de Perfil
+        // Configura o listener de clique para a imagem de perfil, abrindo a tela de Profile
         imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, PerfilActivity.class);
-                startActivity(intent);  // Inicia a atividade PerfilActivity
+                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                startActivity(intent);  // Inicia a atividade ProfileActivity
             }
         });
 

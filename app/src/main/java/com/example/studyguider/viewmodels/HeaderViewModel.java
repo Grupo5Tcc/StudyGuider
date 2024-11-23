@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.studyguider.view.PerfilActivity;
+import com.example.studyguider.view.ProfileActivity;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -46,7 +46,7 @@ public class HeaderViewModel extends ViewModel {
 
     // Abre a tela de perfil ao clicar na imagem do perfil
     public void onProfileImageClicked(Context context) {
-        Intent intent = new Intent(context, PerfilActivity.class);
+        Intent intent = new Intent(context, ProfileActivity.class);
         context.startActivity(intent);
     }
 }

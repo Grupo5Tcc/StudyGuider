@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.studyguider.models.ItemAfazeresList;
+import com.example.studyguider.models.ItemTaskList;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,7 +27,7 @@ import java.util.Map;
 public class TaskRepositoryToDoList {
     private static final String TAG = "TaskRepository"; // Tag para logs
     private FirebaseFirestore db; // Instância do Firestore
-    private MutableLiveData<List<ItemAfazeresList>> tasksLiveData; // LiveData para observar a lista de tarefas
+    private MutableLiveData<List<ItemTaskList>> tasksLiveData; // LiveData para observar a lista de tarefas
 
     // Construtor da classe
     public TaskRepositoryToDoList() {
@@ -36,7 +36,7 @@ public class TaskRepositoryToDoList {
     }
 
     // Método para obter as tarefas
-    public LiveData<List<ItemAfazeresList>> getTasks() {
+    public LiveData<List<ItemTaskList>> getTasks() {
         loadTasksFromFirebase(); // Carrega as tarefas do Firestore
         return tasksLiveData; // Retorna o LiveData com as tarefas
     }
@@ -50,11 +50,11 @@ public class TaskRepositoryToDoList {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) { // Verifica se a tarefa foi bem-sucedida
-                            List<ItemAfazeresList> items = new ArrayList<>(); // Cria uma lista para armazenar as tarefas
+                            List<ItemTaskList> items = new ArrayList<>(); // Cria uma lista para armazenar as tarefas
                             for (QueryDocumentSnapshot document : task.getResult()) { // Itera pelos documentos retornados
                                 String taskName = document.getString("task"); // Obtém o nome da tarefa
                                 boolean completed = document.getBoolean("completed"); // Obtém o status de conclusão
-                                items.add(new ItemAfazeresList(document.getId(), taskName, completed)); // Adiciona a tarefa à lista
+                                items.add(new ItemTaskList(document.getId(), taskName, completed)); // Adiciona a tarefa à lista
                             }
                             tasksLiveData.postValue(items); // Atualiza o LiveData com a nova lista de tarefas
                         } else {

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.studyguider.models.Perfil;
+import com.example.studyguider.models.Profile;
 import com.example.studyguider.repository.UserRepository;
 
 public class PerfilViewModel extends ViewModel {
@@ -15,7 +15,7 @@ public class PerfilViewModel extends ViewModel {
         userRepository = new UserRepository();
     }
 
-    public LiveData<Perfil> getUserProfile() {
+    public LiveData<Profile> getUserProfile() {
         return userRepository.getUserProfile(); // Assumindo que o repositório busca o perfil
     }
 
@@ -26,7 +26,7 @@ public class PerfilViewModel extends ViewModel {
     public void fetchUserProfile() {
         isLoading.setValue(true);
 
-        LiveData<Perfil> userProfileLiveData = getUserProfile();
+        LiveData<Profile> userProfileLiveData = getUserProfile();
         userProfileLiveData.observeForever(userProfile -> {
             if (userProfile != null) {
                 // Dados do usuário atualizados

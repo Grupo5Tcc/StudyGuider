@@ -28,57 +28,54 @@
             android:name=".view.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.AgendaActivity"
+            android:name=".view.PlannerActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ControleRecuperacoes"
-            android:exported="false" />
+            android:name=".view.RecoveryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Material3StudyGuider"/>
         <activity
-            android:name=".view.FaltasActivity"
+            android:name=".view.AbsenceCalendarActivity"
             android:exported="false" />
         <activity
             android:name=".view.EmotionalCalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".view.AfazeresActivity"
+            android:name=".view.TasksActivity"
             android:exported="false" />
         <activity
-            android:name=".view.PerfilActivity"
+            android:name=".view.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".view.SobreNosActivity"
+            android:name=".view.AboutUsActivity"
             android:exported="false" />
         <activity
             android:name=".view.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".view.CadastroActivity"
+            android:name=".view.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".view.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".view.PlantoesEditActivity"
+            android:name=".view.ShiftsEditActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider" />
         <activity
-            android:name=".view.PlantoesAddActivity"
+            android:name=".view.ShiftsAddActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider" />
         <activity
-            android:name=".view.PlantoesActivity"
+            android:name=".view.ShiftsActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider" />
         <activity
-            android:name=".view.MateriasEditActivity"
+            android:name=".view.SubjectsAddActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider" />
         <activity
-            android:name=".view.MateriasAddActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Material3StudyGuider" />
-        <activity
-            android:name=".view.MateriasActivity"
+            android:name=".view.SubjectsActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider" />
         <activity
@@ -86,15 +83,15 @@
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider" />
         <activity
-            android:name=".view.ControleNotasEditActivity"
+            android:name=".view.GradesEditActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider"/>
         <activity
-            android:name=".view.ControleNotasAddActivity"
+            android:name=".view.GradesAddActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider"/>
         <activity
-            android:name=".view.ControleNotasActivity"
+            android:name=".view.GradesActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3StudyGuider"/>
 

@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".view.ControleRecuperacoes">
+    tools:context=".view.RecoveryActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/orange_clearer"
-        tools:context=".view.ControleRecuperacoes">
+        tools:context=".view.RecoveryActivity">
 
         <include
             android:id="@+id/header"

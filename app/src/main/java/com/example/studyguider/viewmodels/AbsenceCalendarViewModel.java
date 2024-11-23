@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.studyguider.models.Faltas;
+import com.example.studyguider.models.Absence;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -23,7 +23,7 @@ public class AbsenceCalendarViewModel extends ViewModel {
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     // LiveData para armazenar dados de ausência, estado de carregamento e mensagens de erro
-    private final MutableLiveData<Map<String, Faltas>> absenceData = new MutableLiveData<>();
+    private final MutableLiveData<Map<String, Absence>> absenceData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false);
     private final MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
@@ -37,10 +37,10 @@ public class AbsenceCalendarViewModel extends ViewModel {
                         isLoading.setValue(false);
                         return;
                     }
-                    Map<String, Faltas> result = new HashMap<>();
+                    Map<String, Absence> result = new HashMap<>();
                     if (querySnapshot != null) {
                         for (DocumentSnapshot document : querySnapshot.getDocuments()) {
-                            Faltas falta = document.toObject(Faltas.class);
+                            Absence falta = document.toObject(Absence.class);
                             result.put(document.getId(), falta);
                         }
                         absenceData.setValue(result);
@@ -49,7 +49,7 @@ public class AbsenceCalendarViewModel extends ViewModel {
                 });
     }
 
-    public LiveData<Map<String, Faltas>> getAbsenceData() {
+    public LiveData<Map<String, Absence>> getAbsenceData() {
         return absenceData;
     }
 
@@ -62,7 +62,7 @@ public class AbsenceCalendarViewModel extends ViewModel {
     }
 
     // Salva uma falta para um dia específico
-    public void saveFalta(String userId, String monthYearKey, String day, Faltas falta) {
+    public void saveFalta(String userId, String monthYearKey, String day, Absence falta) {
         DocumentReference docRef = db.collection("absence_calendar").document(userId)
                 .collection(monthYearKey).document(day);
 

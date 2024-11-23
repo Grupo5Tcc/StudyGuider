@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/controleN"
     android:background="@color/orange_clearer"
-    tools:context=".view.ControleNotasActivity">
+    tools:context=".view.GradesActivity">
 
     <include
         android:id="@+id/header"

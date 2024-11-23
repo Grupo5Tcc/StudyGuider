@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_orange"
-    tools:context=".view.AfazeresActivity">
+    tools:context=".view.TasksActivity">
 
     <!-- Cabeçalho incluído -->
     <include

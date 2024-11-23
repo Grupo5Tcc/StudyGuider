@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
-import com.example.studyguider.viewmodels.EmocoesViewModel;
+import com.example.studyguider.viewmodels.EmotionalCalendarViewModel;
 import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,7 +33,7 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
     private GridLayout gridLayoutCalendar;
     private TextView monthTextView;
     private int selectedColor = Color.WHITE;
-    private EmocoesViewModel viewModel;
+    private EmotionalCalendarViewModel viewModel;
     private boolean isEmotionSelected = false; // Para controlar a seleção de emoção
 
     // Mapeia cores para listas de frases motivacionais
@@ -84,7 +84,7 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_emocoes);
+        setContentView(R.layout.activity_emotional_calendar);
 
         // Define orientação da tela para retrato
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -106,7 +106,7 @@ public class EmotionalCalendarActivity extends AppCompatActivity {
         Button buttonNextMonth = findViewById(R.id.buttonNextMonth);
         buttonNextMonth.setText(">");
 
-        viewModel = new ViewModelProvider(this).get(EmocoesViewModel.class);
+        viewModel = new ViewModelProvider(this).get(EmotionalCalendarViewModel.class);
 
         gridLayoutCalendar = findViewById(R.id.gridLayoutCalendar);
         monthTextView = findViewById(R.id.textViewMonth);
