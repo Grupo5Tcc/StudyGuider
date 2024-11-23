@@ -64,7 +64,6 @@ public class ProfileActivity extends AppCompatActivity {
         textViewEmail = findViewById(R.id.lblEmailLoading);
         textViewDateOfBirth = findViewById(R.id.lblDateOfBirthLoading);
         textViewAbsence = findViewById(R.id.lblAbsenceLoading);
-        textViewRecovery = findViewById(R.id.lblRecoveryLoading); // Inicializa o campo de recuperação
     }
 
     private void observeViewModel() {

@@ -190,36 +190,6 @@
                     android:textSize="16dp" />
             </LinearLayout>
 
-            <!-- Informações de recuperação do perfil -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
-
-                <!-- titulo para a recuperação -->
-                <TextView
-                    android:id="@+id/lblRecovery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:fontFamily="@font/bebas_neue"
-                    android:text="@string/recovery_profile"
-                    android:textColor="@color/blue_2"
-                    android:textSize="18dp" />
-
-                <!-- carregamento da recuperação -->
-                <TextView
-                    android:id="@+id/lblRecoveryLoading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="@string/loading_lbl_profile"
-                    android:textColor="@color/white"
-                    android:textSize="16dp" />
-            </LinearLayout>
-
             <!-- Botão para sair da conta -->
             <Button
                 android:id="@+id/btnLogOut"

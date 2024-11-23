@@ -88,14 +88,6 @@
 
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/image_remover"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/ic_delete" />
-
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
