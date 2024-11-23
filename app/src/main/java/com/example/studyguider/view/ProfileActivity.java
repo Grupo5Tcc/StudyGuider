@@ -75,8 +75,6 @@ public class ProfileActivity extends AppCompatActivity {
                 textViewDateOfBirth.setText(userProfile.getDateOfBirth());
                 textViewAbsence.setText(String.valueOf(userProfile.getAbsence()));
 
-                // Atualiza o campo de recuperação
-                textViewRecovery.setText(String.valueOf(userProfile.getRecovery()));
             }
         });
 
