@@ -12,8 +12,10 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
+import com.example.studyguider.viewmodels.HeaderViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,11 +31,23 @@ import java.util.Objects;
 public class GradesAddActivity extends AppCompatActivity {
 
     private static final String TAG = "AddNotas";
+    private HeaderViewModel headerViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+
+        headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
+
+        View headerView = findViewById(R.id.header);
+        HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
+
+        // Configurações do cabeçalho
+        FirebaseUser  currentUser1 = FirebaseAuth.getInstance().getCurrentUser ();
+        if (currentUser1 != null) {
+            headerViewModel.fetchUsername(currentUser1);
+        }
 
         setContentView(R.layout.activity_add_notas);
 

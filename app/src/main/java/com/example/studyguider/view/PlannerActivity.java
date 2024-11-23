@@ -4,6 +4,7 @@ package com.example.studyguider.view;
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -125,10 +126,15 @@ public class PlannerActivity extends AppCompatActivity {
 
 
         saveButton.setOnClickListener(v -> {
-            if (selectedDayTextView == null) {
-                Toast.makeText(this, "Selecione um dia primeiro!", Toast.LENGTH_SHORT).show();
-            } else {
-                saveEvent();
+            try {
+                if (selectedDayTextView == null) {
+                    Toast.makeText(this, "Selecione um dia primeiro!", Toast.LENGTH_SHORT).show();
+                } else {
+                    saveEvent();
+                }
+            } catch (Exception e) {
+                Log.e("PlannerActivity", "Error saving event: ", e);
+                Toast.makeText(this, "Ocorreu um erro ao salvar o evento. Tente novamente.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -265,59 +271,67 @@ public class PlannerActivity extends AppCompatActivity {
 
 
     private void saveEvent() {
-        // Obtém os valores do ViewModel e os campos do formulário
-        String day = plannerViewModel.getSelectedDay().getValue();
-        String eventName = editTextEventName.getText().toString().trim();
-        String eventTime = textViewEventTime.getText().toString().trim();
-        String additionalInfo = editTextAdditionalInfo.getText().toString().trim();
+        try {
+            // Obtém os valores do ViewModel e os campos do formulário
+            String day = plannerViewModel.getSelectedDay().getValue();
+            String eventName = editTextEventName.getText().toString().trim();
+            String eventTime = textViewEventTime.getText().toString().trim();
+            String additionalInfo = editTextAdditionalInfo.getText().toString().trim();
 
-        // Valida se o nome do evento foi preenchido
-        if (eventName.isEmpty()) {
-            Toast.makeText(this, "Preencha todos os campos obrigatórios!", Toast.LENGTH_SHORT).show();
-            return;
+            Log.d("PlannerActivity", "Saving event: " + eventName + ", Time: " + eventTime + ", Additional Info: " + additionalInfo);
+
+            // Valida se o nome do evento foi preenchido
+            if (eventName.isEmpty()) {
+                Toast.makeText(this, "Preencha todos os campos obrigatórios!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Verifica se o horário foi selecionado
+            if (eventTime.equals("Clique Aqui")) {
+                Toast.makeText(this, "Selecione um horário!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Verifica se uma cor foi selecionada
+            Integer selectedColor = plannerViewModel.getSelectedColor().getValue();
+            if (selectedColor == null || selectedColor == Color.WHITE) {
+                Toast.makeText(this, "Selecione uma cor para o evento!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Se estivermos editando um evento existente
+            if (currentEditingEvent != null) {
+                // Atualiza o evento existente
+                currentEditingEvent.setEventName(eventName);
+                currentEditingEvent.setEventTime(eventTime);
+                currentEditingEvent.setAdditionalInfo(additionalInfo);
+                currentEditingEvent.setColor(selectedColor);
+                Log.d("PlannerActivity", "Updating event: " + currentEditingEvent.toString());
+                plannerViewModel.updateEvent(currentEditingEvent);
+            } else {
+                // Adiciona um novo evento
+                String dayKey = getDayKey(Integer.parseInt(day));
+                plannerViewModel.removeEventByDay(dayKey);
+                FirebaseUser  user = auth.getCurrentUser ();
+                String userId = user.getUid();
+                plannerViewModel.addEvent(userId, eventName, eventTime, additionalInfo, selectedColor, dayKey);
+            }
+
+            // Atualiza a cor do dia no calendário
+            if (selectedDayTextView != null) {
+                dayColors.put(getDayKey(Integer.parseInt(day)), selectedColor);
+                selectedDayTextView.setBackgroundColor(selectedColor);
+            }
+
+            // Limpa os campos do formulário
+            resetForm();
+
+            // Atualiza a interface
+            updateInterfaceAfterSave();
+        } catch (Exception e) {
+            Log.e("PlannerActivity", "Error in saveEvent: ", e);
+            Toast.makeText(this, "Ocorreu um erro ao salvar o evento. Tente novamente.", Toast.LENGTH_SHORT).show();
         }
-
-        // Verifica se o horário foi selecionado
-        if (eventTime.equals("Clique Aqui")) {
-            Toast.makeText(this, "Selecione um horário!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // Verifica se uma cor foi selecionada
-        Integer selectedColor = plannerViewModel.getSelectedColor().getValue();
-        if (selectedColor == null || selectedColor == Color.WHITE) {
-            Toast.makeText(this, "Selecione uma cor para o evento!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // Se estivermos editando um evento existente
-        if (currentEditingEvent != null) {
-            // Atualiza o evento existente
-            currentEditingEvent.setEventName(eventName);
-            currentEditingEvent.setEventTime(eventTime);
-            currentEditingEvent.setAdditionalInfo(additionalInfo);
-            currentEditingEvent.setColor(selectedColor);
-            plannerViewModel.updateEvent(currentEditingEvent); // Adicione este método no ViewModel
-        } else {
-            // Adiciona um novo evento
-            String dayKey = getDayKey(Integer.parseInt(day));
-            plannerViewModel.removeEventByDay(dayKey);
-            FirebaseUser  user = auth.getCurrentUser ();
-            String userId = user.getUid();
-            plannerViewModel.addEvent(userId, eventName, eventTime, additionalInfo, selectedColor, dayKey);
-        }
-
-        // Atualiza a cor do dia no calendário
-        if (selectedDayTextView != null) {
-            dayColors.put(getDayKey(Integer.parseInt(day)), selectedColor);
-            selectedDayTextView.setBackgroundColor(selectedColor);
-        }
-
-        // Limpa os campos do formulário
-        resetForm();
-
-        // Atualiza a interface
-        updateInterfaceAfterSave();
     }
 
     private void resetForm() {
@@ -432,16 +446,9 @@ public class PlannerActivity extends AppCompatActivity {
                     updateSavedEvents(plannerViewModel.getEvents().getValue()); // Atualiza a lista de eventos
                 });
 
-                ImageView editIcon = new ImageView(this);
-                editIcon.setImageResource(R.drawable.ic_password_form); // Substitua pelo recurso de ícone de edição
-                editIcon.setLayoutParams(new LinearLayout.LayoutParams(80, 80));
-                editIcon.setOnClickListener(v -> {
-                    editEvent(event); // Função para editar o evento
-                });
 
                 // Adiciona os ícones ao layout vertical
                 iconLayout.addView(deleteIcon);
-                iconLayout.addView(editIcon);
 
                 // Adiciona o TextView e o layout dos ícones ao layout principal
                 eventLayout.addView(eventTextView);
@@ -481,7 +488,7 @@ public class PlannerActivity extends AppCompatActivity {
         return day + "-" + currentMonth + "-" + currentYear;
     }
 
-
+/*
     private void editEvent(Planner event) {
         currentEditingEvent = event; // Armazena o evento que está sendo editado
         String[] eventDateParts = event.getDay().split("-");
@@ -521,6 +528,6 @@ public class PlannerActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "O evento pertence a outro mês/ano. Mude para o mês correto para editá-lo.", Toast.LENGTH_LONG).show();
         }
-    }
+    }*/
 
 }

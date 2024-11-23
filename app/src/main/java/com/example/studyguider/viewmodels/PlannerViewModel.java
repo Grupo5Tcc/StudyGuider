@@ -153,6 +153,7 @@ public class PlannerViewModel extends ViewModel {
 
     public void updateEvent(Planner event) {
         if (event == null || event.getId() == null) {
+            Log.e("PlannerViewModel", "Event or ID is null, cannot update.");
             return;
         }
 
@@ -167,6 +168,7 @@ public class PlannerViewModel extends ViewModel {
                             events.setValue(currentEvents);
                         }
                     }
+                    Log.d("PlannerViewModel", "Event updated successfully.");
                 })
                 .addOnFailureListener(e -> {
                     Log.e("PlannerViewModel", "Error updating event: ", e);
