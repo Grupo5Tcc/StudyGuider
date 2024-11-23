@@ -1,18 +1,14 @@
 package com.example.studyguider.models;
 
 public class Notas {
+    String id, nomeMateria, cred, list,trab, pre, prova;
 
-    // Criação de Variáveis
-    String id, subjectName, creditScore, list,trab, pre, prova;
-
-    // Construtor
     public Notas() {
     }
 
-    // Getters e Setters
-    public String getSubjectName() { return subjectName; }
+    public String getNomeMateria() { return nomeMateria; }
 
-    public void setSubjectName(String subjectName) { this.subjectName = subjectName; }
+    public void setNomeMateria(String nomeMateria) { this.nomeMateria = nomeMateria; }
 
     public String getId() {
         return id;
@@ -22,12 +18,12 @@ public class Notas {
         this.id = id;
     }
 
-    public String getCreditScore() {
-        return creditScore;
+    public String getCred() {
+        return cred;
     }
 
-    public void setCreditScore(String cred) {
-        this.creditScore = cred;
+    public void setCred(String cred) {
+        this.cred = cred;
     }
 
     public String getList() {

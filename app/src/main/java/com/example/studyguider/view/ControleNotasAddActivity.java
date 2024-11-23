@@ -1,6 +1,5 @@
 package com.example.studyguider.view;
 
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,20 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.studyguider.R;
-import com.example.studyguider.viewmodels.HeaderViewModel;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -36,37 +26,18 @@ import java.util.Objects;
 
 public class ControleNotasAddActivity extends AppCompatActivity {
 
-    private HeaderViewModel headerViewModel;
     private static final String TAG = "AddNotas";
-    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
-        setContentView(R.layout.activity_grades_add);
-
-        // Define orientação da tela para retrato
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        headerViewModel = new ViewModelProvider(this).get(HeaderViewModel.class);
-
-
-        View headerView = findViewById(R.id.header);
-        HeaderActivity headerActivity = new HeaderActivity(headerView, headerViewModel, this);
-
-
-        FirebaseUser currentUser1 = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser1 != null) {
-            headerViewModel.fetchUsername(currentUser1);
-        }
+        setContentView(R.layout.activity_add_notas);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // Referência aos campos de entrada para inserir informações sobre a nota
-        Spinner nomeMateriaSp = findViewById(R.id.nomeMateriaSP);
+        Spinner nomeMateriaSp = findViewById(R.id.nomeMateriaTxt);
         TextInputEditText notaCredET = findViewById(R.id.notaCredET);
         TextInputEditText notaTrabET = findViewById(R.id.notaTrabET);
         TextInputEditText notaListaET = findViewById(R.id.notaListaET);
@@ -84,7 +55,6 @@ public class ControleNotasAddActivity extends AppCompatActivity {
                     Toast.makeText(ControleNotasAddActivity.this, "Por favor, selecione uma matéria válida!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                String notaPreciso;
 
                 String notaCred = Objects.requireNonNull(notaCredET.getText()).toString().trim();
                 String notaTrab = Objects.requireNonNull(notaTrabET.getText()).toString().trim();
@@ -94,153 +64,104 @@ public class ControleNotasAddActivity extends AppCompatActivity {
                 if (notaCred.isEmpty() || notaTrab.isEmpty() || notaList.isEmpty() || notaPro.isEmpty()) {
                     Toast.makeText(ControleNotasAddActivity.this, "Por favor, preencha todos os campos!", Toast.LENGTH_SHORT).show();
                     return;
-                } else {
-
-                    // Calcula se é necessário mais pontos para aprovação
-                    float ntPreciso, ntCred, ntTrab, ntList;
-
-                    ntCred = Float.parseFloat(notaCred);
-                    ntTrab = Float.parseFloat(notaTrab);
-                    ntList = Float.parseFloat(notaList);
-
-                    float ntSoma = ntCred + ntTrab + ntList;
-
-                    if (ntSoma < 6) {
-                        ntPreciso = 6 - ntSoma;
-                        notaPreciso = String.valueOf(ntPreciso);
-                        updateUserRecCount(1);
-                    } else {
-                        notaPreciso = "Não precisa de pontos para passar!!";
-                        Toast.makeText(ControleNotasAddActivity.this, "Não está de recuperação!!", Toast.LENGTH_SHORT).show();
-                    }
-
-                    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                    if (currentUser != null) {
-                        String userId = currentUser.getUid();
-
-                        db.collection("subjects").document(userId).collection("userSubjects").get()
-                                .addOnSuccessListener(queryDocumentSnapshots -> {
-                                    if (!queryDocumentSnapshots.isEmpty()) {
-                                        String nomeProf = queryDocumentSnapshots.getDocuments().get(0).getString("nomeProf");
-                                        if (nomeProf == null)
-                                            nomeProf = "Desconhecido"; // Caso nomeProf esteja ausente.
-
-                                        Map<String, Object> notas = new HashMap<>();
-                                        notas.put("nomeMateria", nomeMateria);
-                                        notas.put("cred", notaCred);
-                                        notas.put("trab", notaTrab);
-                                        notas.put("list", notaList);
-                                        notas.put("pre", ntSoma);
-                                        notas.put("prova", notaPro);
-                                        notas.put("nomeProf", nomeProf);
-
-                                        db.collection("grades").document(userId).collection("userGrades").add(notas)
-                                            .addOnSuccessListener(documentReference -> {
-                                            Toast.makeText(ControleNotasAddActivity.this, "Notas adicionadas com sucesso!!", Toast.LENGTH_SHORT).show();
-                                            finish();
-                                        }).addOnFailureListener(e -> {
-                                            Toast.makeText(ControleNotasAddActivity.this, "Falha ao adicionar notas: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                            Log.e(TAG, "Erro ao adicionar notas", e);
-                                        });
-                                    } else {
-                                        Toast.makeText(ControleNotasAddActivity.this, "Matéria não encontrada no banco!", Toast.LENGTH_SHORT).show();
-                                    }
-                                }).addOnFailureListener(e -> {
-                                    Toast.makeText(ControleNotasAddActivity.this, "Erro ao buscar professor: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    Log.e(TAG, "Erro ao buscar professor", e);
-                                });
-                    }
                 }
-            }
 
+                float ntCred = Float.parseFloat(notaCred);
+                float ntTrab = Float.parseFloat(notaTrab);
+                float ntList = Float.parseFloat(notaList);
+                float ntSoma = ntCred + ntTrab + ntList;
+                String notaPreciso = ntSoma < 6 ? String.valueOf(6 - ntSoma) : "Não precisa de pontos para passar!!";
+
+                db.collection("subjects").whereEqualTo("userSubjects", nomeMateria).get()
+                        .addOnSuccessListener(queryDocumentSnapshots -> {
+                            if (!queryDocumentSnapshots.isEmpty()) {
+                                String nomeProf = queryDocumentSnapshots.getDocuments().get(0).getString("nomeProf");
+                                if (nomeProf == null)
+                                    nomeProf = "Desconhecido"; // Caso nomeProf esteja ausente.
+
+                                Map<String, Object> notas = new HashMap<>();
+                                notas.put("nomeMateria", nomeMateria);
+                                notas.put("cred", notaCred);
+                                notas.put("trab", notaTrab);
+                                notas.put("list", notaList);
+                                notas.put("pre", notaPreciso);
+                                notas.put("prova", notaPro);
+                                notas.put("nomeProf", nomeProf);
+
+                                db.collection("notas").add(notas).addOnSuccessListener(documentReference -> {
+                                    Toast.makeText(ControleNotasAddActivity.this, "Notas adicionadas com sucesso!!", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }).addOnFailureListener(e -> {
+                                    Toast.makeText(ControleNotasAddActivity.this, "Falha ao adicionar notas: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Log.e(TAG, "Erro ao adicionar notas", e);
+                                });
+                            } else {
+                                Toast.makeText(ControleNotasAddActivity.this, "Matéria não encontrada no banco!", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(e -> {
+                            Toast.makeText(ControleNotasAddActivity.this, "Erro ao buscar professor: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Log.e(TAG, "Erro ao buscar professor", e);
+                        });
+            }
         });
+
     }
 
     private void carregarMaterias(Spinner spinner) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         ArrayList<String> materiasAdicionadas = new ArrayList<>();
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null) {
-            String userId = currentUser.getUid();
 
-            db.collection("grades").document(userId).collection("userGrades").get()
-                    .addOnCompleteListener(taskNotas -> {
-                        if (taskNotas.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : taskNotas.getResult()) {
-                                String nomeMateria = document.getString("nomeMateria");
-                                if (nomeMateria != null) {
-                                    materiasAdicionadas.add(nomeMateria);
-                                }
+        db.collection("notas").get().addOnCompleteListener(taskNotas -> {
+            if (taskNotas.isSuccessful()) {
+                for (QueryDocumentSnapshot document : taskNotas.getResult()) {
+                    String nomeMateria = document.getString("userSubjects");
+                    if (nomeMateria != null) {
+                        materiasAdicionadas.add(nomeMateria);
+                    }
+                }
+
+                db.collection("subjects").get().addOnCompleteListener(taskMaterias -> {
+                    if (taskMaterias.isSuccessful()) {
+                        ArrayList<String> listaMaterias = new ArrayList<>();
+                        listaMaterias.add("Selecione uma matéria"); // Opção neutra
+
+                        for (QueryDocumentSnapshot document : taskMaterias.getResult()) {
+                            String nomeMateria = document.getString("userSubjects");
+
+                            if (nomeMateria != null && !materiasAdicionadas.contains(nomeMateria)) {
+                                listaMaterias.add(nomeMateria);
+                            }
+                        }
+
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaMaterias) {
+                            @Override
+                            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                                View view = super.getDropDownView(position, convertView, parent);
+                                TextView textView = (TextView) view;
+                                textView.setTextColor(Color.BLACK);
+                                view.setBackgroundColor(Color.WHITE);
+                                return view;
                             }
 
-                            db.collection("subjects").document(userId).collection("userSubjects")
-                                    .get().addOnCompleteListener(taskMaterias -> {
-                                        if (taskMaterias.isSuccessful()) {
-                                            ArrayList<String> listaMaterias = new ArrayList<>();
-                                            listaMaterias.add("Selecione uma matéria"); // Opção neutra
+                            @Override
+                            public View getView(int position, View convertView, ViewGroup parent) {
+                                View view = super.getView(position, convertView, parent);
+                                TextView textView = (TextView) view;
+                                textView.setTextColor(Color.BLACK);
+                                return view;
+                            }
+                        };
 
-                                            for (QueryDocumentSnapshot document : taskMaterias.getResult()) {
-                                                String nomeMateria = document.getString("nomeMateria");
-
-                                                if (nomeMateria != null && !materiasAdicionadas.contains(nomeMateria)) {
-                                                    listaMaterias.add(nomeMateria);
-                                                }
-                                            }
-
-                                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaMaterias) {
-                                                @Override
-                                                public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                                                    View view = super.getDropDownView(position, convertView, parent);
-                                                    TextView textView = (TextView) view;
-                                                    textView.setTextColor(Color.BLACK);
-                                                    view.setBackgroundColor(Color.WHITE);
-                                                    return view;
-                                                }
-
-                                                @Override
-                                                public View getView(int position, View convertView, ViewGroup parent) {
-                                                    View view = super.getView(position, convertView, parent);
-                                                    TextView textView = (TextView) view;
-                                                    textView.setTextColor(Color.BLACK);
-                                                    return view;
-                                                }
-                                            };
-
-                                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                            spinner.setAdapter(adapter);
-                                        } else {
-                                            Toast.makeText(this, "Erro ao carregar matérias: " + taskMaterias.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                        } else {
-                            Toast.makeText(this, "Erro ao carregar notas: " + taskNotas.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-        }
-
-    }
-
-    public void updateUserRecCount(int count) {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser == null) {
-            return;
-        }
-
-        DocumentReference userDocRef = db.collection("user").document(currentUser.getUid());
-
-        db.runTransaction(transaction -> {
-            DocumentSnapshot snapshot = transaction.get(userDocRef);
-            long currentAbsenceCount = snapshot.contains("rec") ? snapshot.getLong("rec") : 0;
-            long newAbsenceCount = currentAbsenceCount + count;
-            transaction.update(userDocRef, "rec", newAbsenceCount);
-            return null;
-        }).addOnSuccessListener(aVoid -> {
-            // Successfully updated
-            Log.d("db", "Successful update of absence count");
-        }).addOnFailureListener(e -> {
-            Log.d("db_error", "Error updating absence count: " + e.toString());
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner.setAdapter(adapter);
+                    } else {
+                        Toast.makeText(this, "Erro ao carregar matérias: " + taskMaterias.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                Toast.makeText(this, "Erro ao carregar notas: " + taskNotas.getException().getMessage(), Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

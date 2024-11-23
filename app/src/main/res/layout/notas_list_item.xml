@@ -4,91 +4,98 @@
     style="@style/Widget.Material3.CardView.Elevated"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="20dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginEnd="20dp"
-    android:layout_marginBottom="5dp"
+    android:layout_marginVertical="5dp"
+    android:layout_marginHorizontal="20dp"
+    android:background="@color/orange_clearer"
     app:cardCornerRadius="15dp"
     app:cardElevation="10dp">
 
-    <!-- Layout horizontal para alinhar o conteúdo e o botão -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/blue_clearer"
         android:orientation="horizontal"
-        android:padding="10dp"
-        android:background="@color/blue_clearer">
+        android:padding="10dp">
 
-        <!-- Conteúdo com os TextViews -->
         <RelativeLayout
-            android:id="@+id/relative_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true">
+            android:background="@color/blue_clearer"
+            android:clickable="false"
+            android:focusable="false">
 
-            <!-- Texto que exibe a matéria -->
             <TextView
                 android:id="@+id/list_item_materia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/yeseva_one"
+                android:ellipsize="end"
                 android:singleLine="true"
                 android:textColor="@color/blue_2"
                 android:textSize="20dp" />
 
-            <!-- Texto que exibe as crediaria -->
             <TextView
                 android:id="@+id/list_item_cred"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/list_item_materia"
-                android:textColor="@color/black" />
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
 
-            <!-- Texto que exibe o trabalho -->
             <TextView
                 android:id="@+id/list_item_trab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/list_item_cred"
-                android:textColor="@color/black" />
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
 
-            <!-- Texto que exibe a lista -->
             <TextView
                 android:id="@+id/list_item_lista"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/list_item_trab"
-                android:textColor="@color/black" />
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
 
-            <!-- Texto que exibe a pré -->
-            <TextView
-                android:id="@+id/list_item_pre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/list_item_lista"
-                android:textColor="@color/black" />
-
-            <!-- Texto que exibe o professor -->
             <TextView
                 android:id="@+id/list_item_pro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/list_item_pre"
-                android:textColor="@color/black" />
+                android:layout_below="@id/list_item_lista"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/list_item_pre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/list_item_pro"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
         </RelativeLayout>
 
-        <!-- Botão de remover fora do RelativeLayout mas dentro do CardView -->
         <ImageView
             android:id="@+id/image_remover"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="16dp"
-            android:contentDescription="@string/delete_button"
             android:src="@drawable/ic_delete" />
+
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

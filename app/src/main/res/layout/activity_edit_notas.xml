@@ -2,141 +2,170 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/addN"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/orange_clearer"
-    tools:context=".view.ControleNotasAddActivity">
+    tools:context=".view.ControleNotasEditActivity">
 
-    <!-- Inclusão do cabeçalho do app -->
     <include
         android:id="@+id/header"
         layout="@layout/activity_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Campo para selecionar o nome da matéria -->
-    <Spinner
-        android:id="@+id/nomeMateriaSP"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nomeMateriaLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/header"
-        android:layout_margin="20dp"
-        android:background="@drawable/rnd_add_edit"
-        android:padding="16dp"
-        android:spinnerMode="dropdown"
-        android:textColor="@color/black" />
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/rnd_add_edit">
 
-    <!-- Campo para inserir a nota de crediaria -->
+        <TextView
+            android:id="@+id/nomeMateriaTxt"
+            android:layout_width="match_parent"
+            android:layout_height="55.2dp"
+            android:background="@drawable/rnd_add_edit"
+            android:paddingLeft="10dp"
+            android:paddingTop="20dp"
+            android:text="Preciso"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/notaCredLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/nomeMateriaSP"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_below="@id/nomeMateriaLayout"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
         android:layout_weight="1"
         android:background="@drawable/rnd_add_edit"
         android:hint="Cred">
 
-        <!-- Campo de entrada para a nota de crediaria -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/notaCredET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:fontFamily="@font/yeseva_one"
             android:inputType="numberDecimal"
             android:maxLength="4"
             android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Campo para inserir a nota de trabalho -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/notaTrabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/notaCredLayout"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
         android:layout_weight="1"
         android:background="@drawable/rnd_add_edit"
         android:hint="Trabalho">
 
-        <!-- Campo de entrada para a nota de trabalho -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/notaTrabET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:fontFamily="@font/yeseva_one"
             android:inputType="numberDecimal"
             android:maxLength="4"
             android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Campo para inserir a nota da lista -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/notaListaLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/notaTrabLayout"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
         android:layout_weight="1"
         android:background="@drawable/rnd_add_edit"
         android:hint="Lista">
 
-        <!-- Campo de entrada para a nota de lista -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/notaListaET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:fontFamily="@font/yeseva_one"
             android:inputType="numberDecimal"
             android:maxLength="4"
             android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Campo para inserir a nota da prova -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/notaProvaLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/notaListaLayout"
-        android:layout_margin="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
         android:layout_weight="1"
         android:background="@drawable/rnd_add_edit"
         android:hint="Prova"
         android:visibility="visible">
 
-        <!-- Campo de entrada para a nota da prova -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/notaProvaET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:fontFamily="@font/yeseva_one"
             android:inputType="numberDecimal"
             android:maxLength="4"
             android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Botão para adicionar a nota -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/notaPrecisoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/save"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rnd_add_edit">
+
+        <TextView
+            android:id="@+id/notaPrecisoTxt"
+            android:layout_width="match_parent"
+            android:layout_height="55.2dp"
+            android:background="@drawable/rnd_add_edit"
+            android:paddingLeft="10dp"
+            android:paddingTop="20dp"
+            android:text="Preciso"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/addNota"
+        android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/notaProvaLayout"
-        android:layout_centerHorizontal="true"
+        android:layout_alignStart="@id/notaProvaLayout"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="20dp"
         android:backgroundTint="@color/orange_1"
-        android:text="Adicionar"
-        android:textColor="@color/black" />
+        android:text="Deletar"
+        app:backgroundTint="@android:color/holo_red_light" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notaProvaLayout"
+        android:layout_alignEnd="@id/notaProvaLayout"
+        android:layout_marginVertical="10dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/orange_1"
+        android:text="Salvar" />
 
 </RelativeLayout>
