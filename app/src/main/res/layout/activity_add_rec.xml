@@ -45,34 +45,6 @@
         app:layout_constraintStart_toStartOf="@+id/materia"
         app:layout_constraintTop_toTopOf="@+id/containerRec" />
 
-    <!-- TextView para exibir o título "PROFESSOR(A):" -->
-    <TextView
-        android:id="@+id/professor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="52dp"
-        android:fontFamily="@font/bebas_neue"
-        android:text="PROFESSOR(A):"
-        android:textColor="@color/blue_2"
-        android:textSize="16dp"
-        app:layout_constraintStart_toStartOf="@+id/containerRec"
-        app:layout_constraintTop_toTopOf="@+id/containerRec" />
-
-    <!-- TextView para exibir o nome do professor -->
-    <TextView
-        android:id="@+id/profrec"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="85dp"
-        android:layout_marginTop="51.7dp"
-        android:fontFamily="@font/gabriela"
-        android:text="XXXX-xxxx"
-        android:textColor="@color/blue_2"
-        android:textSize="14dp"
-        app:layout_constraintStart_toStartOf="@+id/professor"
-        app:layout_constraintTop_toTopOf="@+id/containerRec" />
-
     <!-- TextView para exibir o título "NOTA:" -->
     <TextView
         android:id="@+id/nota"

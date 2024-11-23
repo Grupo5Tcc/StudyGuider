@@ -59,7 +59,7 @@ public class RecoveryActivity extends AppCompatActivity {
         }
 
         // Obtém coleção "notas" do Firestore e verifica se o aluno está em recuperação
-        db.collection("notas").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("grades").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
